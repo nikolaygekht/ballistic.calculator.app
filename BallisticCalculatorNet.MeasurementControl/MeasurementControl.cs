@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -11,7 +12,7 @@ using System.Windows.Forms;
 using BallisticCalculatorNet.MeasurementControl;
 using Gehtsoft.Measurements;
 
-namespace BallisticCalculatorNet.ReticleEditor
+namespace BallisticCalculatorNet.MeasurementControl
 {
     public partial class MeasurementControl : UserControl
     {
@@ -34,63 +35,51 @@ namespace BallisticCalculatorNet.ReticleEditor
             UpdateUnits();
         }
 
-        public int DecimalPlaces
-        {
-            get => numericPart.DecimalPlaces;
-            set => numericPart.DecimalPlaces = value;
-        }
+        public bool Metric { get; set; } = true;
 
-        public decimal Increment
-        {
-            get => numericPart.Increment;
-            set => numericPart.Increment = value;
-        }
+        public double Increment { get; set; } = 1;
 
-        public decimal Minimum
-        {
-            get => numericPart.Minimum;
-            set => numericPart.Minimum = value;
-        }
+        internal CultureInfo Culture { get; set; } = CultureInfo.CurrentUICulture;
 
-        public decimal Maximum 
-        {
-            get => numericPart.Maximum;
-            set => numericPart.Maximum = value;
-        }
+        public double Minimum { get; set; } = -10000;
 
-        internal NumericUpDown NumericPart => numericPart;
+        public double Maximum { get; set; } = 10000;
 
-        internal ComboBox UnitPart => unitPart;
+        internal TextBox NumericPartControl => NumericPart;
 
+        internal ComboBox UnitPartControl => UnitPart;
 
         private void UpdateUnits()
         {
-            unitPart.Items.Clear();
+            UnitPart.Items.Clear();
             foreach (var unit in mMeasurementUtility.Units)
-                unitPart.Items.Add(unit);
-            unitPart.SelectedIndex = 0;
+                UnitPart.Items.Add(unit);
+            UnitPart.SelectedIndex = 0;
         }
 
         public object Value
         {
             get
             {
-                decimal v = numericPart.Value;
-                object u = (unitPart.SelectedItem as MeasurementUtility.Unit).Value;
-                return mMeasurementUtility.Activator((double)v, u);
+                double v;
+                if (NumericPart.Text.Length == 0)
+                    v = 0;
+                else 
+                    v = double.Parse(NumericPart.Text, Culture);
+                object u = ((MeasurementUtility.Unit)UnitPart.SelectedItem).Value;
+                return mMeasurementUtility.Activator(v, u);
             }
             set
             {
-                numericPart.Value = (decimal)mMeasurementUtility.ValueGetter(value);
-                
+                NumericPart.Text = mMeasurementUtility.ValueGetter(value).ToString(Culture);
                 object u = mMeasurementUtility.UnitGetter(value);
 
-                foreach (var unit in unitPart.Items)
+                foreach (var unit in UnitPart.Items)
                 {
                     var _unit = unit as MeasurementUtility.Unit;
                     if (_unit.Value.Equals(u))
                     {
-                        unitPart.SelectedItem = _unit;
+                        UnitPart.SelectedItem = _unit;
                     }
                 }
             }
@@ -104,16 +93,43 @@ namespace BallisticCalculatorNet.ReticleEditor
             return (Measurement<T>) Value;
         }
 
+        public void ForceCulture(CultureInfo cultureInfo) => Culture = cultureInfo;
+
         private void MeasurementControl_Enter(object sender, EventArgs e)
         {
-            numericPart.Focus();
+            NumericPart.Focus();
         }
 
-        private void MeasurementControl_Resize(object sender, EventArgs e)
+        private void NumericPart_KeyPress(object sender, KeyPressEventArgs e)
         {
-            numericPart.Size = new Size(this.Width - unitPart.Size.Width, numericPart.Size.Height);
-            unitPart.Location = new Point(this.Width - unitPart.Size.Width, 0);
+            int position = NumericPart.SelectionStart + NumericPart.SelectionLength;
+            string beforeSelect = NumericPart.Text.Substring(0, NumericPart.SelectionStart);
+            string afterSelect = position < NumericPart.Text.Length ? NumericPart.Text.Substring(position) : "";
+
+            if (e.KeyChar == '+' || e.KeyChar == '-')
+            {
+                if (NumericPart.Text.Length == 0)
+                    return;
+
+                if (position == 0 && !NumericPart.Text.Contains("+") && !NumericPart.Text.Contains('-'))
+                    return;
+            }
+            else if (e.KeyChar >= '0' && e.KeyChar <= '9')
+            {
+                if (afterSelect.Length == 0 || (!afterSelect.Contains('+') && !afterSelect.Contains('-')))
+                    return;
+            }
+            else if (e.KeyChar == Culture.NumberFormat.NumberDecimalSeparator[0])
+            {
+                if (position > 0 && !NumericPart.Text.Contains(Culture.NumberFormat.NumberDecimalSeparator[0]))
+                    return;
+            }
+            else if (e.KeyChar == Culture.NumberFormat.NumberGroupSeparator[0])
+            {
+                if (position > 0 && !afterSelect.Contains("+") && !afterSelect.Contains("-"))
+                    return;
+            }
+            e.Handled = true;   //ignore key
         }
     }
 }
-

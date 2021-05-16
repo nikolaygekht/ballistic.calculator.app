@@ -1,5 +1,5 @@
 ﻿
-namespace BallisticCalculatorNet.ReticleEditor
+namespace BallisticCalculatorNet.MeasurementControl
 {
     partial class MeasurementControl
     {
@@ -29,57 +29,70 @@ namespace BallisticCalculatorNet.ReticleEditor
         /// </summary>
         private void InitializeComponent()
         {
-            this.numericPart = new System.Windows.Forms.NumericUpDown();
-            this.unitPart = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.numericPart)).BeginInit();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.UnitPart = new System.Windows.Forms.ComboBox();
+            this.NumericPart = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // numericPart
+            // tableLayoutPanel1
             // 
-            this.numericPart.DecimalPlaces = 3;
-            this.numericPart.Location = new System.Drawing.Point(0, 1);
-            this.numericPart.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericPart.Minimum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            -2147483648});
-            this.numericPart.Name = "numericPart";
-            this.numericPart.Size = new System.Drawing.Size(156, 22);
-            this.numericPart.TabIndex = 0;
-            this.numericPart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericPart.ThousandsSeparator = true;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.Controls.Add(this.UnitPart, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.NumericPart, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(239, 28);
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // unitPart
+            // UnitPart
             // 
-            this.unitPart.FormattingEnabled = true;
-            this.unitPart.Location = new System.Drawing.Point(156, 0);
-            this.unitPart.Name = "unitPart";
-            this.unitPart.Size = new System.Drawing.Size(74, 24);
-            this.unitPart.TabIndex = 1;
+            this.UnitPart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UnitPart.FormattingEnabled = true;
+            this.UnitPart.Location = new System.Drawing.Point(159, 0);
+            this.UnitPart.Margin = new System.Windows.Forms.Padding(0);
+            this.UnitPart.Name = "UnitPart";
+            this.UnitPart.Size = new System.Drawing.Size(80, 28);
+            this.UnitPart.TabIndex = 1;
+            // 
+            // NumericPart
+            // 
+            this.NumericPart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NumericPart.Location = new System.Drawing.Point(0, 0);
+            this.NumericPart.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.NumericPart.Name = "NumericPart";
+            this.NumericPart.Size = new System.Drawing.Size(156, 27);
+            this.NumericPart.TabIndex = 2;
+            this.NumericPart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.NumericPart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericPart_KeyPress);
             // 
             // MeasurementControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.unitPart);
-            this.Controls.Add(this.numericPart);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.MaximumSize = new System.Drawing.Size(4096, 28);
+            this.MinimumSize = new System.Drawing.Size(120, 28);
             this.Name = "MeasurementControl";
-            this.Size = new System.Drawing.Size(230, 24);
+            this.Size = new System.Drawing.Size(239, 28);
             this.Enter += new System.EventHandler(this.MeasurementControl_Enter);
-            this.Resize += new System.EventHandler(this.MeasurementControl_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.numericPart)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.NumericUpDown numericPart;
-        private System.Windows.Forms.ComboBox unitPart;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.ComboBox UnitPart;
+        private System.Windows.Forms.TextBox NumericPart;
     }
 }

@@ -9,7 +9,7 @@ using FluentAssertions;
 using Gehtsoft.Measurements;
 using Xunit;
 
-namespace BallisticCalculatorNet.UnitTest.MeasurementControl
+namespace BallisticCalculatorNet.UnitTest.MsrmentControl
 {
     public class UtilTest
     {
