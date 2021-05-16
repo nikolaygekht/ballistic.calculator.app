@@ -35,8 +35,6 @@ namespace BallisticCalculatorNet.MeasurementControl
             UpdateUnits();
         }
 
-        public bool Metric { get; set; } = true;
-
         public double Increment { get; set; } = 1;
 
         internal CultureInfo Culture { get; set; } = CultureInfo.CurrentUICulture;
@@ -71,7 +69,14 @@ namespace BallisticCalculatorNet.MeasurementControl
             }
             set
             {
-                NumericPart.Text = mMeasurementUtility.ValueGetter(value).ToString(Culture);
+                var v = mMeasurementUtility.ValueGetter(value);
+                var s1 = v.ToString("#,0.##", Culture);
+                var s2 = v.ToString(Culture);
+
+                var i1 = s1.IndexOf(Culture.NumberFormat.NumberDecimalSeparator);
+                var i2 = s2.IndexOf(Culture.NumberFormat.NumberDecimalSeparator);
+
+                NumericPart.Text = s1.Substring(0, i1) + Culture.NumberFormat.NumberDecimalSeparator + (i2 >= 0 ? s2.Substring(i2 + 1) : "");
                 object u = mMeasurementUtility.UnitGetter(value);
 
                 foreach (var unit in UnitPart.Items)
@@ -91,6 +96,19 @@ namespace BallisticCalculatorNet.MeasurementControl
                 throw new InvalidOperationException($"An attempt to read a values of type {typeof(T).Name} from the control that hold value of type {mMeasurementUtility.MeasurementUnit.Name}");
 
             return (Measurement<T>) Value;
+        }
+
+        public object Unit
+        {
+            get => ((MeasurementUtility.Unit)UnitPart.SelectedItem).Value;
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
+                if (value.GetType() != mMeasurementUtility.MeasurementUnit)
+                    throw new ArgumentException($"Unit is expected to be a type of {mMeasurementUtility.MeasurementUnit.Name} but is a type of {value.GetType().Name}", nameof(value));
+                UnitPart.SelectedItem = mMeasurementUtility.Units.First(u => u.Value.Equals(value));
+            }
         }
 
         public void ForceCulture(CultureInfo cultureInfo) => Culture = cultureInfo;

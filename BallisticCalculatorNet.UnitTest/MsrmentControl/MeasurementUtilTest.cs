@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using BallisticCalculatorNet.MeasurementControl;
@@ -52,6 +53,32 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
         {
             var util = MeasurementTools.Instance.GetUtility(type);
             util.Units.Should().Contain(new MeasurementUtility.Unit(name, unit));
+        }
+
+        [Theory]
+        [InlineData(MeasurementType.Distance, typeof(DistanceUnit))]
+        [InlineData(MeasurementType.Angular, typeof(AngularUnit))]
+        [InlineData(MeasurementType.Pressure, typeof(PressureUnit))]
+        [InlineData(MeasurementType.Velocity, typeof(VelocityUnit))]
+        [InlineData(MeasurementType.Weight, typeof(WeightUnit))]
+        public void MeasurementUtil_UnitList_Completeness(MeasurementType type, Type unitType)
+        {
+            var util = MeasurementTools.Instance.GetUtility(type);
+
+            var values = Enum.GetValues(unitType);
+            util.Units.Should().HaveCount(values.Length);
+
+            foreach (var value in values)
+            {
+                var mi = unitType.GetMember(value.ToString()).FirstOrDefault();
+                mi.Should().NotBeNull();
+                var attr = mi.GetCustomAttribute<UnitAttribute>();
+                attr.Should().NotBeNull();
+
+                string n = attr.Name;
+
+                util.Units.Should().Contain(u => u.Value.Equals(value) && u.Name == n);
+            }
         }
 
         private void MeasurementUtil_TestCreator_Validate<T>(object obj, double expectedValue, T expectedUnit)
