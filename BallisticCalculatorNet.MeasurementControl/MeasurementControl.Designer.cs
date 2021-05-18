@@ -61,6 +61,7 @@ namespace BallisticCalculatorNet.MeasurementControl
             this.UnitPart.Name = "UnitPart";
             this.UnitPart.Size = new System.Drawing.Size(80, 28);
             this.UnitPart.TabIndex = 1;
+            this.UnitPart.SelectedIndexChanged += new System.EventHandler(this.UnitPart_SelectedIndexChanged);
             // 
             // NumericPart
             // 
@@ -71,6 +72,8 @@ namespace BallisticCalculatorNet.MeasurementControl
             this.NumericPart.Size = new System.Drawing.Size(156, 27);
             this.NumericPart.TabIndex = 2;
             this.NumericPart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.NumericPart.TextChanged += new System.EventHandler(this.NumericPart_TextChanged);
+            this.NumericPart.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NumericPart_KeyDown);
             this.NumericPart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericPart_KeyPress);
             // 
             // MeasurementControl

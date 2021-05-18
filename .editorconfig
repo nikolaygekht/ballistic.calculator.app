@@ -21,3 +21,6 @@ dotnet_diagnostic.RCS1003.severity = none
 
 # RCS1003: Add braces to if-else (when statement spans over multiple lines).
 dotnet_diagnostic.RCS1001.severity = none
+
+# IDE0057: Use range operator
+dotnet_diagnostic.IDE0057.severity = none

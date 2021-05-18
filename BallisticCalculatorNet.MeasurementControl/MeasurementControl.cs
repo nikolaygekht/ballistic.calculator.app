@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,86 +14,79 @@ namespace BallisticCalculatorNet.MeasurementControl
 {
     public partial class MeasurementControl : UserControl
     {
-        private MeasurementType mMeasurementType = MeasurementType.Distance;
-        private MeasurementUtility mMeasurementUtility = MeasurementTools.Instance.GetUtility(MeasurementType.Distance);
+        private readonly MeasurmentControlController mController;
 
-        public MeasurementType MeasurementType {
-            get => mMeasurementType;
+        public MeasurementType MeasurementType
+        {
+            get => mController.MeasurementType;
             set
             {
-                mMeasurementType = value;
-                mMeasurementUtility = MeasurementTools.Instance.GetUtility(value);
+                mController.MeasurementType = value;
                 UpdateUnits();
             }
         }
 
         public MeasurementControl()
         {
+            mController = new MeasurmentControlController();
             InitializeComponent();
             UpdateUnits();
         }
 
-        public double Increment { get; set; } = 1;
+        public double Increment
+        {
+            get => mController.Increment;
+            set => mController.Increment = value;
+        }
 
-        internal CultureInfo Culture { get; set; } = CultureInfo.CurrentUICulture;
+        public double Minimum
+        {
+            get => mController.Minimum;
+            set => mController.Minimum = value;
+        }
 
-        public double Minimum { get; set; } = -10000;
-
-        public double Maximum { get; set; } = 10000;
+        public double Maximum
+        {
+            get => mController.Maximum;
+            set => mController.Maximum = value;
+        }
 
         internal TextBox NumericPartControl => NumericPart;
 
         internal ComboBox UnitPartControl => UnitPart;
 
+        public bool IsEmpty => NumericPartControl.Text.Length == 0;
+
         private void UpdateUnits()
         {
             UnitPart.Items.Clear();
-            foreach (var unit in mMeasurementUtility.Units)
+            foreach (var unit in mController.GetUnits())
                 UnitPart.Items.Add(unit);
             UnitPart.SelectedIndex = 0;
         }
 
         public object Value
         {
-            get
-            {
-                double v;
-                if (NumericPart.Text.Length == 0)
-                    v = 0;
-                else 
-                    v = double.Parse(NumericPart.Text, Culture);
-                object u = ((MeasurementUtility.Unit)UnitPart.SelectedItem).Value;
-                return mMeasurementUtility.Activator(v, u);
-            }
+            get => mController.Value(NumericPart.Text, UnitPart.SelectedItem);
             set
             {
-                var v = mMeasurementUtility.ValueGetter(value);
-                var s1 = v.ToString("#,0.##", Culture);
-                var s2 = v.ToString(Culture);
-
-                var i1 = s1.IndexOf(Culture.NumberFormat.NumberDecimalSeparator);
-                var i2 = s2.IndexOf(Culture.NumberFormat.NumberDecimalSeparator);
-
-                NumericPart.Text = s1.Substring(0, i1) + Culture.NumberFormat.NumberDecimalSeparator + (i2 >= 0 ? s2.Substring(i2 + 1) : "");
-                object u = mMeasurementUtility.UnitGetter(value);
-
-                foreach (var unit in UnitPart.Items)
-                {
-                    var _unit = unit as MeasurementUtility.Unit;
-                    if (_unit.Value.Equals(u))
-                    {
-                        UnitPart.SelectedItem = _unit;
-                    }
-                }
+                mController.ParseValue(value, out var text, out var unit);
+                NumericPart.Text = text;
+                UnitPart.SelectedItem = unit;
             }
         }
 
         public Measurement<T> ValueAs<T>() where T : Enum
         {
-            if (typeof(T) != mMeasurementUtility.MeasurementUnit)
-                throw new InvalidOperationException($"An attempt to read a values of type {typeof(T).Name} from the control that hold value of type {mMeasurementUtility.MeasurementUnit.Name}");
+            mController.ValidateUnitType<T>();
+            return (Measurement<T>)Value;
+        }
 
-            return (Measurement<T>) Value;
+        public T UnitAs<T>() where T : Enum
+        {
+            mController.ValidateUnitType<T>();
+            var unit = (MeasurementUtility.Unit)UnitPart.SelectedItem;
+            return (T)unit.Value;
         }
 
         public object Unit
@@ -105,13 +96,20 @@ namespace BallisticCalculatorNet.MeasurementControl
             {
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
-                if (value.GetType() != mMeasurementUtility.MeasurementUnit)
-                    throw new ArgumentException($"Unit is expected to be a type of {mMeasurementUtility.MeasurementUnit.Name} but is a type of {value.GetType().Name}", nameof(value));
-                UnitPart.SelectedItem = mMeasurementUtility.Units.First(u => u.Value.Equals(value));
+                mController.ValidateUnitType(value.GetType());
+                UnitPart.SelectedItem = mController.GetUnit(value);
             }
         }
 
-        public void ForceCulture(CultureInfo cultureInfo) => Culture = cultureInfo;
+        public void ForceCulture(CultureInfo cultureInfo)
+        {
+            object value = null;
+            if (NumericPart.Text.Length > 0)
+                value = Value;
+            mController.Culture = cultureInfo;
+            if (value != null)
+                Value = value;
+        }
 
         private void MeasurementControl_Enter(object sender, EventArgs e)
         {
@@ -120,34 +118,36 @@ namespace BallisticCalculatorNet.MeasurementControl
 
         private void NumericPart_KeyPress(object sender, KeyPressEventArgs e)
         {
-            int position = NumericPart.SelectionStart + NumericPart.SelectionLength;
-            string beforeSelect = NumericPart.Text.Substring(0, NumericPart.SelectionStart);
-            string afterSelect = position < NumericPart.Text.Length ? NumericPart.Text.Substring(position) : "";
+            if (!mController.AllowKeyInEditor(NumericPart.Text, NumericPart.SelectionStart, NumericPart.SelectionLength, e.KeyChar))
+                e.Handled = true;
+        }
 
-            if (e.KeyChar == '+' || e.KeyChar == '-')
-            {
-                if (NumericPart.Text.Length == 0)
-                    return;
+        public event EventHandler Changed;
 
-                if (position == 0 && !NumericPart.Text.Contains("+") && !NumericPart.Text.Contains('-'))
-                    return;
-            }
-            else if (e.KeyChar >= '0' && e.KeyChar <= '9')
+        private void NumericPart_TextChanged(object sender, EventArgs e)
+        {
+            Changed?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void UnitPart_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Changed?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void NumericPart_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up && e.Modifiers == Keys.None)
             {
-                if (afterSelect.Length == 0 || (!afterSelect.Contains('+') && !afterSelect.Contains('-')))
-                    return;
+                NumericPartControl.Text = mController.DoIncrement(NumericPartControl.Text, 1);
+                e.Handled = true;
+                Changed?.Invoke(this, EventArgs.Empty);
             }
-            else if (e.KeyChar == Culture.NumberFormat.NumberDecimalSeparator[0])
+            else if (e.KeyCode == Keys.Down && e.Modifiers == Keys.None)
             {
-                if (position > 0 && !NumericPart.Text.Contains(Culture.NumberFormat.NumberDecimalSeparator[0]))
-                    return;
+                NumericPartControl.Text = mController.DoIncrement(NumericPartControl.Text, -1);
+                e.Handled = true;
+                Changed?.Invoke(this, EventArgs.Empty);
             }
-            else if (e.KeyChar == Culture.NumberFormat.NumberGroupSeparator[0])
-            {
-                if (position > 0 && !afterSelect.Contains("+") && !afterSelect.Contains("-"))
-                    return;
-            }
-            e.Handled = true;   //ignore key
         }
     }
 }

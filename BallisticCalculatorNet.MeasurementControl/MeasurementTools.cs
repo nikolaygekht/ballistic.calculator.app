@@ -20,7 +20,7 @@ namespace BallisticCalculatorNet.MeasurementControl
 
         public static MeasurementTools Instance
         {
-            get => gInst ?? (gInst = new MeasurementTools());
+            get => gInst ??= new MeasurementTools();
         }
 
         private MeasurementTools()
@@ -36,28 +36,20 @@ namespace BallisticCalculatorNet.MeasurementControl
 
         private static Type GetMeasurementEnumType(MeasurementType measurementType)
         {
-            switch (measurementType)
+            return measurementType switch
             {
-                case MeasurementType.Angular:
-                    return typeof(AngularUnit);
-                case MeasurementType.Distance:
-                    return typeof(DistanceUnit);
-                case MeasurementType.Velocity:
-                    return typeof(VelocityUnit);
-                case MeasurementType.Pressure:
-                    return typeof(PressureUnit);
-                case MeasurementType.Temperature:
-                    return typeof(TemperatureUnit);
-                case MeasurementType.Volume:
-                    return typeof(VolumeUnit);
-                case MeasurementType.Weight:
-                    return typeof(WeightUnit);
-                default:
-                    throw new ArgumentException($"Value {measurementType} is unknown", nameof(measurementType));
-            }
+                MeasurementType.Angular => typeof(AngularUnit),
+                MeasurementType.Distance => typeof(DistanceUnit),
+                MeasurementType.Velocity => typeof(VelocityUnit),
+                MeasurementType.Pressure => typeof(PressureUnit),
+                MeasurementType.Temperature => typeof(TemperatureUnit),
+                MeasurementType.Volume => typeof(VolumeUnit),
+                MeasurementType.Weight => typeof(WeightUnit),
+                _ => throw new ArgumentException($"Value {measurementType} is unknown", nameof(measurementType)),
+            };
         }
 
-        private MeasurementUtility CreateUtility(Type measurementUnit)
+        private static MeasurementUtility CreateUtility(Type measurementUnit)
         {
             Type measurementType = typeof(Measurement<>).MakeGenericType(measurementUnit);
 
@@ -159,7 +151,7 @@ namespace BallisticCalculatorNet.MeasurementControl
 
             var paramValue = Expression.Parameter(typeof(string));
             var labelReturn = Expression.Label(typeof(object));
-            var returnStmt = Expression.Return(labelReturn, Expression.Convert(Expression.New(constructor, new Expression[] {  paramValue } ), typeof(object)));
+            var returnStmt = Expression.Return(labelReturn, Expression.Convert(Expression.New(constructor, new Expression[] { paramValue }), typeof(object)));
             var body = Expression.Block(typeof(object), new Expression[] { returnStmt, Expression.Label(labelReturn, Expression.Constant(null)) });
             var lambda = Expression.Lambda<Func<string, object>>(body, new ParameterExpression[] { paramValue });
             return lambda.Compile();

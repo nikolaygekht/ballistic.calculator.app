@@ -38,7 +38,7 @@ namespace BallisticCalculatorNet.UnitTest.Utils
             {
                 Location = new Point(x, y),
                 Size = new Size(sx, sy),
-                TabIndex= ++mItemsAdded,
+                TabIndex = ++mItemsAdded,
             };
             this.Controls.Add(t);
             return t;

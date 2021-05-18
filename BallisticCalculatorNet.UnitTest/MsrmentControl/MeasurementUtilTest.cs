@@ -81,7 +81,7 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
             }
         }
 
-        private void MeasurementUtil_TestCreator_Validate<T>(object obj, double expectedValue, T expectedUnit)
+        private static void MeasurementUtil_TestCreator_Validate<T>(object obj, double expectedValue, T expectedUnit)
              where T : Enum
         {
             obj.Should().BeOfType(typeof(Measurement<T>));
@@ -101,8 +101,8 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
             var util = MeasurementTools.Instance.GetUtility(type);
             object obj = util.Activator(value, unit);
             obj.Should().NotBeNull();
-            var mi = this.GetType().GetMethod(nameof(MeasurementUtil_TestCreator_Validate), BindingFlags.NonPublic | BindingFlags.Instance).MakeGenericMethod(new Type[] { valueType });
-            mi.Invoke(this, new object[] { obj, value, unit });
+            var mi = this.GetType().GetMethod(nameof(MeasurementUtil_TestCreator_Validate), BindingFlags.NonPublic | BindingFlags.Static).MakeGenericMethod(new Type[] { valueType });
+            mi.Invoke(null, new object[] { obj, value, unit });
 
             util.ValueGetter(obj).Should().Be(value);
             util.UnitGetter(obj).Should().BeOfType(valueType);

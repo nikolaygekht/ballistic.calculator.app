@@ -25,6 +25,17 @@ namespace BallisticCalculatorNet.MeasurementControl
             {
                 return Name == other.Name && Value.Equals(other.Value);
             }
+
+            public override bool Equals(object obj)
+            {
+                if (object.ReferenceEquals(this, obj))
+                    return true;
+                if (obj is Unit unit)
+                    return Equals(unit);
+                return false;
+            }
+
+            public override int GetHashCode() => HashCode.Combine(Name, Value);
         }
 
         public Type MeasurementUnit { get; }
