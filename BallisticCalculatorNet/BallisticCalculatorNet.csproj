@@ -8,4 +8,8 @@
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="BallisticCalculator" Version="1.1.0.2" />
+  </ItemGroup>
+
 </Project>

@@ -12,7 +12,6 @@ dotnet_diagnostic.RCS1123.severity = none
 # IDE0090: Use 'new(...)'
 dotnet_diagnostic.IDE0090.severity = none
 
-
 # S1199: Nested code blocks should not be used
 dotnet_diagnostic.S1199.severity = none
 
@@ -24,3 +23,9 @@ dotnet_diagnostic.RCS1001.severity = none
 
 # IDE0057: Use range operator
 dotnet_diagnostic.IDE0057.severity = none
+
+# IDE1006: Naming Styles
+dotnet_diagnostic.IDE1006.severity = none
+
+# S4136: Method overloads should be grouped together
+dotnet_diagnostic.S4136.severity = none
