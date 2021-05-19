@@ -81,6 +81,14 @@ namespace BallisticCalculatorNet.ReticleEditor
             reticleHeight.Value = Reticle.Size.Y;
             zeroOffsetX.Value = Reticle.Zero.X;
             zeroOffsetY.Value = Reticle.Zero.Y;
+
+            reticleItems.Items.Clear();
+            for (int i = 0; i < Reticle.Elements.Count; i++)
+                reticleItems.Items.Add(Reticle.Elements[i]);
+
+            for (int i = 0; i < Reticle.BulletDropCompensator.Count; i++)
+                reticleItems.Items.Add(Reticle.BulletDropCompensator[i]);
+
             UpdateImage();
         }
 
@@ -120,6 +128,29 @@ namespace BallisticCalculatorNet.ReticleEditor
             ReticleDrawController controller = new ReticleDrawController(Reticle, canvas);
             canvas.Clear();
             controller.DrawReticle();
+            if (Reticle.BulletDropCompensator.Count > 0)
+            {
+                for (int i = 0; i < Reticle.BulletDropCompensator.Count; i++)
+                {
+                    var bdc = Reticle.BulletDropCompensator[i];
+                    controller.DrawElement(new ReticleCircle()
+                    {
+                        Center = bdc.Position,
+                        Radius = Reticle.Size.X / 50,
+                        Color = "blue",
+                        Fill = false,
+                        LineWidth = null,
+                    });
+
+                    controller.DrawElement(new ReticleText()
+                    {
+                        Position = new ReticlePosition(bdc.Position.X + bdc.TextOffset, bdc.Position.Y - bdc.TextHeight / 2),
+                        Color = "blue",
+                        TextHeight = bdc.TextHeight,
+                        Text = bdc.Position.Y.ToString(),
+                    });
+                }
+            }
             pictureReticle.Image = bm;
         }
 

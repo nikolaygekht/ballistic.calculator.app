@@ -53,7 +53,7 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
             appForm.MeasurementControl("zeroOffsetX").Should().HaveExactValue(r1.Zero.X);
             appForm.MeasurementControl("zeroOffsetY").Should().HaveExactValue(r1.Zero.Y);
 
-            appForm.ListBox("reticleItems").Should().HaveItemsCount(r1.Elements.Count);
+            appForm.ListBox("reticleItems").Should().HaveItemsCount(r1.Elements.Count + r1.BulletDropCompensator.Count);
             appForm.ListBox("reticleItems").Should().HaveIndexSelected(-1);
         }
     }

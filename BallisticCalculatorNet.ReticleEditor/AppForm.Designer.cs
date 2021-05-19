@@ -49,6 +49,14 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.label1 = new System.Windows.Forms.Label();
             this.reticleItems = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.buttonNewLine = new System.Windows.Forms.Button();
+            this.buttonNewCircle = new System.Windows.Forms.Button();
+            this.buttonNewRect = new System.Windows.Forms.Button();
+            this.buttonNewPath = new System.Windows.Forms.Button();
+            this.buttonNewText = new System.Windows.Forms.Button();
+            this.buttonNewBdcPoint = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -56,6 +64,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             ((System.ComponentModel.ISupportInitialize)(this.pictureReticle)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -277,11 +286,91 @@ namespace BallisticCalculatorNet.ReticleEditor
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.buttonDelete);
+            this.panel2.Controls.Add(this.buttonEdit);
+            this.panel2.Controls.Add(this.buttonNewBdcPoint);
+            this.panel2.Controls.Add(this.buttonNewText);
+            this.panel2.Controls.Add(this.buttonNewPath);
+            this.panel2.Controls.Add(this.buttonNewRect);
+            this.panel2.Controls.Add(this.buttonNewCircle);
+            this.panel2.Controls.Add(this.buttonNewLine);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 666);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1006, 45);
             this.panel2.TabIndex = 2;
+            // 
+            // buttonNewLine
+            // 
+            this.buttonNewLine.Location = new System.Drawing.Point(13, 9);
+            this.buttonNewLine.Name = "buttonNewLine";
+            this.buttonNewLine.Size = new System.Drawing.Size(94, 29);
+            this.buttonNewLine.TabIndex = 0;
+            this.buttonNewLine.Text = "Line";
+            this.buttonNewLine.UseVisualStyleBackColor = true;
+            // 
+            // buttonNewCircle
+            // 
+            this.buttonNewCircle.Location = new System.Drawing.Point(116, 9);
+            this.buttonNewCircle.Name = "buttonNewCircle";
+            this.buttonNewCircle.Size = new System.Drawing.Size(94, 29);
+            this.buttonNewCircle.TabIndex = 1;
+            this.buttonNewCircle.Text = "Circle";
+            this.buttonNewCircle.UseVisualStyleBackColor = true;
+            // 
+            // buttonNewRect
+            // 
+            this.buttonNewRect.Location = new System.Drawing.Point(217, 8);
+            this.buttonNewRect.Name = "buttonNewRect";
+            this.buttonNewRect.Size = new System.Drawing.Size(94, 29);
+            this.buttonNewRect.TabIndex = 2;
+            this.buttonNewRect.Text = "Rectangle";
+            this.buttonNewRect.UseVisualStyleBackColor = true;
+            // 
+            // buttonNewPath
+            // 
+            this.buttonNewPath.Location = new System.Drawing.Point(317, 9);
+            this.buttonNewPath.Name = "buttonNewPath";
+            this.buttonNewPath.Size = new System.Drawing.Size(94, 29);
+            this.buttonNewPath.TabIndex = 3;
+            this.buttonNewPath.Text = "Path";
+            this.buttonNewPath.UseVisualStyleBackColor = true;
+            // 
+            // buttonNewText
+            // 
+            this.buttonNewText.Location = new System.Drawing.Point(417, 8);
+            this.buttonNewText.Name = "buttonNewText";
+            this.buttonNewText.Size = new System.Drawing.Size(94, 29);
+            this.buttonNewText.TabIndex = 4;
+            this.buttonNewText.Text = "Text";
+            this.buttonNewText.UseVisualStyleBackColor = true;
+            // 
+            // buttonNewBdcPoint
+            // 
+            this.buttonNewBdcPoint.Location = new System.Drawing.Point(517, 8);
+            this.buttonNewBdcPoint.Name = "buttonNewBdcPoint";
+            this.buttonNewBdcPoint.Size = new System.Drawing.Size(94, 29);
+            this.buttonNewBdcPoint.TabIndex = 5;
+            this.buttonNewBdcPoint.Text = "BDC Point";
+            this.buttonNewBdcPoint.UseVisualStyleBackColor = true;
+            // 
+            // buttonEdit
+            // 
+            this.buttonEdit.Location = new System.Drawing.Point(617, 9);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(94, 29);
+            this.buttonEdit.TabIndex = 6;
+            this.buttonEdit.Text = "Edit";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(717, 9);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(94, 29);
+            this.buttonDelete.TabIndex = 7;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
             // 
             // AppForm
             // 
@@ -300,6 +389,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -325,6 +415,14 @@ namespace BallisticCalculatorNet.ReticleEditor
         private System.Windows.Forms.Button buttonLoad;
         private System.Windows.Forms.Button buttonSet;
         private System.Windows.Forms.PictureBox pictureReticle;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.Button buttonNewBdcPoint;
+        private System.Windows.Forms.Button buttonNewText;
+        private System.Windows.Forms.Button buttonNewPath;
+        private System.Windows.Forms.Button buttonNewRect;
+        private System.Windows.Forms.Button buttonNewCircle;
+        private System.Windows.Forms.Button buttonNewLine;
     }
 }
 
