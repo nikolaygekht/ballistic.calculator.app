@@ -24,7 +24,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             where T : class
         {
             var xmlSeralizer = new BallisticXmlSerializer();
-            xmlSeralizer.Serialize(value);
+            xmlSeralizer.Document.AppendChild(xmlSeralizer.Serialize(value));
             xmlSeralizer.Document.Save(stream);
         }
     }

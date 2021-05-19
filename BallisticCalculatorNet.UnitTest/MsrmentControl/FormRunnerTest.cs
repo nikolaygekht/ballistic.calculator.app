@@ -7,10 +7,10 @@ using Xunit;
 
 namespace BallisticCalculatorNet.UnitTest.MsrmentControl
 {
-    public class FormRunnerTest
+    public static class FormRunnerTest
     {
-        [Fact]
-        public void Run()
+        //[Fact]
+        public static void Perform()
         {
             using TestForm tf = new TestForm();
 

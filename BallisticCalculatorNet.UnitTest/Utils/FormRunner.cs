@@ -19,10 +19,7 @@ namespace BallisticCalculatorNet.UnitTest.Utils
         {
             mThread = new Thread(() =>
             {
-                formToRun.Load += (sender, args) =>
-                {
-                    mStarted.Set();
-                };
+                formToRun.Load += (sender, args) => mStarted.Set();
 
                 try
                 {

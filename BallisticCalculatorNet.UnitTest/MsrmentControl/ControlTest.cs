@@ -23,12 +23,15 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
             using TestForm tf = new TestForm();
 
             var control = tf.AddControl<MeasurementControl.MeasurementControl>(13, 13, 300, 28);
+            control.Control<Control>("UnitPart").Should()
+                .Exist()
+                .And
+                .BeOfType<ComboBox>();
 
-            control.UnitPartControl.Should().NotBeNull();
-            control.UnitPartControl.Should().BeOfType(typeof(ComboBox));
-
-            control.NumericPartControl.Should().NotBeNull();
-            control.NumericPartControl.Should().BeOfType(typeof(TextBox));
+            control.Control<Control>("NumericPart").Should()
+                .Exist()
+                .And
+                .BeOfType<TextBox>();
 
             control.MeasurementType.Should().Be(MeasurementType.Distance);
 
@@ -57,7 +60,7 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
             control.Value = new Measurement<DistanceUnit>(value, unit);
 
             control.Value.Should().Be(new Measurement<DistanceUnit>(value, unit));
-            control.NumericPartControl.Text.Should().Be(expectedText);
+            control.TextBox("NumericPart").Should().HaveText(expectedText);
             control.Unit.Should().Be(unit);
         }
 
@@ -79,10 +82,15 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
             control.Unit.Should().BeOfType(unitType);
             control.Value.Should().BeOfType(typeof(Measurement<>).MakeGenericType(new Type[] { unitType }));
 
-            control.UnitPartControl.Items.Should().HaveCount(util.Units.Count);
-            control.UnitPartControl.Items.Should().HaveCount(Enum.GetValues(unitType).Length);
-            foreach (var unit in util.Units)
-                control.UnitPartControl.Items.Should().Contain(unit);
+            var unitPart = control.ComboBox("UnitPart");
+
+            unitPart.Should()
+                .HaveItemsCount(util.Units.Count)
+                .And
+                .HaveItemsCount(Enum.GetValues(unitType).Length);
+
+            foreach (MeasurementUtility.Unit unit in util.Units)
+                unitPart.Should().HaveItemMatching<MeasurementUtility.Unit>(u => u.Equals(unit));
         }
 
         [Fact]
@@ -92,12 +100,20 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
             var control = tf.AddControl<MeasurementControl.MeasurementControl>(13, 13, 300, 28);
             control.MeasurementType = MeasurementType.Angular;
             control.ForceCulture(CultureInfo.InvariantCulture);
-            control.NumericPartControl.Text.Should().BeEmpty();
+            var numericPart = control.TextBox("NumericPart");
+
+            numericPart.Should()
+                .Exist()
+                .And
+                .HaveNoText();
+
             control.Value = new Measurement<AngularUnit>(1234.56, AngularUnit.Degree);
-            control.NumericPartControl.Text.Should().Be("1,234.56");
+            numericPart.Should().HaveText("1,234.56");
+
             var ruCulture = CultureInfo.GetCultureInfo("ru-RU");
+            var expectRuValue = "1" + ruCulture.NumberFormat.NumberGroupSeparator + "234" + ruCulture.NumberFormat.NumberDecimalSeparator + "56";
             control.ForceCulture(ruCulture);
-            control.NumericPartControl.Text.Should().Be("1" + ruCulture.NumberFormat.NumberGroupSeparator + "234" + ruCulture.NumberFormat.NumberDecimalSeparator + "56");
+            numericPart.Should().HaveText(expectRuValue);
         }
 
         [Theory]

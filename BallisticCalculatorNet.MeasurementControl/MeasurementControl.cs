@@ -51,11 +51,7 @@ namespace BallisticCalculatorNet.MeasurementControl
             set => mController.Maximum = value;
         }
 
-        internal TextBox NumericPartControl => NumericPart;
-
-        internal ComboBox UnitPartControl => UnitPart;
-
-        public bool IsEmpty => NumericPartControl.Text.Length == 0;
+        public bool IsEmpty => NumericPart.Text.Length == 0;
 
         private void UpdateUnits()
         {
@@ -138,13 +134,13 @@ namespace BallisticCalculatorNet.MeasurementControl
         {
             if (e.KeyCode == Keys.Up && e.Modifiers == Keys.None)
             {
-                NumericPartControl.Text = mController.DoIncrement(NumericPartControl.Text, 1);
+                NumericPart.Text = mController.DoIncrement(NumericPart.Text, 1);
                 e.Handled = true;
                 Changed?.Invoke(this, EventArgs.Empty);
             }
             else if (e.KeyCode == Keys.Down && e.Modifiers == Keys.None)
             {
-                NumericPartControl.Text = mController.DoIncrement(NumericPartControl.Text, -1);
+                NumericPart.Text = mController.DoIncrement(NumericPart.Text, -1);
                 e.Handled = true;
                 Changed?.Invoke(this, EventArgs.Empty);
             }

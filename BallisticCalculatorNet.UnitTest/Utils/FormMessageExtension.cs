@@ -7,6 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+#pragma warning disable CA1806 // Do not ignore method results
+
 namespace BallisticCalculatorNet.UnitTest.Utils
 {
     public enum VirtualKeys : ushort
@@ -27,11 +29,8 @@ namespace BallisticCalculatorNet.UnitTest.Utils
         Pause = 0x13,
         CapsLock = 0x14,
         Kana = 0x15,
-        Hangeul = 0x15,
-        Hangul = 0x15,
         Junja = 0x17,
         Final = 0x18,
-        Hanja = 0x19,
         Kanji = 0x19,
         Escape = 0x1B,
         Convert = 0x1C,
@@ -137,7 +136,6 @@ namespace BallisticCalculatorNet.UnitTest.Utils
         NumLock = 0x90,
         ScrollLock = 0x91,
         NEC_Equal = 0x92,
-        Fujitsu_Jisho = 0x92,
         Fujitsu_Masshou = 0x93,
         Fujitsu_Touroku = 0x94,
         Fujitsu_Loya = 0x95,

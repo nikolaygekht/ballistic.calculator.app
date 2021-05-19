@@ -23,16 +23,6 @@ namespace BallisticCalculatorNet.ReticleEditor
 
         internal ReticleDefinition Reticle { get; private set; } = new ReticleDefinition();
 
-        internal TextBox ReticleNameControl => reticleName;
-
-        internal MeasurementControl.MeasurementControl ReticleWidth => reticleWidth;
-
-        internal MeasurementControl.MeasurementControl ReticleHeight => reticleHeight;
-
-        internal MeasurementControl.MeasurementControl ZeroOffsetX => zeroOffsetX;
-
-        internal MeasurementControl.MeasurementControl ZeroOffsetY => zeroOffsetY;
-
         public AppForm()
         {
             InitializeComponent();
@@ -121,7 +111,7 @@ namespace BallisticCalculatorNet.ReticleEditor
         {
             if (Reticle.Elements.Count == 0)
                 return;
-                
+
             CalculateReticleImageSize(pictureReticle.Size.Width, pictureReticle.Size.Height,
                                       Reticle.Size.X, Reticle.Size.Y, out int imageX, out int imageY);
 

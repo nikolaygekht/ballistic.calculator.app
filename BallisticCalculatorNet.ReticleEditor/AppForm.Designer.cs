@@ -47,7 +47,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.reticleWidth = new BallisticCalculatorNet.MeasurementControl.MeasurementControl();
             this.reticleName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.ReticleItems = new System.Windows.Forms.ListBox();
+            this.reticleItems = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -92,7 +92,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.ReticleItems, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.reticleItems, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -265,15 +265,15 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.label1.TabIndex = 0;
             this.label1.Text = "Reticle Parameteters";
             // 
-            // ReticleItems
+            // reticleItems
             // 
-            this.ReticleItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ReticleItems.FormattingEnabled = true;
-            this.ReticleItems.ItemHeight = 20;
-            this.ReticleItems.Location = new System.Drawing.Point(3, 202);
-            this.ReticleItems.Name = "ReticleItems";
-            this.ReticleItems.Size = new System.Drawing.Size(1006, 458);
-            this.ReticleItems.TabIndex = 1;
+            this.reticleItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reticleItems.FormattingEnabled = true;
+            this.reticleItems.ItemHeight = 20;
+            this.reticleItems.Location = new System.Drawing.Point(3, 202);
+            this.reticleItems.Name = "reticleItems";
+            this.reticleItems.Size = new System.Drawing.Size(1006, 458);
+            this.reticleItems.TabIndex = 1;
             // 
             // panel2
             // 
@@ -310,7 +310,7 @@ namespace BallisticCalculatorNet.ReticleEditor
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox ReticleItems;
+        private System.Windows.Forms.ListBox reticleItems;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox reticleName;
         private MeasurementControl.MeasurementControl zeroOffsetY;
