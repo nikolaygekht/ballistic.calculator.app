@@ -49,9 +49,12 @@ namespace BallisticCalculatorNet.ReticleEditor
             SaveReticle(fs);
         }
 
-        internal void LoadReticle(Stream reticleStream, string fileName)
+        internal void LoadReticle(Stream reticleStream, string fileName) =>
+            LoadReticle(reticleStream.BallisticXmlDeserialize<ReticleDefinition>(), fileName);
+
+        internal void LoadReticle(ReticleDefinition definition, string fileName)
         {
-            Reticle = reticleStream.BallisticXmlDeserialize<ReticleDefinition>();
+            Reticle = definition;
             ReticleFileName = fileName;
             UpdateReticle();
         }
@@ -170,6 +173,31 @@ namespace BallisticCalculatorNet.ReticleEditor
             }
         }
 
+        internal void DeleteItem(object item)
+        {
+            if (item is ReticleElement el)
+            {
+                for (int i = 0; i < Reticle.Elements.Count; i++)
+                    if (ReferenceEquals(el, Reticle.Elements[i]))
+                    {
+                        Reticle.Elements.RemoveAt(i);
+                        reticleItems.Items.Remove(item);
+                        break;
+                    }
+
+            }
+            else if (item is ReticleBulletDropCompensatorPoint pt)
+            {
+                for (int i = 0; i < Reticle.BulletDropCompensator.Count; i++)
+                    if (ReferenceEquals(pt, Reticle.BulletDropCompensator[i]))
+                    {
+                        Reticle.BulletDropCompensator.RemoveAt(i);
+                        reticleItems.Items.Remove(item);
+                        break;
+                    }
+            }
+        }
+
         private void buttonSet_Click(object sender, EventArgs e)
         {
             GatherReticleDefinition();
@@ -218,6 +246,17 @@ namespace BallisticCalculatorNet.ReticleEditor
 
         private void splitContainer1_Panel1_SizeChanged(object sender, EventArgs e)
         {
+            UpdateImage();
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            if (reticleItems.SelectedItem == null)
+            {
+                MessageBox.Show(this, "Select Item To Delete", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            DeleteItem(reticleItems.SelectedItem);
             UpdateImage();
         }
     }

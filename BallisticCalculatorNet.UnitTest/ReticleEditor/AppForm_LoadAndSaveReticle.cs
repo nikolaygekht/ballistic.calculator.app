@@ -53,8 +53,39 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
             appForm.MeasurementControl("zeroOffsetX").Should().HaveExactValue(r1.Zero.X);
             appForm.MeasurementControl("zeroOffsetY").Should().HaveExactValue(r1.Zero.Y);
 
-            appForm.ListBox("reticleItems").Should().HaveItemsCount(r1.Elements.Count + r1.BulletDropCompensator.Count);
-            appForm.ListBox("reticleItems").Should().HaveIndexSelected(-1);
+            var lb = appForm.ListBox("reticleItems");
+            lb.Should().Exist();
+            lb.Should().HaveItemsCount(r1.Elements.Count + r1.BulletDropCompensator.Count);
+            lb.Should().HaveIndexSelected(-1);
+
+            //wrong reticle, take it from control!!!
+            foreach (var element in appForm.Reticle.Elements)
+                lb.Should().HaveItemMatching<object>(lbi => ReferenceEquals(lbi, element));
+
+            foreach (var element in appForm.Reticle.BulletDropCompensator)
+                lb.Should().HaveItemMatching<object>(lbi => ReferenceEquals(lbi, element));
         }
+
+        [Fact]
+        public void GatherReticle()
+        {
+            AppForm f = new AppForm();
+            f.TextBox("reticleName").Text = "NewName";
+            f.MeasurementControl("reticleWidth").Value = AngularUnit.Mil.New(1);
+            f.MeasurementControl("reticleHeight").Value = AngularUnit.Mil.New(2);
+            f.MeasurementControl("zeroOffsetX").Value = AngularUnit.Mil.New(3);
+            f.MeasurementControl("zeroOffsetY").Value = AngularUnit.Mil.New(4);
+
+            f.GatherReticleDefinition();
+
+            f.Reticle.Name.Should().Be("NewName");
+            f.Reticle.Size.X.Should().Be(AngularUnit.Mil.New(1));
+            f.Reticle.Size.Y.Should().Be(AngularUnit.Mil.New(2));
+            f.Reticle.Zero.X.Should().Be(AngularUnit.Mil.New(3));
+            f.Reticle.Zero.Y.Should().Be(AngularUnit.Mil.New(4));
+
+        }
+
+
     }
 }

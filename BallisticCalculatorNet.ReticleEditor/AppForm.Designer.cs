@@ -49,14 +49,14 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.label1 = new System.Windows.Forms.Label();
             this.reticleItems = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.buttonNewLine = new System.Windows.Forms.Button();
-            this.buttonNewCircle = new System.Windows.Forms.Button();
-            this.buttonNewRect = new System.Windows.Forms.Button();
-            this.buttonNewPath = new System.Windows.Forms.Button();
-            this.buttonNewText = new System.Windows.Forms.Button();
-            this.buttonNewBdcPoint = new System.Windows.Forms.Button();
-            this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
+            this.buttonNewBdcPoint = new System.Windows.Forms.Button();
+            this.buttonNewText = new System.Windows.Forms.Button();
+            this.buttonNewPath = new System.Windows.Forms.Button();
+            this.buttonNewRect = new System.Windows.Forms.Button();
+            this.buttonNewCircle = new System.Windows.Forms.Button();
+            this.buttonNewLine = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -139,7 +139,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonSet.Location = new System.Drawing.Point(111, 131);
             this.buttonSet.Name = "buttonSet";
             this.buttonSet.Size = new System.Drawing.Size(94, 29);
-            this.buttonSet.TabIndex = 12;
+            this.buttonSet.TabIndex = 6;
             this.buttonSet.Text = "Set";
             this.buttonSet.UseVisualStyleBackColor = true;
             this.buttonSet.Click += new System.EventHandler(this.buttonSet_Click);
@@ -149,7 +149,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonSaveAs.Location = new System.Drawing.Point(411, 130);
             this.buttonSaveAs.Name = "buttonSaveAs";
             this.buttonSaveAs.Size = new System.Drawing.Size(94, 29);
-            this.buttonSaveAs.TabIndex = 11;
+            this.buttonSaveAs.TabIndex = 9;
             this.buttonSaveAs.Text = "Save As";
             this.buttonSaveAs.UseVisualStyleBackColor = true;
             this.buttonSaveAs.Click += new System.EventHandler(this.buttonSaveAs_Click);
@@ -159,7 +159,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonSave.Location = new System.Drawing.Point(311, 130);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(94, 29);
-            this.buttonSave.TabIndex = 10;
+            this.buttonSave.TabIndex = 8;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
@@ -169,7 +169,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonLoad.Location = new System.Drawing.Point(211, 131);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(94, 29);
-            this.buttonLoad.TabIndex = 9;
+            this.buttonLoad.TabIndex = 7;
             this.buttonLoad.Text = "Load";
             this.buttonLoad.UseVisualStyleBackColor = true;
             this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
@@ -282,7 +282,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.reticleItems.Location = new System.Drawing.Point(3, 202);
             this.reticleItems.Name = "reticleItems";
             this.reticleItems.Size = new System.Drawing.Size(1006, 458);
-            this.reticleItems.TabIndex = 1;
+            this.reticleItems.TabIndex = 10;
             // 
             // panel2
             // 
@@ -300,77 +300,78 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.panel2.Size = new System.Drawing.Size(1006, 45);
             this.panel2.TabIndex = 2;
             // 
-            // buttonNewLine
+            // buttonDelete
             // 
-            this.buttonNewLine.Location = new System.Drawing.Point(13, 9);
-            this.buttonNewLine.Name = "buttonNewLine";
-            this.buttonNewLine.Size = new System.Drawing.Size(94, 29);
-            this.buttonNewLine.TabIndex = 0;
-            this.buttonNewLine.Text = "Line";
-            this.buttonNewLine.UseVisualStyleBackColor = true;
-            // 
-            // buttonNewCircle
-            // 
-            this.buttonNewCircle.Location = new System.Drawing.Point(116, 9);
-            this.buttonNewCircle.Name = "buttonNewCircle";
-            this.buttonNewCircle.Size = new System.Drawing.Size(94, 29);
-            this.buttonNewCircle.TabIndex = 1;
-            this.buttonNewCircle.Text = "Circle";
-            this.buttonNewCircle.UseVisualStyleBackColor = true;
-            // 
-            // buttonNewRect
-            // 
-            this.buttonNewRect.Location = new System.Drawing.Point(217, 8);
-            this.buttonNewRect.Name = "buttonNewRect";
-            this.buttonNewRect.Size = new System.Drawing.Size(94, 29);
-            this.buttonNewRect.TabIndex = 2;
-            this.buttonNewRect.Text = "Rectangle";
-            this.buttonNewRect.UseVisualStyleBackColor = true;
-            // 
-            // buttonNewPath
-            // 
-            this.buttonNewPath.Location = new System.Drawing.Point(317, 9);
-            this.buttonNewPath.Name = "buttonNewPath";
-            this.buttonNewPath.Size = new System.Drawing.Size(94, 29);
-            this.buttonNewPath.TabIndex = 3;
-            this.buttonNewPath.Text = "Path";
-            this.buttonNewPath.UseVisualStyleBackColor = true;
-            // 
-            // buttonNewText
-            // 
-            this.buttonNewText.Location = new System.Drawing.Point(417, 8);
-            this.buttonNewText.Name = "buttonNewText";
-            this.buttonNewText.Size = new System.Drawing.Size(94, 29);
-            this.buttonNewText.TabIndex = 4;
-            this.buttonNewText.Text = "Text";
-            this.buttonNewText.UseVisualStyleBackColor = true;
-            // 
-            // buttonNewBdcPoint
-            // 
-            this.buttonNewBdcPoint.Location = new System.Drawing.Point(517, 8);
-            this.buttonNewBdcPoint.Name = "buttonNewBdcPoint";
-            this.buttonNewBdcPoint.Size = new System.Drawing.Size(94, 29);
-            this.buttonNewBdcPoint.TabIndex = 5;
-            this.buttonNewBdcPoint.Text = "BDC Point";
-            this.buttonNewBdcPoint.UseVisualStyleBackColor = true;
+            this.buttonDelete.Location = new System.Drawing.Point(717, 9);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(94, 29);
+            this.buttonDelete.TabIndex = 18;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // buttonEdit
             // 
             this.buttonEdit.Location = new System.Drawing.Point(617, 9);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(94, 29);
-            this.buttonEdit.TabIndex = 6;
+            this.buttonEdit.TabIndex = 17;
             this.buttonEdit.Text = "Edit";
             this.buttonEdit.UseVisualStyleBackColor = true;
             // 
-            // buttonDelete
+            // buttonNewBdcPoint
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(717, 9);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(94, 29);
-            this.buttonDelete.TabIndex = 7;
-            this.buttonDelete.Text = "Delete";
-            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonNewBdcPoint.Location = new System.Drawing.Point(517, 8);
+            this.buttonNewBdcPoint.Name = "buttonNewBdcPoint";
+            this.buttonNewBdcPoint.Size = new System.Drawing.Size(94, 29);
+            this.buttonNewBdcPoint.TabIndex = 16;
+            this.buttonNewBdcPoint.Text = "BDC Point";
+            this.buttonNewBdcPoint.UseVisualStyleBackColor = true;
+            // 
+            // buttonNewText
+            // 
+            this.buttonNewText.Location = new System.Drawing.Point(417, 8);
+            this.buttonNewText.Name = "buttonNewText";
+            this.buttonNewText.Size = new System.Drawing.Size(94, 29);
+            this.buttonNewText.TabIndex = 15;
+            this.buttonNewText.Text = "Text";
+            this.buttonNewText.UseVisualStyleBackColor = true;
+            // 
+            // buttonNewPath
+            // 
+            this.buttonNewPath.Location = new System.Drawing.Point(317, 9);
+            this.buttonNewPath.Name = "buttonNewPath";
+            this.buttonNewPath.Size = new System.Drawing.Size(94, 29);
+            this.buttonNewPath.TabIndex = 14;
+            this.buttonNewPath.Text = "Path";
+            this.buttonNewPath.UseVisualStyleBackColor = true;
+            // 
+            // buttonNewRect
+            // 
+            this.buttonNewRect.Location = new System.Drawing.Point(217, 8);
+            this.buttonNewRect.Name = "buttonNewRect";
+            this.buttonNewRect.Size = new System.Drawing.Size(94, 29);
+            this.buttonNewRect.TabIndex = 13;
+            this.buttonNewRect.Text = "Rectangle";
+            this.buttonNewRect.UseVisualStyleBackColor = true;
+            // 
+            // buttonNewCircle
+            // 
+            this.buttonNewCircle.Location = new System.Drawing.Point(116, 9);
+            this.buttonNewCircle.Name = "buttonNewCircle";
+            this.buttonNewCircle.Size = new System.Drawing.Size(94, 29);
+            this.buttonNewCircle.TabIndex = 12;
+            this.buttonNewCircle.Text = "Circle";
+            this.buttonNewCircle.UseVisualStyleBackColor = true;
+            // 
+            // buttonNewLine
+            // 
+            this.buttonNewLine.Location = new System.Drawing.Point(13, 9);
+            this.buttonNewLine.Name = "buttonNewLine";
+            this.buttonNewLine.Size = new System.Drawing.Size(94, 29);
+            this.buttonNewLine.TabIndex = 11;
+            this.buttonNewLine.Text = "Line";
+            this.buttonNewLine.UseVisualStyleBackColor = true;
             // 
             // AppForm
             // 

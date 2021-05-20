@@ -40,11 +40,14 @@ namespace BallisticCalculatorNet.UnitTest.Utils
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lb =>
-                {   
+                {
                     var f = predicate.Compile();
                     foreach (object o in lb.Items)
-                        if (o is T t && f(t))
-                            return true;
+                    {
+                        if (o is T t)
+                            if (f(t))
+                                return true;
+                    }
                     return false;
                 })
                 .FailWith("Expected {context:control} to have item matching {0}, but it has no such items", predicate);

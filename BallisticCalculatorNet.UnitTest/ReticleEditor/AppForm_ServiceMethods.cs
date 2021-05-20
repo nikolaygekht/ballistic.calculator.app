@@ -1,4 +1,5 @@
-﻿using BallisticCalculatorNet.ReticleEditor;
+﻿using BallisticCalculator.Reticle;
+using BallisticCalculatorNet.ReticleEditor;
 using BallisticCalculatorNet.UnitTest.Utils;
 using FluentAssertions;
 using Gehtsoft.Measurements;
@@ -24,6 +25,55 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
 
             calculatedImageWidth.Should().Be(imageWidth, $"expected in {situation}");
             calculateImageHeight.Should().Be(imageHeight, $"expected in {situation}");
+        }
+
+        [Fact]
+        public void Delete_ReticleElement()
+        {
+            AppForm form = new AppForm();
+            form.LoadReticle(new MilDotReticle(), "mildot");
+
+            var originalListBoxItemsCount = form.ListBox("reticleItems").Items.Count;
+
+            var elementToDelete = form.Reticle.Elements[1];
+            var originalElementsCount = form.Reticle.Elements.Count;
+
+            form.Reticle.Elements.Should().Contain(elementToDelete);
+
+            form.DeleteItem(elementToDelete);
+            
+            form.ListBox("reticleItems").Should()
+                .HaveItemsCount(originalListBoxItemsCount - 1)
+                .And
+                .HaveNotItemsMatching<object>(i => ReferenceEquals(i, elementToDelete));
+
+            form.Reticle.Elements.Should().HaveCount(originalElementsCount - 1);
+            form.Reticle.Elements.Should().NotContain(elementToDelete);           
+        }
+
+        [Fact]
+        public void Delete_ReticleBdc()
+        {
+            AppForm form = new AppForm();
+            form.LoadReticle(new MilDotReticle(), "mildot");
+
+            var originalListBoxItemsCount = form.ListBox("reticleItems").Items.Count;
+
+            var bdcToDelete = form.Reticle.BulletDropCompensator[1];
+            var originalBdcCount = form.Reticle.BulletDropCompensator.Count;
+
+            form.Reticle.BulletDropCompensator.Should().Contain(bdcToDelete);
+
+            form.DeleteItem(bdcToDelete);
+
+            form.ListBox("reticleItems").Should()
+                .HaveItemsCount(originalListBoxItemsCount - 1)
+                .And
+                .HaveNotItemsMatching<object>(i => ReferenceEquals(i, bdcToDelete));
+
+            form.Reticle.BulletDropCompensator.Should().HaveCount(originalBdcCount - 1);
+            form.Reticle.BulletDropCompensator.Should().NotContain(bdcToDelete);
+
         }
     }
 }
