@@ -283,14 +283,35 @@ namespace BallisticCalculatorNet.ReticleEditor
             };
 
             if (dlg.ShowDialog(this) == DialogResult.OK)
-                LoadReticle(dlg.FileName);
+            {
+                try
+                {
+                    LoadReticle(dlg.FileName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Can't open the file {dlg.FileName}\r\nError: {ex.Message}\r\nTo log the error details enable the warning log level and try operation again");
+                    Program.Logger?.Warning(ex, $"Loading file '{dlg.FileName}' failed");
+                }
+            }
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(ReticleFileName))
                 buttonSaveAs_Click(sender, e);
-            SaveReticle();
+            else
+            {
+                try
+                {
+                    SaveReticle();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Can't save the file {ReticleFileName}\r\nError: {ex.Message}\r\nTo log the error details enable the warning log level and try operation again");
+                    Program.Logger?.Warning(ex, $"Saving file '{ReticleFileName}' failed");
+                }
+            }
         }
 
         private const string FILTER = "Reticle files|*.reticle|All Files|*.*";
@@ -308,7 +329,17 @@ namespace BallisticCalculatorNet.ReticleEditor
             };
 
             if (dlg.ShowDialog(this) == DialogResult.OK)
-                SaveReticleAs(dlg.FileName);
+            {
+                try
+                {
+                    SaveReticleAs(dlg.FileName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Can't save the file {dlg.FileName}\r\nError: {ex.Message}\r\nTo log the error details enable the warning log level and try operation again");
+                    Program.Logger?.Warning(ex, $"Saving file '{dlg.FileName}' failed");
+                }
+            }
         }
 
         private void splitContainer1_Panel1_SizeChanged(object sender, EventArgs e)
