@@ -283,6 +283,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.reticleItems.Name = "reticleItems";
             this.reticleItems.Size = new System.Drawing.Size(1006, 458);
             this.reticleItems.TabIndex = 10;
+            this.reticleItems.DoubleClick += new System.EventHandler(this.reticleItems_DoubleClick);
             // 
             // panel2
             // 
@@ -318,6 +319,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonEdit.TabIndex = 17;
             this.buttonEdit.Text = "Edit";
             this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // buttonNewBdcPoint
             // 
@@ -327,6 +329,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonNewBdcPoint.TabIndex = 16;
             this.buttonNewBdcPoint.Text = "BDC Point";
             this.buttonNewBdcPoint.UseVisualStyleBackColor = true;
+            this.buttonNewBdcPoint.Click += new System.EventHandler(this.buttonNewBdcPoint_Click);
             // 
             // buttonNewText
             // 
@@ -336,6 +339,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonNewText.TabIndex = 15;
             this.buttonNewText.Text = "Text";
             this.buttonNewText.UseVisualStyleBackColor = true;
+            this.buttonNewText.Click += new System.EventHandler(this.buttonNewText_Click);
             // 
             // buttonNewPath
             // 
@@ -354,6 +358,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonNewRect.TabIndex = 13;
             this.buttonNewRect.Text = "Rectangle";
             this.buttonNewRect.UseVisualStyleBackColor = true;
+            this.buttonNewRect.Click += new System.EventHandler(this.buttonNewRect_Click);
             // 
             // buttonNewCircle
             // 
@@ -363,6 +368,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonNewCircle.TabIndex = 12;
             this.buttonNewCircle.Text = "Circle";
             this.buttonNewCircle.UseVisualStyleBackColor = true;
+            this.buttonNewCircle.Click += new System.EventHandler(this.buttonNewCircle_Click);
             // 
             // buttonNewLine
             // 
@@ -372,6 +378,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonNewLine.TabIndex = 11;
             this.buttonNewLine.Text = "Line";
             this.buttonNewLine.UseVisualStyleBackColor = true;
+            this.buttonNewLine.Click += new System.EventHandler(this.buttonNewLine_Click);
             // 
             // AppForm
             // 

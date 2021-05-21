@@ -1,5 +1,8 @@
-﻿using BallisticCalculator.Reticle;
+﻿using System;
+using BallisticCalculator.Reticle;
+using BallisticCalculator.Reticle.Data;
 using BallisticCalculatorNet.ReticleEditor;
+using BallisticCalculatorNet.ReticleEditor.Forms;
 using BallisticCalculatorNet.UnitTest.Utils;
 using FluentAssertions;
 using Gehtsoft.Measurements;
@@ -41,14 +44,14 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
             form.Reticle.Elements.Should().Contain(elementToDelete);
 
             form.DeleteItem(elementToDelete);
-            
+
             form.ListBox("reticleItems").Should()
                 .HaveItemsCount(originalListBoxItemsCount - 1)
                 .And
                 .HaveNotItemsMatching<object>(i => ReferenceEquals(i, elementToDelete));
 
             form.Reticle.Elements.Should().HaveCount(originalElementsCount - 1);
-            form.Reticle.Elements.Should().NotContain(elementToDelete);           
+            form.Reticle.Elements.Should().NotContain(elementToDelete);
         }
 
         [Fact]
@@ -73,7 +76,17 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
 
             form.Reticle.BulletDropCompensator.Should().HaveCount(originalBdcCount - 1);
             form.Reticle.BulletDropCompensator.Should().NotContain(bdcToDelete);
+        }
 
+        [Theory]
+        [InlineData(typeof(ReticleCircle), typeof(EditCircleForm))]
+        [InlineData(typeof(ReticleLine), typeof(EditLineForm))]
+        [InlineData(typeof(ReticleRectangle), typeof(EditRectangleForm))]
+        [InlineData(typeof(ReticleText), typeof(EditTextForm))]
+        [InlineData(typeof(ReticleBulletDropCompensatorPoint), typeof(EditBdcForm))]
+        public void CorrectFormCreation(Type element, Type form)
+        {
+            AppForm.FormForObject(Activator.CreateInstance(element)).Should().BeOfType(form);
         }
     }
 }

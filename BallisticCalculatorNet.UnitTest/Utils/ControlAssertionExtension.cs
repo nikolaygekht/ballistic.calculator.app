@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Gehtsoft.Measurements;
 
 namespace BallisticCalculatorNet.UnitTest.Utils
 {
@@ -12,6 +13,8 @@ namespace BallisticCalculatorNet.UnitTest.Utils
         public static ListBoxAssertions Should(this ListBox control) => new ListBoxAssertions(control);
 
         public static ComboBoxAssertions Should(this ComboBox control) => new ComboBoxAssertions(control);
+
+        public static CheckBoxAssertions Should(this CheckBox control) => new CheckBoxAssertions(control);
 
         public static MeasurementControlAssertions Should(this MeasurementControl.MeasurementControl control) => new MeasurementControlAssertions(control);
 
@@ -35,6 +38,8 @@ namespace BallisticCalculatorNet.UnitTest.Utils
         public static ListBox ListBox(this Control parent, string name) => Control<ListBox>(parent, name);
 
         public static ComboBox ComboBox(this Control parent, string name) => Control<ComboBox>(parent, name);
+
+        public static CheckBox CheckBox(this Control parent, string name) => Control<CheckBox>(parent, name);
 
         public static MeasurementControl.MeasurementControl MeasurementControl(this Control parent, string name) => Control<MeasurementControl.MeasurementControl>(parent, name);
     }

@@ -55,6 +55,7 @@ namespace BallisticCalculatorNet.MeasurementControl
             // UnitPart
             // 
             this.UnitPart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UnitPart.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.UnitPart.FormattingEnabled = true;
             this.UnitPart.Location = new System.Drawing.Point(159, 0);
             this.UnitPart.Margin = new System.Windows.Forms.Padding(0);

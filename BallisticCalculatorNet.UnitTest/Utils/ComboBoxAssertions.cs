@@ -109,6 +109,16 @@ namespace BallisticCalculatorNet.UnitTest.Utils
 
             return new AndConstraint<ComboBoxAssertions>(this);
         }
-    }
 
+        public AndConstraint<ComboBoxAssertions> HaveText(string text, string because = null, params object[] becauseParameters)
+        {
+            Execute.Assertion
+                .BecauseOf(because, becauseParameters)
+                .Given(() => Subject.Text)
+                .ForCondition(t => t == text)
+                .FailWith("Expected {context:control} to have text '{1}', but it has text '{0}'", Subject.Text, text);
+
+            return new AndConstraint<ComboBoxAssertions>(this);
+        }
+    }
 }

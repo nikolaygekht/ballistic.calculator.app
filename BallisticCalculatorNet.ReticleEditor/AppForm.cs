@@ -13,6 +13,7 @@ using BallisticCalculator.Reticle.Data;
 using BallisticCalculator.Reticle.Draw;
 using BallisticCalculator.Reticle.Graphics;
 using BallisticCalculator.Serialization;
+using BallisticCalculatorNet.ReticleEditor.Forms;
 using Gehtsoft.Measurements;
 
 namespace BallisticCalculatorNet.ReticleEditor
@@ -23,10 +24,30 @@ namespace BallisticCalculatorNet.ReticleEditor
 
         internal ReticleDefinition Reticle { get; private set; } = new ReticleDefinition();
 
-        public AppForm()
+        public AppForm(string fileToOpen = null)
         {
             InitializeComponent();
-            NewReticle();
+            if (string.IsNullOrEmpty(fileToOpen))
+                NewReticle();
+            else
+            {
+                try
+                {
+                    LoadReticle(fileToOpen);
+                }
+                catch (IOException e)
+                {
+                    MessageBox.Show($"Can't read file {fileToOpen}\r\n{e.Message}", "I/O error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Program.Logger?.Warning(e, $"Can't open file {fileToOpen}");
+                    NewReticle();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show($"Can't read reticle from {fileToOpen}\r\n{e.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Program.Logger?.Warning(e, $"Can't open file {fileToOpen}");
+                    NewReticle();
+                }
+            }
         }
 
         internal void LoadReticle(string fileName)
@@ -184,7 +205,6 @@ namespace BallisticCalculatorNet.ReticleEditor
                         reticleItems.Items.Remove(item);
                         break;
                     }
-
             }
             else if (item is ReticleBulletDropCompensatorPoint pt)
             {
@@ -195,6 +215,53 @@ namespace BallisticCalculatorNet.ReticleEditor
                         reticleItems.Items.Remove(item);
                         break;
                     }
+            }
+        }
+
+        internal static Form FormForObject(object obj)
+        {
+            if (obj == null)
+                throw new ArgumentNullException(nameof(obj));
+
+            Type type = null;
+            if (obj is ReticleCircle)
+                type = typeof(EditCircleForm);
+            else if (obj is ReticleLine)
+                type = typeof(EditLineForm);
+            else if (obj is ReticleRectangle)
+                type = typeof(EditRectangleForm);
+            else if (obj is ReticleText)
+                type = typeof(EditTextForm);
+            else if (obj is ReticleBulletDropCompensatorPoint)
+                type = typeof(EditBdcForm);
+
+            if (type == null)
+                throw new ArgumentException($"The object type is not supported ({obj.GetType().Name})", nameof(obj));
+
+            var constructor = type.GetConstructor(new Type[] { obj.GetType() });
+
+            if (constructor == null)
+                throw new ArgumentException($"The form does not have a constructor that supports ({obj.GetType().Name})", nameof(obj));
+
+            return (Form)constructor.Invoke(new object[] { obj });
+        }
+
+        internal Measurement<AngularUnit> ToReticleUnits(Measurement<AngularUnit> value) => value.To(reticleWidth.UnitAs<AngularUnit>());
+
+        internal ReticlePosition ToReticleUnits(ReticlePosition value) => new ReticlePosition() { X = ToReticleUnits(value.X), Y = ToReticleUnits(value.Y) };
+
+        private void NewElement(object element)
+        {
+            var form = FormForObject(element);
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                reticleItems.Items.Add(element);
+                reticleItems.SelectedIndex = reticleItems.Items.Count - 1;
+                if (element is ReticleBulletDropCompensatorPoint bdc)
+                    Reticle.BulletDropCompensator.Add(bdc);
+                else if (element is ReticleElement el)
+                    Reticle.Elements.Add(el);
+                UpdateImage();
             }
         }
 
@@ -258,6 +325,90 @@ namespace BallisticCalculatorNet.ReticleEditor
             }
             DeleteItem(reticleItems.SelectedItem);
             UpdateImage();
+        }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            if (reticleItems.SelectedItem == null)
+            {
+                MessageBox.Show(this, "Select Item To Edit", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var form = FormForObject(reticleItems.SelectedItem);
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                var idx = reticleItems.SelectedIndex;
+                var it = reticleItems.SelectedItem;
+                reticleItems.Items.RemoveAt(idx);
+                reticleItems.Items.Insert(idx, it);
+                reticleItems.SelectedIndex = idx;
+
+                UpdateImage();
+            }
+        }
+
+        private void reticleItems_DoubleClick(object sender, EventArgs e) => buttonEdit_Click(sender, e);
+
+        private void buttonNewCircle_Click(object sender, EventArgs e)
+        {
+            ReticleCircle circle = new ReticleCircle()
+            {
+                Center = ToReticleUnits(new ReticlePosition(0, 0, AngularUnit.Mil)),
+                Radius = ToReticleUnits(AngularUnit.Mil.New(1)),
+                LineWidth = null,
+                Color = "black",
+                Fill = false
+            };
+            NewElement(circle);
+        }
+
+        private void buttonNewLine_Click(object sender, EventArgs e)
+        {
+            ReticleLine line = new ReticleLine()
+            {
+                Start = ToReticleUnits(new ReticlePosition(0, 0, AngularUnit.Mil)),
+                End = ToReticleUnits(new ReticlePosition(0, 0, AngularUnit.Mil)),
+                LineWidth = null,
+                Color = "black",
+            };
+            NewElement(line);
+        }
+
+        private void buttonNewRect_Click(object sender, EventArgs e)
+        {
+            ReticleRectangle r = new ReticleRectangle()
+            {
+                TopLeft = ToReticleUnits(new ReticlePosition(0, 0, AngularUnit.Mil)),
+                Size = ToReticleUnits(new ReticlePosition(0, 0, AngularUnit.Mil)),
+                LineWidth = null,
+                Color = "black",
+                Fill = false,
+            };
+            NewElement(r);
+        }
+
+        private void buttonNewText_Click(object sender, EventArgs e)
+        {
+            ReticleText r = new ReticleText()
+            {
+                Position = ToReticleUnits(new ReticlePosition(0, 0, AngularUnit.Mil)),
+                TextHeight = ToReticleUnits(AngularUnit.Mil.New(0.5)),
+                Color = "black",
+                Text = ""
+            };
+            NewElement(r);
+        }
+
+        private void buttonNewBdcPoint_Click(object sender, EventArgs e)
+        {
+            ReticleBulletDropCompensatorPoint r = new ReticleBulletDropCompensatorPoint()
+            {
+                Position = ToReticleUnits(new ReticlePosition(0, -1, AngularUnit.Mil)),
+                TextHeight = ToReticleUnits(AngularUnit.Mil.New(0.5)),
+                TextOffset = ToReticleUnits(AngularUnit.Mil.New(0.5)),
+            };
+            NewElement(r);
         }
     }
 }

@@ -54,14 +54,15 @@ namespace BallisticCalculatorNet.MeasurementControl
             StringBuilder sb = new StringBuilder();
 
             if (i1 >= 0)
-                sb.Append(s1.Substring(0, i1));
+                sb.Append(s1, 0, i1);
             else
                 sb.Append(s1);
 
             if (i2 >= 0)
             {
                 sb.Append(ds);
-                sb.Append(s2.Substring(i2 + 1));
+                sb.Append(s2, i2 + 1, s2.Length - (i2 + 1));
+                //sb.Append(s2.Substring(i2 + 1));
             }
 
             return sb.ToString();

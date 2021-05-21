@@ -483,5 +483,40 @@ namespace BallisticCalculatorNet.UnitTest.Utils
             c.Value = DistanceUnit.Meter.New(1.5);
             ((Action)(() => c.Should().HaveUnitSelected(DistanceUnit.Centimeter))).Should().Throw<XunitException>();
         }
+
+        [Fact]
+        public void CheckBox_Checked_OK()
+        {
+            using TestForm tf = new TestForm();
+            var c = tf.AddControl<CheckBox>(1, 1, 5, 5);
+            c.Checked = true;
+            ((Action)(() => c.Should().BeChecked())).Should().NotThrow();
+        }
+
+        [Fact]
+        public void CheckBox_Checked_Failed()
+        {
+            using TestForm tf = new TestForm();
+            var c = tf.AddControl<CheckBox>(1, 1, 5, 5);
+            c.Checked = false;
+            ((Action)(() => c.Should().BeChecked())).Should().Throw<XunitException>();
+        }
+        [Fact]
+        public void CheckBox_NotChecked_OK()
+        {
+            using TestForm tf = new TestForm();
+            var c = tf.AddControl<CheckBox>(1, 1, 5, 5);
+            c.Checked = false;
+            ((Action)(() => c.Should().BeNotChecked())).Should().NotThrow();
+        }
+
+        [Fact]
+        public void CheckBox_NotChecked_Failed()
+        {
+            using TestForm tf = new TestForm();
+            var c = tf.AddControl<CheckBox>(1, 1, 5, 5);
+            c.Checked = true;
+            ((Action)(() => c.Should().BeNotChecked())).Should().Throw<XunitException>();
+        }
     }
 }

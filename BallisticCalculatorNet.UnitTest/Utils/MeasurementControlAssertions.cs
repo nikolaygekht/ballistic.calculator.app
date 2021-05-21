@@ -36,6 +36,17 @@ namespace BallisticCalculatorNet.UnitTest.Utils
             return new AndConstraint<MeasurementControlAssertions>(this);
         }
 
+        public AndConstraint<MeasurementControlAssertions> BeEmpty(string because = null, params object[] becauseParameters)
+        {
+            Execute.Assertion
+                .BecauseOf(because, becauseParameters)
+                .Given(() => Subject)
+                .ForCondition(control => control.IsEmpty)
+                .FailWith("Expected {context:control} to be empty, but it has value '{0}'", Subject.Value);
+
+            return new AndConstraint<MeasurementControlAssertions>(this);
+        }
+
         public AndConstraint<MeasurementControlAssertions> HaveExactValue<T>(Measurement<T> value, string because = null, params object[] becauseParameters)
            where T : Enum
         {

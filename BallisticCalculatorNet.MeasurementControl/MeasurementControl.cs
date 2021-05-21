@@ -66,6 +66,11 @@ namespace BallisticCalculatorNet.MeasurementControl
             get => mController.Value(NumericPart.Text, UnitPart.SelectedItem);
             set
             {
+                if (value == null)
+                {
+                    NumericPart.Text = "";
+                    return;
+                }
                 mController.ParseValue(value, out var text, out var unit);
                 NumericPart.Text = text;
                 UnitPart.SelectedItem = unit;
@@ -114,6 +119,9 @@ namespace BallisticCalculatorNet.MeasurementControl
 
         private void NumericPart_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (e.KeyChar == '\b')
+                return;
+
             if (!mController.AllowKeyInEditor(NumericPart.Text, NumericPart.SelectionStart, NumericPart.SelectionLength, e.KeyChar))
                 e.Handled = true;
         }

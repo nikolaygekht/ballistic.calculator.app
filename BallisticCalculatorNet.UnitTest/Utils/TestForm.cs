@@ -53,7 +53,6 @@ namespace BallisticCalculatorNet.UnitTest.Utils
             this.ClientSize = new System.Drawing.Size(417, 253);
             this.Name = "TestForm";
             this.ResumeLayout(false);
-
         }
     }
 }

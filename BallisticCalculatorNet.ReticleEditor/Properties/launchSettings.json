@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BallisticCalculatorNet.ReticleEditor": {
+      "commandName": "Project",
+      "commandLineArgs": "--open ..\\..\\..\\..\\data\\reticle\\mildot.reticle"
+    }
+  }
+}

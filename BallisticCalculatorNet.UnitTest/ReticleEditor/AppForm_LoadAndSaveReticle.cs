@@ -83,9 +83,6 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
             f.Reticle.Size.Y.Should().Be(AngularUnit.Mil.New(2));
             f.Reticle.Zero.X.Should().Be(AngularUnit.Mil.New(3));
             f.Reticle.Zero.Y.Should().Be(AngularUnit.Mil.New(4));
-
         }
-
-
     }
 }
