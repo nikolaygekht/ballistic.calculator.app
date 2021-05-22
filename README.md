@@ -1,8 +1,8 @@
 # Ballistic Calculator .NET
 
-Windows (100% WinE compatible) ballistic calculator with accurancy comparable with best commercial calculators.
+100% open source windows (100% WinE compatible) ballistic calculator with accuracy and performance comparable with best commercial calculators.
 
-The calculator is based on [Gehtsoft Open Source Ballistic Calculator](https://github.com/gehtsoft-usa/BallisticCalculator1)
+The calculator is based on [Gehtsoft Open Source Ballistic Calculator API](https://github.com/gehtsoft-usa/BallisticCalculator1) which is also open source.
 
 ## RISK NOTICE
 
