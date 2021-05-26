@@ -193,7 +193,7 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         }
 
         [Fact]
-        public void TextBdc()
+        public void BdcEdit()
         {
             ReticleBulletDropCompensatorPoint bdc = new ReticleBulletDropCompensatorPoint()
             {
@@ -226,5 +226,96 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
             bdc.TextHeight.Should().Be(AngularUnit.MOA.New(12));
             bdc.TextOffset.Should().Be(AngularUnit.MOA.New(13));
         }
+        
+        [Fact]
+        public void MoveToEdit()
+        {
+            ReticlePathElementMoveTo el = new ReticlePathElementMoveTo()
+            {
+                Position = new ReticlePosition(1, 2, AngularUnit.Mil),
+            };
+
+            EditMoveToForm form = new EditMoveToForm(el);
+
+            form.MeasurementControl("measurementX1").Should().HaveValue(el.Position.X);
+            form.MeasurementControl("measurementY1").Should().HaveValue(el.Position.Y);
+
+            form.MeasurementControl("measurementX1").Value = AngularUnit.MOA.New(10);
+            form.MeasurementControl("measurementY1").Value = AngularUnit.MOA.New(11);
+
+            el.Position.X.Should().NotBe(AngularUnit.MOA.New(10));
+            el.Position.Y.Should().NotBe(AngularUnit.MOA.New(11));
+
+            form.Save();
+
+            el.Position.X.Should().Be(AngularUnit.MOA.New(10));
+            el.Position.Y.Should().Be(AngularUnit.MOA.New(11));
+        }
+
+        [Fact]
+        public void LineToEdit()
+        {
+            ReticlePathElementLineTo el = new ReticlePathElementLineTo()
+            {
+                Position = new ReticlePosition(1, 2, AngularUnit.Mil),
+            };
+
+            EditLineToForm form = new EditLineToForm(el);
+
+            form.MeasurementControl("measurementX1").Should().HaveValue(el.Position.X);
+            form.MeasurementControl("measurementY1").Should().HaveValue(el.Position.Y);
+
+            form.MeasurementControl("measurementX1").Value = AngularUnit.MOA.New(10);
+            form.MeasurementControl("measurementY1").Value = AngularUnit.MOA.New(11);
+
+            el.Position.X.Should().NotBe(AngularUnit.MOA.New(10));
+            el.Position.Y.Should().NotBe(AngularUnit.MOA.New(11));
+
+            form.Save();
+
+            el.Position.X.Should().Be(AngularUnit.MOA.New(10));
+            el.Position.Y.Should().Be(AngularUnit.MOA.New(11));
+        }
+
+        [Fact]
+        public void ArcEdit()
+        {
+            ReticlePathElementArc el = new ReticlePathElementArc()
+            {
+                Position = new ReticlePosition(1, 2, AngularUnit.Mil),
+                Radius = AngularUnit.Mil.New(3),
+                MajorArc = true,
+                ClockwiseDirection = true,
+            };
+
+            EditArcForm form = new EditArcForm(el);
+
+            form.MeasurementControl("measurementX1").Should().HaveValue(el.Position.X);
+            form.MeasurementControl("measurementY1").Should().HaveValue(el.Position.Y);
+            form.MeasurementControl("measurementR").Should().HaveValue(el.Radius);
+            form.CheckBox("checkBoxMajorArc").Should().Be(el.MajorArc);
+            form.CheckBox("checkBoxClockwise").Should().Be(el.ClockwiseDirection);
+
+            form.MeasurementControl("measurementX1").Value = AngularUnit.MOA.New(10);
+            form.MeasurementControl("measurementY1").Value = AngularUnit.MOA.New(11);
+            form.MeasurementControl("measurementR").Value = AngularUnit.MOA.New(13);
+            form.CheckBox("checkBoxMajorArc").Checked = false;
+            form.CheckBox("checkBoxClockwise").Checked = false;
+
+            el.Position.X.Should().NotBe(AngularUnit.MOA.New(10));
+            el.Position.Y.Should().NotBe(AngularUnit.MOA.New(11));
+            el.Radius.Should().NotBe(AngularUnit.MOA.New(13));
+            el.MajorArc.Should().BeTrue();
+            el.ClockwiseDirection.Should().BeTrue();
+
+            form.Save();
+
+            el.Position.X.Should().Be(AngularUnit.MOA.New(10));
+            el.Position.Y.Should().Be(AngularUnit.MOA.New(11));
+            el.Radius.Should().Be(AngularUnit.MOA.New(13));
+            el.MajorArc.Should().BeFalse();
+            el.ClockwiseDirection.Should().BeFalse();
+        }
+
     }
 }

@@ -55,6 +55,34 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         }
 
         [Fact]
+        public void Duplicate_ReticleElement()
+        {
+            AppForm form = new AppForm();
+            form.LoadReticle(new MilDotReticle(), "mildot");
+            var lb = form.ListBox("reticleItems");
+            var originalListBoxItemsCount = lb.Items.Count;
+
+            var elementToDuplicate = form.Reticle.Elements[1];
+            var originalElementsCount = form.Reticle.Elements.Count;
+
+            form.Reticle.Elements.Should().Contain(elementToDuplicate);
+
+            form.DuplicateItem(elementToDuplicate);
+
+            lb.Should()
+                .HaveItemsCount(originalListBoxItemsCount + 1)
+                .And.HaveItemMatching<object>(i => ReferenceEquals(i, elementToDuplicate))
+                .And.HaveItemMatching<object>(i => i.Equals(elementToDuplicate) && !ReferenceEquals(i, elementToDuplicate));
+
+            form.Reticle.Elements.Should()
+                .HaveCount(originalElementsCount + 1)
+                .And.Contain(i => ReferenceEquals(i, elementToDuplicate))
+                .And.Contain(i => i.Equals(elementToDuplicate) && !ReferenceEquals(i, elementToDuplicate));
+
+            lb.Items[^1].Should().Match(i => i.Equals(elementToDuplicate) && !ReferenceEquals(i, elementToDuplicate));
+        }
+
+        [Fact]
         public void Delete_ReticleBdc()
         {
             AppForm form = new AppForm();
@@ -76,6 +104,61 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
 
             form.Reticle.BulletDropCompensator.Should().HaveCount(originalBdcCount - 1);
             form.Reticle.BulletDropCompensator.Should().NotContain(bdcToDelete);
+        }
+
+        [Fact]
+        public void Duplicate_ReticleBdc()
+        {
+            AppForm form = new AppForm();
+            form.LoadReticle(new MilDotReticle(), "mildot");
+            var lb = form.ListBox("reticleItems");
+            var originalListBoxItemsCount = lb.Items.Count;
+
+            var elementToDuplicate = form.Reticle.BulletDropCompensator[1];
+            var originalElementsCount = form.Reticle.BulletDropCompensator.Count;
+
+            form.DuplicateItem(elementToDuplicate);
+
+            lb.Should()
+                .HaveItemsCount(originalListBoxItemsCount + 1)
+                .And
+                .HaveItemMatching<object>(i => ReferenceEquals(i, elementToDuplicate))
+                .And
+                .HaveItemMatching<object>(i => i.Equals(elementToDuplicate) && !ReferenceEquals(i, elementToDuplicate));
+
+            form.Reticle.BulletDropCompensator.Should().HaveCount(originalElementsCount + 1);
+            form.Reticle.BulletDropCompensator.Should().Contain(elementToDuplicate);
+            form.Reticle.BulletDropCompensator.Should().Contain(i => i.Equals(elementToDuplicate) && !ReferenceEquals(i, elementToDuplicate));
+
+            lb.Items[^1].Should().Match(i => i.Equals(elementToDuplicate) && !ReferenceEquals(i, elementToDuplicate));
+        }
+
+        [Fact]
+        public void Duplicate_ThenDeleteOriginal()
+        {
+            AppForm form = new AppForm();
+            form.LoadReticle(new MilDotReticle(), "mildot");
+            var lb = form.ListBox("reticleItems");
+            var org = lb.Items[0];
+            form.DuplicateItem(org);
+            lb.Items[^1].Should().Match(i => i.Equals(org) && !ReferenceEquals(i, org));
+            form.DeleteItem(org);
+            lb.Items[0].Should().Match(i => !i.Equals(org) && !ReferenceEquals(i, org));
+            lb.Items[^1].Should().Match(i => i.Equals(org) && !ReferenceEquals(i, org));
+        }
+
+        [Fact]
+        public void Duplicate_ThenDeleteCopy()
+        {
+            AppForm form = new AppForm();
+            form.LoadReticle(new MilDotReticle(), "mildot");
+            var lb = form.ListBox("reticleItems");
+            var org = lb.Items[0];
+            form.DuplicateItem(org);
+            lb.Items[^1].Should().Match(i => i.Equals(org) && !ReferenceEquals(i, org));
+            form.DeleteItem(lb.Items[^1]);
+            lb.Items[0].Should().Match(i => i.Equals(org) && ReferenceEquals(i, org));
+            lb.Items[^1].Should().Match(i => !i.Equals(org));
         }
 
         [Theory]

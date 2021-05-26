@@ -34,6 +34,8 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.pictureReticle = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonNew = new System.Windows.Forms.Button();
+            this.checkBoxHighlihtCurrent = new System.Windows.Forms.CheckBox();
             this.buttonSet = new System.Windows.Forms.Button();
             this.buttonSaveAs = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -49,6 +51,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.label1 = new System.Windows.Forms.Label();
             this.reticleItems = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.buttonDuplicate = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonNewBdcPoint = new System.Windows.Forms.Button();
@@ -115,6 +118,8 @@ namespace BallisticCalculatorNet.ReticleEditor
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonNew);
+            this.panel1.Controls.Add(this.checkBoxHighlihtCurrent);
             this.panel1.Controls.Add(this.buttonSet);
             this.panel1.Controls.Add(this.buttonSaveAs);
             this.panel1.Controls.Add(this.buttonSave);
@@ -134,9 +139,30 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.panel1.Size = new System.Drawing.Size(1006, 193);
             this.panel1.TabIndex = 0;
             // 
+            // buttonNew
+            // 
+            this.buttonNew.Location = new System.Drawing.Point(116, 164);
+            this.buttonNew.Name = "buttonNew";
+            this.buttonNew.Size = new System.Drawing.Size(94, 29);
+            this.buttonNew.TabIndex = 8;
+            this.buttonNew.Text = "New";
+            this.buttonNew.UseVisualStyleBackColor = true;
+            this.buttonNew.Click += new System.EventHandler(this.buttonNew_Click);
+            // 
+            // checkBoxHighlihtCurrent
+            // 
+            this.checkBoxHighlihtCurrent.AutoSize = true;
+            this.checkBoxHighlihtCurrent.Location = new System.Drawing.Point(216, 136);
+            this.checkBoxHighlihtCurrent.Name = "checkBoxHighlihtCurrent";
+            this.checkBoxHighlihtCurrent.Size = new System.Drawing.Size(203, 24);
+            this.checkBoxHighlihtCurrent.TabIndex = 7;
+            this.checkBoxHighlihtCurrent.Text = "Highlight Current Element";
+            this.checkBoxHighlihtCurrent.UseVisualStyleBackColor = true;
+            this.checkBoxHighlihtCurrent.CheckedChanged += new System.EventHandler(this.checkBoxHighlihtCurrent_CheckedChanged);
+            // 
             // buttonSet
             // 
-            this.buttonSet.Location = new System.Drawing.Point(111, 131);
+            this.buttonSet.Location = new System.Drawing.Point(116, 131);
             this.buttonSet.Name = "buttonSet";
             this.buttonSet.Size = new System.Drawing.Size(94, 29);
             this.buttonSet.TabIndex = 6;
@@ -146,30 +172,30 @@ namespace BallisticCalculatorNet.ReticleEditor
             // 
             // buttonSaveAs
             // 
-            this.buttonSaveAs.Location = new System.Drawing.Point(411, 130);
+            this.buttonSaveAs.Location = new System.Drawing.Point(421, 164);
             this.buttonSaveAs.Name = "buttonSaveAs";
             this.buttonSaveAs.Size = new System.Drawing.Size(94, 29);
-            this.buttonSaveAs.TabIndex = 9;
+            this.buttonSaveAs.TabIndex = 11;
             this.buttonSaveAs.Text = "Save As";
             this.buttonSaveAs.UseVisualStyleBackColor = true;
             this.buttonSaveAs.Click += new System.EventHandler(this.buttonSaveAs_Click);
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(311, 130);
+            this.buttonSave.Location = new System.Drawing.Point(321, 164);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(94, 29);
-            this.buttonSave.TabIndex = 8;
+            this.buttonSave.TabIndex = 10;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // buttonLoad
             // 
-            this.buttonLoad.Location = new System.Drawing.Point(211, 131);
+            this.buttonLoad.Location = new System.Drawing.Point(217, 164);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(94, 29);
-            this.buttonLoad.TabIndex = 7;
+            this.buttonLoad.TabIndex = 9;
             this.buttonLoad.Text = "Load";
             this.buttonLoad.UseVisualStyleBackColor = true;
             this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
@@ -282,11 +308,13 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.reticleItems.Location = new System.Drawing.Point(3, 202);
             this.reticleItems.Name = "reticleItems";
             this.reticleItems.Size = new System.Drawing.Size(1006, 458);
-            this.reticleItems.TabIndex = 10;
+            this.reticleItems.TabIndex = 20;
+            this.reticleItems.SelectedIndexChanged += new System.EventHandler(this.reticleItems_SelectedIndexChanged);
             this.reticleItems.DoubleClick += new System.EventHandler(this.reticleItems_DoubleClick);
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.buttonDuplicate);
             this.panel2.Controls.Add(this.buttonDelete);
             this.panel2.Controls.Add(this.buttonEdit);
             this.panel2.Controls.Add(this.buttonNewBdcPoint);
@@ -301,22 +329,32 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.panel2.Size = new System.Drawing.Size(1006, 45);
             this.panel2.TabIndex = 2;
             // 
+            // buttonDuplicate
+            // 
+            this.buttonDuplicate.Location = new System.Drawing.Point(617, 8);
+            this.buttonDuplicate.Name = "buttonDuplicate";
+            this.buttonDuplicate.Size = new System.Drawing.Size(94, 29);
+            this.buttonDuplicate.TabIndex = 37;
+            this.buttonDuplicate.Text = "Duplicate";
+            this.buttonDuplicate.UseVisualStyleBackColor = true;
+            this.buttonDuplicate.Click += new System.EventHandler(this.buttonDuplicate_Click);
+            // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(717, 9);
+            this.buttonDelete.Location = new System.Drawing.Point(817, 8);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(94, 29);
-            this.buttonDelete.TabIndex = 18;
+            this.buttonDelete.TabIndex = 39;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(617, 9);
+            this.buttonEdit.Location = new System.Drawing.Point(717, 8);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(94, 29);
-            this.buttonEdit.TabIndex = 17;
+            this.buttonEdit.TabIndex = 38;
             this.buttonEdit.Text = "Edit";
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
@@ -326,7 +364,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonNewBdcPoint.Location = new System.Drawing.Point(517, 8);
             this.buttonNewBdcPoint.Name = "buttonNewBdcPoint";
             this.buttonNewBdcPoint.Size = new System.Drawing.Size(94, 29);
-            this.buttonNewBdcPoint.TabIndex = 16;
+            this.buttonNewBdcPoint.TabIndex = 36;
             this.buttonNewBdcPoint.Text = "BDC Point";
             this.buttonNewBdcPoint.UseVisualStyleBackColor = true;
             this.buttonNewBdcPoint.Click += new System.EventHandler(this.buttonNewBdcPoint_Click);
@@ -336,7 +374,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonNewText.Location = new System.Drawing.Point(417, 8);
             this.buttonNewText.Name = "buttonNewText";
             this.buttonNewText.Size = new System.Drawing.Size(94, 29);
-            this.buttonNewText.TabIndex = 15;
+            this.buttonNewText.TabIndex = 35;
             this.buttonNewText.Text = "Text";
             this.buttonNewText.UseVisualStyleBackColor = true;
             this.buttonNewText.Click += new System.EventHandler(this.buttonNewText_Click);
@@ -346,16 +384,16 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonNewPath.Location = new System.Drawing.Point(317, 9);
             this.buttonNewPath.Name = "buttonNewPath";
             this.buttonNewPath.Size = new System.Drawing.Size(94, 29);
-            this.buttonNewPath.TabIndex = 14;
+            this.buttonNewPath.TabIndex = 34;
             this.buttonNewPath.Text = "Path";
             this.buttonNewPath.UseVisualStyleBackColor = true;
             // 
             // buttonNewRect
             // 
-            this.buttonNewRect.Location = new System.Drawing.Point(217, 8);
+            this.buttonNewRect.Location = new System.Drawing.Point(217, 9);
             this.buttonNewRect.Name = "buttonNewRect";
             this.buttonNewRect.Size = new System.Drawing.Size(94, 29);
-            this.buttonNewRect.TabIndex = 13;
+            this.buttonNewRect.TabIndex = 33;
             this.buttonNewRect.Text = "Rectangle";
             this.buttonNewRect.UseVisualStyleBackColor = true;
             this.buttonNewRect.Click += new System.EventHandler(this.buttonNewRect_Click);
@@ -365,7 +403,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonNewCircle.Location = new System.Drawing.Point(116, 9);
             this.buttonNewCircle.Name = "buttonNewCircle";
             this.buttonNewCircle.Size = new System.Drawing.Size(94, 29);
-            this.buttonNewCircle.TabIndex = 12;
+            this.buttonNewCircle.TabIndex = 32;
             this.buttonNewCircle.Text = "Circle";
             this.buttonNewCircle.UseVisualStyleBackColor = true;
             this.buttonNewCircle.Click += new System.EventHandler(this.buttonNewCircle_Click);
@@ -375,7 +413,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonNewLine.Location = new System.Drawing.Point(13, 9);
             this.buttonNewLine.Name = "buttonNewLine";
             this.buttonNewLine.Size = new System.Drawing.Size(94, 29);
-            this.buttonNewLine.TabIndex = 11;
+            this.buttonNewLine.TabIndex = 31;
             this.buttonNewLine.Text = "Line";
             this.buttonNewLine.UseVisualStyleBackColor = true;
             this.buttonNewLine.Click += new System.EventHandler(this.buttonNewLine_Click);
@@ -431,6 +469,9 @@ namespace BallisticCalculatorNet.ReticleEditor
         private System.Windows.Forms.Button buttonNewRect;
         private System.Windows.Forms.Button buttonNewCircle;
         private System.Windows.Forms.Button buttonNewLine;
+        private System.Windows.Forms.CheckBox checkBoxHighlihtCurrent;
+        private System.Windows.Forms.Button buttonDuplicate;
+        private System.Windows.Forms.Button buttonNew;
     }
 }
 

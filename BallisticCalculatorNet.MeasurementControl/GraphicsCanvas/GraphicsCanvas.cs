@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using BallisticCalculator.Reticle.Draw;
+using System.Windows.Forms.PropertyGridInternal;
 
 namespace BallisticCalculator.Reticle.Graphics
 {
@@ -115,32 +116,39 @@ namespace BallisticCalculator.Reticle.Graphics
         private readonly static Dictionary<string, Brush> gSolidBrush;
         private readonly static Dictionary<string, Pen> gPenCache = new Dictionary<string, Pen>();
         private readonly static Dictionary<string, Font> gFontCache = new Dictionary<string, Font>();
-
 #pragma warning disable S3963 // "static" fields should be initialized inline
         static GraphicsCanvas()
         {
             gColorNames = new Dictionary<string, Color>()
             {
-                {"white", Color.White},
-                {"black", Color.Black},
-                {"lightgray", Color.LightGray},
-                {"darkgray", Color.DarkGray},
-                {"navy", Color.Navy},
-                {"blue", Color.Blue},
-                {"darkblue", Color.DarkBlue},
-                {"red", Color.Red},
-                {"darkred", Color.DarkRed},
-                {"green", Color.Green},
-                {"khaki", Color.Khaki},
-                {"darkgreen", Color.DarkGreen},
-                {"cyan", Color.Cyan},
-                {"darkcyan", Color.DarkCyan},
-                {"yellow", Color.Yellow},
-                {"brown", Color.Brown},
-                {"violet", Color.Violet},
-                {"darkviolet", Color.DarkViolet},
-                {"magenta", Color.Magenta},
-                {"darkmagenta", Color.DarkMagenta},
+                { "black", Color.Black },
+                { "blue", Color.Blue },
+                { "brown", Color.Brown },
+                { "cyan", Color.Cyan },
+                { "darkblue", Color.DarkBlue },
+                { "darkcyan", Color.DarkCyan },
+                { "darkgray", Color.DarkGray },
+                { "darkgreen", Color.DarkGreen },
+                { "darkmagenta", Color.DarkMagenta },
+                { "darkorange", Color.DarkOrange },
+                { "darkred", Color.DarkRed },
+                { "darkviolet", Color.DarkViolet },
+                { "gold", Color.Gold },
+                { "goldenrod", Color.Goldenrod },
+                { "grey", Color.Gray },
+                { "green", Color.Green },
+                { "greenyellow", Color.GreenYellow },
+                { "lightgray", Color.LightGray },
+                { "magenta", Color.Magenta },
+                { "mediumblue", Color.MediumBlue },
+                { "mediumpurple", Color.MediumPurple },
+                { "orange", Color.Orange },
+                { "pink", Color.Pink },
+                { "purple", Color.Purple },
+                { "red", Color.Red },
+                { "teal", Color.Teal },
+                { "violet", Color.Violet },
+                { "white", Color.White },
             };
 
             gSolidBrush = new Dictionary<string, Brush>();
@@ -148,12 +156,30 @@ namespace BallisticCalculator.Reticle.Graphics
             foreach (string key in gColorNames.Keys)
                 gSolidBrush[key] = new SolidBrush(gColorNames[key]);
         }
+
 #pragma warning restore S3963 // "static" fields should be initialized inline
 
         private static Color TranslateColor(string name)
         {
             if (!gColorNames.TryGetValue(name ?? "black", out Color color))
-                color = Color.Black;
+            {
+                var properties = typeof(Color).GetProperties();
+                var property = properties.FirstOrDefault(property => property.PropertyType == typeof(Color) && property.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+                if (property != null)
+                {
+                    try
+                    {
+                        color = (Color)property.GetValue(null);
+                    }
+                    catch (Exception )
+                    {
+                        // suppress and return black 
+                        property = null;
+                    }
+                }
+                if (property == null)
+                    color = Color.Black;
+            }
             return color;
         }
 

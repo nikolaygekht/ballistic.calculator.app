@@ -141,8 +141,12 @@ namespace BallisticCalculatorNet.ReticleEditor
 
         internal void UpdateImage()
         {
-            if (Reticle.Elements.Count == 0)
+            if (Reticle.Size == null)
                 return;
+
+            object selection = null;
+            if (checkBoxHighlihtCurrent.Checked)
+                selection = reticleItems.SelectedItem;
 
             CalculateReticleImageSize(pictureReticle.Size.Width, pictureReticle.Size.Height,
                                       Reticle.Size.X, Reticle.Size.Y, out int imageX, out int imageY);
@@ -151,17 +155,35 @@ namespace BallisticCalculatorNet.ReticleEditor
             GraphicsCanvas canvas = GraphicsCanvas.FromImage(bm, Color.White);
             ReticleDrawController controller = new ReticleDrawController(Reticle, canvas);
             canvas.Clear();
-            controller.DrawReticle();
+
+            if (Reticle.Elements.Count != 0)
+            {
+                controller.DrawReticle();
+
+                if (selection is ReticleElement selectedReticleElement)
+                {
+                    var clone = selectedReticleElement.Clone();
+                    var colorProperty = clone.GetType().GetProperty("Color");
+                    if (colorProperty != null)
+                    {
+                        colorProperty.SetValue(clone, "blue");
+                        controller.DrawElement(clone);
+                    }
+                }
+            }
+
             if (Reticle.BulletDropCompensator.Count > 0)
             {
                 for (int i = 0; i < Reticle.BulletDropCompensator.Count; i++)
                 {
                     var bdc = Reticle.BulletDropCompensator[i];
+                    string color = (selection != null && ReferenceEquals(selection, bdc)) ? "blue" : "darkblue";
+
                     controller.DrawElement(new ReticleCircle()
                     {
                         Center = bdc.Position,
                         Radius = Reticle.Size.X / 50,
-                        Color = "blue",
+                        Color = color,
                         Fill = false,
                         LineWidth = null,
                     });
@@ -169,7 +191,7 @@ namespace BallisticCalculatorNet.ReticleEditor
                     controller.DrawElement(new ReticleText()
                     {
                         Position = new ReticlePosition(bdc.Position.X + bdc.TextOffset, bdc.Position.Y - bdc.TextHeight / 2),
-                        Color = "blue",
+                        Color = color,
                         TextHeight = bdc.TextHeight,
                         Text = bdc.Position.Y.ToString(),
                     });
@@ -196,13 +218,14 @@ namespace BallisticCalculatorNet.ReticleEditor
 
         internal void DeleteItem(object item)
         {
+            bool removed = false;
             if (item is ReticleElement el)
             {
                 for (int i = 0; i < Reticle.Elements.Count; i++)
                     if (ReferenceEquals(el, Reticle.Elements[i]))
                     {
                         Reticle.Elements.RemoveAt(i);
-                        reticleItems.Items.Remove(item);
+                        removed = true;
                         break;
                     }
             }
@@ -212,9 +235,34 @@ namespace BallisticCalculatorNet.ReticleEditor
                     if (ReferenceEquals(pt, Reticle.BulletDropCompensator[i]))
                     {
                         Reticle.BulletDropCompensator.RemoveAt(i);
-                        reticleItems.Items.Remove(item);
+                        removed = true;
                         break;
                     }
+            }
+            if (removed)
+            {
+                for (int i = 0; i < reticleItems.Items.Count; i++)
+                    if (ReferenceEquals(reticleItems.Items[i], item))
+                    {
+                        reticleItems.Items.RemoveAt(i);
+                        i--;
+                    }
+            }
+        }
+
+        internal void DuplicateItem(object item)
+        {
+            if (item is ReticleElement reticleElement)
+            {
+                var clone = reticleElement.Clone();
+                Reticle.Elements.Add(clone);
+                reticleItems.Items.Add(clone);
+            }
+            else if (item is ReticleBulletDropCompensatorPoint bdc)
+            {
+                var clone = bdc.Clone();
+                Reticle.BulletDropCompensator.Add(clone);
+                reticleItems.Items.Add(clone);
             }
         }
 
@@ -374,7 +422,6 @@ namespace BallisticCalculatorNet.ReticleEditor
                 reticleItems.Items.RemoveAt(idx);
                 reticleItems.Items.Insert(idx, it);
                 reticleItems.SelectedIndex = idx;
-
                 UpdateImage();
             }
         }
@@ -440,6 +487,33 @@ namespace BallisticCalculatorNet.ReticleEditor
                 TextOffset = ToReticleUnits(AngularUnit.Mil.New(0.5)),
             };
             NewElement(r);
+        }
+
+        private void reticleItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (checkBoxHighlihtCurrent.Checked)
+                UpdateImage();
+        }
+
+        private void checkBoxHighlihtCurrent_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateImage();
+        }
+
+        private void buttonDuplicate_Click(object sender, EventArgs e)
+        {
+            if (reticleItems.SelectedItem == null)
+            {
+                MessageBox.Show(this, "Select Item To Edit", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            DuplicateItem(reticleItems.SelectedItem);
+        }
+
+        private void buttonNew_Click(object sender, EventArgs e)
+        {
+            NewReticle();
+            UpdateImage();
         }
     }
 }
