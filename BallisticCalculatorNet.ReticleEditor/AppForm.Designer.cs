@@ -387,6 +387,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.buttonNewPath.TabIndex = 34;
             this.buttonNewPath.Text = "Path";
             this.buttonNewPath.UseVisualStyleBackColor = true;
+            this.buttonNewPath.Click += new System.EventHandler(this.buttonNewPath_Click);
             // 
             // buttonNewRect
             // 

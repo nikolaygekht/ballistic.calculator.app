@@ -28,7 +28,6 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
 
             comboBoxColor.FillByColors();
             comboBoxColor.Text = text.Color;
-
         }
 
         internal void Save()

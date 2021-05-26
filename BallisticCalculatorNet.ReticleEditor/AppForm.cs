@@ -142,7 +142,10 @@ namespace BallisticCalculatorNet.ReticleEditor
         internal void UpdateImage()
         {
             if (Reticle.Size == null)
+            {
+                pictureReticle.Image = null;
                 return;
+            }
 
             object selection = null;
             if (checkBoxHighlihtCurrent.Checked)
@@ -266,7 +269,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             }
         }
 
-        internal static Form FormForObject(object obj)
+        internal Form FormForObject(object obj)
         {
             if (obj == null)
                 throw new ArgumentNullException(nameof(obj));
@@ -282,16 +285,25 @@ namespace BallisticCalculatorNet.ReticleEditor
                 type = typeof(EditTextForm);
             else if (obj is ReticleBulletDropCompensatorPoint)
                 type = typeof(EditBdcForm);
+            else if (obj is ReticlePath)
+                type = typeof(EditPathForm);
 
             if (type == null)
                 throw new ArgumentException($"The object type is not supported ({obj.GetType().Name})", nameof(obj));
 
-            var constructor = type.GetConstructor(new Type[] { obj.GetType() });
+            var constructor = type.GetConstructor(new Type[] { obj.GetType() }) ?? type.GetConstructor(new Type[] { obj.GetType(), typeof(ReticleDefinition) });
 
             if (constructor == null)
                 throw new ArgumentException($"The form does not have a constructor that supports ({obj.GetType().Name})", nameof(obj));
 
-            return (Form)constructor.Invoke(new object[] { obj });
+            object[] args;
+
+            if (constructor.GetParameters().Length == 2)
+                args = new object[] { obj, Reticle };
+            else
+                args = new object[] { obj };
+
+            return (Form)constructor.Invoke(args);
         }
 
         internal Measurement<AngularUnit> ToReticleUnits(Measurement<AngularUnit> value) => value.To(reticleWidth.UnitAs<AngularUnit>());
@@ -514,6 +526,15 @@ namespace BallisticCalculatorNet.ReticleEditor
         {
             NewReticle();
             UpdateImage();
+        }
+
+        private void buttonNewPath_Click(object sender, EventArgs e)
+        {
+            ReticlePath r = new ReticlePath()
+            {
+                Color = "black",
+            };
+            NewElement(r);
         }
     }
 }

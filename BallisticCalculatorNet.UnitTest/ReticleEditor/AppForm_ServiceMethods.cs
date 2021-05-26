@@ -166,10 +166,12 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [InlineData(typeof(ReticleLine), typeof(EditLineForm))]
         [InlineData(typeof(ReticleRectangle), typeof(EditRectangleForm))]
         [InlineData(typeof(ReticleText), typeof(EditTextForm))]
+        [InlineData(typeof(ReticlePath), typeof(EditPathForm))]
         [InlineData(typeof(ReticleBulletDropCompensatorPoint), typeof(EditBdcForm))]
         public void CorrectFormCreation(Type element, Type form)
         {
-            AppForm.FormForObject(Activator.CreateInstance(element)).Should().BeOfType(form);
+            AppForm f = new AppForm();
+            f.FormForObject(Activator.CreateInstance(element)).Should().BeOfType(form);
         }
     }
 }

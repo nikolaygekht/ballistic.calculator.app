@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BallisticCalculatorNet", "B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BallisticCalculatorNet.UnitTest", "BallisticCalculatorNet.UnitTest\BallisticCalculatorNet.UnitTest.csproj", "{B40EB7B3-729A-4BDE-9BE9-C85A7F3FE573}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BallisticCalculatorNet.ReticleCanvas", "BallisticCalculatorNet.ReticleCanvas\BallisticCalculatorNet.ReticleCanvas.csproj", "{741A6A09-0B46-453C-A48A-E0912A2E2F57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,12 +41,16 @@ Global
 		{B40EB7B3-729A-4BDE-9BE9-C85A7F3FE573}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B40EB7B3-729A-4BDE-9BE9-C85A7F3FE573}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B40EB7B3-729A-4BDE-9BE9-C85A7F3FE573}.Release|Any CPU.Build.0 = Release|Any CPU
+		{741A6A09-0B46-453C-A48A-E0912A2E2F57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{741A6A09-0B46-453C-A48A-E0912A2E2F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{741A6A09-0B46-453C-A48A-E0912A2E2F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{741A6A09-0B46-453C-A48A-E0912A2E2F57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {175DDDBA-66F7-4CE1-A5D6-21780054F9A4}
 		        SolutionGuid = {3B64E7C3-1B3F-4B52-BDBF-DBE060C82E75}
+		SolutionGuid = {175DDDBA-66F7-4CE1-A5D6-21780054F9A4}
 	EndGlobalSection
 EndGlobal

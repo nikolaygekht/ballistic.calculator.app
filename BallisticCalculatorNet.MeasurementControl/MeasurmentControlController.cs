@@ -62,7 +62,6 @@ namespace BallisticCalculatorNet.MeasurementControl
             {
                 sb.Append(ds);
                 sb.Append(s2, i2 + 1, s2.Length - (i2 + 1));
-                //sb.Append(s2.Substring(i2 + 1));
             }
 
             return sb.ToString();

@@ -164,7 +164,7 @@ namespace BallisticCalculator.Reticle.Graphics
             if (!gColorNames.TryGetValue(name ?? "black", out Color color))
             {
                 var properties = typeof(Color).GetProperties();
-                var property = properties.FirstOrDefault(property => property.PropertyType == typeof(Color) && property.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+                var property = Array.Find(properties, property => property.PropertyType == typeof(Color) && property.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
                 if (property != null)
                 {
                     try

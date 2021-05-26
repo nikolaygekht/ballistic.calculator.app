@@ -26,7 +26,6 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
 
             measurementO.Value = bdc.TextOffset;
             measurementH.Value = bdc.TextHeight;
-
         }
 
         internal void Save()

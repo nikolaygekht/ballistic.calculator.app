@@ -33,7 +33,7 @@ namespace BallisticCalculatorNet.UnitTest.Utils
 
             return new AndConstraint<ListBoxAssertions>(this);
         }
-        
+
         public AndConstraint<ListBoxAssertions> HaveItemMatching<T>(Expression<Func<T, bool>> predicate, string because = null, params object[] becauseParameters)
         {
             Execute.Assertion
@@ -113,5 +113,4 @@ namespace BallisticCalculatorNet.UnitTest.Utils
             return new AndConstraint<ListBoxAssertions>(this);
         }
     }
-
 }

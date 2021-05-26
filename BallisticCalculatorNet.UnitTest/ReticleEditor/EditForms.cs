@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using BallisticCalculator.Reticle;
 using BallisticCalculator.Reticle.Data;
 using BallisticCalculatorNet.ReticleEditor.Forms;
 using BallisticCalculatorNet.UnitTest.Utils;
@@ -226,7 +229,7 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
             bdc.TextHeight.Should().Be(AngularUnit.MOA.New(12));
             bdc.TextOffset.Should().Be(AngularUnit.MOA.New(13));
         }
-        
+
         [Fact]
         public void MoveToEdit()
         {
@@ -316,6 +319,141 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
             el.MajorArc.Should().BeFalse();
             el.ClockwiseDirection.Should().BeFalse();
         }
+    }
 
+    public class EditPath
+    {
+        [Fact]
+        public void Parameters_Save()
+        {
+            MilDotReticle mildot = new MilDotReticle();
+
+            ReticlePath path = new ReticlePath()
+            {
+                LineWidth = AngularUnit.MOA.New(0.1),
+                Color = "black",
+                Fill = true
+            };
+
+            EditPathForm form = new EditPathForm(path, mildot);
+
+            form.MeasurementControl("measurementWidth").Should().HaveValue(path.LineWidth.Value);
+            form.ComboBox("comboBoxColor").Should().HaveText(path.Color);
+            form.CheckBox("checkBoxFill").Should().BeChecked();
+
+            form.MeasurementControl("measurementWidth").Value = AngularUnit.MOA.New(21);
+            form.ComboBox("comboBoxColor").Text = "aqua";
+            form.CheckBox("checkBoxFill").Checked = false;
+
+            path.LineWidth.Should().NotBe(AngularUnit.MOA.New(21));
+            path.Color.Should().NotBe("aqua");
+            path.Fill.Should().NotBeFalse();
+
+            form.buttonOK_Click(this, EventArgs.Empty);
+
+            path.LineWidth.Should().Be(AngularUnit.MOA.New(21));
+            path.Color.Should().Be("aqua");
+            path.Fill.Should().BeFalse();
+
+            form.Close();
+            form.EditPathForm_FormClosed(this, new FormClosedEventArgs(CloseReason.UserClosing));
+            form.Dispose();
+
+            path.LineWidth.Should().Be(AngularUnit.MOA.New(21));
+            path.Color.Should().Be("aqua");
+            path.Fill.Should().BeFalse();
+        }
+
+        [Fact]
+        public void Parameters_Preview_Then_Cancel()
+        {
+            MilDotReticle mildot = new MilDotReticle();
+
+            ReticlePath path = new ReticlePath()
+            {
+                LineWidth = AngularUnit.MOA.New(0.1),
+                Color = "black",
+                Fill = true
+            };
+
+            EditPathForm form = new EditPathForm(path, mildot);
+
+            form.MeasurementControl("measurementWidth").Should().HaveValue(path.LineWidth.Value);
+            form.ComboBox("comboBoxColor").Should().HaveText(path.Color);
+            form.CheckBox("checkBoxFill").Should().BeChecked();
+
+            form.MeasurementControl("measurementWidth").Value = AngularUnit.MOA.New(21);
+            form.ComboBox("comboBoxColor").Text = "aqua";
+            form.CheckBox("checkBoxFill").Checked = false;
+
+            path.LineWidth.Should().NotBe(AngularUnit.MOA.New(21));
+            path.Color.Should().NotBe("aqua");
+            path.Fill.Should().NotBeFalse();
+
+            form.Save();
+
+            path.LineWidth.Should().Be(AngularUnit.MOA.New(21));
+            path.Color.Should().Be("aqua");
+            path.Fill.Should().BeFalse();
+
+            form.Revert();
+
+            path.LineWidth.Should().Be(AngularUnit.MOA.New(0.1));
+            path.Color.Should().Be("black");
+            path.Fill.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Parameters_Preview_Then_Close()
+        {
+            MilDotReticle mildot = new MilDotReticle();
+
+            ReticlePath path = new ReticlePath()
+            {
+                LineWidth = AngularUnit.MOA.New(0.1),
+                Color = "black",
+                Fill = true
+            };
+
+            EditPathForm form = new EditPathForm(path, mildot);
+
+            form.MeasurementControl("measurementWidth").Should().HaveValue(path.LineWidth.Value);
+            form.ComboBox("comboBoxColor").Should().HaveText(path.Color);
+            form.CheckBox("checkBoxFill").Should().BeChecked();
+
+            form.MeasurementControl("measurementWidth").Value = AngularUnit.MOA.New(21);
+            form.ComboBox("comboBoxColor").Text = "aqua";
+            form.CheckBox("checkBoxFill").Checked = false;
+
+            path.LineWidth.Should().NotBe(AngularUnit.MOA.New(21));
+            path.Color.Should().NotBe("aqua");
+            path.Fill.Should().NotBeFalse();
+
+            form.Save();
+
+            path.LineWidth.Should().Be(AngularUnit.MOA.New(21));
+            path.Color.Should().Be("aqua");
+            path.Fill.Should().BeFalse();
+
+            form.Close();
+            form.EditPathForm_FormClosed(this, new FormClosedEventArgs(CloseReason.UserClosing));
+            form.Dispose();
+
+            path.LineWidth.Should().Be(AngularUnit.MOA.New(0.1));
+            path.Color.Should().Be("black");
+            path.Fill.Should().BeTrue();
+        }
+
+        [Theory]
+        [InlineData(typeof(ReticlePathElementMoveTo), typeof(EditMoveToForm))]
+        [InlineData(typeof(ReticlePathElementLineTo), typeof(EditLineToForm))]
+        [InlineData(typeof(ReticlePathElementArc), typeof(EditArcForm))]
+        public void CreateFormObject(Type objectType, Type formType)
+        {
+            object x = Activator.CreateInstance(objectType);
+            var form = EditPathForm.FormForObject(x);
+            form.Should().NotBeNull();
+            form.Should().BeOfType(formType);
+        }
     }
 }
