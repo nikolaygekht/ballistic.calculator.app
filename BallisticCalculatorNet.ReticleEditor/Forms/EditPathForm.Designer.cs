@@ -49,9 +49,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.buttonDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picturePreview)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // buttonOK
-            // 
+            //
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Location = new System.Drawing.Point(207, 442);
             this.buttonOK.Name = "buttonOK";
@@ -60,9 +60,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            // 
+            //
             // buttonCancel
-            // 
+            //
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(307, 442);
             this.buttonCancel.Name = "buttonCancel";
@@ -71,17 +71,17 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            // 
+            //
             // comboBoxColor
-            // 
+            //
             this.comboBoxColor.FormattingEnabled = true;
             this.comboBoxColor.Location = new System.Drawing.Point(156, 45);
             this.comboBoxColor.Name = "comboBoxColor";
             this.comboBoxColor.Size = new System.Drawing.Size(209, 28);
             this.comboBoxColor.TabIndex = 5;
-            // 
+            //
             // checkBoxFill
-            // 
+            //
             this.checkBoxFill.AutoSize = true;
             this.checkBoxFill.Location = new System.Drawing.Point(156, 80);
             this.checkBoxFill.Name = "checkBoxFill";
@@ -89,9 +89,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.checkBoxFill.TabIndex = 6;
             this.checkBoxFill.Text = "Fill";
             this.checkBoxFill.UseVisualStyleBackColor = true;
-            // 
+            //
             // measurementWidth
-            // 
+            //
             this.measurementWidth.Increment = 1D;
             this.measurementWidth.Location = new System.Drawing.Point(156, 11);
             this.measurementWidth.Maximum = 10000D;
@@ -102,64 +102,64 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.measurementWidth.Name = "measurementWidth";
             this.measurementWidth.Size = new System.Drawing.Size(209, 28);
             this.measurementWidth.TabIndex = 4;
-            this.measurementWidth.Unit = Gehtsoft.Measurements.AngularUnit.Radian;
-            // 
+            this.measurementWidth.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
+            //
             // label3
-            // 
+            //
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(13, 13);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 20);
             this.label3.TabIndex = 104;
             this.label3.Text = "Line Width";
-            // 
+            //
             // label4
-            // 
+            //
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(13, 47);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 20);
             this.label4.TabIndex = 105;
             this.label4.Text = "Color";
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 140);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 20);
             this.label1.TabIndex = 106;
             this.label1.Text = "Elements";
-            // 
+            //
             // listBoxElements
-            // 
+            //
             this.listBoxElements.FormattingEnabled = true;
             this.listBoxElements.ItemHeight = 20;
             this.listBoxElements.Location = new System.Drawing.Point(13, 174);
             this.listBoxElements.Name = "listBoxElements";
             this.listBoxElements.Size = new System.Drawing.Size(394, 224);
             this.listBoxElements.TabIndex = 8;
-            // 
+            //
             // picturePreview
-            // 
+            //
             this.picturePreview.Location = new System.Drawing.Point(431, 174);
             this.picturePreview.Name = "picturePreview";
             this.picturePreview.Size = new System.Drawing.Size(254, 224);
             this.picturePreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picturePreview.TabIndex = 107;
             this.picturePreview.TabStop = false;
-            // 
+            //
             // label2
-            // 
+            //
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(431, 140);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 20);
             this.label2.TabIndex = 108;
             this.label2.Text = "Preview";
-            // 
+            //
             // buttonUndo
-            // 
+            //
             this.buttonUndo.Location = new System.Drawing.Point(407, 442);
             this.buttonUndo.Name = "buttonUndo";
             this.buttonUndo.Size = new System.Drawing.Size(94, 29);
@@ -167,9 +167,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.buttonUndo.Text = "Revert";
             this.buttonUndo.UseVisualStyleBackColor = true;
             this.buttonUndo.Click += new System.EventHandler(this.buttonUndo_Click);
-            // 
+            //
             // buttonPreview
-            // 
+            //
             this.buttonPreview.Location = new System.Drawing.Point(156, 111);
             this.buttonPreview.Name = "buttonPreview";
             this.buttonPreview.Size = new System.Drawing.Size(94, 29);
@@ -177,9 +177,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.buttonPreview.Text = "Preview";
             this.buttonPreview.UseVisualStyleBackColor = true;
             this.buttonPreview.Click += new System.EventHandler(this.buttonPreview_Click);
-            // 
+            //
             // buttonMove
-            // 
+            //
             this.buttonMove.Location = new System.Drawing.Point(13, 405);
             this.buttonMove.Name = "buttonMove";
             this.buttonMove.Size = new System.Drawing.Size(94, 29);
@@ -187,9 +187,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.buttonMove.Text = "Move To";
             this.buttonMove.UseVisualStyleBackColor = true;
             this.buttonMove.Click += new System.EventHandler(this.buttonMove_Click);
-            // 
+            //
             // buttonLine
-            // 
+            //
             this.buttonLine.Location = new System.Drawing.Point(114, 404);
             this.buttonLine.Name = "buttonLine";
             this.buttonLine.Size = new System.Drawing.Size(94, 29);
@@ -197,9 +197,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.buttonLine.Text = "Line To";
             this.buttonLine.UseVisualStyleBackColor = true;
             this.buttonLine.Click += new System.EventHandler(this.buttonLine_Click);
-            // 
+            //
             // buttonArc
-            // 
+            //
             this.buttonArc.Location = new System.Drawing.Point(215, 404);
             this.buttonArc.Name = "buttonArc";
             this.buttonArc.Size = new System.Drawing.Size(94, 29);
@@ -207,9 +207,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.buttonArc.Text = "Arc";
             this.buttonArc.UseVisualStyleBackColor = true;
             this.buttonArc.Click += new System.EventHandler(this.buttonArc_Click);
-            // 
+            //
             // buttonEdit
-            // 
+            //
             this.buttonEdit.Location = new System.Drawing.Point(313, 404);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(94, 29);
@@ -217,9 +217,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.buttonEdit.Text = "Edit";
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
-            // 
+            //
             // buttonDelete
-            // 
+            //
             this.buttonDelete.Location = new System.Drawing.Point(413, 404);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(94, 29);
@@ -227,9 +227,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
-            // 
+            //
             // EditPathForm
-            // 
+            //
             this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

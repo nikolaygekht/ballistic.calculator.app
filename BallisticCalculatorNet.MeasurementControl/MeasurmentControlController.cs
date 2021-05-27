@@ -26,7 +26,28 @@ namespace BallisticCalculatorNet.MeasurementControl
         public double Maximum { get; set; } = 10000;
         public double Increment { get; set; } = 1;
 
-        public IEnumerable<MeasurementUtility.Unit> GetUnits() => mMeasurementUtility.Units;
+        public IEnumerable<MeasurementUtility.Unit> GetUnits(out int defaultIndex)
+        {
+            if (MeasurementType == MeasurementType.Distance)
+                defaultIndex = IndexOf(mMeasurementUtility.Units, DistanceUnit.Foot);
+            else if (MeasurementType == MeasurementType.Angular)
+                defaultIndex = IndexOf(mMeasurementUtility.Units, AngularUnit.Mil);
+            else if (MeasurementType == MeasurementType.Weight)
+                defaultIndex = IndexOf(mMeasurementUtility.Units, WeightUnit.Gram);
+            else
+                defaultIndex = -1;
+
+            return mMeasurementUtility.Units;
+        }
+
+        private int IndexOf<T>(IReadOnlyList<MeasurementUtility.Unit> units, T value)
+            where T : Enum
+        {
+            for (int i = 0; i < units.Count; i++)
+                if (units[i].Value.Equals(value))
+                    return i;
+            return 0;
+        }
 
         public CultureInfo Culture { get; set; } = CultureInfo.CurrentUICulture;
 

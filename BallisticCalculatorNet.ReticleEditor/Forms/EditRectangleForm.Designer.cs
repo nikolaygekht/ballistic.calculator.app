@@ -43,9 +43,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.measurementX2 = new BallisticCalculatorNet.MeasurementControl.MeasurementControl();
             this.checkBoxFill = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
-            // 
+            //
             // buttonOK
-            // 
+            //
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Location = new System.Drawing.Point(216, 179);
             this.buttonOK.Name = "buttonOK";
@@ -54,9 +54,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            // 
+            //
             // buttonCancel
-            // 
+            //
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(316, 179);
             this.buttonCancel.Name = "buttonCancel";
@@ -64,9 +64,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.buttonCancel.TabIndex = 101;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            // 
+            //
             // measurementX1
-            // 
+            //
             this.measurementX1.Increment = 1D;
             this.measurementX1.Location = new System.Drawing.Point(156, 12);
             this.measurementX1.Maximum = 10000D;
@@ -77,10 +77,10 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.measurementX1.Name = "measurementX1";
             this.measurementX1.Size = new System.Drawing.Size(209, 28);
             this.measurementX1.TabIndex = 1;
-            this.measurementX1.Unit = Gehtsoft.Measurements.AngularUnit.Radian;
-            // 
+            this.measurementX1.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
+            //
             // measurementY1
-            // 
+            //
             this.measurementY1.Increment = 1D;
             this.measurementY1.Location = new System.Drawing.Point(371, 12);
             this.measurementY1.Maximum = 10000D;
@@ -91,18 +91,18 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.measurementY1.Name = "measurementY1";
             this.measurementY1.Size = new System.Drawing.Size(209, 28);
             this.measurementY1.TabIndex = 2;
-            this.measurementY1.Unit = Gehtsoft.Measurements.AngularUnit.Radian;
-            // 
+            this.measurementY1.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
+            //
             // comboBoxColor
-            // 
+            //
             this.comboBoxColor.FormattingEnabled = true;
             this.comboBoxColor.Location = new System.Drawing.Point(156, 114);
             this.comboBoxColor.Name = "comboBoxColor";
             this.comboBoxColor.Size = new System.Drawing.Size(209, 28);
             this.comboBoxColor.TabIndex = 6;
-            // 
+            //
             // measurementWidth
-            // 
+            //
             this.measurementWidth.Increment = 1D;
             this.measurementWidth.Location = new System.Drawing.Point(156, 80);
             this.measurementWidth.Maximum = 10000D;
@@ -113,46 +113,46 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.measurementWidth.Name = "measurementWidth";
             this.measurementWidth.Size = new System.Drawing.Size(209, 28);
             this.measurementWidth.TabIndex = 5;
-            this.measurementWidth.Unit = Gehtsoft.Measurements.AngularUnit.Radian;
-            // 
+            this.measurementWidth.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
+            //
             // label1
-            // 
+            //
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 20);
             this.label1.TabIndex = 102;
             this.label1.Text = "Top-Left (X, Y)";
-            // 
+            //
             // label3
-            // 
+            //
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 80);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 20);
             this.label3.TabIndex = 104;
             this.label3.Text = "Line Width";
-            // 
+            //
             // label4
-            // 
+            //
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(13, 116);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 20);
             this.label4.TabIndex = 105;
             this.label4.Text = "Color";
-            // 
+            //
             // label2
-            // 
+            //
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(13, 46);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 20);
             this.label2.TabIndex = 108;
             this.label2.Text = "Size (X, Y)";
-            // 
+            //
             // measurementY2
-            // 
+            //
             this.measurementY2.Increment = 1D;
             this.measurementY2.Location = new System.Drawing.Point(371, 46);
             this.measurementY2.Maximum = 10000D;
@@ -163,10 +163,10 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.measurementY2.Name = "measurementY2";
             this.measurementY2.Size = new System.Drawing.Size(209, 28);
             this.measurementY2.TabIndex = 4;
-            this.measurementY2.Unit = Gehtsoft.Measurements.AngularUnit.Radian;
-            // 
+            this.measurementY2.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
+            //
             // measurementX2
-            // 
+            //
             this.measurementX2.Increment = 1D;
             this.measurementX2.Location = new System.Drawing.Point(156, 46);
             this.measurementX2.Maximum = 10000D;
@@ -177,10 +177,10 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.measurementX2.Name = "measurementX2";
             this.measurementX2.Size = new System.Drawing.Size(209, 28);
             this.measurementX2.TabIndex = 3;
-            this.measurementX2.Unit = Gehtsoft.Measurements.AngularUnit.Radian;
-            // 
+            this.measurementX2.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
+            //
             // checkBoxFill
-            // 
+            //
             this.checkBoxFill.AutoSize = true;
             this.checkBoxFill.Location = new System.Drawing.Point(156, 149);
             this.checkBoxFill.Name = "checkBoxFill";
@@ -188,9 +188,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.checkBoxFill.TabIndex = 109;
             this.checkBoxFill.Text = "Fill";
             this.checkBoxFill.UseVisualStyleBackColor = true;
-            // 
+            //
             // EditRectangleForm
-            // 
+            //
             this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

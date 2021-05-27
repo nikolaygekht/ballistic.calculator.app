@@ -38,10 +38,7 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             comboBoxColor.FillByColors();
             comboBoxColor.Text = Path.Color;
 
-            if (Path.Fill ?? false)
-                checkBoxFill.Checked = true;
-            else
-                checkBoxFill.Checked = false;
+            checkBoxFill.Checked = Path.Fill ?? false;
 
             listBoxElements.Items.Clear();
             for (int i = 0; i < Path.Elements.Count; i++)
@@ -175,7 +172,6 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
                 listBoxElements.Items.Add(el);
                 UpdateImage();
             }
-
         }
 
         private void buttonArc_Click(object sender, EventArgs e)
@@ -227,7 +223,7 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             }
 
             var el = listBoxElements.SelectedItem;
-            
+
             for (int i = 0; i < Path.Elements.Count; i++)
             {
                 if (ReferenceEquals(el, Path.Elements[i]))

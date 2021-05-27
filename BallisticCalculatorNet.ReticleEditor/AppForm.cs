@@ -20,9 +20,29 @@ namespace BallisticCalculatorNet.ReticleEditor
 {
     public partial class AppForm : Form
     {
-        internal string ReticleFileName { get; private set;  } = null;
+        private string mReticleName;
+
+        internal string ReticleFileName { 
+            get => mReticleName; 
+            private set
+            {
+                mReticleName = value;
+                UpdateText();
+            }
+        }
 
         internal ReticleDefinition Reticle { get; private set; } = new ReticleDefinition();
+
+        private bool mChanged;
+
+        internal bool Changed { 
+            get => mChanged;
+            private set
+            {
+                mChanged = value;
+                UpdateText();
+            }
+        }
 
         public AppForm(string fileToOpen = null)
         {
@@ -78,6 +98,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             Reticle = definition;
             ReticleFileName = fileName;
             UpdateReticle();
+            Changed = false;
         }
 
         internal void NewReticle()
@@ -90,12 +111,14 @@ namespace BallisticCalculatorNet.ReticleEditor
             };
             ReticleFileName = null;
             UpdateReticle();
+            Changed = false;
         }
 
         internal void SaveReticle(Stream reticleStream)
         {
             GatherReticleDefinition();
             Reticle.BallisticXmlSerialize(reticleStream);
+            Changed = false;
         }
 
         internal void UpdateReticle()
@@ -321,18 +344,25 @@ namespace BallisticCalculatorNet.ReticleEditor
                     Reticle.BulletDropCompensator.Add(bdc);
                 else if (element is ReticleElement el)
                     Reticle.Elements.Add(el);
+                Changed = true;
                 UpdateImage();
             }
         }
 
+        private void UpdateText() => this.Text = "Reticle Editor - [" + (mReticleName ?? "New Reticle") + "]" + (mChanged ? "*" : "");
+
         private void buttonSet_Click(object sender, EventArgs e)
         {
             GatherReticleDefinition();
+            Changed = true;
             UpdateImage();
         }
 
         private void buttonLoad_Click(object sender, EventArgs e)
         {
+            if (mChanged && !OkToContinueOnChanged())
+                return;
+
             OpenFileDialog dlg = new OpenFileDialog()
             {
                 DefaultExt = ".reticle",
@@ -415,6 +445,7 @@ namespace BallisticCalculatorNet.ReticleEditor
                 return;
             }
             DeleteItem(reticleItems.SelectedItem);
+            Changed = true;
             UpdateImage();
         }
 
@@ -434,6 +465,7 @@ namespace BallisticCalculatorNet.ReticleEditor
                 reticleItems.Items.RemoveAt(idx);
                 reticleItems.Items.Insert(idx, it);
                 reticleItems.SelectedIndex = idx;
+                Changed = true;
                 UpdateImage();
             }
         }
@@ -524,6 +556,8 @@ namespace BallisticCalculatorNet.ReticleEditor
 
         private void buttonNew_Click(object sender, EventArgs e)
         {
+            if (mChanged && !OkToContinueOnChanged())
+                return;
             NewReticle();
             UpdateImage();
         }
@@ -535,6 +569,19 @@ namespace BallisticCalculatorNet.ReticleEditor
                 Color = "black",
             };
             NewElement(r);
+        }
+
+        private bool OkToContinueOnChanged()
+        {
+            return !this.Visible ||
+                MessageBox.Show(this, "The reticle is changed. If you continue, all changes will be lost. Do you want to proceed?", 
+                                       "Reticle Editor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+        }
+
+        private void AppForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (mChanged && !OkToContinueOnChanged())
+                e.Cancel = true;
         }
     }
 }

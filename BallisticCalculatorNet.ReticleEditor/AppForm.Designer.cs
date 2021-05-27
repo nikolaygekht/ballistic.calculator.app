@@ -239,7 +239,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.zeroOffsetY.Name = "zeroOffsetY";
             this.zeroOffsetY.Size = new System.Drawing.Size(299, 28);
             this.zeroOffsetY.TabIndex = 5;
-            this.zeroOffsetY.Unit = Gehtsoft.Measurements.AngularUnit.Radian;
+            this.zeroOffsetY.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
             // 
             // zeroOffsetX
             // 
@@ -253,7 +253,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.zeroOffsetX.Name = "zeroOffsetX";
             this.zeroOffsetX.Size = new System.Drawing.Size(299, 28);
             this.zeroOffsetX.TabIndex = 4;
-            this.zeroOffsetX.Unit = Gehtsoft.Measurements.AngularUnit.Radian;
+            this.zeroOffsetX.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
             // 
             // reticleHeight
             // 
@@ -267,7 +267,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.reticleHeight.Name = "reticleHeight";
             this.reticleHeight.Size = new System.Drawing.Size(299, 28);
             this.reticleHeight.TabIndex = 3;
-            this.reticleHeight.Unit = Gehtsoft.Measurements.AngularUnit.Radian;
+            this.reticleHeight.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
             // 
             // reticleWidth
             // 
@@ -281,7 +281,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.reticleWidth.Name = "reticleWidth";
             this.reticleWidth.Size = new System.Drawing.Size(299, 28);
             this.reticleWidth.TabIndex = 2;
-            this.reticleWidth.Unit = Gehtsoft.Measurements.AngularUnit.Radian;
+            this.reticleWidth.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
             // 
             // reticleName
             // 
@@ -428,6 +428,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AppForm";
             this.Text = "Reticle Editor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AppForm_FormClosing);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

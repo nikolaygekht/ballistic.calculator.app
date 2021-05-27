@@ -56,9 +56,10 @@ namespace BallisticCalculatorNet.MeasurementControl
         private void UpdateUnits()
         {
             UnitPart.Items.Clear();
-            foreach (var unit in mController.GetUnits())
+            int defaultIndex;
+            foreach (var unit in mController.GetUnits(out defaultIndex))
                 UnitPart.Items.Add(unit);
-            UnitPart.SelectedIndex = 0;
+            UnitPart.SelectedIndex = defaultIndex;
         }
 
         public object Value

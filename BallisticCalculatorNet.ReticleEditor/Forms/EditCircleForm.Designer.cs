@@ -42,9 +42,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
+            //
             // buttonOK
-            // 
+            //
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Location = new System.Drawing.Point(216, 186);
             this.buttonOK.Name = "buttonOK";
@@ -53,9 +53,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            // 
+            //
             // buttonCancel
-            // 
+            //
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(316, 186);
             this.buttonCancel.Name = "buttonCancel";
@@ -63,9 +63,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.buttonCancel.TabIndex = 101;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            // 
+            //
             // measurementX
-            // 
+            //
             this.measurementX.Increment = 1D;
             this.measurementX.Location = new System.Drawing.Point(156, 12);
             this.measurementX.Maximum = 10000D;
@@ -76,10 +76,10 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.measurementX.Name = "measurementX";
             this.measurementX.Size = new System.Drawing.Size(209, 28);
             this.measurementX.TabIndex = 1;
-            this.measurementX.Unit = Gehtsoft.Measurements.AngularUnit.Radian;
-            // 
+            this.measurementX.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
+            //
             // measurementY
-            // 
+            //
             this.measurementY.Increment = 1D;
             this.measurementY.Location = new System.Drawing.Point(371, 12);
             this.measurementY.Maximum = 10000D;
@@ -90,10 +90,10 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.measurementY.Name = "measurementY";
             this.measurementY.Size = new System.Drawing.Size(209, 28);
             this.measurementY.TabIndex = 2;
-            this.measurementY.Unit = Gehtsoft.Measurements.AngularUnit.Radian;
-            // 
+            this.measurementY.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
+            //
             // measurementR
-            // 
+            //
             this.measurementR.Increment = 1D;
             this.measurementR.Location = new System.Drawing.Point(156, 46);
             this.measurementR.Maximum = 10000D;
@@ -104,18 +104,18 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.measurementR.Name = "measurementR";
             this.measurementR.Size = new System.Drawing.Size(209, 28);
             this.measurementR.TabIndex = 3;
-            this.measurementR.Unit = Gehtsoft.Measurements.AngularUnit.Radian;
-            // 
+            this.measurementR.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
+            //
             // comboBoxColor
-            // 
+            //
             this.comboBoxColor.FormattingEnabled = true;
             this.comboBoxColor.Location = new System.Drawing.Point(156, 114);
             this.comboBoxColor.Name = "comboBoxColor";
             this.comboBoxColor.Size = new System.Drawing.Size(209, 28);
             this.comboBoxColor.TabIndex = 5;
-            // 
+            //
             // checkBoxFill
-            // 
+            //
             this.checkBoxFill.AutoSize = true;
             this.checkBoxFill.Location = new System.Drawing.Point(156, 149);
             this.checkBoxFill.Name = "checkBoxFill";
@@ -123,9 +123,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.checkBoxFill.TabIndex = 6;
             this.checkBoxFill.Text = "Fill";
             this.checkBoxFill.UseVisualStyleBackColor = true;
-            // 
+            //
             // measurementWidth
-            // 
+            //
             this.measurementWidth.Increment = 1D;
             this.measurementWidth.Location = new System.Drawing.Point(156, 80);
             this.measurementWidth.Maximum = 10000D;
@@ -136,46 +136,46 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             this.measurementWidth.Name = "measurementWidth";
             this.measurementWidth.Size = new System.Drawing.Size(209, 28);
             this.measurementWidth.TabIndex = 4;
-            this.measurementWidth.Unit = Gehtsoft.Measurements.AngularUnit.Radian;
-            // 
+            this.measurementWidth.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
+            //
             // label1
-            // 
+            //
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 20);
             this.label1.TabIndex = 102;
             this.label1.Text = "Position (X, Y)";
-            // 
+            //
             // label2
-            // 
+            //
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(13, 48);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 20);
             this.label2.TabIndex = 103;
             this.label2.Text = "Radius";
-            // 
+            //
             // label3
-            // 
+            //
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(13, 82);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 20);
             this.label3.TabIndex = 104;
             this.label3.Text = "Line Width";
-            // 
+            //
             // label4
-            // 
+            //
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(13, 116);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 20);
             this.label4.TabIndex = 105;
             this.label4.Text = "Color";
-            // 
+            //
             // EditCircleForm
-            // 
+            //
             this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
