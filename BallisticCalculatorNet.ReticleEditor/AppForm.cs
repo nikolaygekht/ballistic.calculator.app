@@ -22,8 +22,8 @@ namespace BallisticCalculatorNet.ReticleEditor
     {
         private string mReticleName;
 
-        internal string ReticleFileName { 
-            get => mReticleName; 
+        internal string ReticleFileName {
+            get => mReticleName;
             private set
             {
                 mReticleName = value;
@@ -35,7 +35,7 @@ namespace BallisticCalculatorNet.ReticleEditor
 
         private bool mChanged;
 
-        internal bool Changed { 
+        internal bool Changed {
             get => mChanged;
             private set
             {
@@ -47,6 +47,9 @@ namespace BallisticCalculatorNet.ReticleEditor
         public AppForm(string fileToOpen = null)
         {
             InitializeComponent();
+            
+            Program.State.MainWindowState.Restore(this);
+
             if (string.IsNullOrEmpty(fileToOpen))
                 NewReticle();
             else
@@ -574,14 +577,18 @@ namespace BallisticCalculatorNet.ReticleEditor
         private bool OkToContinueOnChanged()
         {
             return !this.Visible ||
-                MessageBox.Show(this, "The reticle is changed. If you continue, all changes will be lost. Do you want to proceed?", 
+                MessageBox.Show(this, "The reticle is changed. If you continue, all changes will be lost. Do you want to proceed?",
                                        "Reticle Editor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
 
         private void AppForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (mChanged && !OkToContinueOnChanged())
+            {
                 e.Cancel = true;
+                return;
+            }
+            Program.State.MainWindowState.Save(this);
         }
     }
 }

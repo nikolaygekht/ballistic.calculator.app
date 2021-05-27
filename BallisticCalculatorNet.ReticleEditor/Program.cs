@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BallisticCalculatorNet.Common;
+using BallisticCalculatorNet.Common.PersistentState;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Core;
@@ -19,6 +21,10 @@ namespace BallisticCalculatorNet.ReticleEditor
         public static string ApplicationFolder { get; private set; }
 
         public static IConfiguration Configuration { get; private set; }
+
+        private static ApplicationStateController<ApplicationState> mState;
+
+        public static ApplicationState State => mState.State;
 
         private static LogEventLevel MinimumLogLevel
         {
@@ -69,6 +75,15 @@ namespace BallisticCalculatorNet.ReticleEditor
                 .MinimumLevel.Is(MinimumLogLevel)
                 .WriteTo.File(LogTarget, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 10)
                 .CreateLogger();
+
+            try
+            {
+                mState = new ApplicationStateController<ApplicationState>(ApplicationFolder, "reticleeditor");
+            }
+            catch (Exception e)
+            {
+                Logger.Warning(e, "Can't read application state");
+            }
         }
 
         /// <summary>
@@ -87,6 +102,15 @@ namespace BallisticCalculatorNet.ReticleEditor
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new AppForm(Configuration["command-line:open"]));
+
+            try
+            {
+                mState.Save();
+            }
+            catch (Exception e)
+            {
+                Logger.Warning(e, "Can't write application state");
+            }
         }
 
         private static void ThreadExceptionHandler(object sender, ThreadExceptionEventArgs e)

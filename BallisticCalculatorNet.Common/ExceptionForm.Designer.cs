@@ -1,5 +1,5 @@
 ﻿
-namespace BallisticCalculatorNet.ReticleEditor
+namespace BallisticCalculatorNet.Common
 {
     partial class ExceptionForm
     {
@@ -87,7 +87,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(12, 254);
+            this.linkLabel1.Location = new System.Drawing.Point(37, 247);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(420, 20);
             this.linkLabel1.TabIndex = 5;

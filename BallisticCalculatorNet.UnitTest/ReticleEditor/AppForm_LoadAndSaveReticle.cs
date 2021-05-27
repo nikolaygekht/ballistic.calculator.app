@@ -18,7 +18,7 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [Fact]
         public void NewReticle()
         {
-            AppForm appForm = new AppForm();
+            BallisticCalculatorNet.ReticleEditor.AppForm appForm = new BallisticCalculatorNet.ReticleEditor.AppForm();
 
             //make sure reticle is loaded
             appForm.TextBox("reticleName").Should().HaveNoText();
@@ -33,7 +33,7 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [Fact]
         public void LoadReticle()
         {
-            AppForm appForm = new AppForm();
+            BallisticCalculatorNet.ReticleEditor.AppForm appForm = new BallisticCalculatorNet.ReticleEditor.AppForm();
 
             MilDotReticle r1 = new MilDotReticle();
             using (var ms1 = new MemoryStream())
@@ -69,7 +69,7 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [Fact]
         public void GatherReticle()
         {
-            AppForm f = new AppForm();
+            BallisticCalculatorNet.ReticleEditor.AppForm f = new BallisticCalculatorNet.ReticleEditor.AppForm();
             f.TextBox("reticleName").Text = "NewName";
             f.MeasurementControl("reticleWidth").Value = AngularUnit.Mil.New(1);
             f.MeasurementControl("reticleHeight").Value = AngularUnit.Mil.New(2);

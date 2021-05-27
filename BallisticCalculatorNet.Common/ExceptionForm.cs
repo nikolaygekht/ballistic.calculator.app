@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BallisticCalculatorNet.ReticleEditor
+namespace BallisticCalculatorNet.Common
 {
     public partial class ExceptionForm : Form
     {

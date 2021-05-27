@@ -21,7 +21,7 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [InlineData(100, 60, 6, 8, 45, 60, "horizontal holder, vertical reticle")]
         public void CalculateReticleImageSize(int controlWidth, int controlHeight, double reticleWidth, double reticleHeight, int imageWidth, int imageHeight, string situation)
         {
-            AppForm.CalculateReticleImageSize(controlWidth, controlHeight,
+            BallisticCalculatorNet.ReticleEditor.AppForm.CalculateReticleImageSize(controlWidth, controlHeight,
                 AngularUnit.Mil.New(reticleWidth),
                 AngularUnit.Mil.New(reticleHeight),
                 out int calculatedImageWidth, out int calculateImageHeight);
@@ -33,7 +33,7 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [Fact]
         public void Delete_ReticleElement()
         {
-            AppForm form = new AppForm();
+            BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
             form.LoadReticle(new MilDotReticle(), "mildot");
 
             var originalListBoxItemsCount = form.ListBox("reticleItems").Items.Count;
@@ -57,7 +57,7 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [Fact]
         public void Duplicate_ReticleElement()
         {
-            AppForm form = new AppForm();
+            BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
             form.LoadReticle(new MilDotReticle(), "mildot");
             var lb = form.ListBox("reticleItems");
             var originalListBoxItemsCount = lb.Items.Count;
@@ -85,7 +85,7 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [Fact]
         public void Delete_ReticleBdc()
         {
-            AppForm form = new AppForm();
+            BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
             form.LoadReticle(new MilDotReticle(), "mildot");
 
             var originalListBoxItemsCount = form.ListBox("reticleItems").Items.Count;
@@ -109,7 +109,7 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [Fact]
         public void Duplicate_ReticleBdc()
         {
-            AppForm form = new AppForm();
+            BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
             form.LoadReticle(new MilDotReticle(), "mildot");
             var lb = form.ListBox("reticleItems");
             var originalListBoxItemsCount = lb.Items.Count;
@@ -136,7 +136,7 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [Fact]
         public void Duplicate_ThenDeleteOriginal()
         {
-            AppForm form = new AppForm();
+            BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
             form.LoadReticle(new MilDotReticle(), "mildot");
             var lb = form.ListBox("reticleItems");
             var org = lb.Items[0];
@@ -150,7 +150,7 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [Fact]
         public void Duplicate_ThenDeleteCopy()
         {
-            AppForm form = new AppForm();
+            BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
             form.LoadReticle(new MilDotReticle(), "mildot");
             var lb = form.ListBox("reticleItems");
             var org = lb.Items[0];
@@ -170,7 +170,7 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [InlineData(typeof(ReticleBulletDropCompensatorPoint), typeof(EditBdcForm))]
         public void CorrectFormCreation(Type element, Type form)
         {
-            AppForm f = new AppForm();
+            BallisticCalculatorNet.ReticleEditor.AppForm f = new BallisticCalculatorNet.ReticleEditor.AppForm();
             f.FormForObject(Activator.CreateInstance(element)).Should().BeOfType(form);
         }
     }
