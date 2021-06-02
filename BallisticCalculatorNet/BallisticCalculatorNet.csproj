@@ -6,7 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
-    <ApplicationIcon>Sportsbettingspot-Summer-Olympics-Shooting.ico</ApplicationIcon>
+    <ApplicationIcon>Shooting.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

@@ -29,18 +29,26 @@ namespace BallisticCalculatorNet.MeasurementControl
         public IEnumerable<MeasurementUtility.Unit> GetUnits(out int defaultIndex)
         {
             if (MeasurementType == MeasurementType.Distance)
-                defaultIndex = IndexOf(mMeasurementUtility.Units, DistanceUnit.Foot);
+                defaultIndex = IndexOf(mMeasurementUtility.Units, DistanceUnit.Meter);
             else if (MeasurementType == MeasurementType.Angular)
                 defaultIndex = IndexOf(mMeasurementUtility.Units, AngularUnit.Mil);
             else if (MeasurementType == MeasurementType.Weight)
                 defaultIndex = IndexOf(mMeasurementUtility.Units, WeightUnit.Gram);
+            else if (MeasurementType == MeasurementType.Pressure)
+                defaultIndex = IndexOf(mMeasurementUtility.Units, PressureUnit.Bar);
+            else if (MeasurementType == MeasurementType.Temperature)
+                defaultIndex = IndexOf(mMeasurementUtility.Units, TemperatureUnit.Celsius);
+            else if (MeasurementType == MeasurementType.Velocity)
+                defaultIndex = IndexOf(mMeasurementUtility.Units, VelocityUnit.MetersPerSecond);
+            else if (MeasurementType == MeasurementType.Volume)
+                defaultIndex = IndexOf(mMeasurementUtility.Units, VolumeUnit.Liter);
             else
-                defaultIndex = -1;
+                defaultIndex = 0;
 
             return mMeasurementUtility.Units;
         }
 
-        private int IndexOf<T>(IReadOnlyList<MeasurementUtility.Unit> units, T value)
+        private static int IndexOf<T>(IReadOnlyList<MeasurementUtility.Unit> units, T value)
             where T : Enum
         {
             for (int i = 0; i < units.Count; i++)

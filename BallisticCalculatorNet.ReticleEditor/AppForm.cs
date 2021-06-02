@@ -47,8 +47,8 @@ namespace BallisticCalculatorNet.ReticleEditor
         public AppForm(string fileToOpen = null)
         {
             InitializeComponent();
-            
-            Program.State.MainWindowState.Restore(this);
+
+            Program.State?.MainWindowState.Restore(this);
 
             if (string.IsNullOrEmpty(fileToOpen))
                 NewReticle();
@@ -588,7 +588,7 @@ namespace BallisticCalculatorNet.ReticleEditor
                 e.Cancel = true;
                 return;
             }
-            Program.State.MainWindowState.Save(this);
+            Program.State?.MainWindowState.Save(this);
         }
     }
 }

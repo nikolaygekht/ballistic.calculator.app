@@ -4,6 +4,7 @@ using BallisticCalculatorNet.MeasurementControl;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Gehtsoft.Measurements;
+using Gehtsoft.Winforms.FluentAssertions;
 
 namespace BallisticCalculatorNet.UnitTest.Utils
 {

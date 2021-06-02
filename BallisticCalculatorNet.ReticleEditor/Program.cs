@@ -24,7 +24,7 @@ namespace BallisticCalculatorNet.ReticleEditor
 
         private static ApplicationStateController<ApplicationState> mState;
 
-        public static ApplicationState State => mState.State;
+        public static ApplicationState State => mState?.State;
 
         private static LogEventLevel MinimumLogLevel
         {

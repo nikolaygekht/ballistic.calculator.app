@@ -9,6 +9,7 @@ using BallisticCalculatorNet.ReticleEditor;
 using BallisticCalculatorNet.UnitTest.Utils;
 using FluentAssertions;
 using Gehtsoft.Measurements;
+using Gehtsoft.Winforms.FluentAssertions;
 using Xunit;
 
 namespace BallisticCalculatorNet.UnitTest.ReticleEditor

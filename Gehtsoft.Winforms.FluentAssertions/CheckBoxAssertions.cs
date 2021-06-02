@@ -2,7 +2,7 @@
 using FluentAssertions;
 using FluentAssertions.Execution;
 
-namespace BallisticCalculatorNet.UnitTest.Utils
+namespace Gehtsoft.Winforms.FluentAssertions
 {
     public class CheckBoxAssertions : ControlAssertionsBase<CheckBox, CheckBoxAssertions>
     {

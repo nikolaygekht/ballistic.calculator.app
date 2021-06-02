@@ -10,6 +10,7 @@ using BallisticCalculatorNet.UnitTest.Utils;
 using FluentAssertions;
 using FluentAssertions.Common;
 using Gehtsoft.Measurements;
+using Gehtsoft.Winforms.FluentAssertions;
 using Microsoft.VisualStudio.TestPlatform.Utilities;
 using Xunit;
 
@@ -44,7 +45,7 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
             control.ValueAs<DistanceUnit>().Should().NotBeNull();
             control.ValueAs<DistanceUnit>().Value.Should().Be(0);
 
-            control.Unit.Should().Be(DistanceUnit.Line);
+            control.Unit.Should().Be(DistanceUnit.Meter);
         }
 
         [Theory]
