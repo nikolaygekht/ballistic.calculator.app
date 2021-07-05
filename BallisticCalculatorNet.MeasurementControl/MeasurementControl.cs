@@ -154,5 +154,12 @@ namespace BallisticCalculatorNet.MeasurementControl
                 Changed?.Invoke(this, EventArgs.Empty);
             }
         }
+
+        public void ChangeUnit<T>(T unit) where T : Enum
+        {
+            mController.ValidateUnitType<T>();
+            var value = ValueAs<T>();
+            Value = value.To(unit);
+        }
     }
 }

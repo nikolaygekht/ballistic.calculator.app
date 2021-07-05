@@ -101,7 +101,8 @@ namespace BallisticCalculatorNet
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AppForm());
+            //Application.Run(new AppForm());
+            Application.Run(new MyTestForm());
 
             try
             {
