@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using BallisticCalculator;
 using Gehtsoft.Measurements;
 
-namespace BallisticCalculatorNet.WindControl
+namespace BallisticCalculatorNet.InputPanels
 {
     public partial class WindControl : UserControl
     {
@@ -18,11 +18,25 @@ namespace BallisticCalculatorNet.WindControl
         {
             get
             {
+                if (!checkBoxDistance.Checked &&
+                    measurementVelocity.ValueAs<VelocityUnit>().Value < 1e-5 &&
+                    measurementDirection.ValueAs<AngularUnit>().Value < 1e-5)
+                    return null;
+
                 return new Wind(measurementVelocity.ValueAs<VelocityUnit>(), measurementDirection.ValueAs<AngularUnit>(),
                     checkBoxDistance.Checked ? measurementDistance.ValueAs<DistanceUnit>() : null);
             }
             set
             {
+                if (value == null)
+                {
+                    checkBoxDistance.Checked = false;
+                    measurementDistance.Value = new Measurement<DistanceUnit>(0, measurementDistance.UnitAs<DistanceUnit>());
+                    measurementDirection.Value = new Measurement<AngularUnit>(0, measurementDirection.UnitAs<AngularUnit>());
+                    measurementVelocity.Value = new Measurement<VelocityUnit>(0, measurementVelocity.UnitAs<VelocityUnit>());
+                    return;
+                }
+
                 measurementVelocity.Value = value.Velocity;
                 measurementDirection.Value = value.Direction;
                 if (value.MaximumRange != null)
@@ -32,7 +46,7 @@ namespace BallisticCalculatorNet.WindControl
                 }
                 else
                 {
-                    checkBoxDistance.Checked = true;
+                    checkBoxDistance.Checked = false;
                     measurementDistance.Value = new Measurement<DistanceUnit>(0, measurementDistance.UnitAs<DistanceUnit>());
                 }
             }
@@ -98,6 +112,12 @@ namespace BallisticCalculatorNet.WindControl
         {
             measurementDistance.ChangeUnit<DistanceUnit>(distanceUnit);
             measurementDistance.ChangeUnit<VelocityUnit>(velocityUnit);
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+                pictureBox1_MouseClick(sender, e);
         }
     }
 }

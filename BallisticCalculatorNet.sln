@@ -8,10 +8,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BallisticCalculatorNet.MeasurementControl", "BallisticCalculatorNet.MeasurementControl\BallisticCalculatorNet.MeasurementControl.csproj", "{F989ACF7-BF67-4F76-BF75-2EF8D0C8B2C6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AEC2804A-98EC-4047-A466-9D4ACCC382F9}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-		.gitignore = .gitignore
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BallisticCalculatorNet", "BallisticCalculatorNet\BallisticCalculatorNet.csproj", "{FC316B6C-97E2-4B04-B83F-1F06CCA42584}"
 EndProject
@@ -25,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gehtsoft.Winforms.FluentAss
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gehtsoft.Winforms.FluentAssertions.Test", "Gehtsoft.Winforms.FluentAssertions.Test\Gehtsoft.Winforms.FluentAssertions.Test.csproj", "{D0ACF118-057E-4F33-A863-5E2C01B283B7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BallisticCalculatorNet.WindControl", "BallisticCalculatorNet.WindControl\BallisticCalculatorNet.WindControl.csproj", "{E42FE485-B98E-48C4-8DE3-6B4BBBFB856A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BallisticCalculatorNet.InputPanels", "BallisticCalculatorNet.InputPanels\BallisticCalculatorNet.InputPanels.csproj", "{E42FE485-B98E-48C4-8DE3-6B4BBBFB856A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,7 +70,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {175DDDBA-66F7-4CE1-A5D6-21780054F9A4}
-		        SolutionGuid = {3B64E7C3-1B3F-4B52-BDBF-DBE060C82E75}
+		                SolutionGuid = {3B64E7C3-1B3F-4B52-BDBF-DBE060C82E75}
+		        SolutionGuid = {175DDDBA-66F7-4CE1-A5D6-21780054F9A4}
+		SolutionGuid = {88E6864F-6125-46F7-A705-6D81292F7984}
 	EndGlobalSection
 EndGlobal

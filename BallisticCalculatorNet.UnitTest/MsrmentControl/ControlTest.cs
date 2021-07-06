@@ -255,5 +255,21 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
             var s = controller.FormatNumericPart(minimum);
             controller.DoIncrement(s, -1).Should().Be(s);
         }
+
+        [Theory]
+        [InlineData(MeasurementType.Distance, 4, 10, DistanceUnit.Meter, 32.8084, DistanceUnit.Foot)]
+        [InlineData(MeasurementType.Velocity, 2, 5.5, VelocityUnit.FeetPerSecond, 3.75, VelocityUnit.MilesPerHour)]
+        [InlineData(MeasurementType.Velocity, 2, 3.75, VelocityUnit.MilesPerHour, 5.5, VelocityUnit.FeetPerSecond)]
+        public void ChangeUnit<T>(MeasurementType type, int accurracy, double initialValue, T unitialUnit, double convertedValue, T targetUnit)
+            where T : Enum
+        {
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<MeasurementControl.MeasurementControl>(13, 13, 300, 28);
+            control.MeasurementType = type;
+            control.Value = new Measurement<T>(initialValue, unitialUnit);
+            control.ChangeUnit(targetUnit, accurracy);
+            control.UnitAs<T>().Should().Be(targetUnit);
+            control.Value.Should().Be(new Measurement<T>(convertedValue, targetUnit));
+        }
     }
 }

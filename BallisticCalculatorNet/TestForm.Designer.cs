@@ -1,4 +1,6 @@
 ﻿
+using BallisticCalculatorNet.InputPanels;
+
 namespace BallisticCalculatorNet
 {
     partial class MyTestForm
@@ -29,7 +31,7 @@ namespace BallisticCalculatorNet
         /// </summary>
         private void InitializeComponent()
         {
-            this.windControl1 = new BallisticCalculatorNet.WindControl.WindControl();
+            this.windControl1 = new BallisticCalculatorNet.InputPanels.WindControl();
             this.SuspendLayout();
             // 
             // windControl1
@@ -53,6 +55,6 @@ namespace BallisticCalculatorNet
 
         #endregion
 
-        private WindControl.WindControl windControl1;
+        private WindControl windControl1;
     }
 }

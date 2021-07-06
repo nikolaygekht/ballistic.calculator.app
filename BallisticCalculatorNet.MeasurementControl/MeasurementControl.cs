@@ -155,11 +155,11 @@ namespace BallisticCalculatorNet.MeasurementControl
             }
         }
 
-        public void ChangeUnit<T>(T unit) where T : Enum
+        public void ChangeUnit<T>(T unit, int accuracy = 3) where T : Enum
         {
             mController.ValidateUnitType<T>();
             var value = ValueAs<T>();
-            Value = value.To(unit);
+            Value = new Measurement<T>(Math.Round(value.In(unit), accuracy), unit);
         }
     }
 }

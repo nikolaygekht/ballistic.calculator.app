@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BallisticCalculatorNet.Common\BallisticCalculatorNet.Common.csproj" />
+    <ProjectReference Include="..\BallisticCalculatorNet.InputPanels\BallisticCalculatorNet.InputPanels.csproj" />
     <ProjectReference Include="..\BallisticCalculatorNet.MeasurementControl\BallisticCalculatorNet.MeasurementControl.csproj" />
     <ProjectReference Include="..\BallisticCalculatorNet.ReticleEditor\BallisticCalculatorNet.ReticleEditor.csproj" />
     <ProjectReference Include="..\BallisticCalculatorNet\BallisticCalculatorNet.csproj" />
