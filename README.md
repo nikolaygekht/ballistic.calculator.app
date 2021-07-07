@@ -2,6 +2,10 @@
 
 100% open source windows (100% WinE compatible) ballistic calculator with accuracy and performance comparable with best commercial calculators.
 
+The application is under development now!!! Only reticle editor is completed. Please stay in touch. I expect the first release by September 2021. 
+If you need something now, take a look at OLD version of the application 
+https://sourceforge.net/projects/ballisticcalculator/
+
 ## RISK NOTICE
 
 The application performs very limited simulation of a complex physical process and so it performs a lot of approximations. Therefore the calculation results MUST NOT be considered as completely and reliably reflecting actual behavior or characteristics of projectiles. While these results may be used for educational purpose, they must NOT be considered as reliable for the areas where incorrect calculation may cause making a wrong decision, financial harm, or can put a human life at risk.
