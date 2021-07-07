@@ -40,6 +40,7 @@
             // 
             // measurementDistance
             // 
+            this.measurementDistance.DecimalPoints = 1;
             this.measurementDistance.Increment = 1D;
             this.measurementDistance.Location = new System.Drawing.Point(96, 1);
             this.measurementDistance.Maximum = 10000D;
@@ -50,6 +51,7 @@
             this.measurementDistance.Name = "measurementDistance";
             this.measurementDistance.Size = new System.Drawing.Size(184, 28);
             this.measurementDistance.TabIndex = 2;
+            this.measurementDistance.TextValue = "m";
             this.measurementDistance.Unit = Gehtsoft.Measurements.DistanceUnit.Meter;
             // 
             // checkBoxDistance
@@ -65,6 +67,7 @@
             // 
             // measurementDirection
             // 
+            this.measurementDirection.DecimalPoints = 0;
             this.measurementDirection.Increment = 1D;
             this.measurementDirection.Location = new System.Drawing.Point(96, 36);
             this.measurementDirection.Maximum = 180D;
@@ -75,11 +78,13 @@
             this.measurementDirection.Name = "measurementDirection";
             this.measurementDirection.Size = new System.Drawing.Size(184, 28);
             this.measurementDirection.TabIndex = 3;
+            this.measurementDirection.TextValue = "0°";
             this.measurementDirection.Unit = Gehtsoft.Measurements.AngularUnit.Degree;
             this.measurementDirection.Changed += new System.EventHandler(this.measurementDirection_Changed);
             // 
             // measurementVelocity
             // 
+            this.measurementVelocity.DecimalPoints = 1;
             this.measurementVelocity.Increment = 1D;
             this.measurementVelocity.Location = new System.Drawing.Point(96, 71);
             this.measurementVelocity.Maximum = 10000D;
@@ -90,12 +95,13 @@
             this.measurementVelocity.Name = "measurementVelocity";
             this.measurementVelocity.Size = new System.Drawing.Size(184, 28);
             this.measurementVelocity.TabIndex = 4;
+            this.measurementVelocity.TextValue = "m/s";
             this.measurementVelocity.Unit = Gehtsoft.Measurements.VelocityUnit.MetersPerSecond;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(2, 39);
+            this.label1.Location = new System.Drawing.Point(0, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 20);
             this.label1.TabIndex = 5;
@@ -104,7 +110,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 73);
+            this.label2.Location = new System.Drawing.Point(0, 74);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 20);
             this.label2.TabIndex = 6;

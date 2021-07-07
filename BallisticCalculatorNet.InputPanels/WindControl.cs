@@ -12,7 +12,7 @@ using Gehtsoft.Measurements;
 
 namespace BallisticCalculatorNet.InputPanels
 {
-    public partial class WindControl : UserControl
+    public partial class WindControl : UserControl, IMeasurementSystemControl
     {
         public Wind Wind
         {
@@ -108,10 +108,31 @@ namespace BallisticCalculatorNet.InputPanels
             measurementDistance.Enabled = checkBoxDistance.Checked;
         }
 
-        public void ChangeUnit(DistanceUnit distanceUnit, VelocityUnit velocityUnit)
+        private MeasurementSystem mMeasurementSystem = MeasurementSystem.Metric;
+
+        public MeasurementSystem MeasurementSystem
         {
-            measurementDistance.ChangeUnit<DistanceUnit>(distanceUnit);
-            measurementDistance.ChangeUnit<VelocityUnit>(velocityUnit);
+            get => mMeasurementSystem;
+            set
+            {
+                mMeasurementSystem = value;
+                UpdateSystem();
+            }
+        }
+
+        private void UpdateSystem()
+        {
+            switch (mMeasurementSystem)
+            {
+                case MeasurementSystem.Metric:
+                    measurementDistance.ChangeUnit(DistanceUnit.Meter);
+                    measurementVelocity.ChangeUnit(VelocityUnit.MetersPerSecond);
+                    break;
+                case MeasurementSystem.Imperial:
+                    measurementDistance.ChangeUnit(DistanceUnit.Foot);
+                    measurementVelocity.ChangeUnit(VelocityUnit.FeetPerSecond);
+                    break;
+            }
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)

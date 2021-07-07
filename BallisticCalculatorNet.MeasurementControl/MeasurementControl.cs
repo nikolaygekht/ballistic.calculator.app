@@ -51,6 +51,12 @@ namespace BallisticCalculatorNet.MeasurementControl
             set => mController.Maximum = value;
         }
 
+        public int? DecimalPoints
+        {
+            get => mController.DecimalPoints;
+            set => mController.DecimalPoints = value;
+        }
+
         public bool IsEmpty => NumericPart.Text.Length == 0;
 
         private void UpdateUnits()
@@ -62,19 +68,62 @@ namespace BallisticCalculatorNet.MeasurementControl
             UnitPart.SelectedIndex = defaultIndex;
         }
 
+        public string TextValue
+        {
+            get => NumericPart.Text + UnitPart.SelectedItem.ToString();
+
+            set
+            {
+                var units = mController.GetUnits(out int defaultIndex);
+                if (string.IsNullOrEmpty(value))
+                {
+                    NumericPart.Text = "";
+                    UnitPart.SelectedIndex = defaultIndex;
+                    return;
+                }
+
+                int index = -1;
+                foreach (var unit in units)
+                {
+                    index++;
+                    if (value.EndsWith(unit.Name))
+                    {
+                        NumericPart.Text = value.Substring(0, value.Length - unit.Name.Length);
+                        UnitPart.SelectedIndex = index;
+                        return;
+                    }
+                }
+
+                NumericPart.Text = value;
+                UnitPart.SelectedIndex = defaultIndex;
+            }
+        }
+
+        public object mOldValue = null;
+        public string mOrgText = null;
+
         public object Value
         {
-            get => mController.Value(NumericPart.Text, UnitPart.SelectedItem);
+            get
+            {
+                if (mOrgText == NumericPart.Text && mOldValue != null)
+                    return mOldValue;
+                return mController.Value(NumericPart.Text, UnitPart.SelectedItem);
+            }
             set
             {
                 if (value == null)
                 {
                     NumericPart.Text = "";
-                    return;
                 }
-                mController.ParseValue(value, out var text, out var unit);
-                NumericPart.Text = text;
-                UnitPart.SelectedItem = unit;
+                else
+                {
+                    mController.ParseValue(value, out var text, out var unit);
+                    NumericPart.Text = text;
+                    UnitPart.SelectedItem = unit;
+                }
+                mOrgText = NumericPart.Text;
+                mOldValue = value;
             }
         }
 
@@ -155,11 +204,13 @@ namespace BallisticCalculatorNet.MeasurementControl
             }
         }
 
-        public void ChangeUnit<T>(T unit, int accuracy = 3) where T : Enum
+        public void ChangeUnit<T>(T unit, int? accuracy = null) where T : Enum
         {
             mController.ValidateUnitType<T>();
             var value = ValueAs<T>();
-            Value = new Measurement<T>(Math.Round(value.In(unit), accuracy), unit);
+            var v = value.In(unit);
+            DecimalPoints = accuracy;
+            Value = new Measurement<T>(v, unit);
         }
     }
 }

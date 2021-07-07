@@ -66,6 +66,33 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
         }
 
         [Theory]
+        [InlineData(1.23456, null, "1.23456")]
+        [InlineData(1.23456, 3, "1.235")]
+        [InlineData(1987.23456, 3, "1,987.235")]
+
+        public void DigitalPoints(double value, int? decimalPoints, string text)
+        {
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<MeasurementControl.MeasurementControl>(13, 13, 300, 28);
+            control.DecimalPoints = decimalPoints;
+            control.MeasurementType = MeasurementType.Distance;
+            control.Value = DistanceUnit.Meter.New(value);
+            control.TextBox("NumericPart").Text.Should().Be(text);
+        }
+
+        [Fact]
+        public void ReturnOriginalValueIfNotChanged()
+        {
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<MeasurementControl.MeasurementControl>(13, 13, 300, 28);
+            control.DecimalPoints = 1;
+            control.MeasurementType = MeasurementType.Distance;
+            control.Value = DistanceUnit.Meter.New(1.2345);
+            control.TextBox("NumericPart").Text.Should().Be("1.2");
+            control.Value.Should().Be(DistanceUnit.Meter.New(1.2345));
+        }
+
+        [Theory]
         [InlineData(MeasurementType.Distance, typeof(DistanceUnit))]
         [InlineData(MeasurementType.Angular, typeof(AngularUnit))]
         [InlineData(MeasurementType.Pressure, typeof(PressureUnit))]
@@ -260,16 +287,37 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
         [InlineData(MeasurementType.Distance, 4, 10, DistanceUnit.Meter, 32.8084, DistanceUnit.Foot)]
         [InlineData(MeasurementType.Velocity, 2, 5.5, VelocityUnit.FeetPerSecond, 3.75, VelocityUnit.MilesPerHour)]
         [InlineData(MeasurementType.Velocity, 2, 3.75, VelocityUnit.MilesPerHour, 5.5, VelocityUnit.FeetPerSecond)]
-        public void ChangeUnit<T>(MeasurementType type, int accurracy, double initialValue, T unitialUnit, double convertedValue, T targetUnit)
+        public void ChangeUnit<T>(MeasurementType type, int accurracy, double initialValue, T initialUnit, double convertedValue, T targetUnit)
             where T : Enum
         {
             using TestForm tf = new TestForm();
             var control = tf.AddControl<MeasurementControl.MeasurementControl>(13, 13, 300, 28);
             control.MeasurementType = type;
-            control.Value = new Measurement<T>(initialValue, unitialUnit);
+            control.Value = new Measurement<T>(initialValue, initialUnit);
             control.ChangeUnit(targetUnit, accurracy);
             control.UnitAs<T>().Should().Be(targetUnit);
-            control.Value.Should().Be(new Measurement<T>(convertedValue, targetUnit));
+            control.TextBox("NumericPart").Text.Should().Be(convertedValue.ToString());
+            //change back to initial value
+            control.ChangeUnit(initialUnit, null);
+            control.Value.Should().Be(new Measurement<T>(initialValue, initialUnit));
+        }
+
+        [Theory]
+        [InlineData(MeasurementType.Distance, "10.5m", 10.5, DistanceUnit.Meter)]
+        [InlineData(MeasurementType.Distance, "1.234", 1.234, DistanceUnit.Meter)]
+        [InlineData(MeasurementType.Distance, "1.234in", 1.234, DistanceUnit.Inch)]
+        public void SetTextValue<T>(MeasurementType type, string text, double value, T unit)
+            where T : Enum
+        {
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<MeasurementControl.MeasurementControl>(13, 13, 300, 28);
+            control.MeasurementType = type;
+            control.TextValue = text;
+
+            (control.ComboBox("UnitPart").SelectedItem as MeasurementUtility.Unit)?.Value.Should().Be(unit);
+            control.TextBox("NumericPart").Text.Should().Be(value.ToString());
+            control.Value.Should().Be(unit.New(value));
+
         }
     }
 }

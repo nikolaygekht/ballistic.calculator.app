@@ -161,6 +161,5 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             w1.Direction.Should().Be(w.Direction);
             w1.Velocity.Should().Be(w.Velocity);
         }
-
     }
 }

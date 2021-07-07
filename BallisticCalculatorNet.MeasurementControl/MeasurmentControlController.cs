@@ -25,6 +25,7 @@ namespace BallisticCalculatorNet.MeasurementControl
         public double Minimum { get; set; } = -10000;
         public double Maximum { get; set; } = 10000;
         public double Increment { get; set; } = 1;
+        public int? DecimalPoints { get; set; } = null;
 
         public IEnumerable<MeasurementUtility.Unit> GetUnits(out int defaultIndex)
         {
@@ -69,6 +70,9 @@ namespace BallisticCalculatorNet.MeasurementControl
 
         public string FormatNumericPart(double v)
         {
+            if (DecimalPoints != null)
+                v = Math.Round(v, DecimalPoints.Value);
+
             var s1 = v.ToString("#,0.##", Culture);
             var s2 = v.ToString(Culture);
 
