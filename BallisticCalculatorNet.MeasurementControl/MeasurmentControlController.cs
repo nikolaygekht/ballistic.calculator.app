@@ -128,7 +128,15 @@ namespace BallisticCalculatorNet.MeasurementControl
                 throw new ArgumentException($"The unit type specified is {unitType.Name} while the unit type expected is {mMeasurementUtility.MeasurementUnit.Name}", nameof(unitType));
         }
 
+        public void ValidateType(Type type)
+        {
+            if (type != mMeasurementUtility.MeasurementType)
+                throw new ArgumentException($"The unit type specified is {type.Name} while the unit type expected is {mMeasurementUtility.MeasurementType.Name}", nameof(type));
+        }
+
         public void ValidateUnitType<T>() => ValidateUnitType(typeof(T));
+
+        public void ValidateType<T>() => ValidateType(typeof(T));
 
         public void ValidateValueType(Type valueType)
         {

@@ -38,11 +38,11 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
 
         internal void Save()
         {
-            Circle.Center.X = measurementX.ValueAs<AngularUnit>();
-            Circle.Center.Y = measurementY.ValueAs<AngularUnit>();
-            Circle.Radius = measurementR.ValueAs<AngularUnit>();
+            Circle.Center.X = measurementX.ValueAsMeasurement<AngularUnit>();
+            Circle.Center.Y = measurementY.ValueAsMeasurement<AngularUnit>();
+            Circle.Radius = measurementR.ValueAsMeasurement<AngularUnit>();
             if (!measurementWidth.IsEmpty)
-                Circle.LineWidth = measurementWidth.ValueAs<AngularUnit>();
+                Circle.LineWidth = measurementWidth.ValueAsMeasurement<AngularUnit>();
             Circle.Color = comboBoxColor.Text;
             Circle.Fill = checkBoxFill.Checked;
         }

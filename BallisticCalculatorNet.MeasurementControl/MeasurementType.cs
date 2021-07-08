@@ -16,5 +16,6 @@ namespace BallisticCalculatorNet.MeasurementControl
         Energy,
         Temperature,
         Volume,
+        BallisticCoefficient
     }
 }

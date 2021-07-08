@@ -19,12 +19,12 @@ namespace BallisticCalculatorNet.InputPanels
             get
             {
                 if (!checkBoxDistance.Checked &&
-                    measurementVelocity.ValueAs<VelocityUnit>().Value < 1e-5 &&
-                    measurementDirection.ValueAs<AngularUnit>().Value < 1e-5)
+                    measurementVelocity.ValueAsMeasurement<VelocityUnit>().Value < 1e-5 &&
+                    measurementDirection.ValueAsMeasurement<AngularUnit>().Value < 1e-5)
                     return null;
 
-                return new Wind(measurementVelocity.ValueAs<VelocityUnit>(), measurementDirection.ValueAs<AngularUnit>(),
-                    checkBoxDistance.Checked ? measurementDistance.ValueAs<DistanceUnit>() : null);
+                return new Wind(measurementVelocity.ValueAsMeasurement<VelocityUnit>(), measurementDirection.ValueAsMeasurement<AngularUnit>(),
+                    checkBoxDistance.Checked ? measurementDistance.ValueAsMeasurement<DistanceUnit>() : null);
             }
             set
             {
@@ -74,9 +74,9 @@ namespace BallisticCalculatorNet.InputPanels
             var cx = pictureBox1.Width / 2;
             var r = Math.Min(cx, cy);
             e.Graphics.DrawEllipse(pen, cx - r, cy - r, r * 2, cy * 2);
-            DrawRay(e.Graphics, pen, cx, cy, r, measurementDirection.ValueAs<AngularUnit>().In(AngularUnit.Radian));
-            DrawRay(e.Graphics, pen, cx, cy, r / 5f, measurementDirection.ValueAs<AngularUnit>().In(AngularUnit.Radian) - AngularUnit.Degree.New(30).In(AngularUnit.Radian));
-            DrawRay(e.Graphics, pen, cx, cy, r / 5f, measurementDirection.ValueAs<AngularUnit>().In(AngularUnit.Radian) + AngularUnit.Degree.New(30).In(AngularUnit.Radian));
+            DrawRay(e.Graphics, pen, cx, cy, r, measurementDirection.ValueAsMeasurement<AngularUnit>().In(AngularUnit.Radian));
+            DrawRay(e.Graphics, pen, cx, cy, r / 5f, measurementDirection.ValueAsMeasurement<AngularUnit>().In(AngularUnit.Radian) - AngularUnit.Degree.New(30).In(AngularUnit.Radian));
+            DrawRay(e.Graphics, pen, cx, cy, r / 5f, measurementDirection.ValueAsMeasurement<AngularUnit>().In(AngularUnit.Radian) + AngularUnit.Degree.New(30).In(AngularUnit.Radian));
         }
 
         internal void pictureBox1_MouseClick(object sender, MouseEventArgs e)
@@ -139,6 +139,11 @@ namespace BallisticCalculatorNet.InputPanels
         {
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
                 pictureBox1_MouseClick(sender, e);
+        }
+
+        private void WindControl_Enter(object sender, EventArgs e)
+        {
+            checkBoxDistance.Focus();
         }
     }
 }

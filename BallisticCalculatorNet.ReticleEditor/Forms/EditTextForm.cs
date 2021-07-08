@@ -32,9 +32,9 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
 
         internal void Save()
         {
-            ReticleText.Position.X = measurementX.ValueAs<AngularUnit>();
-            ReticleText.Position.Y = measurementY.ValueAs<AngularUnit>();
-            ReticleText.TextHeight = measurementH.ValueAs<AngularUnit>();
+            ReticleText.Position.X = measurementX.ValueAsMeasurement<AngularUnit>();
+            ReticleText.Position.Y = measurementY.ValueAsMeasurement<AngularUnit>();
+            ReticleText.TextHeight = measurementH.ValueAsMeasurement<AngularUnit>();
             ReticleText.Text = textBox.Text;
             ReticleText.Color = comboBoxColor.Text;
         }

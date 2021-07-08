@@ -37,12 +37,12 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
 
         internal void Save()
         {
-            Rectangle.TopLeft.X = measurementX1.ValueAs<AngularUnit>();
-            Rectangle.TopLeft.Y = measurementY1.ValueAs<AngularUnit>();
-            Rectangle.Size.X = measurementX2.ValueAs<AngularUnit>();
-            Rectangle.Size.Y = measurementY2.ValueAs<AngularUnit>();
+            Rectangle.TopLeft.X = measurementX1.ValueAsMeasurement<AngularUnit>();
+            Rectangle.TopLeft.Y = measurementY1.ValueAsMeasurement<AngularUnit>();
+            Rectangle.Size.X = measurementX2.ValueAsMeasurement<AngularUnit>();
+            Rectangle.Size.Y = measurementY2.ValueAsMeasurement<AngularUnit>();
             if (!measurementWidth.IsEmpty)
-                Rectangle.LineWidth = measurementWidth.ValueAs<AngularUnit>();
+                Rectangle.LineWidth = measurementWidth.ValueAsMeasurement<AngularUnit>();
             Rectangle.Color = comboBoxColor.Text;
             Rectangle.Fill = checkBoxFill.Checked;
         }

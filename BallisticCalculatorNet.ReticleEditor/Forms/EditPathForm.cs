@@ -49,7 +49,7 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
 
         internal void Save()
         {
-            Path.LineWidth = measurementWidth.ValueAs<AngularUnit>();
+            Path.LineWidth = measurementWidth.ValueAsMeasurement<AngularUnit>();
             Path.Color = comboBoxColor.Text;
             Path.Fill = checkBoxFill.Checked;
         }

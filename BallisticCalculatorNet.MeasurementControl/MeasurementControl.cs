@@ -99,8 +99,8 @@ namespace BallisticCalculatorNet.MeasurementControl
             }
         }
 
-        public object mOldValue = null;
-        public string mOrgText = null;
+        private object mOldValue = null;
+        private string mOrgText = null;
 
         public object Value
         {
@@ -127,10 +127,16 @@ namespace BallisticCalculatorNet.MeasurementControl
             }
         }
 
-        public Measurement<T> ValueAs<T>() where T : Enum
+        public Measurement<T> ValueAsMeasurement<T>() where T : Enum
         {
             mController.ValidateUnitType<T>();
             return (Measurement<T>)Value;
+        }
+
+        public T ValueAs<T>() where T : struct
+        {
+            mController.ValidateType<T>();
+            return (T)Value;
         }
 
         public T UnitAs<T>() where T : Enum
@@ -207,7 +213,7 @@ namespace BallisticCalculatorNet.MeasurementControl
         public void ChangeUnit<T>(T unit, int? accuracy = null) where T : Enum
         {
             mController.ValidateUnitType<T>();
-            var value = ValueAs<T>();
+            var value = ValueAsMeasurement<T>();
             var v = value.In(unit);
             DecimalPoints = accuracy;
             Value = new Measurement<T>(v, unit);

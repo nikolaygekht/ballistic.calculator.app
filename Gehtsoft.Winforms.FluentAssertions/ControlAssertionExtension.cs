@@ -1,5 +1,8 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Reflection;
 using System.Windows.Forms;
+using FluentAssertions;
 
 namespace Gehtsoft.Winforms.FluentAssertions
 {
@@ -41,5 +44,34 @@ namespace Gehtsoft.Winforms.FluentAssertions
         public static CheckBox CheckBox(this Control parent, string name) => Control<CheckBox>(parent, name);
 
         public static RadioButton RadioButton(this Control parent, string name) => Control<RadioButton>(parent, name);
+
+        public static void InvokeEventHandler(this Control control, string method, EventArgs args)
+        {
+            if (args == null)
+                throw new ArgumentNullException(nameof(args));
+
+            MethodInfo mi = null;
+            var methods = control.GetType().GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Instance);
+            for (int i = 0; i < methods.Length; i++)
+            {
+                if (methods[i].Name.Contains(method))
+                {
+                    var parameters = methods[i].GetParameters();
+                    if (parameters.Length == 2 &&
+                        parameters[0].ParameterType == typeof(object) &&
+                        parameters[1].ParameterType.IsInstanceOfType(args))
+                    {
+                        if (mi != null)
+                            throw new ArgumentException($"More than one method is found matching the name {method} and expected signature (found: {mi.Name}, {methods[i].Name})", nameof(method));
+                        mi = methods[i];
+                    }
+                }
+            }
+
+            if (mi == null)
+                throw new ArgumentException($"No methods is found matching the name {method} and expected signature", nameof(method));
+
+            mi.Invoke(control, new object[] { control, args });
+        }
     }
 }

@@ -145,10 +145,10 @@ namespace BallisticCalculatorNet.ReticleEditor
         internal void GatherReticleDefinition()
         {
             Reticle.Name = reticleName.Text;
-            Reticle.Size.X = reticleWidth.ValueAs<AngularUnit>();
-            Reticle.Size.Y = reticleHeight.ValueAs<AngularUnit>();
-            Reticle.Zero.X = zeroOffsetX.ValueAs<AngularUnit>();
-            Reticle.Zero.Y = zeroOffsetY.ValueAs<AngularUnit>();
+            Reticle.Size.X = reticleWidth.ValueAsMeasurement<AngularUnit>();
+            Reticle.Size.Y = reticleHeight.ValueAsMeasurement<AngularUnit>();
+            Reticle.Zero.X = zeroOffsetX.ValueAsMeasurement<AngularUnit>();
+            Reticle.Zero.Y = zeroOffsetY.ValueAsMeasurement<AngularUnit>();
         }
 
         internal string GetInitialDirectory()

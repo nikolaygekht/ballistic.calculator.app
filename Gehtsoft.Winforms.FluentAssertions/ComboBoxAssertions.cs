@@ -110,7 +110,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
             return new AndConstraint<ComboBoxAssertions>(this);
         }
 
-        public AndConstraint<ComboBoxAssertions> HaveText(string text, string because = null, params object[] becauseParameters)
+        new public AndConstraint<ComboBoxAssertions> HaveText(string text, string because = null, params object[] becauseParameters)
         {
             Execute.Assertion
                 .BecauseOf(because, becauseParameters)

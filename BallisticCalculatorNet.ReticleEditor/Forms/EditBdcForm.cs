@@ -30,10 +30,10 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
 
         internal void Save()
         {
-            Bdc.Position.X = measurementX.ValueAs<AngularUnit>();
-            Bdc.Position.Y = measurementY.ValueAs<AngularUnit>();
-            Bdc.TextOffset = measurementO.ValueAs<AngularUnit>();
-            Bdc.TextHeight = measurementH.ValueAs<AngularUnit>();
+            Bdc.Position.X = measurementX.ValueAsMeasurement<AngularUnit>();
+            Bdc.Position.Y = measurementY.ValueAsMeasurement<AngularUnit>();
+            Bdc.TextOffset = measurementO.ValueAsMeasurement<AngularUnit>();
+            Bdc.TextHeight = measurementH.ValueAsMeasurement<AngularUnit>();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)

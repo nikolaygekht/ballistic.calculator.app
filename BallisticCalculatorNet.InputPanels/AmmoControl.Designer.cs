@@ -31,8 +31,6 @@ namespace BallisticCalculatorNet.InputPanels
         {
             this.measurementBulletWeight = new BallisticCalculatorNet.MeasurementControl.MeasurementControl();
             this.label1 = new System.Windows.Forms.Label();
-            this.numericBallisticCoefficient = new System.Windows.Forms.NumericUpDown();
-            this.comboBoxBallisticTable = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.measurementMuzzleVelocity = new BallisticCalculatorNet.MeasurementControl.MeasurementControl();
             this.label3 = new System.Windows.Forms.Label();
@@ -41,7 +39,7 @@ namespace BallisticCalculatorNet.InputPanels
             this.measurementLength = new BallisticCalculatorNet.MeasurementControl.MeasurementControl();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericBallisticCoefficient)).BeginInit();
+            this.measurementControl1 = new BallisticCalculatorNet.MeasurementControl.MeasurementControl();
             this.SuspendLayout();
             // 
             // measurementBulletWeight
@@ -69,28 +67,10 @@ namespace BallisticCalculatorNet.InputPanels
             this.label1.TabIndex = 1;
             this.label1.Text = "Weight";
             // 
-            // numericBallisticCoefficient
-            // 
-            this.numericBallisticCoefficient.Location = new System.Drawing.Point(134, 38);
-            this.numericBallisticCoefficient.Name = "numericBallisticCoefficient";
-            this.numericBallisticCoefficient.Size = new System.Drawing.Size(107, 27);
-            this.numericBallisticCoefficient.TabIndex = 2;
-            this.numericBallisticCoefficient.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericBallisticCoefficient.ThousandsSeparator = true;
-            // 
-            // comboBoxBallisticTable
-            // 
-            this.comboBoxBallisticTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxBallisticTable.FormattingEnabled = true;
-            this.comboBoxBallisticTable.Location = new System.Drawing.Point(244, 38);
-            this.comboBoxBallisticTable.Name = "comboBoxBallisticTable";
-            this.comboBoxBallisticTable.Size = new System.Drawing.Size(79, 28);
-            this.comboBoxBallisticTable.TabIndex = 3;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 41);
+            this.label2.Location = new System.Drawing.Point(3, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(27, 20);
             this.label2.TabIndex = 4;
@@ -182,10 +162,27 @@ namespace BallisticCalculatorNet.InputPanels
             this.label5.TabIndex = 11;
             this.label5.Text = "Bullet Length";
             // 
+            // measurementControl1
+            // 
+            this.measurementControl1.DecimalPoints = null;
+            this.measurementControl1.Increment = 0.001D;
+            this.measurementControl1.Location = new System.Drawing.Point(134, 38);
+            this.measurementControl1.Maximum = 2D;
+            this.measurementControl1.MaximumSize = new System.Drawing.Size(4096, 28);
+            this.measurementControl1.MeasurementType = BallisticCalculatorNet.MeasurementControl.MeasurementType.BallisticCoefficient;
+            this.measurementControl1.Minimum = 0D;
+            this.measurementControl1.MinimumSize = new System.Drawing.Size(120, 28);
+            this.measurementControl1.Name = "measurementControl1";
+            this.measurementControl1.Size = new System.Drawing.Size(189, 28);
+            this.measurementControl1.TabIndex = 2;
+            this.measurementControl1.TextValue = "0.5G1";
+            this.measurementControl1.Unit = BallisticCalculator.DragTableId.G1;
+            // 
             // AmmoControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.measurementControl1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.measurementLength);
@@ -194,13 +191,11 @@ namespace BallisticCalculatorNet.InputPanels
             this.Controls.Add(this.label3);
             this.Controls.Add(this.measurementMuzzleVelocity);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBoxBallisticTable);
-            this.Controls.Add(this.numericBallisticCoefficient);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.measurementBulletWeight);
             this.Name = "AmmoControl";
             this.Size = new System.Drawing.Size(333, 204);
-            ((System.ComponentModel.ISupportInitialize)(this.numericBallisticCoefficient)).EndInit();
+            this.Enter += new System.EventHandler(this.AmmoControl_Enter);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,8 +205,6 @@ namespace BallisticCalculatorNet.InputPanels
 
         private MeasurementControl.MeasurementControl measurementBulletWeight;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numericBallisticCoefficient;
-        private System.Windows.Forms.ComboBox comboBoxBallisticTable;
         private System.Windows.Forms.Label label2;
         private MeasurementControl.MeasurementControl measurementMuzzleVelocity;
         private System.Windows.Forms.Label label3;
@@ -220,5 +213,6 @@ namespace BallisticCalculatorNet.InputPanels
         private MeasurementControl.MeasurementControl measurementLength;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private MeasurementControl.MeasurementControl measurementControl1;
     }
 }

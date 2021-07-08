@@ -140,6 +140,7 @@
             this.Controls.Add(this.measurementDistance);
             this.Name = "WindControl";
             this.Size = new System.Drawing.Size(420, 105);
+            this.Enter += new System.EventHandler(this.WindControl_Enter);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

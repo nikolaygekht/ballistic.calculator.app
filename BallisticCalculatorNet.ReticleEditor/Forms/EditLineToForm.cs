@@ -27,8 +27,8 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
 
         internal void Save()
         {
-            Element.Position.X = measurementX1.ValueAs<AngularUnit>();
-            Element.Position.Y = measurementY1.ValueAs<AngularUnit>();
+            Element.Position.X = measurementX1.ValueAsMeasurement<AngularUnit>();
+            Element.Position.Y = measurementY1.ValueAsMeasurement<AngularUnit>();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)

@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Xml;
+using BallisticCalculator;
 using Gehtsoft.Measurements;
 
 namespace BallisticCalculatorNet.MeasurementControl
@@ -45,13 +46,19 @@ namespace BallisticCalculatorNet.MeasurementControl
                 MeasurementType.Temperature => typeof(TemperatureUnit),
                 MeasurementType.Volume => typeof(VolumeUnit),
                 MeasurementType.Weight => typeof(WeightUnit),
+                MeasurementType.BallisticCoefficient => typeof(DragTableId),
                 _ => throw new ArgumentException($"Value {measurementType} is unknown", nameof(measurementType)),
             };
         }
 
         private static MeasurementUtility CreateUtility(Type measurementUnit)
         {
-            Type measurementType = typeof(Measurement<>).MakeGenericType(measurementUnit);
+            Type measurementType;
+
+            if (measurementUnit == typeof(DragTableId))
+                measurementType = typeof(BallisticCoefficient);
+            else
+                measurementType = typeof(Measurement<>).MakeGenericType(measurementUnit);
 
             return new MeasurementUtility(
                 measurementUnit, measurementType,
@@ -66,95 +73,149 @@ namespace BallisticCalculatorNet.MeasurementControl
         private static IReadOnlyList<MeasurementUtility.Unit> GetUnits(Type measurementType, Type unitType)
         {
             var r = new List<MeasurementUtility.Unit>();
-            var mi = measurementType.GetMethod(nameof(Measurement<AngularUnit>.GetUnitNames), BindingFlags.Public | BindingFlags.Static);
-            var tupleType = typeof(Tuple<,>).MakeGenericType(new Type[] { unitType, typeof(string) });
-            var unitField = tupleType.GetProperty("Item1");
-            var nameField = tupleType.GetProperty("Item2");
-            foreach (object tuple in mi.Invoke(null, Array.Empty<object>()) as IEnumerable)
+
+            if (unitType == typeof(DragTableId))
             {
-                r.Add(new MeasurementUtility.Unit(
-                        nameField.GetValue(tuple) as string,
-                        unitField.GetValue(tuple)
-                    ));
+                r.Add(new MeasurementUtility.Unit("G1", DragTableId.G1));
+                r.Add(new MeasurementUtility.Unit("G2", DragTableId.G2));
+                r.Add(new MeasurementUtility.Unit("G5", DragTableId.G5));
+                r.Add(new MeasurementUtility.Unit("G6", DragTableId.G6));
+                r.Add(new MeasurementUtility.Unit("G7", DragTableId.G7));
+                r.Add(new MeasurementUtility.Unit("G8", DragTableId.G8));
+                r.Add(new MeasurementUtility.Unit("GS", DragTableId.GS));
+            }
+            else
+            {
+                var mi = measurementType.GetMethod(nameof(Measurement<AngularUnit>.GetUnitNames), BindingFlags.Public | BindingFlags.Static);
+                var tupleType = typeof(Tuple<,>).MakeGenericType(new Type[] { unitType, typeof(string) });
+                var unitField = tupleType.GetProperty("Item1");
+                var nameField = tupleType.GetProperty("Item2");
+                foreach (object tuple in mi.Invoke(null, Array.Empty<object>()) as IEnumerable)
+                {
+                    r.Add(new MeasurementUtility.Unit(
+                            nameField.GetValue(tuple) as string,
+                            unitField.GetValue(tuple)
+                        ));
+                }
             }
             return r;
         }
 
         private static Func<double, object, object> CreateActivator(Type measurementUnit)
         {
-            var genericMethod = typeof(UnitExtensions).GetMethod(nameof(UnitExtensions.New), BindingFlags.Public | BindingFlags.Static);
-            var method = genericMethod.MakeGenericMethod(new Type[] { measurementUnit });
+            if (measurementUnit == typeof(DragTableId))
+            {
+                return (bc, t) => new BallisticCoefficient(bc, (DragTableId)t);
+            }
+            else
+            {
+                var genericMethod = typeof(UnitExtensions).GetMethod(nameof(UnitExtensions.New), BindingFlags.Public | BindingFlags.Static);
+                var method = genericMethod.MakeGenericMethod(new Type[] { measurementUnit });
 
-            var paramValue = Expression.Parameter(typeof(double));
-            var paramUnit = Expression.Parameter(typeof(object));
+                var paramValue = Expression.Parameter(typeof(double));
+                var paramUnit = Expression.Parameter(typeof(object));
 
-            var labelReturn = Expression.Label(typeof(object));
-            var returnStmt = Expression.Return(labelReturn, Expression.Convert(Expression.Call(null, method, new Expression[] { Expression.Convert(paramUnit, measurementUnit), paramValue }), typeof(object)));
+                var labelReturn = Expression.Label(typeof(object));
+                var returnStmt = Expression.Return(labelReturn, Expression.Convert(Expression.Call(null, method, new Expression[] { Expression.Convert(paramUnit, measurementUnit), paramValue }), typeof(object)));
 
-            var body = Expression.Block(typeof(object), new Expression[] { returnStmt, Expression.Label(labelReturn, Expression.Constant(null)) });
+                var body = Expression.Block(typeof(object), new Expression[] { returnStmt, Expression.Label(labelReturn, Expression.Constant(null)) });
 
-            var lambda = Expression.Lambda<Func<double, object, object>>(body, new ParameterExpression[] { paramValue, paramUnit });
-            return lambda.Compile();
+                var lambda = Expression.Lambda<Func<double, object, object>>(body, new ParameterExpression[] { paramValue, paramUnit });
+                return lambda.Compile();
+            }
         }
 
         private static Func<object, double> CreateValueGetter(Type measurementType)
         {
-            var field = measurementType.GetField(nameof(Measurement<DistanceUnit>.Value));
-            var paramValue = Expression.Parameter(typeof(object));
-            var labelReturn = Expression.Label(typeof(double));
-            var returnStmt = Expression.Return(labelReturn, Expression.MakeMemberAccess(Expression.Convert(paramValue, measurementType), field));
-            var body = Expression.Block(typeof(double), new Expression[] { returnStmt, Expression.Label(labelReturn, Expression.Constant(0.0)) });
-            var lambda = Expression.Lambda<Func<object, double>>(body, new ParameterExpression[] { paramValue });
-            return lambda.Compile();
+            if (measurementType == typeof(BallisticCoefficient))
+            {
+                return v => ((BallisticCoefficient)v).Value;
+            }
+            else
+            {
+                var field = measurementType.GetField(nameof(Measurement<DistanceUnit>.Value));
+                var paramValue = Expression.Parameter(typeof(object));
+                var labelReturn = Expression.Label(typeof(double));
+                var returnStmt = Expression.Return(labelReturn, Expression.MakeMemberAccess(Expression.Convert(paramValue, measurementType), field));
+                var body = Expression.Block(typeof(double), new Expression[] { returnStmt, Expression.Label(labelReturn, Expression.Constant(0.0)) });
+                var lambda = Expression.Lambda<Func<object, double>>(body, new ParameterExpression[] { paramValue });
+                return lambda.Compile();
+            }
         }
 
         private static Func<object, object> CreateUnitGetter(Type measurementType)
         {
-            var field = measurementType.GetField(nameof(Measurement<DistanceUnit>.Unit));
-            var paramValue = Expression.Parameter(typeof(object));
-            var labelReturn = Expression.Label(typeof(object));
-            var returnStmt = Expression.Return(labelReturn, Expression.Convert(Expression.MakeMemberAccess(Expression.Convert(paramValue, measurementType), field), typeof(object)));
-            var body = Expression.Block(typeof(object), new Expression[] { returnStmt, Expression.Label(labelReturn, Expression.Constant(null)) });
-            var lambda = Expression.Lambda<Func<object, object>>(body, new ParameterExpression[] { paramValue });
-            return lambda.Compile();
+            if (measurementType == typeof(BallisticCoefficient))
+            {
+                return v => ((BallisticCoefficient)v).Table;
+            }
+            else
+            {
+                var field = measurementType.GetField(nameof(Measurement<DistanceUnit>.Unit));
+                var paramValue = Expression.Parameter(typeof(object));
+                var labelReturn = Expression.Label(typeof(object));
+                var returnStmt = Expression.Return(labelReturn, Expression.Convert(Expression.MakeMemberAccess(Expression.Convert(paramValue, measurementType), field), typeof(object)));
+                var body = Expression.Block(typeof(object), new Expression[] { returnStmt, Expression.Label(labelReturn, Expression.Constant(null)) });
+                var lambda = Expression.Lambda<Func<object, object>>(body, new ParameterExpression[] { paramValue });
+                return lambda.Compile();
+            }
         }
 
         private static Func<object, string> CreateTextGetter(Type measurementType)
         {
-            var field = measurementType.GetProperty(nameof(Measurement<DistanceUnit>.Text));
-            var paramValue = Expression.Parameter(typeof(object));
-            var labelReturn = Expression.Label(typeof(string));
-            var returnStmt = Expression.Return(labelReturn, Expression.MakeMemberAccess(Expression.Convert(paramValue, measurementType), field));
-            var body = Expression.Block(typeof(string), new Expression[] { returnStmt, Expression.Label(labelReturn, Expression.Constant("")) });
-            var lambda = Expression.Lambda<Func<object, string>>(body, new ParameterExpression[] { paramValue });
-            return lambda.Compile();
+            if (measurementType == typeof(BallisticCoefficient))
+            {
+                return v => ((BallisticCoefficient)v).Text;
+            }
+            else
+            {
+                var field = measurementType.GetProperty(nameof(Measurement<DistanceUnit>.Text));
+                var paramValue = Expression.Parameter(typeof(object));
+                var labelReturn = Expression.Label(typeof(string));
+                var returnStmt = Expression.Return(labelReturn, Expression.MakeMemberAccess(Expression.Convert(paramValue, measurementType), field));
+                var body = Expression.Block(typeof(string), new Expression[] { returnStmt, Expression.Label(labelReturn, Expression.Constant("")) });
+                var lambda = Expression.Lambda<Func<object, string>>(body, new ParameterExpression[] { paramValue });
+                return lambda.Compile();
+            }
         }
 
         private static Func<string, object> CreateParser(Type measurementType)
         {
-            var constructors = measurementType.GetConstructors();
-            ConstructorInfo constructor = null;
-            foreach (var candidate in constructors)
+            if (measurementType == typeof(BallisticCoefficient))
             {
-                var candidateParams = candidate.GetParameters();
-                if (candidate.GetCustomAttribute<JsonConstructorAttribute>() != null &&
-                    candidateParams.Length == 1 &&
-                    candidateParams[0].ParameterType == typeof(string))
+                return s =>
                 {
-                    constructor = candidate;
-                    break;
-                }
+                    if (BallisticCoefficient.TryParse(s, out BallisticCoefficient v))
+                        return v;
+                    throw new ArgumentException("The text to parse is in invalid format");
+                };
             }
+            else
+            {
+                var constructors = measurementType.GetConstructors();
+                ConstructorInfo constructor = null;
+                foreach (var candidate in constructors)
+                {
+                    var candidateParams = candidate.GetParameters();
+                    if (candidate.GetCustomAttribute<JsonConstructorAttribute>() != null &&
+                        candidateParams.Length == 1 &&
+                        candidateParams[0].ParameterType == typeof(string))
+                    {
+                        constructor = candidate;
+                        break;
+                    }
+                }
 
-            if (constructor == null)
-                throw new ArgumentException($"Type {measurementType.FullName} does not have a json constructor with one text field", nameof(measurementType));
+                if (constructor == null)
+                    throw new ArgumentException($"Type {measurementType.FullName} does not have a json constructor with one text field", nameof(measurementType));
 
-            var paramValue = Expression.Parameter(typeof(string));
-            var labelReturn = Expression.Label(typeof(object));
-            var returnStmt = Expression.Return(labelReturn, Expression.Convert(Expression.New(constructor, new Expression[] { paramValue }), typeof(object)));
-            var body = Expression.Block(typeof(object), new Expression[] { returnStmt, Expression.Label(labelReturn, Expression.Constant(null)) });
-            var lambda = Expression.Lambda<Func<string, object>>(body, new ParameterExpression[] { paramValue });
-            return lambda.Compile();
+                var paramValue = Expression.Parameter(typeof(string));
+                var labelReturn = Expression.Label(typeof(object));
+                var returnStmt = Expression.Return(labelReturn, Expression.Convert(Expression.New(constructor, new Expression[] { paramValue }), typeof(object)));
+                var body = Expression.Block(typeof(object), new Expression[] { returnStmt, Expression.Label(labelReturn, Expression.Constant(null)) });
+                var lambda = Expression.Lambda<Func<string, object>>(body, new ParameterExpression[] { paramValue });
+                return lambda.Compile();
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BallisticCalculator;
 using BallisticCalculatorNet.MeasurementControl;
 using BallisticCalculatorNet.UnitTest.Utils;
 using FluentAssertions;
@@ -42,8 +43,8 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
 
             control.Value.Should().BeOfType(typeof(Measurement<DistanceUnit>));
             control.Value.Should().Be(DistanceUnit.Line.New(0));
-            control.ValueAs<DistanceUnit>().Should().NotBeNull();
-            control.ValueAs<DistanceUnit>().Value.Should().Be(0);
+            control.ValueAsMeasurement<DistanceUnit>().Should().NotBeNull();
+            control.ValueAsMeasurement<DistanceUnit>().Value.Should().Be(0);
 
             control.Unit.Should().Be(DistanceUnit.Meter);
         }
@@ -99,6 +100,7 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
         [InlineData(MeasurementType.Velocity, typeof(VelocityUnit))]
         [InlineData(MeasurementType.Temperature, typeof(TemperatureUnit))]
         [InlineData(MeasurementType.Volume, typeof(VolumeUnit))]
+        [InlineData(MeasurementType.BallisticCoefficient, typeof(DragTableId))]
         public void Units(MeasurementType type, Type unitType)
         {
             using TestForm tf = new TestForm();
@@ -108,7 +110,10 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
                 control.MeasurementType = type;
 
             control.Unit.Should().BeOfType(unitType);
-            control.Value.Should().BeOfType(typeof(Measurement<>).MakeGenericType(new Type[] { unitType }));
+            if (control.MeasurementType == MeasurementType.BallisticCoefficient)
+                control.Value.Should().BeOfType(typeof(BallisticCoefficient));
+            else
+                control.Value.Should().BeOfType(typeof(Measurement<>).MakeGenericType(new Type[] { unitType }));
 
             var unitPart = control.ComboBox("UnitPart");
 
@@ -251,7 +256,7 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
         [InlineData(1000, 1)]
         [InlineData(1000, 0.1)]
         [InlineData(0, 1)]
-        public void TextMaximum(double maximum, double increment)
+        public void TestMaximum(double maximum, double increment)
         {
             MeasurmentControlController controller = new MeasurmentControlController
             {
@@ -270,7 +275,7 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
         [InlineData(-1000, 1)]
         [InlineData(-1000, 0.1)]
         [InlineData(0, 1)]
-        public void TextMinimum(double minimum, double increment)
+        public void TestMinimum(double minimum, double increment)
         {
             MeasurmentControlController controller = new MeasurmentControlController
             {
@@ -317,7 +322,27 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
             (control.ComboBox("UnitPart").SelectedItem as MeasurementUtility.Unit)?.Value.Should().Be(unit);
             control.TextBox("NumericPart").Text.Should().Be(value.ToString());
             control.Value.Should().Be(unit.New(value));
+        }
 
+        [Theory]
+        [InlineData(3, 0.365, DragTableId.G1, "0.365")]
+        [InlineData(3, 0.3651, DragTableId.G1, "0.365")]
+        [InlineData(3, 0.225, DragTableId.G7, "0.225")]
+        public void BallisticCoefficient(int accuracy, double value, DragTableId table, string textValue)
+        {
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<MeasurementControl.MeasurementControl>(13, 13, 300, 28);
+            control.MeasurementType = MeasurementType.BallisticCoefficient;
+            control.DecimalPoints = accuracy;
+
+            control.Value = new BallisticCoefficient(value, table);
+            control.TextValue.Should().Be(textValue + table.ToString());
+
+            control.Value = new BallisticCoefficient(1, DragTableId.G1);
+            control.TextValue.Should().Be("1G1");
+
+            control.TextValue = textValue + table.ToString();
+            control.ValueAs<BallisticCoefficient>().Should().Be(new BallisticCoefficient(double.Parse(textValue), table));
         }
     }
 }

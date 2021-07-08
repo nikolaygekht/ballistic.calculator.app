@@ -32,10 +32,10 @@ namespace BallisticCalculatorNet.InputPanels
             {
                 Ammunition ammo = new Ammunition()
                 {
-                    Weight = measurementBulletWeight.ValueAs<WeightUnit>(),
-                    MuzzleVelocity = measurementMuzzleVelocity.ValueAs<VelocityUnit>(),
-                    BulletDiameter = checkBoxDimensions.Checked ? measurementDiameter.ValueAs<DistanceUnit>() : null,
-                    BulletLength = checkBoxDimensions.Checked ? measurementLength.ValueAs<DistanceUnit>() : null,
+                    Weight = measurementBulletWeight.ValueAsMeasurement<WeightUnit>(),
+                    MuzzleVelocity = measurementMuzzleVelocity.ValueAsMeasurement<VelocityUnit>(),
+                    BulletDiameter = checkBoxDimensions.Checked ? measurementDiameter.ValueAsMeasurement<DistanceUnit>() : null,
+                    BulletLength = checkBoxDimensions.Checked ? measurementLength.ValueAsMeasurement<DistanceUnit>() : null,
                 };
                 return ammo;
             }
@@ -93,5 +93,10 @@ namespace BallisticCalculatorNet.InputPanels
         }
 
         internal void checkBoxDimensions_CheckedChanged(object sender, EventArgs e) => UpdateDimension();
+
+        private void AmmoControl_Enter(object sender, EventArgs e)
+        {
+            measurementBulletWeight.Focus();
+        }
     }
 }
