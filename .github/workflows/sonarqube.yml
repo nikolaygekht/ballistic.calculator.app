@@ -46,5 +46,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"nikolaygekht_ballistic.calculator.app" /o:"nikolaygekht" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          <insert_your_clean_build_command>
+          dotnet build BallisticCalculatorNet.sln /p:Configuration="Release"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
