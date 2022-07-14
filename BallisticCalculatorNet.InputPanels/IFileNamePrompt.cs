@@ -6,7 +6,7 @@ namespace BallisticCalculatorNet.InputPanels
     {
         bool SavePrompt { get; set; } 
         bool CheckFileExists { get; set; }
-        bool CheckDirectlyExists { get; set; }
+        bool CheckDirectoryExist { get; set; }
         bool OverwritePrompt { get; set; }
         string Title { get; set; }
         string InitialDirectory { get; set; }

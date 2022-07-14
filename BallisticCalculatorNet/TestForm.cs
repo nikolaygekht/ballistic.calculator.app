@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BallisticCalculatorNet.InputPanels;
 
+#pragma warning disable S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
+
 namespace BallisticCalculatorNet
 {
     public partial class MyTestForm : Form

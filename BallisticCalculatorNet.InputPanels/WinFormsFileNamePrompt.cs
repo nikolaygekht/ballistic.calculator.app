@@ -11,14 +11,14 @@ namespace BallisticCalculatorNet.InputPanels
     {
         public bool SavePrompt { get; set; }
         public bool CheckFileExists { get; set; }
-        public bool CheckDirectlyExists { get; set; }
+        public bool CheckDirectoryExist { get; set; }
         public bool OverwritePrompt { get; set; }
         public string Title { get; set; }
         public string InitialDirectory { get; set; }
         public string FileName { get; set; }
         public string DefaultExtension { get; set; }
 
-        List<Tuple<string, string>> mFilters = new List<Tuple<string, string>>();
+        readonly List<Tuple<string, string>> mFilters = new List<Tuple<string, string>>();
 
         public void AddFilter(string extension, string name) => mFilters.Add(new Tuple<string, string>(extension, name));
 
@@ -45,7 +45,7 @@ namespace BallisticCalculatorNet.InputPanels
                 dlg = new SaveFileDialog()
                 {
                     OverwritePrompt = OverwritePrompt,
-                    CheckPathExists = CheckDirectlyExists,
+                    CheckPathExists = CheckDirectoryExist,
                 };
             }
             else

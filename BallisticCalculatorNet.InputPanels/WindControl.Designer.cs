@@ -42,14 +42,14 @@
             // 
             this.measurementDistance.DecimalPoints = 1;
             this.measurementDistance.Increment = 1D;
-            this.measurementDistance.Location = new System.Drawing.Point(96, 1);
+            this.measurementDistance.Location = new System.Drawing.Point(135, 1);
             this.measurementDistance.Maximum = 10000D;
             this.measurementDistance.MaximumSize = new System.Drawing.Size(4096, 28);
             this.measurementDistance.MeasurementType = BallisticCalculatorNet.MeasurementControl.MeasurementType.Distance;
             this.measurementDistance.Minimum = 0D;
-            this.measurementDistance.MinimumSize = new System.Drawing.Size(120, 28);
+            this.measurementDistance.MinimumSize = new System.Drawing.Size(135, 28);
             this.measurementDistance.Name = "measurementDistance";
-            this.measurementDistance.Size = new System.Drawing.Size(184, 28);
+            this.measurementDistance.Size = new System.Drawing.Size(190, 28);
             this.measurementDistance.TabIndex = 2;
             this.measurementDistance.TextValue = "m";
             this.measurementDistance.Unit = Gehtsoft.Measurements.DistanceUnit.Meter;
@@ -69,14 +69,14 @@
             // 
             this.measurementDirection.DecimalPoints = 0;
             this.measurementDirection.Increment = 1D;
-            this.measurementDirection.Location = new System.Drawing.Point(96, 36);
+            this.measurementDirection.Location = new System.Drawing.Point(135, 36);
             this.measurementDirection.Maximum = 180D;
             this.measurementDirection.MaximumSize = new System.Drawing.Size(4096, 28);
             this.measurementDirection.MeasurementType = BallisticCalculatorNet.MeasurementControl.MeasurementType.Angular;
             this.measurementDirection.Minimum = -180D;
             this.measurementDirection.MinimumSize = new System.Drawing.Size(120, 28);
             this.measurementDirection.Name = "measurementDirection";
-            this.measurementDirection.Size = new System.Drawing.Size(184, 28);
+            this.measurementDirection.Size = new System.Drawing.Size(190, 28);
             this.measurementDirection.TabIndex = 3;
             this.measurementDirection.TextValue = "0°";
             this.measurementDirection.Unit = Gehtsoft.Measurements.AngularUnit.Degree;
@@ -86,14 +86,14 @@
             // 
             this.measurementVelocity.DecimalPoints = 1;
             this.measurementVelocity.Increment = 1D;
-            this.measurementVelocity.Location = new System.Drawing.Point(96, 71);
+            this.measurementVelocity.Location = new System.Drawing.Point(135, 71);
             this.measurementVelocity.Maximum = 10000D;
             this.measurementVelocity.MaximumSize = new System.Drawing.Size(4096, 28);
             this.measurementVelocity.MeasurementType = BallisticCalculatorNet.MeasurementControl.MeasurementType.Velocity;
             this.measurementVelocity.Minimum = 0D;
             this.measurementVelocity.MinimumSize = new System.Drawing.Size(120, 28);
             this.measurementVelocity.Name = "measurementVelocity";
-            this.measurementVelocity.Size = new System.Drawing.Size(184, 28);
+            this.measurementVelocity.Size = new System.Drawing.Size(190, 28);
             this.measurementVelocity.TabIndex = 4;
             this.measurementVelocity.TextValue = "m/s";
             this.measurementVelocity.Unit = Gehtsoft.Measurements.VelocityUnit.MetersPerSecond;
@@ -118,7 +118,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(286, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(331, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(125, 97);
             this.pictureBox1.TabIndex = 7;
@@ -139,7 +139,7 @@
             this.Controls.Add(this.checkBoxDistance);
             this.Controls.Add(this.measurementDistance);
             this.Name = "WindControl";
-            this.Size = new System.Drawing.Size(420, 105);
+            this.Size = new System.Drawing.Size(464, 105);
             this.Enter += new System.EventHandler(this.WindControl_Enter);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

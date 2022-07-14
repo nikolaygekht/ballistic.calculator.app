@@ -42,7 +42,7 @@ namespace BallisticCalculatorNet
             this.windControl1.Location = new System.Drawing.Point(12, 61);
             this.windControl1.MeasurementSystem = BallisticCalculatorNet.InputPanels.MeasurementSystem.Metric;
             this.windControl1.Name = "windControl1";
-            this.windControl1.Size = new System.Drawing.Size(432, 111);
+            this.windControl1.Size = new System.Drawing.Size(452, 111);
             this.windControl1.TabIndex = 2;
             this.windControl1.Wind = null;
             // 
@@ -64,7 +64,7 @@ namespace BallisticCalculatorNet
             this.ammoControl1.Location = new System.Drawing.Point(12, 168);
             this.ammoControl1.MeasurementSystem = BallisticCalculatorNet.InputPanels.MeasurementSystem.Metric;
             this.ammoControl1.Name = "ammoControl1";
-            this.ammoControl1.Size = new System.Drawing.Size(416, 255);
+            this.ammoControl1.Size = new System.Drawing.Size(452, 201);
             this.ammoControl1.TabIndex = 3;
             // 
             // MyTestForm

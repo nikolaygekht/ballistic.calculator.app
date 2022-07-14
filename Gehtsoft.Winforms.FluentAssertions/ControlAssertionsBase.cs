@@ -81,6 +81,8 @@ namespace Gehtsoft.Winforms.FluentAssertions
             return new AndConstraint<T1>(this as T1);
         }
 
+        public AndConstraint<T1> BeDisabled(string because = null, params object[] becauseParameters) => BeEnabled(false, because, becauseParameters);
+
         public AndConstraint<T1> HaveText(string text, string because = null, params object[] becauseParameters)
         {
             Execute.Assertion

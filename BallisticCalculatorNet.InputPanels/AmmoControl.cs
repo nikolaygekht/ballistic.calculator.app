@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,8 +35,9 @@ namespace BallisticCalculatorNet.InputPanels
                 {
                     Weight = measurementBulletWeight.ValueAsMeasurement<WeightUnit>(),
                     MuzzleVelocity = measurementMuzzleVelocity.ValueAsMeasurement<VelocityUnit>(),
-                    BulletDiameter = checkBoxDimensions.Checked ? measurementDiameter.ValueAsMeasurement<DistanceUnit>() : null,
-                    BulletLength = checkBoxDimensions.Checked ? measurementLength.ValueAsMeasurement<DistanceUnit>() : null,
+                    BallisticCoefficient = measurementBC.ValueAs<BallisticCoefficient>(),
+                    BulletDiameter = !measurementDiameter.IsEmpty ? measurementDiameter.ValueAsMeasurement<DistanceUnit>() : null,
+                    BulletLength = !measurementLength.IsEmpty ? measurementLength.ValueAsMeasurement<DistanceUnit>() : null,
                 };
                 return ammo;
             }
@@ -45,27 +47,54 @@ namespace BallisticCalculatorNet.InputPanels
                 {
                     measurementBulletWeight.Value = measurementBulletWeight.UnitAs<WeightUnit>().New(0);
                     measurementMuzzleVelocity.Value = measurementMuzzleVelocity.UnitAs<VelocityUnit>().New(0);
-                    measurementDiameter.Value = measurementDiameter.UnitAs<DistanceUnit>().New(0);
-                    measurementLength.Value = measurementLength.UnitAs<DistanceUnit>().New(0);
+                    measurementBC.Value = new BallisticCoefficient(0.5, DragTableId.G1);
+                    measurementDiameter.Value = null;
+                    measurementLength.Value = null;
                 }
                 else
                 {
                     measurementBulletWeight.Value = value.Weight;
                     measurementMuzzleVelocity.Value = value.MuzzleVelocity;
-                    checkBoxDimensions.Checked = value.BulletDiameter != null && value.BulletLength != null;
-                    measurementDiameter.Value = value.BulletDiameter ?? measurementDiameter.UnitAs<DistanceUnit>().New(0);
-                    measurementLength.Value = value.BulletLength ?? measurementLength.UnitAs<DistanceUnit>().New(0);
+                    measurementBC.Value = value.BallisticCoefficient;
+                    measurementDiameter.Value = value.BulletDiameter;
+                    measurementLength.Value = value.BulletLength;
                 }
+                OnBcChanged();
             }
         }
 
+        public string CustomBallisticFile
+        {
+            get => textBoxCustomBallistic.Text;
+            set 
+            { 
+                textBoxCustomBallistic.Text = value;
+                if (string.IsNullOrEmpty(value) || !File.Exists(value))
+                    CustomBallistic = null;
+                else
+                {
+                    try
+                    {
+                        using var fs = new FileStream(value, FileMode.Open, FileAccess.Read, FileShare.Read);
+                        CustomBallistic = DrgDragTable.Open(fs, Encoding.ASCII);
+                        measurementBC.Value = new BallisticCoefficient(CustomBallistic.Ammunition.Ammunition.GetBallisticCoefficient(), DragTableId.GC);
+                    }
+                    catch (Exception)
+                    {
+                        CustomBallistic = null;
+                    }
+                }
+                CustomTableChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        public DrgDragTable CustomBallistic { get; private set; }
 
         public AmmoControl()
         {
             InitializeComponent();
+            OnBcChanged();
         }
-
-
 
         private void UpdateSystem()
         {
@@ -74,29 +103,61 @@ namespace BallisticCalculatorNet.InputPanels
                 case MeasurementSystem.Metric:
                     measurementBulletWeight.ChangeUnit(WeightUnit.Gram, 2);
                     measurementMuzzleVelocity.ChangeUnit(VelocityUnit.MetersPerSecond, 1);
-                    measurementLength.ChangeUnit(DistanceUnit.Millimeter, 1);
-                    measurementDiameter.ChangeUnit(DistanceUnit.Millimeter, 1);
+                    measurementLength.ChangeUnit(DistanceUnit.Millimeter, 2);
+                    measurementDiameter.ChangeUnit(DistanceUnit.Millimeter, 2);
                     break;
                 case MeasurementSystem.Imperial:
                     measurementBulletWeight.ChangeUnit(WeightUnit.Grain, 1);
                     measurementMuzzleVelocity.ChangeUnit(VelocityUnit.FeetPerSecond, 1);
-                    measurementLength.ChangeUnit(DistanceUnit.Inch, 2);
-                    measurementDiameter.ChangeUnit(DistanceUnit.Inch, 2);
+                    measurementLength.ChangeUnit(DistanceUnit.Inch, 3);
+                    measurementDiameter.ChangeUnit(DistanceUnit.Inch, 3);
                     break;
             }
         }
-
-        private void UpdateDimension()
-        {
-            measurementDiameter.Enabled = checkBoxDimensions.Checked;
-            measurementLength.Enabled = checkBoxDimensions.Checked;
-        }
-
-        internal void checkBoxDimensions_CheckedChanged(object sender, EventArgs e) => UpdateDimension();
 
         private void AmmoControl_Enter(object sender, EventArgs e)
         {
             measurementBulletWeight.Focus();
         }
+
+        public void Clear()
+        {
+            measurementBulletWeight.Value = null;
+            measurementBC.Value = null;
+            measurementMuzzleVelocity.Value = null;
+            measurementLength.Value = null;
+            measurementDiameter.Value = null;
+            OnBcChanged();
+
+        }
+
+        private void measurementBC_Changed(object sender, EventArgs e)
+        {
+            OnBcChanged();
+        }
+
+        private void OnBcChanged()
+        {           
+            bool isCustom = !measurementBC.IsEmpty && measurementBC.ValueAs<BallisticCoefficient>().Table == DragTableId.GC;
+            textBoxCustomBallistic.Enabled = isCustom;
+            buttonCustomBallisticLoad.Enabled = isCustom;
+        }
+
+        private void buttonCustomBallisticLoad_Click(object sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog()
+            {
+                Title = "Open drag table",
+                Filter = "Drag Table (*.drg)|*.drg",
+                CheckFileExists = true,
+                CheckPathExists = true,
+                ShowReadOnly = false,
+                ShowHelp = false,
+            };
+            if (ofd.ShowDialog(this) == DialogResult.OK)
+                CustomBallisticFile = ofd.FileName;
+        }
+
+        public event EventHandler CustomTableChanged;
     }
 }

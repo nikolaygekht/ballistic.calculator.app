@@ -1,6 +1,6 @@
 ﻿namespace BallisticCalculatorNet.InputPanels
 {
-    public class WinFormsFileNamePromptFactory : IFileNamePromptyFactory
+    public class WinFormsFileNamePromptFactory : IFileNamePromptFactory
     {
         public IFileNamePrompt CreateFileNamePrompt(bool savePrompt)
         {
