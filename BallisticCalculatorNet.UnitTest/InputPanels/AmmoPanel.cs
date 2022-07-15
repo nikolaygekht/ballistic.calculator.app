@@ -15,6 +15,33 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
     public class AmmoPanel
     {
         [Fact]
+        public void Initial_Controls()
+        {
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<AmmoControl>(5, 5, 100, 100);
+
+            control.MeasurementControl("measurementBulletWeight").IsEmpty.Should().BeTrue();
+            control.MeasurementControl("measurementBC").Value.Should().Be(new BallisticCoefficient(0.5, DragTableId.G1));
+            control.CheckBox("checkBoxFormFactor").Checked.Should().BeFalse();
+            control.MeasurementControl("measurementDiameter").IsEmpty.Should().BeTrue();
+            control.MeasurementControl("measurementLength").IsEmpty.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Initial_Value()
+        {
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<AmmoControl>(5, 5, 100, 100);
+            control.MeasurementSystem = MeasurementSystem.Metric;
+            var ammo = control.Ammunition;
+
+            ammo.Weight.Value.Should().Be(0);
+            ammo.BallisticCoefficient.Should().Be(new BallisticCoefficient(0.5, DragTableId.G1));
+            ammo.BulletDiameter.Should().BeNull();
+            ammo.BulletLength.Should().BeNull();
+        }
+
+        [Fact]
         public void Metric()
         {
             using TestForm tf = new TestForm();

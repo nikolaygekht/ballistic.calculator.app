@@ -34,7 +34,8 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [Fact]
         public void Delete_ReticleElement()
         {
-            BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
+            using BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
+            using var defer = Defer.Action(() => form.Close());
             form.LoadReticle(new MilDotReticle(), "mildot");
 
             var originalListBoxItemsCount = form.ListBox("reticleItems").Items.Count;
@@ -58,7 +59,8 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [Fact]
         public void Duplicate_ReticleElement()
         {
-            BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
+            using BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
+            using var defer = Defer.Action(() => form.Close());
             form.LoadReticle(new MilDotReticle(), "mildot");
             var lb = form.ListBox("reticleItems");
             var originalListBoxItemsCount = lb.Items.Count;
@@ -86,7 +88,8 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [Fact]
         public void Delete_ReticleBdc()
         {
-            BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
+            using BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
+            using var defer = Defer.Action(() => form.Close());
             form.LoadReticle(new MilDotReticle(), "mildot");
 
             var originalListBoxItemsCount = form.ListBox("reticleItems").Items.Count;
@@ -110,7 +113,8 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [Fact]
         public void Duplicate_ReticleBdc()
         {
-            BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
+            using BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
+            using var defer = Defer.Action(() => form.Close());
             form.LoadReticle(new MilDotReticle(), "mildot");
             var lb = form.ListBox("reticleItems");
             var originalListBoxItemsCount = lb.Items.Count;
@@ -137,7 +141,8 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [Fact]
         public void Duplicate_ThenDeleteOriginal()
         {
-            BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
+            using BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
+            using var defer = Defer.Action(() => form.Close());
             form.LoadReticle(new MilDotReticle(), "mildot");
             var lb = form.ListBox("reticleItems");
             var org = lb.Items[0];
@@ -151,7 +156,8 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [Fact]
         public void Duplicate_ThenDeleteCopy()
         {
-            BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
+            using BallisticCalculatorNet.ReticleEditor.AppForm form = new BallisticCalculatorNet.ReticleEditor.AppForm();
+            using var defer = Defer.Action(() => form.Close());
             form.LoadReticle(new MilDotReticle(), "mildot");
             var lb = form.ListBox("reticleItems");
             var org = lb.Items[0];
@@ -171,7 +177,8 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [InlineData(typeof(ReticleBulletDropCompensatorPoint), typeof(EditBdcForm))]
         public void CorrectFormCreation(Type element, Type form)
         {
-            BallisticCalculatorNet.ReticleEditor.AppForm f = new BallisticCalculatorNet.ReticleEditor.AppForm();
+            using BallisticCalculatorNet.ReticleEditor.AppForm f = new BallisticCalculatorNet.ReticleEditor.AppForm();
+            using var defer = Defer.Action(() => f.Close());
             f.FormForObject(Activator.CreateInstance(element)).Should().BeOfType(form);
         }
     }

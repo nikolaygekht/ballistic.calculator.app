@@ -48,7 +48,7 @@ namespace BallisticCalculatorNet.InputPanels
             {
                 if (value == null)
                 {
-                    measurementBulletWeight.Value = measurementBulletWeight.UnitAs<WeightUnit>().New(0);
+                    measurementBulletWeight.Value = null;
                     measurementMuzzleVelocity.Value = measurementMuzzleVelocity.UnitAs<VelocityUnit>().New(0);
                     measurementBC.Value = new BallisticCoefficient(0.5, DragTableId.G1);
                     checkBoxFormFactor.Checked = false;
@@ -102,6 +102,7 @@ namespace BallisticCalculatorNet.InputPanels
         public AmmoControl()
         {
             InitializeComponent();
+            Clear();
         }
 
         private void UpdateSystem()
@@ -131,7 +132,8 @@ namespace BallisticCalculatorNet.InputPanels
         public void Clear()
         {
             measurementBulletWeight.Value = null;
-            measurementBC.Value = null;
+            measurementBC.Value = new BallisticCoefficient(0.5, DragTableId.G1);
+            checkBoxFormFactor.Checked = false;
             measurementMuzzleVelocity.Value = null;
             measurementLength.Value = null;
             measurementDiameter.Value = null;

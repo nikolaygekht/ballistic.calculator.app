@@ -161,7 +161,8 @@ namespace BallisticCalculatorNet.InputPanels
             dlg.OverwritePrompt = true;
             dlg.CheckDirectoryExist = true;
             dlg.DefaultExtension = "ammox";
-            dlg.FileName = mFileName;
+            if (!string.IsNullOrEmpty(mFileName))
+                dlg.FileName = mFileName;
             if (dlg.AskName(this))
                 BallisticXmlSerializer.SerializeToFile(LibraryEntry, dlg.FileName);
         }

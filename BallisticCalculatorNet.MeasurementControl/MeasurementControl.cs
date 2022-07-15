@@ -213,10 +213,13 @@ namespace BallisticCalculatorNet.MeasurementControl
         public void ChangeUnit<T>(T unit, int? accuracy = null) where T : Enum
         {
             mController.ValidateUnitType<T>();
+            bool empty = IsEmpty;
             var value = ValueAsMeasurement<T>();
             var v = value.In(unit);
             DecimalPoints = accuracy;
             Value = new Measurement<T>(v, unit);
+            if (empty)
+                NumericPart.Text = "";
         }
     }
 }
