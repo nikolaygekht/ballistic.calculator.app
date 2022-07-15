@@ -137,19 +137,17 @@ namespace BallisticCalculatorNet.InputPanels
             measurementDiameter.Value = null;
         }
 
+        public IFileNamePromptFactory PromptFactory { get; set; } = new WinFormsFileNamePromptFactory();
+
         private void buttonCustomBallisticLoad_Click(object sender, EventArgs e)
         {
-            var ofd = new OpenFileDialog()
-            {
-                Title = "Open drag table",
-                Filter = "Drag Table (*.drg)|*.drg",
-                CheckFileExists = true,
-                CheckPathExists = true,
-                ShowReadOnly = false,
-                ShowHelp = false,
-            };
-            if (ofd.ShowDialog(this) == DialogResult.OK)
-                CustomBallisticFile = ofd.FileName;
+            var dlg = PromptFactory.CreateOpenFileNamePrompt();
+            dlg.Title = "Open drag table";
+            dlg.AddFilter("drg", "Custom Drag Table");
+            dlg.CheckFileExists = true;
+            dlg.DefaultExtension = "drg";
+            if (dlg.AskName(this))
+                CustomBallisticFile = dlg.FileName;
         }
 
         public event EventHandler CustomTableChanged;

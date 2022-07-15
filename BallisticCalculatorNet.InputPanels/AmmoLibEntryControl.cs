@@ -18,16 +18,71 @@ namespace BallisticCalculatorNet.InputPanels
         public AmmoLibEntryControl()
         {
             InitializeComponent();
+            comboBoxAmmoType.Items.Add("FMJ");
+            comboBoxAmmoType.Items.Add("HP");
+            comboBoxAmmoType.Items.Add("AP");
+            comboBoxAmmoType.Items.Add("HPBT");
+            comboBoxAmmoType.Items.Add("SP");
+            comboBoxAmmoType.Items.Add("API");
+            comboBoxAmmoType.Items.Add("LRN");
+            comboBoxAmmoType.Items.Add("WC");
+
+            //rimfire
+            comboBoxCaliber.Items.Add(".17 Hornet");
+            comboBoxCaliber.Items.Add(".17 WMR");
+            comboBoxCaliber.Items.Add(".22 LR");
+            comboBoxCaliber.Items.Add(".22 WMR");
+
+            //pistol/revolver
+            comboBoxCaliber.Items.Add("25 ACP");
+            comboBoxCaliber.Items.Add("32 ACP");
+            comboBoxCaliber.Items.Add("380 ACP");
+            comboBoxCaliber.Items.Add("45 ACP");
+            comboBoxCaliber.Items.Add(".38 SPL");
+            comboBoxCaliber.Items.Add("9x19mm");
+            comboBoxCaliber.Items.Add("9x18mm");
+            comboBoxCaliber.Items.Add(".357 Magnum");
+            comboBoxCaliber.Items.Add("50 AE");
+            comboBoxCaliber.Items.Add(".327 Magnum");
+            comboBoxCaliber.Items.Add(".44 Magnum");
+            comboBoxCaliber.Items.Add(".32 LC");
+            comboBoxCaliber.Items.Add(".38 Super");
+            comboBoxCaliber.Items.Add(".45 LC");
+            comboBoxCaliber.Items.Add("4.6x30mm");
+            comboBoxCaliber.Items.Add("5.7x28mm");
+            comboBoxCaliber.Items.Add("7.62×25mm");
+            comboBoxCaliber.Items.Add("7.62×38mmR");
+
+
+            //rifle
+            comboBoxCaliber.Items.Add("5.45×39mm");
+            comboBoxCaliber.Items.Add("6.5mm Creedmoor");
+            comboBoxCaliber.Items.Add("6.5mm Grendel");
+            comboBoxCaliber.Items.Add("6.5×47mm Lapua");
+            comboBoxCaliber.Items.Add("6.5×55mm Swedish");
+            comboBoxCaliber.Items.Add("6.5×57mm Mauser");
+            comboBoxCaliber.Items.Add("6×45mm");
+            comboBoxCaliber.Items.Add("5.56×45mm NATO");
+            comboBoxCaliber.Items.Add(".223 Remington");
+            comboBoxCaliber.Items.Add("7.5×55mm Swiss");
+            comboBoxCaliber.Items.Add("7.62×51mm NATO");
+            comboBoxCaliber.Items.Add(".308 Winchester");
+            comboBoxCaliber.Items.Add("7.62×54mmR");
+            comboBoxCaliber.Items.Add("7.92×57mm Mauser");
+            comboBoxCaliber.Items.Add("9.3×64mm Brenneke");
+            comboBoxCaliber.Items.Add("9.3×57mm Mauser");
+            comboBoxCaliber.Items.Add(".338 Lapua Magnum");
+            comboBoxCaliber.Items.Add(".50 BMG");
         }
 
         public IFileNamePromptFactory PromptFactory { get; set; } = new WinFormsFileNamePromptFactory();
 
         public MeasurementSystem MeasurementSystem
         {
-            get => ammoControl1.MeasurementSystem;
+            get => ammoControl.MeasurementSystem;
             set
             {
-                ammoControl1.MeasurementSystem = value;
+                ammoControl.MeasurementSystem = value;
                 if (value == MeasurementSystem.Metric)
                     measurementBarrelLength.ChangeUnit(DistanceUnit.Millimeter);
                 else
@@ -41,7 +96,7 @@ namespace BallisticCalculatorNet.InputPanels
             {
                 AmmunitionLibraryEntry ale = new AmmunitionLibraryEntry()
                 {
-                    Ammunition = ammoControl1.Ammunition,
+                    Ammunition = ammoControl.Ammunition,
                     Name = textBoxName.Text,
                     Source = textBoxSource.Text,
                     Caliber = comboBoxCaliber.Text,
@@ -56,7 +111,7 @@ namespace BallisticCalculatorNet.InputPanels
                     Clear();
                 else
                 {
-                    ammoControl1.Ammunition = value.Ammunition;
+                    ammoControl.Ammunition = value.Ammunition;
                     textBoxName.Text = value.Name ?? "";
                     textBoxSource.Text = value.Source ?? "";
                     comboBoxAmmoType.Text = value.AmmunitionType ?? "";
@@ -68,13 +123,13 @@ namespace BallisticCalculatorNet.InputPanels
 
         public Ammunition Ammunition
         {
-            get => ammoControl1.Ammunition;
-            set => ammoControl1.Ammunition = value;
+            get => ammoControl.Ammunition;
+            set => ammoControl.Ammunition = value;
         }
 
         private void ammoControl1_Enter(object sender, EventArgs e)
         {
-            ammoControl1.Focus();
+            ammoControl.Focus();
         }
 
         private string mFileName = null;
@@ -113,13 +168,18 @@ namespace BallisticCalculatorNet.InputPanels
 
         public void Clear()
         {
-            ammoControl1.Clear();
+            ammoControl.Clear();
             textBoxName.Text = "";
             textBoxSource.Text = "";
             comboBoxAmmoType.Text = "";
             comboBoxCaliber.Text = "";
         }
 
-
+        private void ammoControl_CustomTableChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxName.Text) &&
+                ammoControl.CustomBallistic != null)
+                textBoxName.Text = ammoControl.CustomBallistic.Ammunition.Name;
+        }
     }
 }

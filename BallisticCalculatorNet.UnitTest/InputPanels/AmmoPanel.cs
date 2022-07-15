@@ -104,25 +104,24 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
            
         }
 
-        private const string DRG = "BRL, 120mm Mortar(McCoy), 13.585, 0.11956, 0.7049, Radar Data\r\n" +
-                                 "0.119\t0\r\n" +
-                                 "0.119\t0.7\r\n" +
-                                 "0.12\t0.85\r\n" +
-                                 "0.122\t0.87\r\n" +
-                                 "0.126\t0.9\r\n" +
-                                 "0.148\t0.93\r\n" +
-                                 "0.182\t0.95\r\n";
-
-
         [Fact]
-        public void SetDrgFile()
+        public void OpenDrgFile()
         {
-            var fileName = Path.GetTempFileName();
-            File.WriteAllText(fileName, DRG);
-            using var defer = Defer.Action(() => File.Delete(fileName));
+            using var drgFile = TemporaryFile.FromResource("120.drg");
             using TestForm tf = new TestForm();
+            
             var control = tf.AddControl<AmmoControl>(5, 5, 100, 100);
-            control.CustomBallisticFile = fileName;           
+
+            var mockPrompt = new MockFileNamePrompt()
+            {
+                FileName = drgFile.FileName
+            };
+            var mockPromptFactory = new MockFileNamePromptFactory();
+            mockPromptFactory.AddPrompt(mockPrompt);
+            control.PromptFactory = mockPromptFactory;
+
+            control.InvokeEventHandler("buttonCustomBallisticLoad_Click", EventArgs.Empty);
+
             control.CustomBallistic.Should().NotBeNull();
 
             var ammo = control.Ammunition;

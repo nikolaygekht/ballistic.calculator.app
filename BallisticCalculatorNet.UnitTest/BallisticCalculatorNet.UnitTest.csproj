@@ -8,6 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\120.drg" />
+    <None Remove="Resources\762x39rem.ammo" />
+    <None Remove="Resources\762x39rem.ammox" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\120.drg" />
+    <EmbeddedResource Include="Resources\762x39rem.ammo" />
+    <EmbeddedResource Include="Resources\762x39rem.ammox" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.7.0" />
     <PackageReference Include="System.Text.Json" Version="6.0.5" />
     <PackageReference Include="xunit" Version="2.4.1" />
