@@ -59,7 +59,6 @@ namespace BallisticCalculatorNet.InputPanels
                     measurementDiameter.Value = value.BulletDiameter;
                     measurementLength.Value = value.BulletLength;
                 }
-                OnBcChanged();
             }
         }
 
@@ -77,7 +76,7 @@ namespace BallisticCalculatorNet.InputPanels
                     {
                         using var fs = new FileStream(value, FileMode.Open, FileAccess.Read, FileShare.Read);
                         CustomBallistic = DrgDragTable.Open(fs, Encoding.ASCII);
-                        measurementBC.Value = new BallisticCoefficient(CustomBallistic.Ammunition.Ammunition.GetBallisticCoefficient(), DragTableId.GC);
+                        measurementBC.Value = new BallisticCoefficient(Math.Round(CustomBallistic.Ammunition.Ammunition.GetBallisticCoefficient(), 5), DragTableId.GC);
                     }
                     catch (Exception)
                     {
@@ -93,7 +92,6 @@ namespace BallisticCalculatorNet.InputPanels
         public AmmoControl()
         {
             InitializeComponent();
-            OnBcChanged();
         }
 
         private void UpdateSystem()
@@ -127,20 +125,6 @@ namespace BallisticCalculatorNet.InputPanels
             measurementMuzzleVelocity.Value = null;
             measurementLength.Value = null;
             measurementDiameter.Value = null;
-            OnBcChanged();
-
-        }
-
-        private void measurementBC_Changed(object sender, EventArgs e)
-        {
-            OnBcChanged();
-        }
-
-        private void OnBcChanged()
-        {           
-            bool isCustom = !measurementBC.IsEmpty && measurementBC.ValueAs<BallisticCoefficient>().Table == DragTableId.GC;
-            textBoxCustomBallistic.Enabled = isCustom;
-            buttonCustomBallisticLoad.Enabled = isCustom;
         }
 
         private void buttonCustomBallisticLoad_Click(object sender, EventArgs e)

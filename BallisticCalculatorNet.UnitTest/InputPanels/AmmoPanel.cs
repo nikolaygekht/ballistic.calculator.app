@@ -30,10 +30,6 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
 
             control.MeasurementControl("measurementDiameter").UnitAs<DistanceUnit>().Should().Be(DistanceUnit.Millimeter);
             control.MeasurementControl("measurementDiameter").DecimalPoints.Should().Be(2);
-
-            control.TextBox("textBoxCustomBallistic").Should().BeDisabled();
-            control.Control("buttonCustomBallisticLoad").Should().BeDisabled();
-
         }
 
         [Fact]
@@ -54,9 +50,6 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
 
             control.MeasurementControl("measurementDiameter").UnitAs<DistanceUnit>().Should().Be(DistanceUnit.Inch);
             control.MeasurementControl("measurementDiameter").DecimalPoints.Should().Be(3);
-
-            control.TextBox("textBoxCustomBallistic").Should().BeDisabled();
-            control.Control("buttonCustomBallisticLoad").Should().BeDisabled();
         }
 
         [Theory]
@@ -104,17 +97,6 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             ammo1.MuzzleVelocity.Should().Be(ammo.MuzzleVelocity);
             ammo1.BulletDiameter.Should().Be(ammo.BulletDiameter);
             ammo1.BulletLength.Should().Be(ammo.BulletLength);
-
-            if (ammo.BallisticCoefficient.Table == DragTableId.GC)
-            {
-                control.TextBox("textBoxCustomBallistic").Should().BeEnabled();
-                control.Control("buttonCustomBallisticLoad").Should().BeEnabled();
-            }
-            else
-            {
-                control.TextBox("textBoxCustomBallistic").Should().BeDisabled();
-                control.Control("buttonCustomBallisticLoad").Should().BeDisabled();
-            }
         }
 
         private const string DRG = "BRL, 120mm Mortar(McCoy), 13.585, 0.11956, 0.7049, Radar Data\r\n" +

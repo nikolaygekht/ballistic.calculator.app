@@ -181,7 +181,6 @@ namespace BallisticCalculatorNet.InputPanels
             this.measurementBC.TabIndex = 2;
             this.measurementBC.TextValue = "0.5G1";
             this.measurementBC.Unit = BallisticCalculator.DragTableId.G1;
-            this.measurementBC.Changed += new System.EventHandler(this.measurementBC_Changed);
             // 
             // label6
             // 
