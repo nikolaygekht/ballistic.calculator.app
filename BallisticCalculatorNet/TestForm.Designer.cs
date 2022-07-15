@@ -40,7 +40,7 @@ namespace BallisticCalculatorNet
             // windControl1
             // 
             this.windControl1.Location = new System.Drawing.Point(15, 73);
-            this.windControl1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.windControl1.Margin = new System.Windows.Forms.Padding(5);
             this.windControl1.MeasurementSystem = BallisticCalculatorNet.InputPanels.MeasurementSystem.Metric;
             this.windControl1.Name = "windControl1";
             this.windControl1.Size = new System.Drawing.Size(565, 133);
@@ -50,7 +50,7 @@ namespace BallisticCalculatorNet
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(16, 16);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(118, 35);
             this.button1.TabIndex = 1;
@@ -63,21 +63,21 @@ namespace BallisticCalculatorNet
             this.ammoControl1.Ammunition = ammunition1;
             this.ammoControl1.CustomBallisticFile = "";
             this.ammoControl1.Location = new System.Drawing.Point(14, 216);
-            this.ammoControl1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.ammoControl1.Margin = new System.Windows.Forms.Padding(5);
             this.ammoControl1.MeasurementSystem = BallisticCalculatorNet.InputPanels.MeasurementSystem.Metric;
             this.ammoControl1.Name = "ammoControl1";
-            this.ammoControl1.Size = new System.Drawing.Size(565, 241);
+            this.ammoControl1.Size = new System.Drawing.Size(565, 367);
             this.ammoControl1.TabIndex = 3;
             // 
             // MyTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 540);
+            this.ClientSize = new System.Drawing.Size(1000, 654);
             this.Controls.Add(this.ammoControl1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.windControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MyTestForm";
             this.Text = "TestForm";
             this.ResumeLayout(false);

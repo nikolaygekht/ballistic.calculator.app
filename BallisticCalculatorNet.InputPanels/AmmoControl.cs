@@ -31,11 +31,14 @@ namespace BallisticCalculatorNet.InputPanels
         {
             get
             {
+                var bc = measurementBC.ValueAs<BallisticCoefficient>();
+                if (checkBoxFormFactor.Checked)
+                    bc = new BallisticCoefficient(bc.Value, bc.Table, BallisticCoefficientValueType.FormFactor);
                 Ammunition ammo = new Ammunition()
                 {
                     Weight = measurementBulletWeight.ValueAsMeasurement<WeightUnit>(),
                     MuzzleVelocity = measurementMuzzleVelocity.ValueAsMeasurement<VelocityUnit>(),
-                    BallisticCoefficient = measurementBC.ValueAs<BallisticCoefficient>(),
+                    BallisticCoefficient = bc,
                     BulletDiameter = !measurementDiameter.IsEmpty ? measurementDiameter.ValueAsMeasurement<DistanceUnit>() : null,
                     BulletLength = !measurementLength.IsEmpty ? measurementLength.ValueAsMeasurement<DistanceUnit>() : null,
                 };
@@ -48,6 +51,7 @@ namespace BallisticCalculatorNet.InputPanels
                     measurementBulletWeight.Value = measurementBulletWeight.UnitAs<WeightUnit>().New(0);
                     measurementMuzzleVelocity.Value = measurementMuzzleVelocity.UnitAs<VelocityUnit>().New(0);
                     measurementBC.Value = new BallisticCoefficient(0.5, DragTableId.G1);
+                    checkBoxFormFactor.Checked = false;
                     measurementDiameter.Value = null;
                     measurementLength.Value = null;
                 }
@@ -56,6 +60,7 @@ namespace BallisticCalculatorNet.InputPanels
                     measurementBulletWeight.Value = value.Weight;
                     measurementMuzzleVelocity.Value = value.MuzzleVelocity;
                     measurementBC.Value = value.BallisticCoefficient;
+                    checkBoxFormFactor.Checked = value.BallisticCoefficient.ValueType == BallisticCoefficientValueType.FormFactor;
                     measurementDiameter.Value = value.BulletDiameter;
                     measurementLength.Value = value.BulletLength;
                 }
@@ -76,11 +81,16 @@ namespace BallisticCalculatorNet.InputPanels
                     {
                         using var fs = new FileStream(value, FileMode.Open, FileAccess.Read, FileShare.Read);
                         CustomBallistic = DrgDragTable.Open(fs, Encoding.ASCII);
-                        measurementBC.Value = new BallisticCoefficient(Math.Round(CustomBallistic.Ammunition.Ammunition.GetBallisticCoefficient(), 5), DragTableId.GC);
+                        measurementBC.Value = new BallisticCoefficient(1, DragTableId.GC);
+                        checkBoxFormFactor.Checked = true;
+                        measurementBulletWeight.Value = CustomBallistic.Ammunition.Ammunition.Weight.To(WeightUnit.Gram);
+                        if (CustomBallistic.Ammunition.Ammunition.BulletDiameter != null)
+                            measurementDiameter.Value = CustomBallistic.Ammunition.Ammunition.BulletDiameter.Value.To(DistanceUnit.Millimeter);
                     }
                     catch (Exception)
                     {
                         CustomBallistic = null;
+                        checkBoxFormFactor.Checked = false;
                     }
                 }
                 CustomTableChanged?.Invoke(this, EventArgs.Empty);
@@ -143,5 +153,16 @@ namespace BallisticCalculatorNet.InputPanels
         }
 
         public event EventHandler CustomTableChanged;
+
+        private void buttonSDasBC_Click(object sender, EventArgs e)
+        {
+            var weight = measurementBulletWeight.ValueAsMeasurement<WeightUnit>();
+            var diameter = measurementDiameter.ValueAsMeasurement<DistanceUnit>();
+            if (weight.Value != 0 && diameter.Value != 0)
+            {
+                measurementBC.Value = new BallisticCoefficient(Math.Round(weight.In(WeightUnit.Grain) / 7000.0 / Math.Pow(diameter.In(DistanceUnit.Inch), 2), 5), DragTableId.GC);
+                checkBoxFormFactor.Checked = false;
+            }
+        }
     }
 }
