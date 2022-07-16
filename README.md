@@ -7,7 +7,7 @@ The application is under development now!!! Please stay in touch. I expect the f
 If you need something to use right now, take a look at OLD version of the application 
 https://sourceforge.net/projects/ballisticcalculator/
 
-For related math see [Ballistic Library]()
+For related math see [Ballistic Library](https://github.com/gehtsoft-usa/BallisticCalculator1)
 
 ## RISK NOTICE
 
