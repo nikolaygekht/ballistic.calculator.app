@@ -164,5 +164,8 @@ namespace BallisticCalculatorNet.InputPanels
                 checkBoxFormFactor.Checked = false;
             }
         }
+
+        internal void SetBulletDiameter(Measurement<DistanceUnit> bulletDiameter)
+            => measurementDiameter.Value = bulletDiameter;
     }
 }

@@ -1,12 +1,15 @@
 ﻿using BallisticCalculator;
+using BallisticCalculator.Data.Dictionary;
 using BallisticCalculator.Serialization;
 using BallisticCalculatorNet.InputPanels;
 using BallisticCalculatorNet.UnitTest.Utils;
 using FluentAssertions;
 using Gehtsoft.Measurements;
 using Gehtsoft.Winforms.FluentAssertions;
+using Moq;
 using System;
 using System.IO;
+using System.Windows.Forms;
 using Xunit;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -24,18 +27,6 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             cb.Items.Contains("FMJ").Should().BeTrue();
             cb.Items.Contains("HP").Should().BeTrue();
             cb.Items.Contains("HPBT").Should().BeTrue();
-        }
-
-        [Fact]
-        public void ComboBoxes_Calibers()
-        {
-            using TestForm tf = new TestForm();
-            var control = tf.AddControl<AmmoLibEntryControl>(5, 5, 100, 100);
-
-            var cb = control.ComboBox("comboBoxCaliber");
-            cb.Items.Contains(".22 LR").Should().BeTrue();
-            cb.Items.Contains("9x19mm").Should().BeTrue();
-            cb.Items.Contains(".223 Remington").Should().BeTrue();
         }
 
         [Fact]
@@ -89,7 +80,7 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
 
             control.TextBox("textBoxName").Text.Should().Be("7.62x39 125gr FMJ");
             control.ComboBox("comboBoxAmmoType").Text.Should().Be("FMJ");
-            control.ComboBox("comboBoxCaliber").Text.Should().Be("7.62x39");
+            control.TextBox("textBoxCaliber").Text.Should().Be("7.62x39");
             control.TextBox("textBoxSource").Text.Should().Be("Remington");
             control.MeasurementControl("measurementBarrelLength")
                 .ValueAsMeasurement<DistanceUnit>().In(DistanceUnit.Inch).Should().BeApproximately(24.0, 1e-8);
@@ -119,7 +110,7 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
 
             control.TextBox("textBoxName").Text = "7.62x39 125gr FMJ";
             control.ComboBox("comboBoxAmmoType").Text = "FMJ";
-            control.ComboBox("comboBoxCaliber").Text = "7.62x39";
+            control.TextBox("textBoxCaliber").Text = "7.62x39";
             control.TextBox("textBoxSource").Text = "Remington";
             control.MeasurementControl("measurementBarrelLength")
                 .Value = new Measurement<DistanceUnit>(24, DistanceUnit.Inch);
@@ -196,16 +187,18 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
         public void Write()
         {
             using var ammoFile = TemporaryFile.WithExtension("ammox");
+            
             var filePrompt = new MockFileNamePrompt() { FileName = ammoFile.FileName };
             var filePropmptFactory = new MockFileNamePromptFactory();
             filePropmptFactory.AddPrompt(filePrompt);
+            
             using TestForm tf = new TestForm();
             var control = tf.AddControl<AmmoLibEntryControl>(5, 5, 100, 100);
             control.PromptFactory = filePropmptFactory;
 
             control.TextBox("textBoxName").Text = "7.62x39 125gr FMJ";
             control.ComboBox("comboBoxAmmoType").Text = "FMJ";
-            control.ComboBox("comboBoxCaliber").Text = "7.62x39";
+            control.TextBox("textBoxCaliber").Text = "7.62x39";
             control.TextBox("textBoxSource").Text = "Remington";
             control.MeasurementControl("measurementBarrelLength")
                 .Value = new Measurement<DistanceUnit>(24, DistanceUnit.Inch);
@@ -249,6 +242,32 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             libEntry.Ammunition.BulletDiameter.Value.In(DistanceUnit.Millimeter).Should().BeApproximately(7.85, 5e-5);
             libEntry.Ammunition.BulletLength.Should().NotBeNull();
             libEntry.Ammunition.BulletLength.Value.In(DistanceUnit.Millimeter).Should().BeApproximately(19, 5e-5);
+        }
+
+        [Fact]
+        public void UseCaliberLibrary()
+        {
+            var caliber = new AmmunitionCaliber(AmmunitionCaliberType.Pistol, null, 7.62.As(DistanceUnit.Millimeter), "7.62x39mm", "");
+
+            var caliberForm = new Mock<ICaliberSelector>();
+            caliberForm.Setup(f => f.Caliber).Returns(caliber);
+            caliberForm.Setup(f => f.Select(It.IsAny<IWin32Window>())).Returns(true);
+
+            var caliberFactory = new Mock<ICaliberSelectorFactory>();
+            caliberFactory.Setup(f => f.Create()).Returns(caliberForm.Object);
+
+
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<AmmoLibEntryControl>(5, 5, 100, 100);
+            control.CaliberSelectorFactory = caliberFactory.Object;
+
+            control.InvokeEventHandler("buttonCaliberSelect_Click", EventArgs.Empty);
+
+            control.TextBox("textBoxCaliber").Should().HaveText("7.62x39mm");
+            
+            control.Control("ammoControl")
+                .MeasurementControl("measurementDiameter")
+                .Should().HaveValue(7.62.As(DistanceUnit.Millimeter));
         }
     }
 }

@@ -82,6 +82,7 @@ namespace BallisticCalculatorNet.MeasurementControl
                 r.Add(new MeasurementUtility.Unit("G6", DragTableId.G6));
                 r.Add(new MeasurementUtility.Unit("G7", DragTableId.G7));
                 r.Add(new MeasurementUtility.Unit("G8", DragTableId.G8));
+                r.Add(new MeasurementUtility.Unit("GI", DragTableId.GI));
                 r.Add(new MeasurementUtility.Unit("GS", DragTableId.GS));
                 r.Add(new MeasurementUtility.Unit("GC", DragTableId.GC));
             }

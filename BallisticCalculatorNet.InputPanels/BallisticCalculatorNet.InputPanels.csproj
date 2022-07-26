@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BallisticCalculator" Version="1.1.0.7" />
-    <PackageReference Include="Gehtsoft.Measurements" Version="1.1.11" />
+    <PackageReference Include="BallisticCalculator" Version="1.1.0.9" />
+    <PackageReference Include="Gehtsoft.Measurements" Version="1.1.12" />
     <PackageReference Include="System.Text.Json" Version="6.0.5" />
   </ItemGroup>
 

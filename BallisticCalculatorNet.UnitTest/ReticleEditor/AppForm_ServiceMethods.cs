@@ -11,6 +11,7 @@ using Xunit;
 
 namespace BallisticCalculatorNet.UnitTest.ReticleEditor
 {
+    [Collection("Non-Parallel Collection")]
     public class AppForm_ServiceMethods
     {
         [Theory]

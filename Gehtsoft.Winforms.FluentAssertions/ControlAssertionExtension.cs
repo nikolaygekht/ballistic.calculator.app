@@ -20,6 +20,10 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public static RadioButtonAssertions Should(this RadioButton control) => new RadioButtonAssertions(control);
 
+        public static ListViewAssertions Should(this ListView control) => new ListViewAssertions(control);
+        
+        public static ListViewItemAssertions Should(this ListViewItem item) => new ListViewItemAssertions(item);
+
         public static Control Control(this Control parent, string name, Type type)
         {
             var control = parent.Controls.Find(name, true);
@@ -44,6 +48,8 @@ namespace Gehtsoft.Winforms.FluentAssertions
         public static CheckBox CheckBox(this Control parent, string name) => Control<CheckBox>(parent, name);
 
         public static RadioButton RadioButton(this Control parent, string name) => Control<RadioButton>(parent, name);
+
+        public static ListView ListView(this Control parent, string name) => Control<ListView>(parent, name);
 
         public static void InvokeEventHandler(this Control control, string method, EventArgs args)
         {
