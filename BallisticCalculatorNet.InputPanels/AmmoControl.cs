@@ -17,6 +17,8 @@ namespace BallisticCalculatorNet.InputPanels
     {
         private MeasurementSystem mMeasurementSystem = MeasurementSystem.Metric;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MeasurementSystem MeasurementSystem
         {
             get => mMeasurementSystem;
@@ -27,6 +29,8 @@ namespace BallisticCalculatorNet.InputPanels
             }
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Ammunition Ammunition
         {
             get
@@ -61,12 +65,17 @@ namespace BallisticCalculatorNet.InputPanels
                     measurementMuzzleVelocity.Value = value.MuzzleVelocity;
                     measurementBC.Value = value.BallisticCoefficient;
                     checkBoxFormFactor.Checked = value.BallisticCoefficient.ValueType == BallisticCoefficientValueType.FormFactor;
-                    measurementDiameter.Value = value.BulletDiameter;
+                    if (value.BulletDiameter != null)
+                        SetBulletDiameter(value.BulletDiameter.Value);
+                    else
+                        measurementDiameter.Value = value.BulletDiameter;
                     measurementLength.Value = value.BulletLength;
                 }
             }
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string CustomBallisticFile
         {
             get => textBoxCustomBallistic.Text;
@@ -97,6 +106,8 @@ namespace BallisticCalculatorNet.InputPanels
             }
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DrgDragTable CustomBallistic { get; private set; }
 
         public AmmoControl()
@@ -166,6 +177,13 @@ namespace BallisticCalculatorNet.InputPanels
         }
 
         internal void SetBulletDiameter(Measurement<DistanceUnit> bulletDiameter)
-            => measurementDiameter.Value = bulletDiameter;
+        {
+            if (bulletDiameter.Unit == DistanceUnit.Millimeter)
+                measurementDiameter.ChangeUnit(DistanceUnit.Millimeter, 2);
+            else if (bulletDiameter.Unit == DistanceUnit.Inch)
+                measurementDiameter.ChangeUnit(DistanceUnit.Inch, 3);
+
+            measurementDiameter.Value = bulletDiameter;
+        }
     }
 }

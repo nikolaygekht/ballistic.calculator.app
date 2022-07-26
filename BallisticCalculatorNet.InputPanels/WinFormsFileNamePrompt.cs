@@ -32,7 +32,7 @@ namespace BallisticCalculatorNet.InputPanels
             StringBuilder filters = new StringBuilder();
             foreach (var filter in mFilters)
                 filters.Append(filter.Item2).Append('|').Append("*.").Append(filter.Item1).Append('|');
-            filters.Append("All files|*.*|");
+            filters.Append("All files|*.*");
 
             fileDialog.Filter = filters.ToString();
         }

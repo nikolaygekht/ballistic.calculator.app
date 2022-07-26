@@ -58,10 +58,13 @@
             // 
             // listViewCalibers
             // 
+            this.listViewCalibers.Alignment = System.Windows.Forms.ListViewAlignment.Default;
             this.listViewCalibers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderType,
             this.columnHeaderName,
             this.columnHeaderDiameter});
+            this.listViewCalibers.FullRowSelect = true;
+            this.listViewCalibers.GridLines = true;
             this.listViewCalibers.Location = new System.Drawing.Point(12, 49);
             this.listViewCalibers.MultiSelect = false;
             this.listViewCalibers.Name = "listViewCalibers";

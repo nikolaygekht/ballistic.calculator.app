@@ -14,6 +14,8 @@ namespace BallisticCalculatorNet.InputPanels
 {
     public partial class WindControl : UserControl, IMeasurementSystemControl
     {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Wind Wind
         {
             get
@@ -110,6 +112,8 @@ namespace BallisticCalculatorNet.InputPanels
 
         private MeasurementSystem mMeasurementSystem = MeasurementSystem.Metric;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MeasurementSystem MeasurementSystem
         {
             get => mMeasurementSystem;

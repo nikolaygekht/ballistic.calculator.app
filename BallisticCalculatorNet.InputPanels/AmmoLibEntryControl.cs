@@ -26,6 +26,8 @@ namespace BallisticCalculatorNet.InputPanels
                 comboBoxAmmoType.Items.Add(type.Abbreviation);
         }
 
+        [Browsable(false)] 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IFileNamePromptFactory PromptFactory { get; set; } = new WinFormsFileNamePromptFactory();
 
         public MeasurementSystem MeasurementSystem
@@ -41,6 +43,8 @@ namespace BallisticCalculatorNet.InputPanels
             }
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public AmmunitionLibraryEntry LibraryEntry
         {
             get
@@ -72,6 +76,8 @@ namespace BallisticCalculatorNet.InputPanels
             }
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Ammunition Ammunition
         {
             get => ammoControl.Ammunition;
@@ -134,7 +140,9 @@ namespace BallisticCalculatorNet.InputPanels
                 textBoxName.Text = ammoControl.CustomBallistic.Ammunition.Name;
         }
 
-        public ICaliberSelectorFactory CaliberSelectorFactory { get; set; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public ICaliberSelectorFactory CaliberSelectorFactory { get; set; } = new CaliberSelectorFactory();
 
         private void buttonCaliberSelect_Click(object sender, EventArgs e)
         {

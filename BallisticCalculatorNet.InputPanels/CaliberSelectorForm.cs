@@ -120,7 +120,7 @@ namespace BallisticCalculatorNet.InputPanels
         {
             StringBuilder sb = new StringBuilder();
             listViewCalibers.BeginUpdate();
-            listViewCalibers.Clear();
+            listViewCalibers.Items.Clear();
             for (int i = 0; i < calibers.Length; i++)
             {
                 var item = calibers[i];
