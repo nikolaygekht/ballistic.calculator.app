@@ -50,7 +50,7 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             this.measurementBulletWeight.DecimalPoints = null;
             this.measurementBulletWeight.Increment = 1D;
-            this.measurementBulletWeight.Location = new System.Drawing.Point(169, 5);
+            this.measurementBulletWeight.Location = new System.Drawing.Point(170, 5);
             this.measurementBulletWeight.Margin = new System.Windows.Forms.Padding(5);
             this.measurementBulletWeight.Maximum = 1000D;
             this.measurementBulletWeight.MaximumSize = new System.Drawing.Size(5120, 34);
@@ -58,7 +58,7 @@ namespace BallisticCalculatorNet.InputPanels
             this.measurementBulletWeight.Minimum = 0D;
             this.measurementBulletWeight.MinimumSize = new System.Drawing.Size(150, 34);
             this.measurementBulletWeight.Name = "measurementBulletWeight";
-            this.measurementBulletWeight.Size = new System.Drawing.Size(238, 34);
+            this.measurementBulletWeight.Size = new System.Drawing.Size(260, 34);
             this.measurementBulletWeight.TabIndex = 1;
             this.measurementBulletWeight.TextValue = "0gr";
             this.measurementBulletWeight.Unit = Gehtsoft.Measurements.WeightUnit.Grain;
@@ -97,7 +97,7 @@ namespace BallisticCalculatorNet.InputPanels
             this.measurementMuzzleVelocity.Minimum = 0D;
             this.measurementMuzzleVelocity.MinimumSize = new System.Drawing.Size(150, 34);
             this.measurementMuzzleVelocity.Name = "measurementMuzzleVelocity";
-            this.measurementMuzzleVelocity.Size = new System.Drawing.Size(238, 34);
+            this.measurementMuzzleVelocity.Size = new System.Drawing.Size(260, 34);
             this.measurementMuzzleVelocity.TabIndex = 9;
             this.measurementMuzzleVelocity.TextValue = "m/s";
             this.measurementMuzzleVelocity.Unit = Gehtsoft.Measurements.VelocityUnit.MetersPerSecond;
@@ -125,7 +125,7 @@ namespace BallisticCalculatorNet.InputPanels
             this.measurementDiameter.Minimum = 0D;
             this.measurementDiameter.MinimumSize = new System.Drawing.Size(150, 34);
             this.measurementDiameter.Name = "measurementDiameter";
-            this.measurementDiameter.Size = new System.Drawing.Size(238, 34);
+            this.measurementDiameter.Size = new System.Drawing.Size(260, 34);
             this.measurementDiameter.TabIndex = 11;
             this.measurementDiameter.TextValue = "m";
             this.measurementDiameter.Unit = Gehtsoft.Measurements.DistanceUnit.Meter;
@@ -142,7 +142,7 @@ namespace BallisticCalculatorNet.InputPanels
             this.measurementLength.Minimum = 0D;
             this.measurementLength.MinimumSize = new System.Drawing.Size(150, 34);
             this.measurementLength.Name = "measurementLength";
-            this.measurementLength.Size = new System.Drawing.Size(238, 34);
+            this.measurementLength.Size = new System.Drawing.Size(260, 34);
             this.measurementLength.TabIndex = 13;
             this.measurementLength.TextValue = "m";
             this.measurementLength.Unit = Gehtsoft.Measurements.DistanceUnit.Meter;
@@ -171,7 +171,7 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             this.measurementBC.DecimalPoints = null;
             this.measurementBC.Increment = 0.001D;
-            this.measurementBC.Location = new System.Drawing.Point(169, 46);
+            this.measurementBC.Location = new System.Drawing.Point(170, 46);
             this.measurementBC.Margin = new System.Windows.Forms.Padding(5);
             this.measurementBC.Maximum = 2D;
             this.measurementBC.MaximumSize = new System.Drawing.Size(5120, 34);
@@ -179,7 +179,7 @@ namespace BallisticCalculatorNet.InputPanels
             this.measurementBC.Minimum = 0D;
             this.measurementBC.MinimumSize = new System.Drawing.Size(150, 34);
             this.measurementBC.Name = "measurementBC";
-            this.measurementBC.Size = new System.Drawing.Size(238, 34);
+            this.measurementBC.Size = new System.Drawing.Size(260, 34);
             this.measurementBC.TabIndex = 3;
             this.measurementBC.TextValue = "0.5G1";
             this.measurementBC.Unit = BallisticCalculator.DragTableId.G1;
@@ -195,14 +195,14 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             // textBoxCustomBallistic
             // 
-            this.textBoxCustomBallistic.Location = new System.Drawing.Point(168, 116);
+            this.textBoxCustomBallistic.Location = new System.Drawing.Point(170, 116);
             this.textBoxCustomBallistic.Name = "textBoxCustomBallistic";
-            this.textBoxCustomBallistic.Size = new System.Drawing.Size(198, 31);
+            this.textBoxCustomBallistic.Size = new System.Drawing.Size(220, 31);
             this.textBoxCustomBallistic.TabIndex = 6;
             // 
             // buttonCustomBallisticLoad
             // 
-            this.buttonCustomBallisticLoad.Location = new System.Drawing.Point(372, 116);
+            this.buttonCustomBallisticLoad.Location = new System.Drawing.Point(396, 116);
             this.buttonCustomBallisticLoad.Name = "buttonCustomBallisticLoad";
             this.buttonCustomBallisticLoad.Size = new System.Drawing.Size(34, 31);
             this.buttonCustomBallisticLoad.TabIndex = 7;
@@ -213,7 +213,7 @@ namespace BallisticCalculatorNet.InputPanels
             // checkBoxFormFactor
             // 
             this.checkBoxFormFactor.AutoSize = true;
-            this.checkBoxFormFactor.Location = new System.Drawing.Point(169, 82);
+            this.checkBoxFormFactor.Location = new System.Drawing.Point(170, 82);
             this.checkBoxFormFactor.Name = "checkBoxFormFactor";
             this.checkBoxFormFactor.Size = new System.Drawing.Size(174, 28);
             this.checkBoxFormFactor.TabIndex = 4;
@@ -222,7 +222,7 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             // buttonSDasBC
             // 
-            this.buttonSDasBC.Location = new System.Drawing.Point(170, 278);
+            this.buttonSDasBC.Location = new System.Drawing.Point(161, 278);
             this.buttonSDasBC.Name = "buttonSDasBC";
             this.buttonSDasBC.Size = new System.Drawing.Size(112, 34);
             this.buttonSDasBC.TabIndex = 14;
@@ -251,7 +251,7 @@ namespace BallisticCalculatorNet.InputPanels
             this.Controls.Add(this.measurementBulletWeight);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AmmoControl";
-            this.Size = new System.Drawing.Size(416, 324);
+            this.Size = new System.Drawing.Size(435, 324);
             this.Enter += new System.EventHandler(this.AmmoControl_Enter);
             this.ResumeLayout(false);
             this.PerformLayout();

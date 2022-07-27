@@ -290,6 +290,7 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
 
         [Theory]
         [InlineData(MeasurementType.Distance, 4, 10, DistanceUnit.Meter, 32.8084, DistanceUnit.Foot)]
+        [InlineData(MeasurementType.Distance, 2, 10, DistanceUnit.Meter, 32.81, DistanceUnit.Foot)]
         [InlineData(MeasurementType.Velocity, 2, 5.5, VelocityUnit.FeetPerSecond, 3.75, VelocityUnit.MilesPerHour)]
         [InlineData(MeasurementType.Velocity, 2, 3.75, VelocityUnit.MilesPerHour, 5.5, VelocityUnit.FeetPerSecond)]
         public void ChangeUnit<T>(MeasurementType type, int accurracy, double initialValue, T initialUnit, double convertedValue, T targetUnit)

@@ -29,8 +29,7 @@ namespace BallisticCalculatorNet.InputPanels
         /// </summary>
         private void InitializeComponent()
         {
-            BallisticCalculator.Ammunition ammunition2 = new BallisticCalculator.Ammunition();
-            BallisticCalculatorNet.InputPanels.WinFormsFileNamePromptFactory winFormsFileNamePromptFactory2 = new BallisticCalculatorNet.InputPanels.WinFormsFileNamePromptFactory();
+            BallisticCalculatorNet.InputPanels.WinFormsFileNamePromptFactory winFormsFileNamePromptFactory1 = new BallisticCalculatorNet.InputPanels.WinFormsFileNamePromptFactory();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -49,15 +48,15 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(178, 11);
+            this.textBoxName.Location = new System.Drawing.Point(170, 11);
             this.textBoxName.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(242, 31);
+            this.textBoxName.Size = new System.Drawing.Size(261, 31);
             this.textBoxName.TabIndex = 1;
             // 
             // buttonLoad
             // 
-            this.buttonLoad.Location = new System.Drawing.Point(178, 50);
+            this.buttonLoad.Location = new System.Drawing.Point(177, 50);
             this.buttonLoad.Margin = new System.Windows.Forms.Padding(4);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(118, 35);
@@ -68,7 +67,7 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(301, 50);
+            this.buttonSave.Location = new System.Drawing.Point(303, 50);
             this.buttonSave.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(118, 35);
@@ -79,17 +78,11 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             // ammoControl
             // 
-            ammunition2.BulletDiameter = null;
-            ammunition2.BulletLength = null;
-            ammunition2.CustomTableFileName = null;
-            this.ammoControl.Ammunition = ammunition2;
-            this.ammoControl.CustomBallisticFile = "";
-            this.ammoControl.Location = new System.Drawing.Point(8, 94);
+            this.ammoControl.Location = new System.Drawing.Point(0, 92);
             this.ammoControl.Margin = new System.Windows.Forms.Padding(5);
-            this.ammoControl.MeasurementSystem = BallisticCalculatorNet.InputPanels.MeasurementSystem.Metric;
             this.ammoControl.Name = "ammoControl";
-            this.ammoControl.PromptFactory = winFormsFileNamePromptFactory2;
-            this.ammoControl.Size = new System.Drawing.Size(445, 318);
+            this.ammoControl.PromptFactory = winFormsFileNamePromptFactory1;
+            this.ammoControl.Size = new System.Drawing.Size(435, 318);
             this.ammoControl.TabIndex = 4;
             this.ammoControl.CustomTableChanged += new System.EventHandler(this.ammoControl_CustomTableChanged);
             this.ammoControl.Enter += new System.EventHandler(this.ammoControl1_Enter);
@@ -107,10 +100,10 @@ namespace BallisticCalculatorNet.InputPanels
             // comboBoxAmmoType
             // 
             this.comboBoxAmmoType.FormattingEnabled = true;
-            this.comboBoxAmmoType.Location = new System.Drawing.Point(180, 459);
+            this.comboBoxAmmoType.Location = new System.Drawing.Point(170, 459);
             this.comboBoxAmmoType.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxAmmoType.Name = "comboBoxAmmoType";
-            this.comboBoxAmmoType.Size = new System.Drawing.Size(242, 32);
+            this.comboBoxAmmoType.Size = new System.Drawing.Size(261, 32);
             this.comboBoxAmmoType.Sorted = true;
             this.comboBoxAmmoType.TabIndex = 10;
             // 
@@ -138,7 +131,7 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             this.measurementBarrelLength.DecimalPoints = null;
             this.measurementBarrelLength.Increment = 1D;
-            this.measurementBarrelLength.Location = new System.Drawing.Point(180, 501);
+            this.measurementBarrelLength.Location = new System.Drawing.Point(170, 501);
             this.measurementBarrelLength.Margin = new System.Windows.Forms.Padding(5);
             this.measurementBarrelLength.Maximum = 10000D;
             this.measurementBarrelLength.MaximumSize = new System.Drawing.Size(5120, 34);
@@ -146,7 +139,7 @@ namespace BallisticCalculatorNet.InputPanels
             this.measurementBarrelLength.Minimum = 0D;
             this.measurementBarrelLength.MinimumSize = new System.Drawing.Size(150, 34);
             this.measurementBarrelLength.Name = "measurementBarrelLength";
-            this.measurementBarrelLength.Size = new System.Drawing.Size(242, 34);
+            this.measurementBarrelLength.Size = new System.Drawing.Size(260, 34);
             this.measurementBarrelLength.TabIndex = 12;
             this.measurementBarrelLength.TextValue = "mm";
             this.measurementBarrelLength.Unit = Gehtsoft.Measurements.DistanceUnit.Millimeter;
@@ -163,10 +156,10 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             // textBoxSource
             // 
-            this.textBoxSource.Location = new System.Drawing.Point(180, 543);
+            this.textBoxSource.Location = new System.Drawing.Point(170, 543);
             this.textBoxSource.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxSource.Name = "textBoxSource";
-            this.textBoxSource.Size = new System.Drawing.Size(242, 31);
+            this.textBoxSource.Size = new System.Drawing.Size(260, 31);
             this.textBoxSource.TabIndex = 14;
             // 
             // label5
@@ -181,14 +174,14 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             // textBoxCaliber
             // 
-            this.textBoxCaliber.Location = new System.Drawing.Point(180, 418);
+            this.textBoxCaliber.Location = new System.Drawing.Point(170, 418);
             this.textBoxCaliber.Name = "textBoxCaliber";
-            this.textBoxCaliber.Size = new System.Drawing.Size(195, 31);
+            this.textBoxCaliber.Size = new System.Drawing.Size(214, 31);
             this.textBoxCaliber.TabIndex = 7;
             // 
             // buttonCaliberSelect
             // 
-            this.buttonCaliberSelect.Location = new System.Drawing.Point(381, 418);
+            this.buttonCaliberSelect.Location = new System.Drawing.Point(390, 418);
             this.buttonCaliberSelect.Name = "buttonCaliberSelect";
             this.buttonCaliberSelect.Size = new System.Drawing.Size(41, 31);
             this.buttonCaliberSelect.TabIndex = 8;
@@ -216,7 +209,7 @@ namespace BallisticCalculatorNet.InputPanels
             this.Controls.Add(this.textBoxName);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AmmoLibEntryControl";
-            this.Size = new System.Drawing.Size(446, 597);
+            this.Size = new System.Drawing.Size(435, 597);
             this.ResumeLayout(false);
             this.PerformLayout();
 
