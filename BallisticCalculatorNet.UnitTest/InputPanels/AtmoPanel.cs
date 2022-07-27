@@ -117,7 +117,7 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             using TestForm tf = new TestForm();
             var control = tf.AddControl<AtmosphereControl>(5, 5, 100, 100);
             var atmo = new Atmosphere(330.As(DistanceUnit.Foot), 31.05.As(PressureUnit.InchesOfMercury), 101.As(TemperatureUnit.Fahrenheit), 0.51);
-            
+
             control.Atmosphere = atmo;
 
             control.MeasurementControl("measurementAltitude").ValueAs<Measurement<DistanceUnit>>()
