@@ -2,8 +2,10 @@
 using BallisticCalculatorNet.InputPanels;
 using BallisticCalculatorNet.UnitTest.Utils;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using Gehtsoft.Measurements;
 using Gehtsoft.Winforms.FluentAssertions;
+using Moq;
 using System;
 using Xunit;
 
@@ -110,7 +112,7 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             using TestForm tf = new TestForm();
             var control = tf.AddControl<WeaponControl>(5, 5, 100, 100);
             control.MeasurementSystem = MeasurementSystem.Metric;
-            
+
             control.Rifle = null;
 
             control.MeasurementControl("measurementSightHeight").Value.Should().Be(50.As(DistanceUnit.Millimeter));
@@ -171,6 +173,118 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             control.MeasurementControl("measurementRifling").Value.Should().Be(12.As(DistanceUnit.Inch));
             control.MeasurementControl("measurementVClick").Value.Should().Be(0.1.As(AngularUnit.Mil));
             control.MeasurementControl("measurementHClick").Value.Should().Be(0.2.As(AngularUnit.Mil));
+        }
+
+        [Theory]
+        [InlineData(MeasurementSystem.Metric)]
+        [InlineData(MeasurementSystem.Imperial)]
+        public void PropogateMeasurementSystem_ToZerocontrols(MeasurementSystem ms)
+        {
+            var zeroAmmo = new Mock<IZeroAmmunitionControl>();
+            zeroAmmo.SetupSet(v => v.MeasurementSystem = ms).Verifiable();
+
+            var zeroAtmo = new Mock<IZeroAtmosphereControl>();
+            zeroAtmo.SetupSet(v => v.MeasurementSystem = ms).Verifiable();
+
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<WeaponControl>(5, 5, 100, 100);
+
+            control.ZeroAmmunition = zeroAmmo.Object;
+            control.ZeroAtmosphere = zeroAtmo.Object;
+
+            control.MeasurementSystem = ms;
+
+            zeroAmmo.Verify();
+            zeroAtmo.Verify();
+        }
+
+        [Fact]
+        public void PropogateValues_ToZerocontrols()
+        {
+            var ammo = new Ammunition(8.As(WeightUnit.Gram), new BallisticCoefficient(0.263, DragTableId.G1), 2300.As(VelocityUnit.FeetPerSecond));
+            var atmo = new Atmosphere();
+            var weapon = new Rifle()
+            {
+                Zero = new ZeroingParameters()
+                {
+                    Distance = 100.As(DistanceUnit.Yard),
+                    Ammunition = ammo,
+                    Atmosphere = atmo,
+                }
+            };
+
+            var zeroAmmo = new Mock<IZeroAmmunitionControl>();
+            zeroAmmo.SetupSet(v => v.Ammunition = ammo).Verifiable();
+
+            var zeroAtmo = new Mock<IZeroAtmosphereControl>();
+            zeroAtmo.SetupSet(v => v.Atmosphere = atmo).Verifiable();
+
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<WeaponControl>(5, 5, 100, 100);
+
+            control.ZeroAmmunition = zeroAmmo.Object;
+            control.ZeroAtmosphere = zeroAtmo.Object;
+
+            control.Rifle = weapon;
+
+            zeroAmmo.Verify();
+            zeroAtmo.Verify();
+        }
+
+        [Fact]
+        public void PropogateNull_ToZerocontrols()
+        {
+            var weapon = new Rifle()
+            {
+                Zero = new ZeroingParameters()
+                {
+                    Distance = 100.As(DistanceUnit.Yard),
+                }
+            };
+
+            var zeroAmmo = new Mock<IZeroAmmunitionControl>();
+            zeroAmmo.SetupSet(v => v.Ammunition = null).Verifiable();
+
+            var zeroAtmo = new Mock<IZeroAtmosphereControl>();
+            zeroAtmo.SetupSet(v => v.Atmosphere = null).Verifiable();
+
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<WeaponControl>(5, 5, 100, 100);
+
+            control.ZeroAmmunition = zeroAmmo.Object;
+            control.ZeroAtmosphere = zeroAtmo.Object;
+
+            control.Rifle = weapon;
+
+            zeroAmmo.Verify();
+            zeroAtmo.Verify();
+        }
+
+        [Fact]
+        public void GatherValues_FromZerocontrols()
+        {
+            var ammo = new Ammunition(8.As(WeightUnit.Gram), new BallisticCoefficient(0.263, DragTableId.G1), 2300.As(VelocityUnit.FeetPerSecond));
+            var atmo = new Atmosphere();
+
+            var zeroAmmo = new Mock<IZeroAmmunitionControl>();
+            zeroAmmo.Setup(v => v.Ammunition).Returns(ammo);
+
+            var zeroAtmo = new Mock<IZeroAtmosphereControl>();
+            zeroAtmo.Setup(v => v.Atmosphere).Returns(atmo);
+
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<WeaponControl>(5, 5, 100, 100);
+
+            control.ZeroAmmunition = zeroAmmo.Object;
+            control.ZeroAtmosphere = zeroAtmo.Object;
+
+            var weapon = control.Rifle;
+
+            weapon.Zero?.Atmosphere.Should().NotBeNull();
+            weapon.Zero?.Ammunition.Should().NotBeNull();
+
+            weapon.Zero?.Ammunition?.Weight.Should().Be(8.As(WeightUnit.Gram));
+            weapon.Zero?.Atmosphere?.Temperature.Should().Be(59.As(TemperatureUnit.Fahrenheit));
         }
     }
 }

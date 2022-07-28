@@ -4,6 +4,7 @@ using BallisticCalculatorNet.UnitTest.Utils;
 using FluentAssertions;
 using Gehtsoft.Measurements;
 using Gehtsoft.Winforms.FluentAssertions;
+using Moq;
 using System;
 using System.Windows.Forms;
 using Xunit;
@@ -151,6 +152,145 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             atmo.Temperature.Should().Be(101.As(TemperatureUnit.Fahrenheit));
             atmo.Pressure.Should().Be(31.05.As(PressureUnit.InchesOfMercury));
             atmo.Humidity.Should().Be(0.515);
+        }
+    }
+
+    public class ParametersPanel
+    {
+        [Fact]
+        public void Initial()
+        {
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<ParametersControl>(5, 5, 100, 100);
+
+            control.MeasurementControl("measurementDistance").Should().BeEmpty();
+            control.MeasurementControl("measurementStep").Should().BeEmpty();
+            control.MeasurementControl("measurementShotAngle").Should().BeEmpty();
+            control.TextBox("textBoxClicks").Should().HaveNoText();
+
+        }
+
+        [Fact]
+        public void Metric()
+        {
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<ParametersControl>(5, 5, 100, 100);
+            control.MeasurementSystem = MeasurementSystem.Metric;
+
+            control.MeasurementControl("measurementDistance").Should().HaveUnitSelected(DistanceUnit.Meter);
+            control.MeasurementControl("measurementDistance").DecimalPoints.Should().Be(0);
+            control.MeasurementControl("measurementStep").Should().HaveUnitSelected(DistanceUnit.Meter);
+            control.MeasurementControl("measurementStep").DecimalPoints.Should().Be(0);
+        }
+
+        [Fact]
+        public void Imperial()
+        {
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<ParametersControl>(5, 5, 100, 100);
+            control.MeasurementSystem = MeasurementSystem.Imperial;
+
+            control.MeasurementControl("measurementDistance").Should().HaveUnitSelected(DistanceUnit.Yard);
+            control.MeasurementControl("measurementDistance").DecimalPoints.Should().Be(0);
+            control.MeasurementControl("measurementStep").Should().HaveUnitSelected(DistanceUnit.Yard);
+            control.MeasurementControl("measurementStep").DecimalPoints.Should().Be(0);
+        }
+
+        [Fact]
+        public void Set_WithShotAngle()
+        {
+            var parameters = new ShotParameters()
+            {
+                MaximumDistance = 500.As(DistanceUnit.Meter),
+                Step = 25.As(DistanceUnit.Meter),
+                ShotAngle = 0.03.As(AngularUnit.Degree)
+            };
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<ParametersControl>(5, 5, 100, 100);
+            control.Parameters = parameters;
+            control.MeasurementControl("measurementDistance").Should().HaveValue(500.As(DistanceUnit.Meter));
+            control.MeasurementControl("measurementStep").Should().HaveValue(25.As(DistanceUnit.Meter));
+            control.MeasurementControl("measurementShotAngle").Should().HaveValue(0.03.As(AngularUnit.Degree));
+        }
+
+        [Fact]
+        public void Get_WithShotAngle()
+        {
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<ParametersControl>(5, 5, 100, 100);
+
+            control.MeasurementControl("measurementDistance").Value = 500.As(DistanceUnit.Meter);
+            control.MeasurementControl("measurementStep").Value = 25.As(DistanceUnit.Meter);
+            control.MeasurementControl("measurementShotAngle").Value = 0.03.As(AngularUnit.Degree);
+
+            var parameters = control.Parameters;
+
+            parameters.MaximumDistance.Should().Be(500.As(DistanceUnit.Meter));
+            parameters.Step.Should().Be(25.As(DistanceUnit.Meter));
+            parameters.ShotAngle.Should().Be(0.03.As(AngularUnit.Degree));
+        }
+        [Fact]
+        public void Set_WithoutShotAngle()
+        {
+            var parameters = new ShotParameters()
+            {
+                MaximumDistance = 500.As(DistanceUnit.Meter),
+                Step = 25.As(DistanceUnit.Meter),
+                ShotAngle = null
+            };
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<ParametersControl>(5, 5, 100, 100);
+            control.Parameters = parameters;
+            control.MeasurementControl("measurementDistance").Should().HaveValue(500.As(DistanceUnit.Meter));
+            control.MeasurementControl("measurementStep").Should().HaveValue(25.As(DistanceUnit.Meter));
+            control.MeasurementControl("measurementShotAngle").Should().BeEmpty();
+        }
+
+        [Fact]
+        public void Get_WithoutShotAngle()
+        {
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<ParametersControl>(5, 5, 100, 100);
+
+            control.MeasurementControl("measurementDistance").Value = 500.As(DistanceUnit.Meter);
+            control.MeasurementControl("measurementStep").Value = 25.As(DistanceUnit.Meter);
+            control.MeasurementControl("measurementShotAngle").Value = null;
+
+            var parameters = control.Parameters;
+
+            parameters.MaximumDistance.Should().Be(500.As(DistanceUnit.Meter));
+            parameters.Step.Should().Be(25.As(DistanceUnit.Meter));
+            parameters.ShotAngle.Should().BeNull();
+        }
+
+        [Fact]
+        public void Clicks_ToEmptyAngle()
+        {
+            var weapon = new Mock<IWeaponControl>();
+            weapon.Setup(m => m.VertialClick).Returns(0.25.As(AngularUnit.Mil));
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<ParametersControl>(5, 5, 100, 100);
+            control.WeaponControl = weapon.Object;
+            control.MeasurementControl("measurementShotAngle").Value = null;
+            control.TextBox("textBoxClicks").Text = "5";
+            control.InvokeEventHandler("buttonClicksSet_Click", EventArgs.Empty);
+            control.MeasurementControl("measurementShotAngle").Should().HaveValue(1.25.As(AngularUnit.Mil));
+        }
+
+        [Fact]
+        public void Calculate_Click()
+        {
+            var weapon = new Mock<IWeaponControl>();
+            weapon.Setup(m => m.VertialClick).Returns(0.25.As(AngularUnit.Mil));
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<ParametersControl>(5, 5, 100, 100);
+            
+            bool called = false;
+            control.CalculateRequested += (_, _) => called = true;
+            
+            control.InvokeEventHandler("buttonCalculate_Click", EventArgs.Empty);
+
+            called.Should().BeTrue();
         }
     }
 }

@@ -12,7 +12,14 @@ using System.Windows.Forms;
 
 namespace BallisticCalculatorNet.InputPanels
 {
-    public partial class WeaponControl : UserControl
+    public interface IWeaponControl
+    {
+        MeasurementSystem MeasurementSystem { get; set; }
+        Measurement<AngularUnit> VertialClick { get; }
+        Rifle Rifle { get; set; }
+    }
+
+    public partial class WeaponControl : UserControl, IWeaponControl
     {
         public WeaponControl()
         {
@@ -33,9 +40,25 @@ namespace BallisticCalculatorNet.InputPanels
             set
             {
                 mMeasurementSystem = value;
+                if (ZeroAtmosphere != null)
+                    ZeroAtmosphere.MeasurementSystem = value;
+                if (ZeroAmmunition != null)
+                    ZeroAmmunition.MeasurementSystem = value;
                 UpdateSystem();
             }
         }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Measurement<AngularUnit> VertialClick => measurementVClick.ValueAsMeasurement<AngularUnit>();
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IZeroAtmosphereControl ZeroAtmosphere { get; set; }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IZeroAmmunitionControl ZeroAmmunition { get; set; }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -52,10 +75,11 @@ namespace BallisticCalculatorNet.InputPanels
 
                 return new Rifle()
                 {
-
                     Zero = new ZeroingParameters()
                     {
-                        Distance = measurementZeroDistance.ValueAsMeasurement<DistanceUnit>()
+                        Distance = measurementZeroDistance.ValueAsMeasurement<DistanceUnit>(),
+                        Atmosphere = ZeroAtmosphere?.Atmosphere,
+                        Ammunition = ZeroAmmunition?.Ammunition
                     },
                     Rifling = twist == null ? null :
                               new Rifling()
@@ -91,10 +115,18 @@ namespace BallisticCalculatorNet.InputPanels
                     measurementZeroDistance.Value = mMeasurementSystem == MeasurementSystem.Metric ?
                                                    100.As(DistanceUnit.Meter) :
                                                    25.As(DistanceUnit.Yard);
+                    if (ZeroAmmunition != null)
+                        ZeroAmmunition.Ammunition = null;
+                    if (ZeroAtmosphere != null)
+                        ZeroAtmosphere.Atmosphere = null;
                 }
                 else
                 {
                     measurementZeroDistance.Value = value.Zero.Distance;
+                    if (ZeroAmmunition != null)
+                        ZeroAmmunition.Ammunition = value.Zero.Ammunition;
+                    if (ZeroAtmosphere != null)
+                        ZeroAtmosphere.Atmosphere = value.Zero.Atmosphere;
                 }
 
                 if (value?.Sight == null)

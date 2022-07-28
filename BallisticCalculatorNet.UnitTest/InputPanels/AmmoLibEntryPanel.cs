@@ -8,6 +8,7 @@ using Gehtsoft.Measurements;
 using Gehtsoft.Winforms.FluentAssertions;
 using Moq;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using Xunit;
@@ -137,7 +138,7 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             libEntry.Caliber.Should().Be("7.62x39");
             libEntry.BarrelLength.Should().NotBeNull();
             libEntry.BarrelLength.Value.In(DistanceUnit.Inch).Should().BeApproximately(24.0, 1e-8);
-            
+
             libEntry.Ammunition.BallisticCoefficient.Value.Should().BeApproximately(0.268, 5e-5);
             libEntry.Ammunition.BallisticCoefficient.Table.Should().Be(DragTableId.G1);
             libEntry.Ammunition.BallisticCoefficient.ValueType.Should().Be(BallisticCoefficientValueType.Coefficient);
@@ -178,7 +179,7 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             libEntry.Ammunition.BallisticCoefficient.ValueType.Should().Be(BallisticCoefficientValueType.Coefficient);
             libEntry.Ammunition.MuzzleVelocity.In(VelocityUnit.FeetPerSecond).Should().BeApproximately(2365, 5e-5);
             libEntry.Ammunition.Weight.In(WeightUnit.Grain).Should().BeApproximately(125, 5e-5);
-            
+
             libEntry.Ammunition.BulletDiameter.Should().BeNull();
             libEntry.Ammunition.BulletLength.Should().BeNull();
         }
@@ -187,11 +188,11 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
         public void Write()
         {
             using var ammoFile = TemporaryFile.WithExtension("ammox");
-            
+
             var filePrompt = new MockFileNamePrompt() { FileName = ammoFile.FileName };
             var filePropmptFactory = new MockFileNamePromptFactory();
             filePropmptFactory.AddPrompt(filePrompt);
-            
+
             using TestForm tf = new TestForm();
             var control = tf.AddControl<AmmoLibEntryControl>(5, 5, 100, 100);
             control.PromptFactory = filePropmptFactory;
@@ -222,7 +223,7 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
 
 
             AmmunitionLibraryEntry libEntry = default;
-            
+
             ((Action)(() => libEntry = BallisticXmlDeserializer.ReadFromFile<AmmunitionLibraryEntry>(ammoFile.FileName))).Should().NotThrow();
             libEntry.Should().NotBeNull();
 
@@ -264,7 +265,7 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             control.InvokeEventHandler("buttonCaliberSelect_Click", EventArgs.Empty);
 
             control.TextBox("textBoxCaliber").Should().HaveText("7.62x39mm");
-            
+
             control.Control("ammoControl")
                 .MeasurementControl("measurementDiameter")
                 .Should().HaveValue(7.62.As(DistanceUnit.Millimeter));

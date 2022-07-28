@@ -93,20 +93,11 @@ namespace BallisticCalculatorNet.InputPanels
 
         private void buttonLoad_Click(object sender, EventArgs e)
         {
-            var dlg = PromptFactory.CreateOpenFileNamePrompt();
-            dlg.Title = "Open ammunition";
-            dlg.AddFilter("ammox", "Ammunition Library Entry");
-            dlg.AddFilter("ammo", "Legacy Ammunition Library Entry");
-            dlg.CheckFileExists = true;
-            dlg.DefaultExtension = "ammox";
-            if (dlg.AskName(this))
+            var ammo = AmmunitionControlUtils.Load(this, PromptFactory, out string fileName);
+            if (ammo != null)
             {
-                Clear();
-                mFileName = dlg.FileName;
-                if (mFileName.EndsWith(".ammo"))
-                    LibraryEntry = BallisticXmlDeserializer.ReadLegacyAmmunitionLibraryEntryFromFile(dlg.FileName);
-                else
-                    LibraryEntry = BallisticXmlDeserializer.ReadFromFile<AmmunitionLibraryEntry>(dlg.FileName);
+                mFileName = fileName;
+                LibraryEntry = ammo;
             }
         }
 
