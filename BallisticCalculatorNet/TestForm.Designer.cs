@@ -31,24 +31,24 @@ namespace BallisticCalculatorNet
         /// </summary>
         private void InitializeComponent()
         {
-            this.ammoLibEntryControl1 = new BallisticCalculatorNet.InputPanels.AmmoLibEntryControl();
+            this.multiWindControl1 = new BallisticCalculatorNet.InputPanels.MultiWindControl();
             this.SuspendLayout();
             // 
-            // ammoLibEntryControl1
+            // multiWindControl1
             // 
-            this.ammoLibEntryControl1.Location = new System.Drawing.Point(13, 13);
-            this.ammoLibEntryControl1.Margin = new System.Windows.Forms.Padding(4);
-            this.ammoLibEntryControl1.MeasurementSystem = BallisticCalculatorNet.InputPanels.MeasurementSystem.Metric;
-            this.ammoLibEntryControl1.Name = "ammoLibEntryControl1";
-            this.ammoLibEntryControl1.Size = new System.Drawing.Size(450, 613);
-            this.ammoLibEntryControl1.TabIndex = 0;
+            this.multiWindControl1.AutoScroll = true;
+            this.multiWindControl1.Location = new System.Drawing.Point(12, 12);
+            this.multiWindControl1.Name = "multiWindControl1";
+            this.multiWindControl1.Size = new System.Drawing.Size(605, 528);
+            this.multiWindControl1.TabIndex = 0;
+            this.multiWindControl1.Winds = null;
             // 
             // MyTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1429, 654);
-            this.Controls.Add(this.ammoLibEntryControl1);
+            this.Controls.Add(this.multiWindControl1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MyTestForm";
             this.Text = "TestForm";
@@ -58,6 +58,6 @@ namespace BallisticCalculatorNet
 
         #endregion
 
-        private AmmoLibEntryControl ammoLibEntryControl1;
+        private MultiWindControl multiWindControl1;
     }
 }

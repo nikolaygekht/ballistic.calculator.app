@@ -246,5 +246,22 @@ namespace Gehtsoft.Winforms.FluentAssertions.Test
 
             ((Action)(() => tf.TextBox("testTextBox3").Should().BeImmediatelyAfter(tf.TextBox("testTextBox1")))).Should().Throw<XunitException>();
         }
+
+        [Fact]
+        public void Controls()
+        {
+            using var tf = new TestForm();
+            var tb1 = tf.AddControl<TextBox>(1, 1, 5, 5);
+            var tb2 = tf.AddControl<TextBox>(1, 6, 5, 5);
+
+            tf.Controls<TextBox>()
+                .Should()
+                .HaveCount(2)
+                .And.Contain(tb1)
+                .And.Contain(tb2);
+
+            tf.Controls<ListBox>().Should().BeEmpty();
+        }
+
     }
 }

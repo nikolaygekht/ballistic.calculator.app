@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
@@ -32,6 +33,14 @@ namespace Gehtsoft.Winforms.FluentAssertions
             if (type.IsInstanceOfType(control[0]))
                 return control[0];
             return null;
+        }
+
+        public static IEnumerable<T> Controls<T>(this Control parent)
+            where T : Control
+        {
+            for (int i = 0; i < parent.Controls.Count; i++)
+                if (parent.Controls[i] is T t)
+                    yield return t;
         }
 
         public static Control Control(this Control parent, string name) => Control(parent, name, typeof(Control));

@@ -9,6 +9,9 @@ dotnet_diagnostic.S1066.severity = none
 # RCS1123: Add parentheses when necessary.
 dotnet_diagnostic.RCS1123.severity = none
 
+# S1118: Return an empty collection instead of null.
+dotnet_diagnostic.RCS1123.severity = none
+
 # IDE0090: Use 'new(...)'
 dotnet_diagnostic.IDE0090.severity = none
 

@@ -20,9 +20,7 @@ namespace BallisticCalculatorNet.InputPanels
         {
             get
             {
-                if (!checkBoxDistance.Checked &&
-                    measurementVelocity.ValueAsMeasurement<VelocityUnit>().Value < 1e-5 &&
-                    measurementDirection.ValueAsMeasurement<AngularUnit>().Value < 1e-5)
+                if (IsEmpty())
                     return null;
 
                 return new Wind(measurementVelocity.ValueAsMeasurement<VelocityUnit>(), measurementDirection.ValueAsMeasurement<AngularUnit>(),
@@ -58,6 +56,31 @@ namespace BallisticCalculatorNet.InputPanels
         {
             InitializeComponent();
             checkBoxDistance_CheckedChanged(this, EventArgs.Empty);
+        }
+
+        public void Clear()
+        {
+            checkBoxDistance.Checked = false;
+            measurementDistance.Value = null;
+            measurementDistance.Enabled = false;
+            measurementVelocity.Value = null;
+            measurementDirection.Value = null;
+        }
+
+        public bool IsEmpty()
+        {
+            return (!checkBoxDistance.Enabled || 
+                     measurementDistance.Value == null || 
+                     measurementDistance.ValueAsMeasurement<DistanceUnit>() < 1e-5.As(DistanceUnit.Meter)) &&
+                   (measurementVelocity.ValueAsMeasurement<VelocityUnit>() < 1e-5.As(VelocityUnit.MetersPerSecond)) &&
+                   (measurementDirection.ValueAsMeasurement<AngularUnit>() < 1e-5.As(AngularUnit.Degree));
+        }
+
+        public void EnableDistance()
+        {
+            checkBoxDistance.Checked = true;
+            measurementDistance.Enabled = true;
+            measurementDistance.Value = 0.As(measurementDistance.UnitAs<DistanceUnit>());
         }
 
         private static void DrawRay(Graphics g, Pen p, float cx, float cy, float r, double direction)
