@@ -234,6 +234,7 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.buttonSDasBC);
             this.Controls.Add(this.checkBoxFormFactor);
             this.Controls.Add(this.buttonCustomBallisticLoad);

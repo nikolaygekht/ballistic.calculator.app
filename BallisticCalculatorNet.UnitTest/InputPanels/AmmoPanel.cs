@@ -171,3 +171,4 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
         }
     }
 }
+

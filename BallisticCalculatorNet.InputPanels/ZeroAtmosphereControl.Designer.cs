@@ -50,13 +50,14 @@
             this.atmosphereControl.Size = new System.Drawing.Size(435, 218);
             this.atmosphereControl.TabIndex = 1;
             // 
-            // ZeroAtmospherePanel
+            // ZeroAtmosphereControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.atmosphereControl);
             this.Controls.Add(this.checkBoxOther);
-            this.Name = "ZeroAtmospherePanel";
+            this.Name = "ZeroAtmosphereControl";
             this.Size = new System.Drawing.Size(435, 255);
             this.ResumeLayout(false);
             this.PerformLayout();

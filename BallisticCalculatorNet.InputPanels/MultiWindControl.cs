@@ -97,13 +97,11 @@ namespace BallisticCalculatorNet.InputPanels
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             var lastControl = mWindControls.Count > 0 ? mWindControls[^1] : windControl1;
-            var lastWind = lastControl.Wind;
+            var lastWind = lastControl.Wind ?? new Wind(0.As(windControl1.MeasurementSystem == MeasurementSystem.Metric ? VelocityUnit.MetersPerSecond : VelocityUnit.FeetPerSecond), 0.As(AngularUnit.Degree));
             var start = lastWind.MaximumRange ?? 0.As(windControl1.MeasurementSystem == MeasurementSystem.Metric ? DistanceUnit.Meter : DistanceUnit.Yard);
             lastWind.MaximumRange = start + 100.As(start.Unit);
             var control = AddControl();
             control.Wind = lastWind;
-
-
         }
 
         private void buttonClear_Click(object sender, EventArgs e)

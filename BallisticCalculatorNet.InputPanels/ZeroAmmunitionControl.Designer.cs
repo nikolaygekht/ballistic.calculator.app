@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            BallisticCalculatorNet.InputPanels.WinFormsFileNamePromptFactory winFormsFileNamePromptFactory4 = new BallisticCalculatorNet.InputPanels.WinFormsFileNamePromptFactory();
+            BallisticCalculatorNet.InputPanels.WinFormsFileNamePromptFactory winFormsFileNamePromptFactory1 = new BallisticCalculatorNet.InputPanels.WinFormsFileNamePromptFactory();
             this.checkBoxOther = new System.Windows.Forms.CheckBox();
             this.ammoControl = new BallisticCalculatorNet.InputPanels.AmmoControl();
             this.buttonLoad = new System.Windows.Forms.Button();
@@ -50,7 +50,7 @@
             this.ammoControl.Location = new System.Drawing.Point(0, 76);
             this.ammoControl.Margin = new System.Windows.Forms.Padding(4);
             this.ammoControl.Name = "ammoControl";
-            this.ammoControl.PromptFactory = winFormsFileNamePromptFactory4;
+            this.ammoControl.PromptFactory = winFormsFileNamePromptFactory1;
             this.ammoControl.Size = new System.Drawing.Size(435, 319);
             this.ammoControl.TabIndex = 2;
             // 
@@ -64,14 +64,15 @@
             this.buttonLoad.UseVisualStyleBackColor = true;
             this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
             // 
-            // ZeroAmmunitionPanel
+            // ZeroAmmunitionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.buttonLoad);
             this.Controls.Add(this.ammoControl);
             this.Controls.Add(this.checkBoxOther);
-            this.Name = "ZeroAmmunitionPanel";
+            this.Name = "ZeroAmmunitionControl";
             this.Size = new System.Drawing.Size(435, 407);
             this.ResumeLayout(false);
             this.PerformLayout();

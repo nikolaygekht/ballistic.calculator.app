@@ -31,24 +31,23 @@ namespace BallisticCalculatorNet
         /// </summary>
         private void InitializeComponent()
         {
-            this.multiWindControl1 = new BallisticCalculatorNet.InputPanels.MultiWindControl();
+            this.shotDataControl1 = new BallisticCalculatorNet.InputPanels.ShotDataControl();
             this.SuspendLayout();
             // 
-            // multiWindControl1
+            // shotDataControl1
             // 
-            this.multiWindControl1.AutoScroll = true;
-            this.multiWindControl1.Location = new System.Drawing.Point(12, 12);
-            this.multiWindControl1.Name = "multiWindControl1";
-            this.multiWindControl1.Size = new System.Drawing.Size(605, 528);
-            this.multiWindControl1.TabIndex = 0;
-            this.multiWindControl1.Winds = null;
+            this.shotDataControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.shotDataControl1.Location = new System.Drawing.Point(0, 0);
+            this.shotDataControl1.Name = "shotDataControl1";
+            this.shotDataControl1.Size = new System.Drawing.Size(1429, 654);
+            this.shotDataControl1.TabIndex = 0;
             // 
             // MyTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1429, 654);
-            this.Controls.Add(this.multiWindControl1);
+            this.Controls.Add(this.shotDataControl1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MyTestForm";
             this.Text = "TestForm";
@@ -58,6 +57,6 @@ namespace BallisticCalculatorNet
 
         #endregion
 
-        private MultiWindControl multiWindControl1;
+        private ShotDataControl shotDataControl1;
     }
 }

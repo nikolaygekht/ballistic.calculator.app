@@ -159,6 +159,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.buttonCalculate);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);

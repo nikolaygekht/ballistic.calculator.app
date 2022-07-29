@@ -193,6 +193,7 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.buttonCaliberSelect);
             this.Controls.Add(this.textBoxCaliber);
             this.Controls.Add(this.label5);
