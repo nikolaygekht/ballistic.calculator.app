@@ -8,8 +8,6 @@ If you need something to use right now, take a look at OLD version of the applic
 * [Sourceforge](https://sourceforge.net/projects/ballisticcalculator/)
 * [GitHub](https://github.com/nikolaygekht/ballistic.calculator.app.old)
 
-For related math see [Ballistic Library](https://github.com/gehtsoft-usa/BallisticCalculator1)
-
 ## RISK NOTICE
 
 The application performs very limited simulation of a complex physical process and so it performs a lot of approximations. Therefore the calculation results MUST NOT be considered as completely and reliably reflecting actual behavior or characteristics of projectiles. While these results may be used for educational purpose, they must NOT be considered as reliable for the areas where incorrect calculation may cause making a wrong decision, financial harm, or can put a human life at risk.
@@ -24,7 +22,9 @@ THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
 
 ## 3rd Party Components used
 
-[Scott Plot for WinForms](https://www.nuget.org/packages/ScottPlot.WinForms)
+* Scott Plot for WinForms [nuget](https://www.nuget.org/packages/ScottPlot.WinForms)
+* Ballistic Caculator [git](https://github.com/gehtsoft-usa/BallisticCalculator1)
+* Measurements/Unit Conversion [git](https://github.com/gehtsoft-usa/Gehtsoft.Measurements) [nuget](https://www.nuget.org/packages/Gehtsoft.Measurements)
 
 
 
