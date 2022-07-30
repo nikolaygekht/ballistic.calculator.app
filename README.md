@@ -26,6 +26,50 @@ THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
 * Ballistic Caculator [git](https://github.com/gehtsoft-usa/BallisticCalculator1)
 * Measurements/Unit Conversion [git](https://github.com/gehtsoft-usa/Gehtsoft.Measurements) [nuget](https://www.nuget.org/packages/Gehtsoft.Measurements)
 
+## Project Structure
 
+* `BallisticCalculatorNet`
+  
+  The calculator application. 
+
+  The application mostly defines the windows, menus and the command logic. All input and output is made trough custom panels. 
+  The panels are in `BallisticCalculatorNet.InputPanels` library.
+
+* `BallisticCalculatorNet.Common`
+
+  Common service classes used in both, the calculator application and the reticle editor
+
+* `BallisticCalculatorNet.InputPanels`
+
+  The input panels to enter data for calculation and to output the results.  
+  All panels are made in form of custom controls and then used in the calculator application.
+
+* `BallisticCalculatorNet.MeasurementControl`
+
+   A custom control to enter a measurement (e.g. distance, weight).
+
+* `BallisticCalculatorNet.ReticleCanvas`
+
+   A custom control to paint a reticle.
+
+* `BallisticCalculatorNet.ReticleEditor`
+ 
+   The editor for reticles. 
+
+* `BallisticCalculatorNet.UnitTest`
+ 
+   Unit and integration tests.
+
+* `Gehtsoft.Winforms.FluentAssertions`
+
+  Fluent assertions for winforms controls.
+
+* `Gehtsoft.Winforms.FluentAssertions.Test`
+
+  Test of fluent assertions for winforms controls.
+  
+* `data`
+
+   Data files: ammunition descriptions, drag tables, reticles. 
 
 
