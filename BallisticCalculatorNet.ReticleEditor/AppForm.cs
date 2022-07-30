@@ -52,10 +52,12 @@ namespace BallisticCalculatorNet.ReticleEditor
 
             this.LoadFormState(Program.Configuration, "main", true);
 
-            var _splitter = Program.Configuration["state:main:separator"];
-            
-            if (int.TryParse(_splitter, NumberStyles.Integer, CultureInfo.InvariantCulture, out var splitter))
-                splitContainer1.SplitterDistance = splitter;
+            if (Program.Configuration != null)
+            {
+                var _splitter = Program.Configuration["state:main:separator"];
+                if (int.TryParse(_splitter, NumberStyles.Integer, CultureInfo.InvariantCulture, out var splitter))
+                    splitContainer1.SplitterDistance = splitter;
+            }
 
             if (string.IsNullOrEmpty(fileToOpen))
                 NewReticle();
@@ -595,8 +597,11 @@ namespace BallisticCalculatorNet.ReticleEditor
                 e.Cancel = true;
                 return;
             }
-            this.SaveFormState(Program.Configuration, "main");
-            Program.Configuration["state:main:separator"] = splitContainer1.SplitterDistance.ToString(CultureInfo.InvariantCulture);
+            if (Program.Configuration != null)
+            {
+                this.SaveFormState(Program.Configuration, "main");
+                Program.Configuration["state:main:separator"] = splitContainer1.SplitterDistance.ToString(CultureInfo.InvariantCulture);
+            }
         }
     }
 }

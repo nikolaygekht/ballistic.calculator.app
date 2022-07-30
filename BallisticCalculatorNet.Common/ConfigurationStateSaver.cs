@@ -67,6 +67,9 @@ namespace BallisticCalculatorNet.Common
 
         public static void LoadFormState(this Form form, IConfiguration configuration, string name, bool sizeOnly)
         {
+            if (configuration == null)
+                return;
+            
             string _left, _top, _width, _height, _state;
 
             _left = configuration[$"state:{name}:left"];
@@ -94,6 +97,9 @@ namespace BallisticCalculatorNet.Common
 
         public static void SaveFormState(this Form form, IConfiguration configuration, string name)
         {
+            if (configuration == null)
+                return;
+
             configuration[$"state:{name}:left"] = form.Location.X.ToString(CultureInfo.InvariantCulture);
             configuration[$"state:{name}:top"] = form.Location.Y.ToString(CultureInfo.InvariantCulture);
             configuration[$"state:{name}:width"] = form.Size.Width.ToString(CultureInfo.InvariantCulture);
