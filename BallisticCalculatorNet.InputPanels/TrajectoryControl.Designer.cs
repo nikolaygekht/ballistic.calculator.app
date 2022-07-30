@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.listView = new System.Windows.Forms.ListView();
+            this.columnHeaderHidden = new System.Windows.Forms.ColumnHeader();
             this.columnHeaderDistance = new System.Windows.Forms.ColumnHeader();
             this.columnHeaderVelocity = new System.Windows.Forms.ColumnHeader();
             this.columnHeaderMach = new System.Windows.Forms.ColumnHeader();
@@ -41,7 +42,6 @@
             this.columnHeaderTime = new System.Windows.Forms.ColumnHeader();
             this.columnHeaderEnergy = new System.Windows.Forms.ColumnHeader();
             this.columnHeaderOGW = new System.Windows.Forms.ColumnHeader();
-            this.columnHeaderHidden = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
             // listView
@@ -71,6 +71,12 @@
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
             this.listView.VirtualMode = true;
+            this.listView.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.listView_RetrieveVirtualItem);
+            // 
+            // columnHeaderHidden
+            // 
+            this.columnHeaderHidden.Text = "Hidden";
+            this.columnHeaderHidden.Width = 0;
             // 
             // columnHeaderDistance
             // 
@@ -139,11 +145,6 @@
             this.columnHeaderOGW.Text = "O.G.W.";
             this.columnHeaderOGW.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderOGW.Width = 75;
-            // 
-            // columnHeaderHidden
-            // 
-            this.columnHeaderHidden.Text = "Hidden";
-            this.columnHeaderHidden.Width = 0;
             // 
             // TrajectoryControl
             // 

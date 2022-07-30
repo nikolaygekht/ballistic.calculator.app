@@ -16,6 +16,7 @@ using BallisticCalculator.Serialization;
 using BallisticCalculatorNet.ReticleEditor.Forms;
 using Gehtsoft.Measurements;
 using BallisticCalculatorNet.Common;
+using System.Globalization;
 
 namespace BallisticCalculatorNet.ReticleEditor
 {
@@ -53,7 +54,7 @@ namespace BallisticCalculatorNet.ReticleEditor
 
             var _splitter = Program.Configuration["state:main:separator"];
             
-            if (int.TryParse(_splitter, out var splitter))
+            if (int.TryParse(_splitter, NumberStyles.Integer, CultureInfo.InvariantCulture, out var splitter))
                 splitContainer1.SplitterDistance = splitter;
 
             if (string.IsNullOrEmpty(fileToOpen))
@@ -595,7 +596,7 @@ namespace BallisticCalculatorNet.ReticleEditor
                 return;
             }
             this.SaveFormState(Program.Configuration, "main");
-            Program.Configuration["state:main:separator"] = splitContainer1.SplitterDistance.ToString();
+            Program.Configuration["state:main:separator"] = splitContainer1.SplitterDistance.ToString(CultureInfo.InvariantCulture);
         }
     }
 }
