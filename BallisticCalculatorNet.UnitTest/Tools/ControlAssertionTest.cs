@@ -10,8 +10,9 @@ using Xunit.Sdk;
 using BallisticCalculatorNet.MeasurementControl;
 using Gehtsoft.Measurements;
 using Gehtsoft.Winforms.FluentAssertions;
+using BallisticCalculatorNet.UnitTest.Utils;
 
-namespace BallisticCalculatorNet.UnitTest.Utils
+namespace BallisticCalculatorNet.UnitTest.Tools
 {
     public class ControlAssertionTest
     {

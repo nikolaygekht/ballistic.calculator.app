@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BallisticCalculatorNet.Common;
 
 namespace BallisticCalculatorNet
 {
@@ -16,7 +17,7 @@ namespace BallisticCalculatorNet
         {
             InitializeComponent();
             SetupMenu();
-            Program.State.MainWindowState.Restore(this);
+            this.LoadFormState(Program.Configuration, "main", true);
         }
 
         private void SetupMenu()
@@ -26,7 +27,7 @@ namespace BallisticCalculatorNet
 
         private void AppForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Program.State.MainWindowState.Save(this);
+            this.SaveFormState(Program.Configuration, "main");
         }
     }
 }

@@ -15,6 +15,7 @@ using BallisticCalculator.Reticle.Graphics;
 using BallisticCalculator.Serialization;
 using BallisticCalculatorNet.ReticleEditor.Forms;
 using Gehtsoft.Measurements;
+using BallisticCalculatorNet.Common;
 
 namespace BallisticCalculatorNet.ReticleEditor
 {
@@ -48,7 +49,7 @@ namespace BallisticCalculatorNet.ReticleEditor
         {
             InitializeComponent();
 
-            Program.State?.MainWindowState?.Restore(this);
+            this.LoadFormState(Program.Configuration, "main", true);
 
             if (string.IsNullOrEmpty(fileToOpen))
                 NewReticle();
@@ -588,7 +589,7 @@ namespace BallisticCalculatorNet.ReticleEditor
                 e.Cancel = true;
                 return;
             }
-            Program.State?.MainWindowState?.Save(this);
+            this.SaveFormState(Program.Configuration, "main");
         }
     }
 }

@@ -5,6 +5,8 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using Gehtsoft.Measurements;
 using Gehtsoft.Winforms.FluentAssertions;
+using System.Text.Json;
+
 
 namespace BallisticCalculatorNet.UnitTest.Utils
 {

@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BallisticCalculatorNet.Common;
-using BallisticCalculatorNet.Common.PersistentState;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Core;
@@ -21,10 +20,6 @@ namespace BallisticCalculatorNet
         public static string ApplicationFolder { get; private set; }
 
         public static IConfiguration Configuration { get; private set; }
-
-        private static ApplicationStateController<ApplicationState> mState;
-
-        public static ApplicationState State => mState.State;
 
         private static LogEventLevel MinimumLogLevel
         {
@@ -68,6 +63,7 @@ namespace BallisticCalculatorNet
             Configuration = new ConfigurationBuilder()
                         .AddJsonFile(Path.Combine(ApplicationFolder, "commonConfiguration.json"), true)
                         .AddJsonFile(Path.Combine(ApplicationFolder, "ballisticCalculator.json"), true)
+                        .AddJsonFile(Path.Combine(ApplicationFolder, "ballisticCalculator.state.json"), true)
                         .AddCommandLine(args, switchMappings)
                         .Build();
 
@@ -75,15 +71,6 @@ namespace BallisticCalculatorNet
                 .MinimumLevel.Is(MinimumLogLevel)
                 .WriteTo.File(LogTarget, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 10)
                 .CreateLogger();
-
-            try
-            {
-                mState = new ApplicationStateController<ApplicationState>(ApplicationFolder, "ballisticCalculator");
-            }
-            catch (Exception e)
-            {
-                Logger.Warning(e, "Can't read application state");
-            }
         }
 
         /// <summary>
@@ -104,14 +91,8 @@ namespace BallisticCalculatorNet
             //Application.Run(new AppForm());
             Application.Run(new MyTestForm());
 
-            try
-            {
-                mState.Save();
-            }
-            catch (Exception e)
-            {
-                Logger.Warning(e, "Can't write application state");
-            }
+
+            Configuration.SaveStateToFile(Path.Combine(ApplicationFolder, "ballisticCalculator.state.json"), "state");
         }
 
         private static void ThreadExceptionHandler(object sender, ThreadExceptionEventArgs e)

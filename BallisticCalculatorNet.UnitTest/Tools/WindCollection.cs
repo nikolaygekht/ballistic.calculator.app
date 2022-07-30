@@ -1,6 +1,7 @@
 ﻿using BallisticCalculator;
 using BallisticCalculator.Serialization;
 using BallisticCalculatorNet.InputPanels;
+using BallisticCalculatorNet.UnitTest.Utils;
 using FluentAssertions;
 using Gehtsoft.Measurements;
 using System;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Xunit;
 
-namespace BallisticCalculatorNet.UnitTest.Utils
+namespace BallisticCalculatorNet.UnitTest.Tools
 {
     public class WindCollectionTest
     {
@@ -37,7 +38,7 @@ namespace BallisticCalculatorNet.UnitTest.Utils
             collection[0].Should().BeSameAs(w0);
             collection[1].Should().BeSameAs(w1);
 
-            collection.Should().ContainInOrder(new Wind[] {w0, w1});
+            collection.Should().ContainInOrder(new Wind[] { w0, w1 });
         }
 
         [Fact]
@@ -101,10 +102,10 @@ namespace BallisticCalculatorNet.UnitTest.Utils
             collection.Add(new Wind(10.As(VelocityUnit.MetersPerSecond), 90.As(AngularUnit.Degree), 0.As(DistanceUnit.Meter)));
             collection.Add(new Wind(11.As(VelocityUnit.MetersPerSecond), 91.As(AngularUnit.Degree), 250.As(DistanceUnit.Meter)));
             collection.Add(new Wind(12.As(VelocityUnit.MetersPerSecond), -92.As(AngularUnit.Degree), 500.As(DistanceUnit.Meter)));
-            
+
             var winds = collection.ToShotParameters();
             winds.Should().HaveCount(3);
-            
+
             winds[0].MaximumRange.Should().Be(250.As(DistanceUnit.Meter));
             winds[0].Velocity.Should().Be(10.As(VelocityUnit.MetersPerSecond));
             winds[0].Direction.Should().Be(90.As(AngularUnit.Degree));
@@ -112,7 +113,7 @@ namespace BallisticCalculatorNet.UnitTest.Utils
             winds[1].MaximumRange.Should().Be(500.As(DistanceUnit.Meter));
             winds[1].Velocity.Should().Be(11.As(VelocityUnit.MetersPerSecond));
             winds[1].Direction.Should().Be(91.As(AngularUnit.Degree));
-            
+
             winds[2].MaximumRange.Should().BeNull();
             winds[2].Velocity.Should().Be(12.As(VelocityUnit.MetersPerSecond));
             winds[2].Direction.Should().Be(-92.As(AngularUnit.Degree));
@@ -189,10 +190,10 @@ namespace BallisticCalculatorNet.UnitTest.Utils
                     Ammunition = new Ammunition(8.2.As(WeightUnit.Gram), new BallisticCoefficient(0.208, DragTableId.G1),
                                                 980.As(VelocityUnit.MetersPerSecond))
                 },
-                Weapon = new Rifle(new Sight(3.2.As(DistanceUnit.Inch), 0.25.As(AngularUnit.MOA), 0.25.As(AngularUnit.MOA)), 
-                                   new ZeroingParameters() { Distance = 100.As(DistanceUnit.Yard) }, 
+                Weapon = new Rifle(new Sight(3.2.As(DistanceUnit.Inch), 0.25.As(AngularUnit.MOA), 0.25.As(AngularUnit.MOA)),
+                                   new ZeroingParameters() { Distance = 100.As(DistanceUnit.Yard) },
                                    new Rifling() { Direction = TwistDirection.Right, RiflingStep = 12.As(DistanceUnit.Inch) }),
-                Atmosphere = new Atmosphere(300.As(DistanceUnit.Foot), 30.02.As(PressureUnit.InchesOfMercury), 
+                Atmosphere = new Atmosphere(300.As(DistanceUnit.Foot), 30.02.As(PressureUnit.InchesOfMercury),
                                             80.As(TemperatureUnit.Fahrenheit), 0.91),
                 Wind = new WindCollection() { new Wind(10.As(VelocityUnit.MetersPerSecond), 90.As(AngularUnit.Degree)) },
                 Parameters = new ShotParameters()
@@ -205,7 +206,7 @@ namespace BallisticCalculatorNet.UnitTest.Utils
             SerializerRoundtrip serializer = new SerializerRoundtrip();
             var xml = serializer.Serialize(data);
             var data1 = serializer.Deserialize<ShotData>(xml);
-            
+
 
             //note: we don't need to test serialization in-depth, each type except windcollection is tested
             //in ballisticcalculator library.
@@ -217,7 +218,7 @@ namespace BallisticCalculatorNet.UnitTest.Utils
 
             data1.Atmosphere.Should().NotBeNull();
             data1.Atmosphere.Should().Match<Atmosphere>(w => w.Altitude == 300.As(DistanceUnit.Foot));
-            
+
             data1.Wind.Should().NotBeNull()
                 .And
                 .HaveCount(1);
