@@ -94,8 +94,8 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
         }
 
         [Theory]
-        [InlineData(null, null, 2, AngularUnit.Degree, 3, VelocityUnit.FeetPerSecond)]
-        [InlineData(1, DistanceUnit.Foot, 2, AngularUnit.Degree, 3, VelocityUnit.FeetPerSecond)]
+        [InlineData(null, null, 2.0, AngularUnit.Degree, 3.0, VelocityUnit.FeetPerSecond)]
+        [InlineData(1.0, DistanceUnit.Foot, 2.0, AngularUnit.Degree, 3.0, VelocityUnit.FeetPerSecond)]
         [InlineData(1.23, DistanceUnit.Mile, 2.45, AngularUnit.Mil, 3.67, VelocityUnit.MilesPerHour)]
         public void SetValue(double? distance, DistanceUnit? distanceUnit, double direction, AngularUnit directionUnit, double velocity, VelocityUnit velocityUnit)
         {
@@ -137,8 +137,8 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
         }
 
         [Theory]
-        [InlineData(null, null, 2, AngularUnit.Degree, 3, VelocityUnit.FeetPerSecond)]
-        [InlineData(1, DistanceUnit.Foot, 2, AngularUnit.Degree, 3, VelocityUnit.FeetPerSecond)]
+        [InlineData(null, null, 2.0, AngularUnit.Degree, 3.0, VelocityUnit.FeetPerSecond)]
+        [InlineData(1.0, DistanceUnit.Foot, 2.0, AngularUnit.Degree, 3.0, VelocityUnit.FeetPerSecond)]
         [InlineData(1.23, DistanceUnit.Mile, 2.45, AngularUnit.Mil, 3.67, VelocityUnit.MilesPerHour)]
         public void GetValue(double? distance, DistanceUnit? distanceUnit, double direction, AngularUnit directionUnit, double velocity, VelocityUnit velocityUnit)
         {

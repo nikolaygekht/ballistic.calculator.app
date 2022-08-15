@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using Xunit;
 using System.Text.Json.Nodes;
 using System.Text.Json;
+using FluentAssertions;
+using FluentAssertions.Extension.Json;
 
 namespace BallisticCalculatorNet.UnitTest.Tools
 {
@@ -36,49 +38,47 @@ namespace BallisticCalculatorNet.UnitTest.Tools
 
             ConfigurationStateSaver.SaveStateToFile(config, tempFile.FileName, "state");
 
-            var jsonText = File.ReadAllText(tempFile.FileName);
-            var jsonObject = JsonSerializer.Deserialize<JsonObject>(jsonText);
+            var jsonObject = File.ReadAllText(tempFile.FileName).AsJson();
 
             jsonObject.Should()
-                .HaveProperty("state")
+                .HaveProperty("state");
+
+            jsonObject.Should()
+                .HaveNoProperty("section1")
                 .And
-                .HaveNoProperty("section1");
-
-            jsonObject.Should()
                 .HaveObjectProperty("state");
 
-            var state = jsonObject["state"].AsObject();
+            var state = jsonObject.GetProperty("state");
 
             state.Should()
-                .HaveValuePropertyEqualTo("status", "x")
+                .HaveStringProperty("status", s => s == "x")
                 .And
                 .HaveObjectProperty("window1")
                 .And
                 .HaveObjectProperty("window2");
 
-            var window1 = state["window1"].AsObject();
+            var window1 = state.GetProperty("window1");
 
             window1.Should()
-                .HaveValuePropertyEqualTo("top", "1")
+                .HaveStringProperty("top", s => s == "1")
                 .And
-                .HaveValuePropertyEqualTo("left", "2");
+                .HaveStringProperty("left", s => s == "2");
 
-            var window2 = state["window2"].AsObject();
+            var window2 = state.GetProperty("window2");
 
             window2.Should()
-                .HaveValuePropertyEqualTo("top", "3")
+                .HaveStringProperty("top", s => s == "3")
                 .And
-                .HaveValuePropertyEqualTo("left", "4");
-
-            window2.Should()
+                .HaveStringProperty("left", s => s == "4")
+                .And
                 .HaveObjectProperty("subsection");
 
-            var ss = window2["subsection"].AsObject();
+            var ss = window2.GetProperty("subsection");
 
             ss.Should()
-                .HaveValueProperty("x", "v1")
+                .HaveStringProperty("x", s => s == "v1")
                 .And
-                .HaveValueProperty("y", "v2");
+                .HaveStringProperty("y", s => s == "v2");
         }
 
         [Fact]
@@ -95,22 +95,25 @@ namespace BallisticCalculatorNet.UnitTest.Tools
 
             ConfigurationStateSaver.SaveStateToFile(config, tempFile.FileName, "state");
 
-            var jsonText = File.ReadAllText(tempFile.FileName);
-            var jsonObject = JsonSerializer.Deserialize<JsonObject>(jsonText);
+            var jsonObject = File.ReadAllText(tempFile.FileName).AsJson();
 
             jsonObject.Should()
-                .HaveObjectProperty("a");
+                .HaveProperty("a")
+                .Which.Should()
+                    .BeObject();
 
-            jsonObject["a"].AsObject()
-                .Should().HaveValuePropertyEqualTo("b", "1");
+            jsonObject.GetProperty("a")
+                .Should()
+                .HaveProperty("b")
+                    .Which.Should()
+                    .Be("1");
 
             jsonObject.Should()
-                .HaveObjectProperty("state");
-
-            var state = jsonObject["state"].AsObject();
-
-            state.Should()
-                .HaveProperty("status");
+                .HaveProperty("state")
+                .Which.Should()
+                    .BeObject()
+                    .And
+                    .HaveProperty("status");
         }
 
         [Fact]
@@ -127,24 +130,29 @@ namespace BallisticCalculatorNet.UnitTest.Tools
 
             ConfigurationStateSaver.SaveStateToFile(config, tempFile.FileName, "state");
 
-            var jsonText = File.ReadAllText(tempFile.FileName);
-            var jsonObject = JsonSerializer.Deserialize<JsonObject>(jsonText);
+            var jsonObject = File.ReadAllText(tempFile.FileName).AsJson();
 
             jsonObject.Should()
-                .HaveObjectProperty("a");
+                .HaveProperty("a")
+                .Which.Should()
+                    .BeObject();
 
-            jsonObject["a"].AsObject()
-                .Should().HaveValuePropertyEqualTo("b", "1");
+            jsonObject
+                .GetProperty("a")
+                .Should()
+                .HaveStringProperty("b", s => s == "1");
 
             jsonObject.Should()
-                .HaveObjectProperty("state");
-            
-            var state = jsonObject["state"].AsObject();
+                .HaveProperty("state")
+                .Which.Should()
+                    .BeObject();
 
-            state.Should()
-                .HaveProperty("status")
+            jsonObject
+                .GetProperty("state")
+                .Should()
+                .HaveNoProperty("y")
                 .And
-                .HaveNoProperty("y");
+                .HaveStringProperty("status", s => s == "x");
         }
     }
 }
