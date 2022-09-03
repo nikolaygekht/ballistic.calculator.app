@@ -12,6 +12,7 @@ using System.Text.Json.Nodes;
 using System.Text.Json;
 using FluentAssertions;
 using FluentAssertions.Extension.Json;
+using System.Windows.Forms;
 
 namespace BallisticCalculatorNet.UnitTest.Tools
 {
@@ -153,6 +154,80 @@ namespace BallisticCalculatorNet.UnitTest.Tools
                 .HaveNoProperty("y")
                 .And
                 .HaveStringProperty("status", s => s == "x");
+        }
+
+        [Fact]
+        public void SaveFormState()
+        {
+            Form f = new Form();
+            f.Location = new System.Drawing.Point(1, 2);
+            f.Size = new System.Drawing.Size(300, 400);
+            f.WindowState = FormWindowState.Normal;
+
+            var config = (new ConfigurationBuilder())
+                .AddCommandLine(Array.Empty<string>()).Build();
+
+            ConfigurationStateSaver.SaveFormState(f, config, "test");
+
+            config["state:test:left"].Should().Be("1");
+            config["state:test:top"].Should().Be("2");
+            config["state:test:width"].Should().Be("300");
+            config["state:test:height"].Should().Be("400");
+            config["state:test:state"].Should().Be("Normal");
+        }
+
+        [Fact]
+        public void LoadFrom_Full()
+        {
+            Form f = new Form();
+            f.Location = new System.Drawing.Point(300, 400);
+            f.Size = new System.Drawing.Size(500, 600);
+            f.WindowState = FormWindowState.Normal;
+
+            var config = (new ConfigurationBuilder())
+                .AddCommandLine(new[]
+                {
+                    "state:test:left=100",
+                    "state:test:top=200",
+                    "state:test:width=300",
+                    "state:test:height=400",
+                    "state:test:state=Maximized",
+                } ).Build();
+
+            ConfigurationStateSaver.LoadFormState(f, config, "test", false);
+
+            f.Location.X.Should().Be(100);
+            f.Location.Y.Should().Be(200);
+            f.Size.Width.Should().Be(300);
+            f.Size.Height.Should().Be(400);
+            f.WindowState.Should().Be(FormWindowState.Maximized);
+        }
+        
+        [Fact]
+        public void LoadFrom_SizeOnly()
+        {
+            Form f = new Form();
+            f.Location = new System.Drawing.Point(350, 450);
+            f.Size = new System.Drawing.Size(500, 600);
+            f.WindowState = FormWindowState.Normal;
+
+            var config = (new ConfigurationBuilder())
+                .AddCommandLine(new[]
+                {
+                    "state:test:left=100",
+                    "state:test:top=200",
+                    "state:test:width=300",
+                    "state:test:height=400",
+                    "state:test:state=Maximized",
+                }).Build();
+
+            ConfigurationStateSaver.LoadFormState(f, config, "test", true);
+
+            f.Location.X.Should().Be(350);
+            f.Location.Y.Should().Be(450);
+            f.Size.Width.Should().Be(300);
+            f.Size.Height.Should().Be(400);
+            f.WindowState.Should().Be(FormWindowState.Normal);
         }
     }
 }

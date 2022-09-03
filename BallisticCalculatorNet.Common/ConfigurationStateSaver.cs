@@ -91,7 +91,7 @@ namespace BallisticCalculatorNet.Common
 
             form.Size = new Size(width, height);
 
-            if (form.WindowState != state)
+            if (form.WindowState != state && !sizeOnly)
                 form.WindowState = state;
         }
 

@@ -18,12 +18,7 @@ namespace BallisticCalculatorNet.InputPanels
     {
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-
         public CultureInfo Culture { get; set; } = CultureInfo.CurrentCulture;
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public IConfiguration Configuration { get; set; }
 
         private AngularUnit mAngularUnits;
 
@@ -38,7 +33,6 @@ namespace BallisticCalculatorNet.InputPanels
                 listView.Update();
             }
         }
-
 
         private Sight mSight;
         [Browsable(false)]
@@ -84,12 +78,12 @@ namespace BallisticCalculatorNet.InputPanels
         public TrajectoryControl()
         {
             InitializeComponent();
-            if (Configuration != null)
+            if (ControlConfiguration.Configuration != null)
             {
                 for (int i = 0; i < listView.Columns.Count; i++)
                 {
                     var column = listView.Columns[i];
-                    var _width = Configuration[$"state:trajectory:{column.Name}"];
+                    var _width = ControlConfiguration.Configuration[$"state:trajectory:column:{i}"];
                     if (int.TryParse(_width, NumberStyles.Integer, CultureInfo.InvariantCulture, out var width))
                         column.Width = width;
                 } 
@@ -98,16 +92,26 @@ namespace BallisticCalculatorNet.InputPanels
 
         public void OnClose()
         {
-            if (Configuration != null)
+            if (ControlConfiguration.Configuration != null)
             {
                 for (int i = 0; i < listView.Columns.Count; i++)
                 {
                     var column = listView.Columns[i];
-                    Configuration[$"state:trajectory:{column.Name}"] = column.Width.ToString(CultureInfo.InvariantCulture);
+                    ControlConfiguration.Configuration[$"state:trajectory:column:{i}"] = column.Width.ToString(CultureInfo.InvariantCulture);
                 }
             }
         }
 
+        public void Clear()
+        {
+            Trajectory = null;
+        }
+
+        public DistanceUnit RangeUnit => mMeasurementSystem == MeasurementSystem.Metric ? DistanceUnit.Meter : DistanceUnit.Yard;
+        public DistanceUnit AdjustmentUnit => mMeasurementSystem == MeasurementSystem.Metric ? DistanceUnit.Centimeter : DistanceUnit.Inch;
+        public VelocityUnit VelocityUnit => mMeasurementSystem == MeasurementSystem.Metric ? VelocityUnit.MetersPerSecond : VelocityUnit.FeetPerSecond;
+        public EnergyUnit EnergyUnit => mMeasurementSystem == MeasurementSystem.Metric ? EnergyUnit.Joule : EnergyUnit.FootPound;
+        public WeightUnit WeightUnit => mMeasurementSystem == MeasurementSystem.Metric ? WeightUnit.Kilogram : WeightUnit.Pound;
 
         private void listView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
         {
@@ -116,47 +120,64 @@ namespace BallisticCalculatorNet.InputPanels
 
             var item = mTrajectory[e.ItemIndex];
 
-            e.Item.Text = "";
+            if (e.Item == null)
+                e.Item = new ListViewItem("");
+
             e.Item.SubItems.Clear();
+
             //range
             e.Item.SubItems
-                .Add(item.Distance.To(mMeasurementSystem == MeasurementSystem.Metric ? DistanceUnit.Meter : DistanceUnit.Yard).ToString("N0", Culture));
+                .Add(item.Distance.To(RangeUnit).ToString("N0", Culture));
             //velocity
             e.Item.SubItems
-                .Add(item.Velocity.To(mMeasurementSystem == MeasurementSystem.Metric ? VelocityUnit.MetersPerSecond : VelocityUnit.FeetPerSecond).ToString("N0", Culture));
+                .Add(item.Velocity.To(VelocityUnit).ToString("N0", Culture));
             //mach
             e.Item.SubItems
                 .Add(item.Mach.ToString("N2", CultureInfo.CurrentCulture));
             //path
-            e.Item.SubItems
-                .Add(item.Drop.To(mMeasurementSystem == MeasurementSystem.Metric ? DistanceUnit.Centimeter : DistanceUnit.Inch).ToString("N2", Culture));
-            //hold
-            e.Item.SubItems
-                .Add(item.DropAdjustment.To(mAngularUnits).ToString("N2", Culture));
-            //clicks
-            if (mSight == null || mSight.VerticalClick == null || mSight.VerticalClick.Value.Value <= 0)
-                e.Item.SubItems.Add("n/a");
-            else
-                e.Item.SubItems.Add((item.DropAdjustment / mSight.VerticalClick.Value).ToString("N0", Culture));
+            AddAngularValue(item.Distance, item.Drop, item.DropAdjustment, mSight?.VerticalClick, e.Item);
+
             //windage
-            e.Item.SubItems
-                .Add(item.Windage.To(mMeasurementSystem == MeasurementSystem.Metric ? DistanceUnit.Centimeter : DistanceUnit.Inch).ToString("N2", Culture));
-            //adj
-            e.Item.SubItems
-                .Add(item.WindageAdjustment.To(mAngularUnits).ToString("N2", Culture));
-            //clicks
-            if (mSight == null || mSight.HorizontalClick == null || mSight.HorizontalClick.Value.Value <= 0)
-                e.Item.SubItems.Add("n/a");
-            else
-                e.Item.SubItems.Add((item.WindageAdjustment / mSight.HorizontalClick.Value).ToString("N0"));
+            AddAngularValue(item.Distance, item.Windage, item.WindageAdjustment, mSight?.HorizontalClick, e.Item);
+
             //time
             e.Item.SubItems.Add(item.Time.ToString("mm\\:ss\\.fff"));
             //energy
             e.Item.SubItems
-                .Add(item.Energy.To(mMeasurementSystem == MeasurementSystem.Metric ? EnergyUnit.Joule : EnergyUnit.FootPound).ToString("N0", Culture));
+                .Add(item.Energy.To(EnergyUnit).ToString("N0", Culture));
             //ogw
             e.Item.SubItems
-                .Add(item.OptimalGameWeight.To(mMeasurementSystem == MeasurementSystem.Metric ? WeightUnit.Kilogram : WeightUnit.Pound).ToString("N1", Culture));
+                .Add(item.OptimalGameWeight.To(WeightUnit).ToString("N1", Culture));
+        }
+
+        private void AddAngularValue(Measurement<DistanceUnit> distance,
+                                     Measurement<DistanceUnit> value,
+                                     Measurement<AngularUnit> valueAdjustiment,
+                                     Measurement<AngularUnit>? scopeStep,
+                                     ListViewItem lvi)
+        {
+            //value
+            lvi.SubItems
+                .Add(value.To(AdjustmentUnit).ToString("N2", Culture));
+
+            //adjustment
+            if (distance.Value < 1e-8)
+            {
+                lvi.SubItems.Add("n/a");
+                lvi.SubItems.Add("n/a");
+            }
+            else
+            {
+                lvi.SubItems
+                    .Add(valueAdjustiment.To(mAngularUnits).ToString("N2", Culture));
+
+                
+                //clicks
+                if (scopeStep == null || scopeStep.Value.Value <= 0)
+                    lvi.SubItems.Add("n/a");
+                else
+                    lvi.SubItems.Add((valueAdjustiment / scopeStep.Value).ToString("N0"));
+            }
         }
     }
 }
