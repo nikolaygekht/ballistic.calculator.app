@@ -40,6 +40,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.checkBoxZeroVerticalOffset = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.measurementVerticalOffset = new BallisticCalculatorNet.MeasurementControl.MeasurementControl();
             this.SuspendLayout();
             // 
             // measurementSightHeight
@@ -49,12 +52,12 @@
             this.measurementSightHeight.Location = new System.Drawing.Point(170, 4);
             this.measurementSightHeight.Margin = new System.Windows.Forms.Padding(4);
             this.measurementSightHeight.Maximum = 10000D;
-            this.measurementSightHeight.MaximumSize = new System.Drawing.Size(5120, 34);
+            this.measurementSightHeight.MaximumSize = new System.Drawing.Size(5120, 35);
             this.measurementSightHeight.MeasurementType = BallisticCalculatorNet.MeasurementControl.MeasurementType.Distance;
             this.measurementSightHeight.Minimum = -10000D;
-            this.measurementSightHeight.MinimumSize = new System.Drawing.Size(150, 34);
+            this.measurementSightHeight.MinimumSize = new System.Drawing.Size(150, 35);
             this.measurementSightHeight.Name = "measurementSightHeight";
-            this.measurementSightHeight.Size = new System.Drawing.Size(261, 34);
+            this.measurementSightHeight.Size = new System.Drawing.Size(261, 35);
             this.measurementSightHeight.TabIndex = 0;
             this.measurementSightHeight.TextValue = "m";
             this.measurementSightHeight.Unit = Gehtsoft.Measurements.DistanceUnit.Meter;
@@ -63,15 +66,15 @@
             // 
             this.measurementZeroDistance.DecimalPoints = null;
             this.measurementZeroDistance.Increment = 1D;
-            this.measurementZeroDistance.Location = new System.Drawing.Point(170, 46);
+            this.measurementZeroDistance.Location = new System.Drawing.Point(170, 48);
             this.measurementZeroDistance.Margin = new System.Windows.Forms.Padding(4);
             this.measurementZeroDistance.Maximum = 10000D;
-            this.measurementZeroDistance.MaximumSize = new System.Drawing.Size(5120, 34);
+            this.measurementZeroDistance.MaximumSize = new System.Drawing.Size(5120, 35);
             this.measurementZeroDistance.MeasurementType = BallisticCalculatorNet.MeasurementControl.MeasurementType.Distance;
             this.measurementZeroDistance.Minimum = -10000D;
-            this.measurementZeroDistance.MinimumSize = new System.Drawing.Size(150, 34);
+            this.measurementZeroDistance.MinimumSize = new System.Drawing.Size(150, 35);
             this.measurementZeroDistance.Name = "measurementZeroDistance";
-            this.measurementZeroDistance.Size = new System.Drawing.Size(261, 34);
+            this.measurementZeroDistance.Size = new System.Drawing.Size(261, 35);
             this.measurementZeroDistance.TabIndex = 1;
             this.measurementZeroDistance.TextValue = "m";
             this.measurementZeroDistance.Unit = Gehtsoft.Measurements.DistanceUnit.Meter;
@@ -84,9 +87,9 @@
             "Not Set",
             "Left",
             "Right"});
-            this.comboBoxRiflingDirection.Location = new System.Drawing.Point(170, 87);
+            this.comboBoxRiflingDirection.Location = new System.Drawing.Point(170, 91);
             this.comboBoxRiflingDirection.Name = "comboBoxRiflingDirection";
-            this.comboBoxRiflingDirection.Size = new System.Drawing.Size(261, 32);
+            this.comboBoxRiflingDirection.Size = new System.Drawing.Size(261, 33);
             this.comboBoxRiflingDirection.TabIndex = 2;
             this.comboBoxRiflingDirection.SelectedIndexChanged += new System.EventHandler(this.comboBoxRiflingDirection_SelectedIndexChanged);
             // 
@@ -94,15 +97,15 @@
             // 
             this.measurementRifling.DecimalPoints = null;
             this.measurementRifling.Increment = 1D;
-            this.measurementRifling.Location = new System.Drawing.Point(170, 126);
+            this.measurementRifling.Location = new System.Drawing.Point(170, 131);
             this.measurementRifling.Margin = new System.Windows.Forms.Padding(4);
             this.measurementRifling.Maximum = 10000D;
-            this.measurementRifling.MaximumSize = new System.Drawing.Size(5120, 34);
+            this.measurementRifling.MaximumSize = new System.Drawing.Size(5120, 35);
             this.measurementRifling.MeasurementType = BallisticCalculatorNet.MeasurementControl.MeasurementType.Distance;
             this.measurementRifling.Minimum = -10000D;
-            this.measurementRifling.MinimumSize = new System.Drawing.Size(150, 34);
+            this.measurementRifling.MinimumSize = new System.Drawing.Size(150, 35);
             this.measurementRifling.Name = "measurementRifling";
-            this.measurementRifling.Size = new System.Drawing.Size(261, 34);
+            this.measurementRifling.Size = new System.Drawing.Size(261, 35);
             this.measurementRifling.TabIndex = 3;
             this.measurementRifling.TextValue = "m";
             this.measurementRifling.Unit = Gehtsoft.Measurements.DistanceUnit.Meter;
@@ -111,15 +114,15 @@
             // 
             this.measurementHClick.DecimalPoints = null;
             this.measurementHClick.Increment = 1D;
-            this.measurementHClick.Location = new System.Drawing.Point(170, 168);
+            this.measurementHClick.Location = new System.Drawing.Point(170, 175);
             this.measurementHClick.Margin = new System.Windows.Forms.Padding(4);
             this.measurementHClick.Maximum = 10000D;
-            this.measurementHClick.MaximumSize = new System.Drawing.Size(5120, 34);
+            this.measurementHClick.MaximumSize = new System.Drawing.Size(5120, 35);
             this.measurementHClick.MeasurementType = BallisticCalculatorNet.MeasurementControl.MeasurementType.Angular;
             this.measurementHClick.Minimum = -10000D;
-            this.measurementHClick.MinimumSize = new System.Drawing.Size(150, 34);
+            this.measurementHClick.MinimumSize = new System.Drawing.Size(150, 35);
             this.measurementHClick.Name = "measurementHClick";
-            this.measurementHClick.Size = new System.Drawing.Size(261, 34);
+            this.measurementHClick.Size = new System.Drawing.Size(261, 35);
             this.measurementHClick.TabIndex = 4;
             this.measurementHClick.TextValue = "mil";
             this.measurementHClick.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
@@ -128,15 +131,15 @@
             // 
             this.measurementVClick.DecimalPoints = null;
             this.measurementVClick.Increment = 1D;
-            this.measurementVClick.Location = new System.Drawing.Point(170, 210);
+            this.measurementVClick.Location = new System.Drawing.Point(170, 219);
             this.measurementVClick.Margin = new System.Windows.Forms.Padding(4);
             this.measurementVClick.Maximum = 10000D;
-            this.measurementVClick.MaximumSize = new System.Drawing.Size(5120, 34);
+            this.measurementVClick.MaximumSize = new System.Drawing.Size(5120, 35);
             this.measurementVClick.MeasurementType = BallisticCalculatorNet.MeasurementControl.MeasurementType.Angular;
             this.measurementVClick.Minimum = -10000D;
-            this.measurementVClick.MinimumSize = new System.Drawing.Size(150, 34);
+            this.measurementVClick.MinimumSize = new System.Drawing.Size(150, 35);
             this.measurementVClick.Name = "measurementVClick";
-            this.measurementVClick.Size = new System.Drawing.Size(261, 34);
+            this.measurementVClick.Size = new System.Drawing.Size(261, 35);
             this.measurementVClick.TabIndex = 5;
             this.measurementVClick.TextValue = "mil";
             this.measurementVClick.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
@@ -146,60 +149,100 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 24);
+            this.label1.Size = new System.Drawing.Size(111, 25);
             this.label1.TabIndex = 6;
             this.label1.Text = "Sight Height";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 53);
+            this.label2.Location = new System.Drawing.Point(3, 55);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(118, 24);
+            this.label2.Size = new System.Drawing.Size(120, 25);
             this.label2.TabIndex = 7;
             this.label2.Text = "Zero Distance";
             // 
             // Rifling
             // 
             this.Rifling.AutoSize = true;
-            this.Rifling.Location = new System.Drawing.Point(3, 92);
+            this.Rifling.Location = new System.Drawing.Point(3, 96);
             this.Rifling.Name = "Rifling";
-            this.Rifling.Size = new System.Drawing.Size(60, 24);
+            this.Rifling.Size = new System.Drawing.Size(62, 25);
             this.Rifling.TabIndex = 8;
             this.Rifling.Text = "Rifling";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 133);
+            this.label3.Location = new System.Drawing.Point(3, 139);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 24);
+            this.label3.Size = new System.Drawing.Size(102, 25);
             this.label3.TabIndex = 9;
             this.label3.Text = "Rifling Step";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 175);
+            this.label4.Location = new System.Drawing.Point(3, 182);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(133, 24);
+            this.label4.Size = new System.Drawing.Size(135, 25);
             this.label4.TabIndex = 10;
             this.label4.Text = "Horizontal Click";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 217);
+            this.label5.Location = new System.Drawing.Point(3, 226);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(107, 24);
+            this.label5.Size = new System.Drawing.Size(109, 25);
             this.label5.TabIndex = 11;
             this.label5.Text = "Vertical Click";
             // 
+            // checkBoxZeroVerticalOffset
+            // 
+            this.checkBoxZeroVerticalOffset.AutoSize = true;
+            this.checkBoxZeroVerticalOffset.Location = new System.Drawing.Point(3, 261);
+            this.checkBoxZeroVerticalOffset.Name = "checkBoxZeroVerticalOffset";
+            this.checkBoxZeroVerticalOffset.Size = new System.Drawing.Size(406, 29);
+            this.checkBoxZeroVerticalOffset.TabIndex = 12;
+            this.checkBoxZeroVerticalOffset.Text = "Impact point at zero is above/below aim point";
+            this.checkBoxZeroVerticalOffset.UseVisualStyleBackColor = true;
+            this.checkBoxZeroVerticalOffset.CheckedChanged += new System.EventHandler(this.checkBoxZeroVerticalOffset_CheckedChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 303);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(119, 25);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Vertical offset";
+            // 
+            // measurementVerticalOffset
+            // 
+            this.measurementVerticalOffset.DecimalPoints = null;
+            this.measurementVerticalOffset.Increment = 1D;
+            this.measurementVerticalOffset.Location = new System.Drawing.Point(170, 297);
+            this.measurementVerticalOffset.Margin = new System.Windows.Forms.Padding(4);
+            this.measurementVerticalOffset.Maximum = 10000D;
+            this.measurementVerticalOffset.MaximumSize = new System.Drawing.Size(5120, 35);
+            this.measurementVerticalOffset.MeasurementType = BallisticCalculatorNet.MeasurementControl.MeasurementType.Distance;
+            this.measurementVerticalOffset.Minimum = -10000D;
+            this.measurementVerticalOffset.MinimumSize = new System.Drawing.Size(150, 35);
+            this.measurementVerticalOffset.Name = "measurementVerticalOffset";
+            this.measurementVerticalOffset.Size = new System.Drawing.Size(261, 35);
+            this.measurementVerticalOffset.TabIndex = 14;
+            this.measurementVerticalOffset.TextValue = "m";
+            this.measurementVerticalOffset.Unit = Gehtsoft.Measurements.DistanceUnit.Meter;
+            // 
             // WeaponControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.measurementVerticalOffset);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.checkBoxZeroVerticalOffset);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -213,7 +256,7 @@
             this.Controls.Add(this.measurementZeroDistance);
             this.Controls.Add(this.measurementSightHeight);
             this.Name = "WeaponControl";
-            this.Size = new System.Drawing.Size(435, 255);
+            this.Size = new System.Drawing.Size(435, 351);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,5 +276,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox checkBoxZeroVerticalOffset;
+        private System.Windows.Forms.Label label6;
+        private MeasurementControl.MeasurementControl measurementVerticalOffset;
     }
 }

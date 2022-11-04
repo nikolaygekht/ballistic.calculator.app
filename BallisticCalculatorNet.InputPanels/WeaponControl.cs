@@ -28,6 +28,7 @@ namespace BallisticCalculatorNet.InputPanels
             measurementRifling.Enabled = false;
             measurementVClick.Value = 0.25.As(AngularUnit.MOA);
             measurementHClick.Value = 0.25.As(AngularUnit.MOA);
+            measurementVerticalOffset.Enabled = false;
         }
 
         private MeasurementSystem mMeasurementSystem = MeasurementSystem.Metric;
@@ -79,7 +80,8 @@ namespace BallisticCalculatorNet.InputPanels
                     {
                         Distance = measurementZeroDistance.ValueAsMeasurement<DistanceUnit>(),
                         Atmosphere = ZeroAtmosphere?.Atmosphere,
-                        Ammunition = ZeroAmmunition?.Ammunition
+                        Ammunition = ZeroAmmunition?.Ammunition,
+                        VerticalOffset = checkBoxZeroVerticalOffset.Checked ? measurementVerticalOffset.ValueAsMeasurement<DistanceUnit>() : null
                     },
                     Rifling = twist == null ? null :
                               new Rifling()
@@ -92,7 +94,7 @@ namespace BallisticCalculatorNet.InputPanels
                         SightHeight = measurementSightHeight.ValueAsMeasurement<DistanceUnit>(),
                         VerticalClick = measurementVClick.ValueAsMeasurement<AngularUnit>(),
                         HorizontalClick = measurementHClick.ValueAsMeasurement<AngularUnit>()
-                    }
+                    },
                 };
             }
             set
@@ -143,6 +145,19 @@ namespace BallisticCalculatorNet.InputPanels
                     measurementVClick.Value = value.Sight.VerticalClick ?? 0.25.As(AngularUnit.MOA);
                     measurementHClick.Value = value.Sight.HorizontalClick ?? 0.25.As(AngularUnit.MOA);
                 }
+
+                if (value?.Zero.VerticalOffset != null)
+                {
+                    checkBoxZeroVerticalOffset.Checked = true;
+                    measurementVerticalOffset.Enabled = true;
+                    measurementVerticalOffset.Value = value.Zero.VerticalOffset.Value;
+                }
+                else
+                {
+                    checkBoxZeroVerticalOffset.Checked = false;
+                    measurementVerticalOffset.Enabled = false;
+                    measurementVerticalOffset.Value = null;
+                }
             }
         }
 
@@ -153,18 +168,25 @@ namespace BallisticCalculatorNet.InputPanels
                 measurementSightHeight.ChangeUnit(DistanceUnit.Millimeter, 0);
                 measurementZeroDistance.ChangeUnit(DistanceUnit.Meter, 0);
                 measurementRifling.ChangeUnit(DistanceUnit.Millimeter, 0);
+                measurementVerticalOffset.ChangeUnit(DistanceUnit.Millimeter, 0);
             }
             else if (mMeasurementSystem == MeasurementSystem.Imperial)
             {
                 measurementSightHeight.ChangeUnit(DistanceUnit.Inch, 1);
                 measurementZeroDistance.ChangeUnit(DistanceUnit.Yard, 0);
                 measurementRifling.ChangeUnit(DistanceUnit.Inch, 1);
+                measurementVerticalOffset.ChangeUnit(DistanceUnit.Inch, 1);
             }
         }
 
         private void comboBoxRiflingDirection_SelectedIndexChanged(object sender, EventArgs e)
         {
             measurementRifling.Enabled = comboBoxRiflingDirection.SelectedIndex != 0;
+        }
+
+        private void checkBoxZeroVerticalOffset_CheckedChanged(object sender, EventArgs e)
+        {
+            measurementVerticalOffset.Enabled = checkBoxZeroVerticalOffset.Checked;
         }
     }
 }

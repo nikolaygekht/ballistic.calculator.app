@@ -7,6 +7,7 @@ using Gehtsoft.Measurements;
 using Gehtsoft.Winforms.FluentAssertions;
 using Moq;
 using System;
+using System.Diagnostics.Metrics;
 using Xunit;
 
 namespace BallisticCalculatorNet.UnitTest.InputPanels
@@ -24,6 +25,7 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             control.MeasurementControl("measurementRifling").Should().BeDisabled();
             control.MeasurementControl("measurementVClick").Value.Should().Be(0.25.As(AngularUnit.MOA));
             control.MeasurementControl("measurementHClick").Value.Should().Be(0.25.As(AngularUnit.MOA));
+            control.MeasurementControl("measurementVerticalOffset").Enabled.Should().BeFalse();
         }
 
         [Fact]
@@ -36,6 +38,7 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             control.MeasurementControl("measurementSightHeight").Unit.Should().Be(DistanceUnit.Millimeter);
             control.MeasurementControl("measurementZeroDistance").Unit.Should().Be(DistanceUnit.Meter);
             control.MeasurementControl("measurementRifling").Unit.Should().Be(DistanceUnit.Millimeter);
+            control.MeasurementControl("measurementVerticalOffset").Unit.Should().Be(DistanceUnit.Millimeter);
         }
 
         [Fact]
@@ -48,6 +51,7 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             control.MeasurementControl("measurementSightHeight").Unit.Should().Be(DistanceUnit.Inch);
             control.MeasurementControl("measurementZeroDistance").Unit.Should().Be(DistanceUnit.Yard);
             control.MeasurementControl("measurementRifling").Unit.Should().Be(DistanceUnit.Inch);
+            control.MeasurementControl("measurementVerticalOffset").Unit.Should().Be(DistanceUnit.Inch);
         }
 
         [Fact]
@@ -121,6 +125,8 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             control.MeasurementControl("measurementRifling").Should().BeDisabled();
             control.MeasurementControl("measurementVClick").Value.Should().Be(0.25.As(AngularUnit.MOA));
             control.MeasurementControl("measurementHClick").Value.Should().Be(0.25.As(AngularUnit.MOA));
+            control.MeasurementControl("measurementVerticalOffset").Should().BeDisabled();
+            control.MeasurementControl("measurementVerticalOffset").Value.Should().Be(0.As(DistanceUnit.Millimeter));
         }
 
         [Fact]
@@ -138,6 +144,8 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             control.MeasurementControl("measurementRifling").Should().BeDisabled();
             control.MeasurementControl("measurementVClick").Value.Should().Be(0.25.As(AngularUnit.MOA));
             control.MeasurementControl("measurementHClick").Value.Should().Be(0.25.As(AngularUnit.MOA));
+            control.MeasurementControl("measurementVerticalOffset").Should().BeDisabled();
+            control.MeasurementControl("measurementVerticalOffset").Value.Should().Be(0.As(DistanceUnit.Inch));
         }
 
         [Fact]
@@ -285,6 +293,73 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
 
             weapon.Zero?.Ammunition?.Weight.Should().Be(8.As(WeightUnit.Gram));
             weapon.Zero?.Atmosphere?.Temperature.Should().Be(59.As(TemperatureUnit.Fahrenheit));
+        }
+
+        [Fact]
+        public void VerticalOffset_EnableDisable_ByCheckbox()
+        {
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<WeaponControl>(5, 5, 100, 100);
+            
+            control.CheckBox("checkBoxZeroVerticalOffset").Checked = true;
+            control.InvokeEventHandler("checkBoxZeroVerticalOffset_CheckedChanged", EventArgs.Empty);
+            control.MeasurementControl("measurementVerticalOffset").Should().BeEnabled();
+
+            control.CheckBox("checkBoxZeroVerticalOffset").Checked = false;
+            control.InvokeEventHandler("checkBoxZeroVerticalOffset_CheckedChanged", EventArgs.Empty);
+            control.MeasurementControl("measurementVerticalOffset").Should().BeDisabled();
+        }
+
+        [Fact]
+        public void VerticalOffset_GetSet_Null()
+        {
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<WeaponControl>(5, 5, 100, 100);
+            var weapon = new Rifle()
+            {
+                Zero = new ZeroingParameters()
+                {
+                    Distance = 100.As(DistanceUnit.Yard),
+                    VerticalOffset = null
+                }
+            };
+            
+            control.Rifle = weapon;
+            control.CheckBox("checkBoxZeroVerticalOffset").Should().BeNotChecked();
+            control.MeasurementControl("measurementVerticalOffset").Should().BeDisabled();
+
+            var weapon1 = control.Rifle;
+            weapon1.Zero.VerticalOffset.Should().BeNull();
+        }
+
+        [Fact]
+        public void VerticalOffset_GetSet_NotNull()
+        {
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<WeaponControl>(5, 5, 100, 100);
+            var weapon = new Rifle()
+            {
+                Zero = new ZeroingParameters()
+                {
+                    Distance = 100.As(DistanceUnit.Yard),
+                    VerticalOffset = DistanceUnit.Inch.New(-2)
+                }
+            };
+
+            control.Rifle = weapon;
+            
+            control.CheckBox("checkBoxZeroVerticalOffset").Should().BeChecked();
+            control.MeasurementControl("measurementVerticalOffset").Should().BeEnabled();
+            control.MeasurementControl("measurementVerticalOffset")
+                .ValueAsMeasurement<DistanceUnit>()
+                .Should().Be(weapon.Zero.VerticalOffset.Value);
+
+            var weapon1 = control.Rifle;
+            
+            weapon1.Zero.VerticalOffset.Should()
+                .NotBeNull();
+            weapon1.Zero.VerticalOffset.Value.Should()
+                .Be(weapon.Zero.VerticalOffset.Value);
         }
     }
 }

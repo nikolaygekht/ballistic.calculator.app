@@ -50,6 +50,9 @@ namespace Gehtsoft.Winforms.FluentAssertions
             Execute.Assertion
                   .BecauseOf(because, becauseParameters)
                   .Given(() => Subject)
+                  .ForCondition(control => control != null)
+                  .FailWith("Expected {context:control} to exists but it does not")
+                  .Then
                   .ForCondition(control => type.IsInstanceOfType(control))
                   .FailWith("Expected {context:control} is expected to be a {0} but it is {1}", type.Name, Subject?.GetType().Name);
 
@@ -65,6 +68,9 @@ namespace Gehtsoft.Winforms.FluentAssertions
             Execute.Assertion
                   .BecauseOf(because, becauseParameters)
                   .Given(() => Subject)
+                  .ForCondition(control => control != null)
+                  .FailWith("Expected {context:control} to exists but it does not")
+                  .Then
                   .ForCondition(control => control is TC t && predicate.Compile().Invoke(t))
                   .FailWith("Expected {context:control} to match {0} but it does not", predicate);
             return new AndConstraint<T1>(this as T1);
@@ -73,10 +79,13 @@ namespace Gehtsoft.Winforms.FluentAssertions
         public AndConstraint<T1> BeEnabled(bool enabled = true, string because = null, params object[] becauseParameters)
         {
             Execute.Assertion
-                              .BecauseOf(because, becauseParameters)
-                              .Given(() => Subject)
-                              .ForCondition(control => control?.Enabled == enabled)
-                              .FailWith("Expected {context:control} to have enabled flag {0} but it has {1}", enabled, Subject?.Enabled);
+                   .BecauseOf(because, becauseParameters)
+                   .Given(() => Subject)
+                   .ForCondition(control => control != null)
+                   .FailWith("Expected {context:control} to exists but it does not")
+                   .Then
+                   .ForCondition(control => control?.Enabled == enabled)
+                   .FailWith("Expected {context:control} to have enabled flag {0} but it has {1}", enabled, Subject?.Enabled);
 
             return new AndConstraint<T1>(this as T1);
         }
@@ -86,10 +95,13 @@ namespace Gehtsoft.Winforms.FluentAssertions
         public AndConstraint<T1> HaveText(string text, string because = null, params object[] becauseParameters)
         {
             Execute.Assertion
-                              .BecauseOf(because, becauseParameters)
-                              .Given(() => Subject)
-                              .ForCondition(control => control?.Text == text)
-                              .FailWith("Expected {context:control} to have text {0} but it has {1}", text, Subject?.Text);
+                   .BecauseOf(because, becauseParameters)
+                   .Given(() => Subject)
+                   .ForCondition(control => control != null)
+                   .FailWith("Expected {context:control} to exists but it does not")
+                   .Then
+                   .ForCondition(control => control?.Text == text)
+                   .FailWith("Expected {context:control} to have text {0} but it has {1}", text, Subject?.Text);
 
             return new AndConstraint<T1>(this as T1);
         }
