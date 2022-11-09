@@ -92,12 +92,5 @@ namespace BallisticCalculatorNet.InputPanels
                 return;
             measurementShotAngle.Value = clicks * WeaponControl.VertialClick;
         }
-
-        public event EventHandler CalculateRequested;
-
-        private void buttonCalculate_Click(object sender, EventArgs e)
-        {
-            CalculateRequested?.Invoke(this, EventArgs.Empty);
-        }
     }
 }

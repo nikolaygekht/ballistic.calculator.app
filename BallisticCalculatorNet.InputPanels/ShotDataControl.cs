@@ -75,12 +75,5 @@ namespace BallisticCalculatorNet.InputPanels
                 panelParameters.Parameters = value.Parameters;
             }
         }
-
-        public event EventHandler CalculateRequested;
-
-        private void panelParameters_CalculateRequested(object sender, EventArgs e)
-        {
-            CalculateRequested?.Invoke(this, e);
-        }
     }
 }

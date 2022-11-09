@@ -37,7 +37,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.buttonCalculate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // measurementDistance
@@ -47,12 +46,12 @@
             this.measurementDistance.Location = new System.Drawing.Point(170, 4);
             this.measurementDistance.Margin = new System.Windows.Forms.Padding(4);
             this.measurementDistance.Maximum = 10000D;
-            this.measurementDistance.MaximumSize = new System.Drawing.Size(5120, 34);
+            this.measurementDistance.MaximumSize = new System.Drawing.Size(5120, 35);
             this.measurementDistance.MeasurementType = BallisticCalculatorNet.MeasurementControl.MeasurementType.Distance;
             this.measurementDistance.Minimum = -10000D;
-            this.measurementDistance.MinimumSize = new System.Drawing.Size(150, 34);
+            this.measurementDistance.MinimumSize = new System.Drawing.Size(150, 35);
             this.measurementDistance.Name = "measurementDistance";
-            this.measurementDistance.Size = new System.Drawing.Size(261, 34);
+            this.measurementDistance.Size = new System.Drawing.Size(261, 35);
             this.measurementDistance.TabIndex = 0;
             this.measurementDistance.TextValue = "m";
             this.measurementDistance.Unit = Gehtsoft.Measurements.DistanceUnit.Meter;
@@ -61,15 +60,15 @@
             // 
             this.measurementStep.DecimalPoints = null;
             this.measurementStep.Increment = 1D;
-            this.measurementStep.Location = new System.Drawing.Point(170, 46);
+            this.measurementStep.Location = new System.Drawing.Point(170, 48);
             this.measurementStep.Margin = new System.Windows.Forms.Padding(4);
             this.measurementStep.Maximum = 10000D;
-            this.measurementStep.MaximumSize = new System.Drawing.Size(5120, 34);
+            this.measurementStep.MaximumSize = new System.Drawing.Size(5120, 35);
             this.measurementStep.MeasurementType = BallisticCalculatorNet.MeasurementControl.MeasurementType.Distance;
             this.measurementStep.Minimum = -10000D;
-            this.measurementStep.MinimumSize = new System.Drawing.Size(150, 34);
+            this.measurementStep.MinimumSize = new System.Drawing.Size(150, 35);
             this.measurementStep.Name = "measurementStep";
-            this.measurementStep.Size = new System.Drawing.Size(261, 34);
+            this.measurementStep.Size = new System.Drawing.Size(261, 35);
             this.measurementStep.TabIndex = 1;
             this.measurementStep.TextValue = "m";
             this.measurementStep.Unit = Gehtsoft.Measurements.DistanceUnit.Meter;
@@ -78,22 +77,22 @@
             // 
             this.measurementShotAngle.DecimalPoints = null;
             this.measurementShotAngle.Increment = 1D;
-            this.measurementShotAngle.Location = new System.Drawing.Point(170, 88);
+            this.measurementShotAngle.Location = new System.Drawing.Point(170, 92);
             this.measurementShotAngle.Margin = new System.Windows.Forms.Padding(4);
             this.measurementShotAngle.Maximum = 10000D;
-            this.measurementShotAngle.MaximumSize = new System.Drawing.Size(5120, 34);
+            this.measurementShotAngle.MaximumSize = new System.Drawing.Size(5120, 35);
             this.measurementShotAngle.MeasurementType = BallisticCalculatorNet.MeasurementControl.MeasurementType.Angular;
             this.measurementShotAngle.Minimum = -10000D;
-            this.measurementShotAngle.MinimumSize = new System.Drawing.Size(150, 34);
+            this.measurementShotAngle.MinimumSize = new System.Drawing.Size(150, 35);
             this.measurementShotAngle.Name = "measurementShotAngle";
-            this.measurementShotAngle.Size = new System.Drawing.Size(261, 34);
+            this.measurementShotAngle.Size = new System.Drawing.Size(261, 35);
             this.measurementShotAngle.TabIndex = 2;
             this.measurementShotAngle.TextValue = "mil";
             this.measurementShotAngle.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
             // 
             // textBoxClicks
             // 
-            this.textBoxClicks.Location = new System.Drawing.Point(170, 129);
+            this.textBoxClicks.Location = new System.Drawing.Point(170, 134);
             this.textBoxClicks.Name = "textBoxClicks";
             this.textBoxClicks.Size = new System.Drawing.Size(157, 31);
             this.textBoxClicks.TabIndex = 3;
@@ -101,9 +100,9 @@
             // 
             // buttonClicksSet
             // 
-            this.buttonClicksSet.Location = new System.Drawing.Point(333, 129);
+            this.buttonClicksSet.Location = new System.Drawing.Point(333, 134);
             this.buttonClicksSet.Name = "buttonClicksSet";
-            this.buttonClicksSet.Size = new System.Drawing.Size(98, 31);
+            this.buttonClicksSet.Size = new System.Drawing.Size(98, 32);
             this.buttonClicksSet.TabIndex = 4;
             this.buttonClicksSet.Text = "Set";
             this.buttonClicksSet.UseVisualStyleBackColor = true;
@@ -114,53 +113,42 @@
             this.labelMaximumRange.AutoSize = true;
             this.labelMaximumRange.Location = new System.Drawing.Point(3, 11);
             this.labelMaximumRange.Name = "labelMaximumRange";
-            this.labelMaximumRange.Size = new System.Drawing.Size(144, 24);
+            this.labelMaximumRange.Size = new System.Drawing.Size(146, 25);
             this.labelMaximumRange.TabIndex = 5;
             this.labelMaximumRange.Text = "Maximum Range";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 53);
+            this.label1.Location = new System.Drawing.Point(3, 55);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 24);
+            this.label1.Size = new System.Drawing.Size(47, 25);
             this.label1.TabIndex = 6;
             this.label1.Text = "Step";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 95);
+            this.label2.Location = new System.Drawing.Point(3, 99);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 24);
+            this.label2.Size = new System.Drawing.Size(58, 25);
             this.label2.TabIndex = 7;
             this.label2.Text = "Angle";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 135);
+            this.label3.Location = new System.Drawing.Point(3, 141);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(124, 24);
+            this.label3.Size = new System.Drawing.Size(126, 25);
             this.label3.TabIndex = 8;
             this.label3.Text = "Angle as clicks";
             // 
-            // buttonCalculate
-            // 
-            this.buttonCalculate.Location = new System.Drawing.Point(170, 166);
-            this.buttonCalculate.Name = "buttonCalculate";
-            this.buttonCalculate.Size = new System.Drawing.Size(112, 34);
-            this.buttonCalculate.TabIndex = 9;
-            this.buttonCalculate.Text = "Calculate!";
-            this.buttonCalculate.UseVisualStyleBackColor = true;
-            this.buttonCalculate.Click += new System.EventHandler(this.buttonCalculate_Click);
-            // 
             // ParametersControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.Controls.Add(this.buttonCalculate);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -171,7 +159,7 @@
             this.Controls.Add(this.measurementStep);
             this.Controls.Add(this.measurementDistance);
             this.Name = "ParametersControl";
-            this.Size = new System.Drawing.Size(435, 217);
+            this.Size = new System.Drawing.Size(435, 226);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,6 +176,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button buttonCalculate;
     }
 }

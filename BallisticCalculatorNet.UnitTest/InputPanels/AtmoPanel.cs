@@ -276,21 +276,5 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             control.InvokeEventHandler("buttonClicksSet_Click", EventArgs.Empty);
             control.MeasurementControl("measurementShotAngle").Should().HaveValue(1.25.As(AngularUnit.Mil));
         }
-
-        [Fact]
-        public void Calculate_Click()
-        {
-            var weapon = new Mock<IWeaponControl>();
-            weapon.Setup(m => m.VertialClick).Returns(0.25.As(AngularUnit.Mil));
-            using TestForm tf = new TestForm();
-            var control = tf.AddControl<ParametersControl>(5, 5, 100, 100);
-            
-            bool called = false;
-            control.CalculateRequested += (_, _) => called = true;
-            
-            control.InvokeEventHandler("buttonCalculate_Click", EventArgs.Empty);
-
-            called.Should().BeTrue();
-        }
     }
 }

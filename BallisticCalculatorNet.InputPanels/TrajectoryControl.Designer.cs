@@ -61,12 +61,14 @@
             this.columnHeaderEnergy,
             this.columnHeaderOGW});
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView.FullRowSelect = true;
+            this.listView.GridLines = true;
             this.listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView.LabelWrap = false;
             this.listView.Location = new System.Drawing.Point(0, 0);
             this.listView.MultiSelect = false;
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(1058, 435);
+            this.listView.Size = new System.Drawing.Size(1058, 453);
             this.listView.TabIndex = 0;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
@@ -148,11 +150,11 @@
             // 
             // TrajectoryControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.listView);
             this.Name = "TrajectoryControl";
-            this.Size = new System.Drawing.Size(1058, 435);
+            this.Size = new System.Drawing.Size(1058, 453);
             this.ResumeLayout(false);
 
         }

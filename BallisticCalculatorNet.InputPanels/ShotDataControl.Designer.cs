@@ -207,7 +207,6 @@
             this.panelParameters.Name = "panelParameters";
             this.panelParameters.Size = new System.Drawing.Size(603, 543);
             this.panelParameters.TabIndex = 0;
-            this.panelParameters.CalculateRequested += new System.EventHandler(this.panelParameters_CalculateRequested);
             // 
             // ShotDataControl
             // 

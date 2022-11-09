@@ -120,8 +120,7 @@ namespace BallisticCalculatorNet.InputPanels
 
             var item = mTrajectory[e.ItemIndex];
 
-            if (e.Item == null)
-                e.Item = new ListViewItem("");
+            e.Item ??= new ListViewItem("");
 
             e.Item.SubItems.Clear();
 

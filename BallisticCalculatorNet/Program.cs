@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BallisticCalculatorNet.Common;
+using BallisticCalculatorNet.InputPanels;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Core;
@@ -67,6 +68,8 @@ namespace BallisticCalculatorNet
                         .AddCommandLine(args, switchMappings)
                         .Build();
 
+            ControlConfiguration.Configuration = Configuration;
+
             Logger = new LoggerConfiguration()
                 .MinimumLevel.Is(MinimumLogLevel)
                 .WriteTo.File(LogTarget, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 10)
@@ -88,9 +91,7 @@ namespace BallisticCalculatorNet
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new AppForm());
-            Application.Run(new MyTestForm());
-
+            Application.Run(new AppForm());
 
             Configuration.SaveStateToFile(Path.Combine(ApplicationFolder, "ballisticCalculator.state.json"), "state");
         }

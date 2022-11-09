@@ -146,7 +146,7 @@ namespace BallisticCalculatorNet.InputPanels
                     measurementHClick.Value = value.Sight.HorizontalClick ?? 0.25.As(AngularUnit.MOA);
                 }
 
-                if (value?.Zero.VerticalOffset != null)
+                if (value?.Zero?.VerticalOffset != null)
                 {
                     checkBoxZeroVerticalOffset.Checked = true;
                     measurementVerticalOffset.Enabled = true;
