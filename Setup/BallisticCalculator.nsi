@@ -1,16 +1,6 @@
-;NSIS Modern User Interface
-;Basic Example Script
-;Written by Joost Verburg
+!include "MUI2.nsh"
+!include "x64.nsh"
 
-;--------------------------------
-;Include Modern UI
-
-  !include "MUI2.nsh"
-
-;--------------------------------
-;General
-
-  ;Name and file
   Name "Ballistic Caculator"
   OutFile "BallisticCaculatorSetup.exe"
   Unicode True
@@ -22,15 +12,9 @@
   InstallDirRegKey HKCU "Software\NikolayGekhtBallisticCaculator" ""
 
   ;Request application privileges for Windows Vista
-  RequestExecutionLevel user
-
-;--------------------------------
-;Interface Settings
+  RequestExecutionLevel admin
 
   !define MUI_ABORTWARNING
-
-;--------------------------------
-;Pages
 
   !insertmacro MUI_PAGE_LICENSE "license.txt"
   !insertmacro MUI_PAGE_DIRECTORY
@@ -39,50 +23,58 @@
   !insertmacro MUI_UNPAGE_CONFIRM
   !insertmacro MUI_UNPAGE_INSTFILES
 
-;--------------------------------
-;Languages
-
   !insertmacro MUI_LANGUAGE "English"
 
-;--------------------------------
-;Installer Sections
+Function .onInit
+${If} ${RunningX64}
+    SetRegView 64
+${EndIf}
+FunctionEnd
 
-Section "Dummy Section" SecDummy
+Function un.onInit
+${If} ${RunningX64}
+    SetRegView 64
+${EndIf}
+FunctionEnd
+
+
+Section "Install"
 
   SetOutPath "$INSTDIR"
 
   File /r ".\content\*.*"
 
-  ;Store installation folder
-  WriteRegStr HKCU "Software\NikolayGekhtBallisticCaculator" "" $INSTDIR
-
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
+  createDirectory "$SMPROGRAMS\NG Ballistic Calculator"
+  createShortCut "$SMPROGRAMS\NG Ballistic Calculator\Ballistic Calculator.lnk" "$INSTDIR\BallisticCalculatorNet.exe"
+  createShortCut "$SMPROGRAMS\NG Ballistic Calculator\Reticle Editor.lnk" "$INSTDIR\BallisticCalculatorNet.ReticleEditor.exe"
+  createShortCut "$SMPROGRAMS\NG Ballistic Calculator\Uninstall Application.lnk" "$INSTDIR\uninstall.exe"
+  SetRegView 64
+  WriteRegStr HKCU "Software\NGBallisticCaculator" "" $INSTDIR
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\{239bccba-9bc1-4ece-bf7e-e9bd2245c92d}" "DisplayName" "NG Ballistic Calculator"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\{239bccba-9bc1-4ece-bf7e-e9bd2245c92d}" "DisplayVersion" "2.0"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\{239bccba-9bc1-4ece-bf7e-e9bd2245c92d}" "UninstallString" "$INSTDIR\uninstall.exe"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\{239bccba-9bc1-4ece-bf7e-e9bd2245c92d}" "InstallLocation" "$INSTDIR"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\{239bccba-9bc1-4ece-bf7e-e9bd2245c92d}" "Publisher" "Nikolay Gekht"
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\{239bccba-9bc1-4ece-bf7e-e9bd2245c92d}" "NoModify" 1
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\{239bccba-9bc1-4ece-bf7e-e9bd2245c92d}" "NoRepair" 1
 SectionEnd
 
-;--------------------------------
-;Descriptions
+  LangString DESC_Install ${LANG_ENGLISH} "Installation."
 
-  ;Language strings
-  LangString DESC_SecDummy ${LANG_ENGLISH} "A test section."
-
-  ;Assign language strings to sections
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-    !insertmacro MUI_DESCRIPTION_TEXT ${SecDummy} $(DESC_SecDummy)
+    !insertmacro MUI_DESCRIPTION_TEXT Install $(DESC_Install)
   !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
-;--------------------------------
-;Uninstaller Section
-
 Section "Uninstall"
-
-  ;ADD YOUR OWN FILES HERE...
-
   Delete "$INSTDIR\Uninstall.exe"
 
-  RMDir "$INSTDIR"
+  RMDIR /r "$INSTDIR"
 
-  DeleteRegKey /ifempty HKCU "Software\Modern UI Test"
-
+  RMDir /r "$SMPROGRAMS\NG Ballistic Calculator"
+  SetRegView 64
+  DeleteRegKey HKCU "Software\NGBallisticCaculator"
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\{239bccba-9bc1-4ece-bf7e-e9bd2245c92d}"
 SectionEnd

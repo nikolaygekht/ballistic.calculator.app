@@ -1,28 +1,53 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup>
+  <OutputType>WinExe</OutputType>
+  <TargetFramework>net60-windows</TargetFramework>
+  <UseWindowsForms>true</UseWindowsForms>
+  <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+  <ApplicationIcon>Shooting.ico</ApplicationIcon>
+ </PropertyGroup>
+ <ItemGroup>
+  <PackageReference Include="BallisticCalculator" Version="1.1.0.10" />
+  <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+  <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="7.0.0" />
+  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+  <PackageReference Include="Serilog" Version="2.12.0" />
+  <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+ </ItemGroup>
+ <ItemGroup>
+  <ProjectReference Include="..\BallisticCalculatorNet.Common\BallisticCalculatorNet.Common.csproj" />
+  <ProjectReference Include="..\BallisticCalculatorNet.MeasurementControl\BallisticCalculatorNet.MeasurementControl.csproj" />
+  <ProjectReference Include="..\BallisticCalculatorNet.ReticleCanvas\BallisticCalculatorNet.ReticleCanvas.csproj" />
+  <ProjectReference Include="..\BallisticCalculatorNet.InputPanels\BallisticCalculatorNet.InputPanels.csproj" />
+ </ItemGroup>
+ <ItemGroup>
+  <Compile Update="Properties\Resources.Designer.cs">
+   <DesignTime>True</DesignTime>
+   <AutoGen>True</AutoGen>
+   <DependentUpon>Resources.resx</DependentUpon>
+  </Compile>
+ </ItemGroup>
+ <ItemGroup>
+  <EmbeddedResource Update="Properties\Resources.resx">
+   <Generator>ResXFileCodeGenerator</Generator>
+   <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+  </EmbeddedResource>
+ </ItemGroup>
+ <Target Name="BuildDate" BeforeTargets="CoreCompile">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net60-windows</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
-    <ApplicationIcon>Shooting.ico</ApplicationIcon>
+   <SharedAssemblyInfoFile>$(IntermediateOutputPath)CustomAssemblyInfo.cs</SharedAssemblyInfoFile>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="BallisticCalculator" Version="1.1.0.10" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
-    <PackageReference Include="Serilog" Version="2.12.0" />
-    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+   <Compile Include="$(SharedAssemblyInfoFile)" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\BallisticCalculatorNet.Common\BallisticCalculatorNet.Common.csproj" />
-    <ProjectReference Include="..\BallisticCalculatorNet.MeasurementControl\BallisticCalculatorNet.MeasurementControl.csproj" />
-    <ProjectReference Include="..\BallisticCalculatorNet.ReticleCanvas\BallisticCalculatorNet.ReticleCanvas.csproj" />
-    <ProjectReference Include="..\BallisticCalculatorNet.InputPanels\BallisticCalculatorNet.InputPanels.csproj" />
+   <AssemblyAttributes Include="AssemblyMetadata">
+    <_Parameter1>AssemblyDate</_Parameter1>
+    <_Parameter2>$([System.DateTime]::UtcNow.ToString("u"))</_Parameter2>
+   </AssemblyAttributes>
   </ItemGroup>
-
+  <WriteCodeFragment Language="C#" OutputFile="$(SharedAssemblyInfoFile)" AssemblyAttributes="@(AssemblyAttributes)" />
+ </Target>
 </Project>

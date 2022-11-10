@@ -51,6 +51,8 @@ namespace BallisticCalculatorNet
 
             menuWindowsTile.Click += (_, _) => this.LayoutMdi(MdiLayout.TileHorizontal);
             menuWindowsCascade.Click += (_, _) => this.LayoutMdi(MdiLayout.Cascade);
+
+            menuHelpAbout.Click += (_, _) => About();
         }
 
         private void SetupMenus()
@@ -184,6 +186,12 @@ namespace BallisticCalculatorNet
             var shotParamsForm = new ShotParametersForm(active.MeasurementSystem, active.ShotData);
             if (shotParamsForm.ShowDialog(this) == DialogResult.OK)
                 active.ShotData = shotParamsForm.ShotParameters;
+        }
+
+        private void About()
+        {
+            var aboutForm = new AboutForm();
+            aboutForm.ShowDialog(this);
         }
     }
 }
