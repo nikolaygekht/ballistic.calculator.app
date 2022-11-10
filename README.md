@@ -4,7 +4,7 @@
 
 The application is under development now!!! Please stay in touch. The current development version is available to play in [releases](https://github.com/nikolaygekht/ballistic.calculator.app/releases). 
 
-If you need something to use right now, take a look at OLD version of the application 
+This version is further development of an old ballistic caculator. The sources of the old calculator are available:
 * [Sourceforge](https://sourceforge.net/projects/ballisticcalculator/)
 * [GitHub](https://github.com/nikolaygekht/ballistic.calculator.app.old)
 
