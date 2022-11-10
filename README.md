@@ -2,7 +2,7 @@
 
 100% open source windows (100% WinE compatible) ballistic calculator with accuracy and performance comparable with best commercial calculators.
 
-The application is under development now!!! Please stay in touch. I expect the first release by ~~September 2021~~November, 2022. You can track the progress on the project page. You can share your suggestions or ideas in discussions. 
+The application is under development now!!! Please stay in touch. The current development version is available to play in [releases](https://github.com/nikolaygekht/ballistic.calculator.app/releases). 
 
 If you need something to use right now, take a look at OLD version of the application 
 * [Sourceforge](https://sourceforge.net/projects/ballisticcalculator/)
