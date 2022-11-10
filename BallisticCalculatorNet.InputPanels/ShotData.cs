@@ -20,7 +20,7 @@ namespace BallisticCalculatorNet.InputPanels
         [BXmlProperty(Name = "atmosphere", ChildElement = true)]
         public Atmosphere Atmosphere { get; set; }
 
-        [BXmlProperty(Name = "wind", Collection = true)]
+        [BXmlProperty(Name = "wind", Collection = true, Optional = true)]
         public WindCollection Wind { get; set; }
 
         [BXmlProperty(Name = "parameters", ChildElement = true)]

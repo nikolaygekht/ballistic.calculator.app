@@ -30,6 +30,7 @@ namespace BallisticCalculatorNet.InputPanels
             set
             {
                 mAngularUnits = value;
+                listView.Invalidate();
                 listView.Update();
             }
         }
@@ -43,6 +44,7 @@ namespace BallisticCalculatorNet.InputPanels
             set
             {
                 mSight = value;
+                listView.Invalidate();
                 listView.Update();
             }
         }
@@ -57,6 +59,7 @@ namespace BallisticCalculatorNet.InputPanels
             set
             {
                 mMeasurementSystem = value;
+                listView.Invalidate();
                 listView.Update();
             }
         }
@@ -71,6 +74,7 @@ namespace BallisticCalculatorNet.InputPanels
             {
                 mTrajectory = value;
                 listView.VirtualListSize = mTrajectory?.Length ?? 0;
+                listView.Invalidate();
                 listView.Update();
             }
         }

@@ -59,8 +59,7 @@ namespace BallisticCalculatorNet.InputPanels
                 var altitude = measurementAltitude.ValueAs<Measurement<DistanceUnit>>();
                 var temperature = measurementTemperature.ValueAs< Measurement<TemperatureUnit>>();
                 var pressure = measurementPressure.ValueAs<Measurement<PressureUnit>>();
-                double humidty;
-                if (!double.TryParse(textBoxHumidity.Text, NumberStyles.Number, CultureInfo.CurrentCulture, out humidty))
+                if (!double.TryParse(textBoxHumidity.Text, NumberStyles.Number, CultureInfo.CurrentCulture, out double humidty))
                     humidty = 0;
                 humidty /= 100;
                 return new Atmosphere(altitude, pressure, temperature, humidty);

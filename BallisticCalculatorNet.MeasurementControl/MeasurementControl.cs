@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,12 +84,12 @@ namespace BallisticCalculatorNet.MeasurementControl
                 }
 
                 int index = -1;
-                foreach (var unit in units)
+                foreach (var name in units.Select(x => x.Name))
                 {
                     index++;
-                    if (value.EndsWith(unit.Name))
+                    if (value.EndsWith(name))
                     {
-                        NumericPart.Text = value.Substring(0, value.Length - unit.Name.Length);
+                        NumericPart.Text = value.Substring(0, value.Length - name.Length);
                         UnitPart.SelectedIndex = index;
                         return;
                     }

@@ -15,6 +15,7 @@ using System.Windows.Forms;
 
 namespace BallisticCalculatorNet
 {
+
     public partial class TrajectoryForm : Form
     {
         private ShotData mShotData = null;
@@ -63,10 +64,16 @@ namespace BallisticCalculatorNet
 
                 mTrajectory = trajectory;
                 trajectoryControl.Trajectory = trajectory;
+
+                Text = string.IsNullOrEmpty(mShotData.Ammunition.Name) ? 
+                            $"Trajectory: New ammunition"
+                          : $"Trajectory: {mShotData.Ammunition.Name})";
             }
         }
 
         public TrajectoryPoint[] Trajectory => mTrajectory;
+
+        public string FileName { get; set; }
 
         public TrajectoryForm()
         {

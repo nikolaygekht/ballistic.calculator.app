@@ -16,7 +16,7 @@ namespace BallisticCalculatorNet.InputPanels
 {
     public partial class AmmoLibEntryControl : UserControl
     {
-        private static AmmunitionTypeDictionary gAmmoTypes = AmmunitionTypeFactory.Create();
+        private readonly static AmmunitionTypeDictionary gAmmoTypes = AmmunitionTypeFactory.Create();
 
         public AmmoLibEntryControl()
         {

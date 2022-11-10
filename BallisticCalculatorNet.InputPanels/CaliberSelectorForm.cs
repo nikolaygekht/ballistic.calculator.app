@@ -13,7 +13,7 @@ namespace BallisticCalculatorNet.InputPanels
 {
     public partial class CaliberSelectorForm : Form, ICaliberSelector
     {
-        private static AmmunitionCaliberDictionary gCalibers = AmmunitionCaliberFactory.Create();
+        private readonly static AmmunitionCaliberDictionary gCalibers = AmmunitionCaliberFactory.Create();
 
         public static AmmunitionCaliberDictionary Calibers { get; set; }
         

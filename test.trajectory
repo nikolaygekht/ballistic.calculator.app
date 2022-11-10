@@ -1,0 +1,16 @@
+<trajectory measurement-system="Imperial" angular-units="Mil">
+  <parameters data-type="shot-data">
+    <ammunition data-type="ammunition-library-entry" name=".300 AAC 115gr" source="AAC" caliber="300 BLK" ammunition-type="FMJ" barrel-length="16in">
+      <ammunition bullet-weight="115gr" ballistic-coefficient="0.29G1" muzzle-velocity="2295ft/s" bullet-diameter="0.308in" bullet-length="1.1in" />
+    </ammunition>
+    <weapon data-type="rifle">
+      <sight sight-height="1.5in" vertical-click="0.25moa" horizontal-click="0.25moa" />
+      <zeroing-parameter zero-distance="100yd" />
+    </weapon>
+    <atmosphere altitude="0ft" pressure="29.95inHg" temperature="59°F" humidity="0.78" />
+    <wind>
+      <wind maximum-range="0ft" velocity="10mi/h" direction="-103°" />
+    </wind>
+    <parameters data-type="shot-parameters" sight-angle="4.869039203008911moa" step="100yd" maximum-distance="1000yd" />
+  </parameters>
+</trajectory>
