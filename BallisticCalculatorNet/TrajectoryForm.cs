@@ -65,6 +65,7 @@ namespace BallisticCalculatorNet
                     GetDragTable(mShotData.Ammunition.Ammunition));
 
                 mTrajectory = trajectory;
+                trajectoryControl.Sight = mShotData.Weapon.Sight;
                 trajectoryControl.Trajectory = trajectory;
                 chartControl.Trajectory = trajectory;
 
@@ -88,6 +89,8 @@ namespace BallisticCalculatorNet
         {
             InitializeComponent();
             this.LoadFormState(Program.Configuration, "trajectory", true);
+            chartControl.AngularUnits = mAngularUnits;
+            trajectoryControl.AngularUnits = mAngularUnits;
         }
 
         private static DragTable GetDragTable(Ammunition ammo)

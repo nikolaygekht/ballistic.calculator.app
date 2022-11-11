@@ -13,6 +13,7 @@ using BallisticCalculatorNet.InputPanels;
 using BallisticCalculatorNet.Utils;
 using Gehtsoft.Measurements;
 using System.Xml;
+using System.IO;
 
 namespace BallisticCalculatorNet
 {
@@ -40,6 +41,7 @@ namespace BallisticCalculatorNet
             menuFileOpen.Click += (_, _) => Open();
             menuFileSave.Click += (_, _) => Save();
             menuFileSaveAs.Click += (_, _) => SaveAs();
+            menuFileExportCsv.Click += (_, _) => ExportCsv();
             menuFileExit.Click += (_, _) => this.Close();
 
             menuViewEditParameters.Click += (_, _) => EditParams();
@@ -234,6 +236,33 @@ namespace BallisticCalculatorNet
         {
             var aboutForm = new AboutForm();
             aboutForm.ShowDialog(this);
+        }
+
+        private void ExportCsv()
+        {
+            var active = this.ActiveMdiChild as TrajectoryForm;
+
+            if (active == null)
+                return;
+
+            var dialog = new SaveFileDialog()
+            {
+                Filter = "CSV files(*.csv)|*.csv|All files (*.*)|*.*",
+                FilterIndex = 1,
+                RestoreDirectory = true,
+                OverwritePrompt = true,
+                CheckPathExists = true,
+            };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                using (var fs = new FileStream(dialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (var stream = new StreamWriter(fs))
+                {
+                    var controllers = new CvsExportController(active.Trajectory, active.MeasurementSystem, active.ShotData.Weapon.Sight, active.AngularUnits);
+                    foreach (var s in controllers.Prepare())
+                        stream.WriteLine(s);
+                }
+            }
         }
     }
 }

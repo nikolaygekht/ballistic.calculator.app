@@ -30,6 +30,7 @@ namespace BallisticCalculatorNet.InputPanels
             set
             {
                 mAngularUnits = value;
+                mMeasurementSystemController.AngularUnit = value;
                 listView.Invalidate();
                 listView.Update();
             }
@@ -49,7 +50,7 @@ namespace BallisticCalculatorNet.InputPanels
             }
         }
 
-
+        private readonly MeasurementSystemController mMeasurementSystemController = new MeasurementSystemController(MeasurementSystem.Metric);
         private MeasurementSystem mMeasurementSystem = MeasurementSystem.Metric;
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -59,6 +60,7 @@ namespace BallisticCalculatorNet.InputPanels
             set
             {
                 mMeasurementSystem = value;
+                mMeasurementSystemController.MeasurementSystem = value;
                 listView.Invalidate();
                 listView.Update();
             }
@@ -111,12 +113,6 @@ namespace BallisticCalculatorNet.InputPanels
             Trajectory = null;
         }
 
-        public DistanceUnit RangeUnit => mMeasurementSystem == MeasurementSystem.Metric ? DistanceUnit.Meter : DistanceUnit.Yard;
-        public DistanceUnit AdjustmentUnit => mMeasurementSystem == MeasurementSystem.Metric ? DistanceUnit.Centimeter : DistanceUnit.Inch;
-        public VelocityUnit VelocityUnit => mMeasurementSystem == MeasurementSystem.Metric ? VelocityUnit.MetersPerSecond : VelocityUnit.FeetPerSecond;
-        public EnergyUnit EnergyUnit => mMeasurementSystem == MeasurementSystem.Metric ? EnergyUnit.Joule : EnergyUnit.FootPound;
-        public WeightUnit WeightUnit => mMeasurementSystem == MeasurementSystem.Metric ? WeightUnit.Kilogram : WeightUnit.Pound;
-
         private void listView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
         {
             if (mTrajectory == null || e.ItemIndex < 0 || e.ItemIndex >= mTrajectory.Length)
@@ -130,13 +126,15 @@ namespace BallisticCalculatorNet.InputPanels
 
             //range
             e.Item.SubItems
-                .Add(item.Distance.To(RangeUnit).ToString("N0", Culture));
+                .Add(item.Distance.To(mMeasurementSystemController.RangeUnit)
+                                  .ToString(mMeasurementSystemController.RangeFormatString, Culture));
             //velocity
             e.Item.SubItems
-                .Add(item.Velocity.To(VelocityUnit).ToString("N0", Culture));
+                .Add(item.Velocity.To(mMeasurementSystemController.VelocityUnit)
+                                  .ToString(mMeasurementSystemController.VelocityFormatString, Culture));
             //mach
             e.Item.SubItems
-                .Add(item.Mach.ToString("N2", CultureInfo.CurrentCulture));
+                .Add(item.Mach.ToString(mMeasurementSystemController.MachFormatString, CultureInfo.CurrentCulture));
             //path
             AddAngularValue(item.Distance, item.Drop, item.DropAdjustment, mSight?.VerticalClick, e.Item);
 
@@ -144,13 +142,15 @@ namespace BallisticCalculatorNet.InputPanels
             AddAngularValue(item.Distance, item.Windage, item.WindageAdjustment, mSight?.HorizontalClick, e.Item);
 
             //time
-            e.Item.SubItems.Add(item.Time.ToString("mm\\:ss\\.fff"));
+            e.Item.SubItems.Add(item.Time.ToString(mMeasurementSystemController.TimeFormatString));
             //energy
             e.Item.SubItems
-                .Add(item.Energy.To(EnergyUnit).ToString("N0", Culture));
+                .Add(item.Energy.To(mMeasurementSystemController.EnergyUnit)
+                                .ToString(mMeasurementSystemController.EnergyFormatString, Culture));
             //ogw
             e.Item.SubItems
-                .Add(item.OptimalGameWeight.To(WeightUnit).ToString("N1", Culture));
+                .Add(item.OptimalGameWeight.To(mMeasurementSystemController.WeightUnit)
+                                            .ToString(mMeasurementSystemController.WeightFormatString, Culture));
         }
 
         private void AddAngularValue(Measurement<DistanceUnit> distance,
@@ -161,7 +161,8 @@ namespace BallisticCalculatorNet.InputPanels
         {
             //value
             lvi.SubItems
-                .Add(value.To(AdjustmentUnit).ToString("N2", Culture));
+                .Add(value.To(mMeasurementSystemController.AdjustmentUnit)
+                .ToString(mMeasurementSystemController.AdjustmentFormatString, Culture));
 
             //adjustment
             if (distance.Value < 1e-8)
@@ -172,14 +173,14 @@ namespace BallisticCalculatorNet.InputPanels
             else
             {
                 lvi.SubItems
-                    .Add(valueAdjustiment.To(mAngularUnits).ToString("N2", Culture));
+                    .Add(valueAdjustiment.To(mAngularUnits).ToString(mMeasurementSystemController.AngularFormatString, Culture));
 
                 
                 //clicks
                 if (scopeStep == null || scopeStep.Value.Value <= 0)
                     lvi.SubItems.Add("n/a");
                 else
-                    lvi.SubItems.Add((valueAdjustiment / scopeStep.Value).ToString("N0"));
+                    lvi.SubItems.Add((valueAdjustiment / scopeStep.Value).ToString(mMeasurementSystemController.ClickFormatString, Culture));
             }
         }
     }

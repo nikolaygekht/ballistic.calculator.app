@@ -40,6 +40,7 @@ namespace BallisticCalculatorNet
             this.menuFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFileExportCsv = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuView = new System.Windows.Forms.ToolStripMenuItem();
             this.menuViewEditParameters = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -59,16 +60,16 @@ namespace BallisticCalculatorNet
             this.menuViewChartDrop = new System.Windows.Forms.ToolStripMenuItem();
             this.menuViewChartWindage = new System.Windows.Forms.ToolStripMenuItem();
             this.menuViewChartEnergy = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuViewShow = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuViewShowTable = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuViewShowChart = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuViewShowReticle = new System.Windows.Forms.ToolStripMenuItem();
             this.menuWindows = new System.Windows.Forms.ToolStripMenuItem();
             this.menuWindowsTile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuWindowsCascade = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuFileExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewShow = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewShowTable = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewShowChart = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewShowReticle = new System.Windows.Forms.ToolStripMenuItem();
+            this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,7 +96,8 @@ namespace BallisticCalculatorNet
             this.menuFileSave,
             this.menuFileSaveAs,
             this.menuFileExportCsv,
-            this.toolStripSeparator1});
+            this.toolStripSeparator1,
+            this.menuFileExit});
             this.menuFile.Name = "menuFile";
             this.menuFile.Size = new System.Drawing.Size(103, 29);
             this.menuFile.Text = "&Trajectory";
@@ -106,7 +108,7 @@ namespace BallisticCalculatorNet
             this.menuFileNewImperial,
             this.menuFileNewMetric});
             this.menuFileNew.Name = "menuFileNew";
-            this.menuFileNew.Size = new System.Drawing.Size(227, 34);
+            this.menuFileNew.Size = new System.Drawing.Size(270, 34);
             this.menuFileNew.Text = "&New";
             // 
             // menuFileNewImperial
@@ -127,32 +129,39 @@ namespace BallisticCalculatorNet
             // 
             this.menuFileOpen.Name = "menuFileOpen";
             this.menuFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.menuFileOpen.Size = new System.Drawing.Size(227, 34);
+            this.menuFileOpen.Size = new System.Drawing.Size(270, 34);
             this.menuFileOpen.Text = "&Open";
             // 
             // menuFileSave
             // 
             this.menuFileSave.Name = "menuFileSave";
             this.menuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.menuFileSave.Size = new System.Drawing.Size(227, 34);
+            this.menuFileSave.Size = new System.Drawing.Size(270, 34);
             this.menuFileSave.Text = "&Save";
             // 
             // menuFileSaveAs
             // 
             this.menuFileSaveAs.Name = "menuFileSaveAs";
-            this.menuFileSaveAs.Size = new System.Drawing.Size(227, 34);
+            this.menuFileSaveAs.Size = new System.Drawing.Size(270, 34);
             this.menuFileSaveAs.Text = "Save As";
             // 
             // menuFileExportCsv
             // 
             this.menuFileExportCsv.Name = "menuFileExportCsv";
-            this.menuFileExportCsv.Size = new System.Drawing.Size(227, 34);
+            this.menuFileExportCsv.Size = new System.Drawing.Size(270, 34);
             this.menuFileExportCsv.Text = "Export As &CSV";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(224, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(267, 6);
+            // 
+            // menuFileExit
+            // 
+            this.menuFileExit.Name = "menuFileExit";
+            this.menuFileExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.menuFileExit.Size = new System.Drawing.Size(270, 34);
+            this.menuFileExit.Text = "&Exit";
             // 
             // menuView
             // 
@@ -309,49 +318,6 @@ namespace BallisticCalculatorNet
             this.menuViewChartEnergy.Size = new System.Drawing.Size(287, 34);
             this.menuViewChartEnergy.Text = "Energy";
             // 
-            // menuWindows
-            // 
-            this.menuWindows.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuWindowsTile,
-            this.menuWindowsCascade});
-            this.menuWindows.Name = "menuWindows";
-            this.menuWindows.Size = new System.Drawing.Size(102, 29);
-            this.menuWindows.Text = "&Windows";
-            // 
-            // menuWindowsTile
-            // 
-            this.menuWindowsTile.Name = "menuWindowsTile";
-            this.menuWindowsTile.Size = new System.Drawing.Size(179, 34);
-            this.menuWindowsTile.Text = "&Tile";
-            // 
-            // menuWindowsCascade
-            // 
-            this.menuWindowsCascade.Name = "menuWindowsCascade";
-            this.menuWindowsCascade.Size = new System.Drawing.Size(179, 34);
-            this.menuWindowsCascade.Text = "&Cascade";
-            // 
-            // menuHelp
-            // 
-            this.menuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuHelpAbout});
-            this.menuHelp.Name = "menuHelp";
-            this.menuHelp.Size = new System.Drawing.Size(65, 29);
-            this.menuHelp.Text = "&Help";
-            // 
-            // menuHelpAbout
-            // 
-            this.menuHelpAbout.Name = "menuHelpAbout";
-            this.menuHelpAbout.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
-            this.menuHelpAbout.Size = new System.Drawing.Size(234, 34);
-            this.menuHelpAbout.Text = "&About";
-            // 
-            // menuFileExit
-            // 
-            this.menuFileExit.Name = "menuFileExit";
-            this.menuFileExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.menuFileExit.Size = new System.Drawing.Size(270, 34);
-            this.menuFileExit.Text = "&Exit";
-            // 
             // menuViewShow
             // 
             this.menuViewShow.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -366,22 +332,65 @@ namespace BallisticCalculatorNet
             // 
             this.menuViewShowTable.Name = "menuViewShowTable";
             this.menuViewShowTable.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.menuViewShowTable.Size = new System.Drawing.Size(270, 34);
+            this.menuViewShowTable.Size = new System.Drawing.Size(226, 34);
             this.menuViewShowTable.Text = "Table";
             // 
             // menuViewShowChart
             // 
             this.menuViewShowChart.Name = "menuViewShowChart";
             this.menuViewShowChart.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.menuViewShowChart.Size = new System.Drawing.Size(270, 34);
+            this.menuViewShowChart.Size = new System.Drawing.Size(226, 34);
             this.menuViewShowChart.Text = "Chart";
             // 
             // menuViewShowReticle
             // 
             this.menuViewShowReticle.Name = "menuViewShowReticle";
             this.menuViewShowReticle.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.menuViewShowReticle.Size = new System.Drawing.Size(270, 34);
+            this.menuViewShowReticle.Size = new System.Drawing.Size(226, 34);
             this.menuViewShowReticle.Text = "Reticle";
+            // 
+            // menuWindows
+            // 
+            this.menuWindows.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuWindowsTile,
+            this.menuWindowsCascade,
+            this.windowsToolStripMenuItem});
+            this.menuWindows.Name = "menuWindows";
+            this.menuWindows.Size = new System.Drawing.Size(102, 29);
+            this.menuWindows.Text = "&Windows";
+            // 
+            // menuWindowsTile
+            // 
+            this.menuWindowsTile.Name = "menuWindowsTile";
+            this.menuWindowsTile.Size = new System.Drawing.Size(270, 34);
+            this.menuWindowsTile.Text = "&Tile";
+            // 
+            // menuWindowsCascade
+            // 
+            this.menuWindowsCascade.Name = "menuWindowsCascade";
+            this.menuWindowsCascade.Size = new System.Drawing.Size(270, 34);
+            this.menuWindowsCascade.Text = "&Cascade";
+            // 
+            // menuHelp
+            // 
+            this.menuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuHelpAbout});
+            this.menuHelp.Name = "menuHelp";
+            this.menuHelp.Size = new System.Drawing.Size(65, 29);
+            this.menuHelp.Text = "&Help";
+            // 
+            // menuHelpAbout
+            // 
+            this.menuHelpAbout.Name = "menuHelpAbout";
+            this.menuHelpAbout.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
+            this.menuHelpAbout.Size = new System.Drawing.Size(270, 34);
+            this.menuHelpAbout.Text = "&About";
+            // 
+            // windowsToolStripMenuItem
+            // 
+            this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
+            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.windowsToolStripMenuItem.Text = "&Windows";
             // 
             // AppForm
             // 
@@ -444,6 +453,7 @@ namespace BallisticCalculatorNet
         private System.Windows.Forms.ToolStripMenuItem menuViewShowTable;
         private System.Windows.Forms.ToolStripMenuItem menuViewShowChart;
         private System.Windows.Forms.ToolStripMenuItem menuViewShowReticle;
+        private System.Windows.Forms.ToolStripMenuItem windowsToolStripMenuItem;
     }
 }
 
