@@ -34,8 +34,10 @@
             this.trajectoryControl = new BallisticCalculatorNet.InputPanels.TrajectoryControl();
             this.tabChart = new System.Windows.Forms.TabPage();
             this.tabReticle = new System.Windows.Forms.TabPage();
+            this.chartControl = new BallisticCalculatorNet.InputPanels.ChartControl();
             this.tabControl.SuspendLayout();
             this.tabTable.SuspendLayout();
+            this.tabChart.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -72,6 +74,7 @@
             // 
             // tabChart
             // 
+            this.tabChart.Controls.Add(this.chartControl);
             this.tabChart.Location = new System.Drawing.Point(4, 4);
             this.tabChart.Name = "tabChart";
             this.tabChart.Padding = new System.Windows.Forms.Padding(3);
@@ -89,6 +92,14 @@
             this.tabReticle.Text = "Reticle";
             this.tabReticle.UseVisualStyleBackColor = true;
             // 
+            // chartControl
+            // 
+            this.chartControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartControl.Location = new System.Drawing.Point(3, 3);
+            this.chartControl.Name = "chartControl";
+            this.chartControl.Size = new System.Drawing.Size(1433, 366);
+            this.chartControl.TabIndex = 0;
+            // 
             // TrajectoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -102,6 +113,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TrajectoryForm_FormClosing);
             this.tabControl.ResumeLayout(false);
             this.tabTable.ResumeLayout(false);
+            this.tabChart.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -113,5 +125,6 @@
         private InputPanels.TrajectoryControl trajectoryControl;
         private System.Windows.Forms.TabPage tabChart;
         private System.Windows.Forms.TabPage tabReticle;
+        private InputPanels.ChartControl chartControl;
     }
 }

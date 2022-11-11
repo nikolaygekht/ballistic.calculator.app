@@ -40,8 +40,9 @@ namespace BallisticCalculatorNet
             this.menuFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFileExportCsv = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuView = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuViewEditParameters = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuViewSystem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuViewSystemImperial = new System.Windows.Forms.ToolStripMenuItem();
             this.menuViewSystemMetric = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,13 +53,22 @@ namespace BallisticCalculatorNet
             this.menuViewAngularMRads = new System.Windows.Forms.ToolStripMenuItem();
             this.menuViewAngularInches = new System.Windows.Forms.ToolStripMenuItem();
             this.menuViewAngularCentimeters = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuViewChart = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuViewChartVelocity = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuViewChartMach = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuViewChartDrop = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuViewChartWindage = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuViewChartEnergy = new System.Windows.Forms.ToolStripMenuItem();
             this.menuWindows = new System.Windows.Forms.ToolStripMenuItem();
             this.menuWindowsTile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuWindowsCascade = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewEditParameters = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuFileExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuViewShow = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuViewShowTable = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuViewShowChart = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuViewShowReticle = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,8 +95,7 @@ namespace BallisticCalculatorNet
             this.menuFileSave,
             this.menuFileSaveAs,
             this.menuFileExportCsv,
-            this.toolStripSeparator1,
-            this.menuFileExit});
+            this.toolStripSeparator1});
             this.menuFile.Name = "menuFile";
             this.menuFile.Size = new System.Drawing.Size(103, 29);
             this.menuFile.Text = "&Trajectory";
@@ -97,55 +106,53 @@ namespace BallisticCalculatorNet
             this.menuFileNewImperial,
             this.menuFileNewMetric});
             this.menuFileNew.Name = "menuFileNew";
-            this.menuFileNew.Size = new System.Drawing.Size(270, 34);
-            this.menuFileNew.Text = "New";
+            this.menuFileNew.Size = new System.Drawing.Size(227, 34);
+            this.menuFileNew.Text = "&New";
             // 
             // menuFileNewImperial
             // 
             this.menuFileNewImperial.Name = "menuFileNewImperial";
-            this.menuFileNewImperial.Size = new System.Drawing.Size(178, 34);
+            this.menuFileNewImperial.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
+            this.menuFileNewImperial.Size = new System.Drawing.Size(234, 34);
             this.menuFileNewImperial.Text = "Imperial";
             // 
             // menuFileNewMetric
             // 
             this.menuFileNewMetric.Name = "menuFileNewMetric";
-            this.menuFileNewMetric.Size = new System.Drawing.Size(178, 34);
+            this.menuFileNewMetric.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+            this.menuFileNewMetric.Size = new System.Drawing.Size(234, 34);
             this.menuFileNewMetric.Text = "Metric";
             // 
             // menuFileOpen
             // 
             this.menuFileOpen.Name = "menuFileOpen";
-            this.menuFileOpen.Size = new System.Drawing.Size(270, 34);
-            this.menuFileOpen.Text = "Open";
+            this.menuFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.menuFileOpen.Size = new System.Drawing.Size(227, 34);
+            this.menuFileOpen.Text = "&Open";
             // 
             // menuFileSave
             // 
             this.menuFileSave.Name = "menuFileSave";
-            this.menuFileSave.Size = new System.Drawing.Size(270, 34);
-            this.menuFileSave.Text = "Save";
+            this.menuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.menuFileSave.Size = new System.Drawing.Size(227, 34);
+            this.menuFileSave.Text = "&Save";
             // 
             // menuFileSaveAs
             // 
             this.menuFileSaveAs.Name = "menuFileSaveAs";
-            this.menuFileSaveAs.Size = new System.Drawing.Size(270, 34);
+            this.menuFileSaveAs.Size = new System.Drawing.Size(227, 34);
             this.menuFileSaveAs.Text = "Save As";
             // 
             // menuFileExportCsv
             // 
             this.menuFileExportCsv.Name = "menuFileExportCsv";
-            this.menuFileExportCsv.Size = new System.Drawing.Size(270, 34);
-            this.menuFileExportCsv.Text = "Export As CSV";
+            this.menuFileExportCsv.Size = new System.Drawing.Size(227, 34);
+            this.menuFileExportCsv.Text = "Export As &CSV";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(267, 6);
-            // 
-            // menuFileExit
-            // 
-            this.menuFileExit.Name = "menuFileExit";
-            this.menuFileExit.Size = new System.Drawing.Size(270, 34);
-            this.menuFileExit.Text = "&Exit";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(224, 6);
             // 
             // menuView
             // 
@@ -153,10 +160,24 @@ namespace BallisticCalculatorNet
             this.menuViewEditParameters,
             this.toolStripSeparator2,
             this.menuViewSystem,
-            this.menuViewAngular});
+            this.menuViewAngular,
+            this.menuViewChart,
+            this.menuViewShow});
             this.menuView.Name = "menuView";
             this.menuView.Size = new System.Drawing.Size(65, 29);
             this.menuView.Text = "&View";
+            // 
+            // menuViewEditParameters
+            // 
+            this.menuViewEditParameters.Name = "menuViewEditParameters";
+            this.menuViewEditParameters.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.menuViewEditParameters.Size = new System.Drawing.Size(296, 34);
+            this.menuViewEditParameters.Text = "&Edit Parameters";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(293, 6);
             // 
             // menuViewSystem
             // 
@@ -164,19 +185,23 @@ namespace BallisticCalculatorNet
             this.menuViewSystemImperial,
             this.menuViewSystemMetric});
             this.menuViewSystem.Name = "menuViewSystem";
-            this.menuViewSystem.Size = new System.Drawing.Size(284, 34);
-            this.menuViewSystem.Text = "Measurement System";
+            this.menuViewSystem.Size = new System.Drawing.Size(296, 34);
+            this.menuViewSystem.Text = "&Measurement System";
             // 
             // menuViewSystemImperial
             // 
             this.menuViewSystemImperial.Name = "menuViewSystemImperial";
-            this.menuViewSystemImperial.Size = new System.Drawing.Size(270, 34);
+            this.menuViewSystemImperial.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.I)));
+            this.menuViewSystemImperial.Size = new System.Drawing.Size(282, 34);
             this.menuViewSystemImperial.Text = "Imperial";
             // 
             // menuViewSystemMetric
             // 
             this.menuViewSystemMetric.Name = "menuViewSystemMetric";
-            this.menuViewSystemMetric.Size = new System.Drawing.Size(270, 34);
+            this.menuViewSystemMetric.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.M)));
+            this.menuViewSystemMetric.Size = new System.Drawing.Size(282, 34);
             this.menuViewSystemMetric.Text = "Metric";
             // 
             // menuViewAngular
@@ -189,44 +214,100 @@ namespace BallisticCalculatorNet
             this.menuViewAngularInches,
             this.menuViewAngularCentimeters});
             this.menuViewAngular.Name = "menuViewAngular";
-            this.menuViewAngular.Size = new System.Drawing.Size(284, 34);
-            this.menuViewAngular.Text = "Angular Units";
+            this.menuViewAngular.Size = new System.Drawing.Size(296, 34);
+            this.menuViewAngular.Text = "&Angular Units";
             // 
             // menuViewAngularMOA
             // 
             this.menuViewAngularMOA.Name = "menuViewAngularMOA";
-            this.menuViewAngularMOA.Size = new System.Drawing.Size(304, 34);
+            this.menuViewAngularMOA.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.A)));
+            this.menuViewAngularMOA.Size = new System.Drawing.Size(347, 34);
             this.menuViewAngularMOA.Text = "Minutes of Angle";
             // 
             // menuViewAngularMils
             // 
             this.menuViewAngularMils.Name = "menuViewAngularMils";
-            this.menuViewAngularMils.Size = new System.Drawing.Size(304, 34);
+            this.menuViewAngularMils.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.M)));
+            this.menuViewAngularMils.Size = new System.Drawing.Size(347, 34);
             this.menuViewAngularMils.Text = "Mils";
             // 
             // menuViewAngularThousands
             // 
             this.menuViewAngularThousands.Name = "menuViewAngularThousands";
-            this.menuViewAngularThousands.Size = new System.Drawing.Size(304, 34);
+            this.menuViewAngularThousands.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.T)));
+            this.menuViewAngularThousands.Size = new System.Drawing.Size(347, 34);
             this.menuViewAngularThousands.Text = "Thousdands";
             // 
             // menuViewAngularMRads
             // 
             this.menuViewAngularMRads.Name = "menuViewAngularMRads";
-            this.menuViewAngularMRads.Size = new System.Drawing.Size(304, 34);
+            this.menuViewAngularMRads.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.R)));
+            this.menuViewAngularMRads.Size = new System.Drawing.Size(347, 34);
             this.menuViewAngularMRads.Text = "Milliradians";
             // 
             // menuViewAngularInches
             // 
             this.menuViewAngularInches.Name = "menuViewAngularInches";
-            this.menuViewAngularInches.Size = new System.Drawing.Size(304, 34);
+            this.menuViewAngularInches.Size = new System.Drawing.Size(347, 34);
             this.menuViewAngularInches.Text = "Inches/100 yards";
             // 
             // menuViewAngularCentimeters
             // 
             this.menuViewAngularCentimeters.Name = "menuViewAngularCentimeters";
-            this.menuViewAngularCentimeters.Size = new System.Drawing.Size(304, 34);
+            this.menuViewAngularCentimeters.Size = new System.Drawing.Size(347, 34);
             this.menuViewAngularCentimeters.Text = "Centimeters/100 meters";
+            // 
+            // menuViewChart
+            // 
+            this.menuViewChart.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuViewChartVelocity,
+            this.menuViewChartMach,
+            this.menuViewChartDrop,
+            this.menuViewChartWindage,
+            this.menuViewChartEnergy});
+            this.menuViewChart.Name = "menuViewChart";
+            this.menuViewChart.Size = new System.Drawing.Size(296, 34);
+            this.menuViewChart.Text = "&Chart";
+            // 
+            // menuViewChartVelocity
+            // 
+            this.menuViewChartVelocity.Name = "menuViewChartVelocity";
+            this.menuViewChartVelocity.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.V)));
+            this.menuViewChartVelocity.Size = new System.Drawing.Size(287, 34);
+            this.menuViewChartVelocity.Text = "Velocity";
+            // 
+            // menuViewChartMach
+            // 
+            this.menuViewChartMach.Name = "menuViewChartMach";
+            this.menuViewChartMach.Size = new System.Drawing.Size(287, 34);
+            this.menuViewChartMach.Text = "Mach";
+            // 
+            // menuViewChartDrop
+            // 
+            this.menuViewChartDrop.Name = "menuViewChartDrop";
+            this.menuViewChartDrop.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.D)));
+            this.menuViewChartDrop.Size = new System.Drawing.Size(287, 34);
+            this.menuViewChartDrop.Text = "Drop";
+            // 
+            // menuViewChartWindage
+            // 
+            this.menuViewChartWindage.Name = "menuViewChartWindage";
+            this.menuViewChartWindage.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.W)));
+            this.menuViewChartWindage.Size = new System.Drawing.Size(287, 34);
+            this.menuViewChartWindage.Text = "Windage";
+            // 
+            // menuViewChartEnergy
+            // 
+            this.menuViewChartEnergy.Name = "menuViewChartEnergy";
+            this.menuViewChartEnergy.Size = new System.Drawing.Size(287, 34);
+            this.menuViewChartEnergy.Text = "Energy";
             // 
             // menuWindows
             // 
@@ -260,19 +341,47 @@ namespace BallisticCalculatorNet
             // menuHelpAbout
             // 
             this.menuHelpAbout.Name = "menuHelpAbout";
-            this.menuHelpAbout.Size = new System.Drawing.Size(164, 34);
+            this.menuHelpAbout.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
+            this.menuHelpAbout.Size = new System.Drawing.Size(234, 34);
             this.menuHelpAbout.Text = "&About";
             // 
-            // menuViewEditParameters
+            // menuFileExit
             // 
-            this.menuViewEditParameters.Name = "menuViewEditParameters";
-            this.menuViewEditParameters.Size = new System.Drawing.Size(284, 34);
-            this.menuViewEditParameters.Text = "Edit Parameters";
+            this.menuFileExit.Name = "menuFileExit";
+            this.menuFileExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.menuFileExit.Size = new System.Drawing.Size(270, 34);
+            this.menuFileExit.Text = "&Exit";
             // 
-            // toolStripSeparator2
+            // menuViewShow
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(281, 6);
+            this.menuViewShow.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuViewShowTable,
+            this.menuViewShowChart,
+            this.menuViewShowReticle});
+            this.menuViewShow.Name = "menuViewShow";
+            this.menuViewShow.Size = new System.Drawing.Size(296, 34);
+            this.menuViewShow.Text = "Show";
+            // 
+            // menuViewShowTable
+            // 
+            this.menuViewShowTable.Name = "menuViewShowTable";
+            this.menuViewShowTable.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
+            this.menuViewShowTable.Size = new System.Drawing.Size(270, 34);
+            this.menuViewShowTable.Text = "Table";
+            // 
+            // menuViewShowChart
+            // 
+            this.menuViewShowChart.Name = "menuViewShowChart";
+            this.menuViewShowChart.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.menuViewShowChart.Size = new System.Drawing.Size(270, 34);
+            this.menuViewShowChart.Text = "Chart";
+            // 
+            // menuViewShowReticle
+            // 
+            this.menuViewShowReticle.Name = "menuViewShowReticle";
+            this.menuViewShowReticle.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.menuViewShowReticle.Size = new System.Drawing.Size(270, 34);
+            this.menuViewShowReticle.Text = "Reticle";
             // 
             // AppForm
             // 
@@ -325,6 +434,16 @@ namespace BallisticCalculatorNet
         private System.Windows.Forms.ToolStripMenuItem menuFileSaveAs;
         private System.Windows.Forms.ToolStripMenuItem menuViewEditParameters;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem menuViewChart;
+        private System.Windows.Forms.ToolStripMenuItem menuViewChartVelocity;
+        private System.Windows.Forms.ToolStripMenuItem menuViewChartMach;
+        private System.Windows.Forms.ToolStripMenuItem menuViewChartDrop;
+        private System.Windows.Forms.ToolStripMenuItem menuViewChartWindage;
+        private System.Windows.Forms.ToolStripMenuItem menuViewChartEnergy;
+        private System.Windows.Forms.ToolStripMenuItem menuViewShow;
+        private System.Windows.Forms.ToolStripMenuItem menuViewShowTable;
+        private System.Windows.Forms.ToolStripMenuItem menuViewShowChart;
+        private System.Windows.Forms.ToolStripMenuItem menuViewShowReticle;
     }
 }
 

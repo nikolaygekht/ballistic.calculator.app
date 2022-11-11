@@ -4,9 +4,21 @@
 
 The application is under development now!!! Please stay in touch. The current development version is available to play in [releases](https://github.com/nikolaygekht/ballistic.calculator.app/releases). 
 
-This version is further development of an old ballistic caculator. The sources of the old calculator are available:
-* [Sourceforge](https://sourceforge.net/projects/ballisticcalculator/)
-* [GitHub](https://github.com/nikolaygekht/ballistic.calculator.app.old)
+# Recommended reading 
+
+To use the application, please read the following articles on wiki if you aren't familiar with precise shooting or external ballistics:
+
+* [External ballistics](https://en.wikipedia.org/wiki/External_ballistics)
+* [Projectile motion](https://en.wikipedia.org/wiki/Projectile_motion)
+* [Ballistic coefficient](https://en.wikipedia.org/wiki/Ballistic_coefficient)
+* [Scope Reticle](https://en.wikipedia.org/wiki/Reticle)
+
+## See also
+
+* [How to run application on Linux using Wine](https://github.com/nikolaygekht/ballistic.calculator.app/wiki/How-to-run-application-on-Linux-using-Wine)
+* [Related and friendly projects](https://github.com/nikolaygekht/ballistic.calculator.app/wiki/Related-and-friendly-projects)
+* [What should I read about external ballistics?](https://github.com/nikolaygekht/ballistic.calculator.app/wiki/What-should-I-read-about-external-ballistics%3F)
+
 
 ## RISK NOTICE
 
@@ -14,11 +26,6 @@ The application performs very limited simulation of a complex physical process a
 
 THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 
-## See also
-
-* [How to run application on Linux using Wine](https://github.com/nikolaygekht/ballistic.calculator.app/wiki/How-to-run-application-on-Linux-using-Wine)
-* [Related and friendly projects](https://github.com/nikolaygekht/ballistic.calculator.app/wiki/Related-and-friendly-projects)
-* [What should I read about external ballistics?](https://github.com/nikolaygekht/ballistic.calculator.app/wiki/What-should-I-read-about-external-ballistics%3F)
 
 ## 3rd Party Components used
 
@@ -73,3 +80,8 @@ THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
    Data files: ammunition descriptions, drag tables, reticles. 
 
 
+# Old version
+
+This version is further development of an old ballistic calculator. The sources of the old calculator are available:
+* [Sourceforge](https://sourceforge.net/projects/ballisticcalculator/)
+* [GitHub](https://github.com/nikolaygekht/ballistic.calculator.app.old)

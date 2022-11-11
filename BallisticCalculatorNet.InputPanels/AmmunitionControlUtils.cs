@@ -11,6 +11,7 @@ namespace BallisticCalculatorNet.InputPanels
             fileName = null;
             var dlg = factory.CreateOpenFileNamePrompt();
             dlg.Title = "Open ammunition";
+            dlg.AddFilter("ammo?", "Ammunition Library Entry (Any Version)");
             dlg.AddFilter("ammox", "Ammunition Library Entry");
             dlg.AddFilter("ammo", "Legacy Ammunition Library Entry");
             dlg.CheckFileExists = true;

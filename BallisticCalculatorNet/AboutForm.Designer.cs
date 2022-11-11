@@ -45,6 +45,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel8 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel9 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -206,12 +210,58 @@
             this.pictureBox1.TabIndex = 18;
             this.pictureBox1.TabStop = false;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(104, 365);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(296, 25);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "Recommended reading at wikipedia";
+            // 
+            // linkLabel7
+            // 
+            this.linkLabel7.AutoSize = true;
+            this.linkLabel7.Location = new System.Drawing.Point(104, 390);
+            this.linkLabel7.Name = "linkLabel7";
+            this.linkLabel7.Size = new System.Drawing.Size(378, 25);
+            this.linkLabel7.TabIndex = 20;
+            this.linkLabel7.TabStop = true;
+            this.linkLabel7.Text = "https://en.wikipedia.org/wiki/External_ballistics";
+            this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+            // 
+            // linkLabel8
+            // 
+            this.linkLabel8.AutoSize = true;
+            this.linkLabel8.Location = new System.Drawing.Point(104, 415);
+            this.linkLabel8.Name = "linkLabel8";
+            this.linkLabel8.Size = new System.Drawing.Size(389, 25);
+            this.linkLabel8.TabIndex = 21;
+            this.linkLabel8.TabStop = true;
+            this.linkLabel8.Text = "https://en.wikipedia.org/wiki/Ballistic_coefficient";
+            this.linkLabel8.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+            // 
+            // linkLabel9
+            // 
+            this.linkLabel9.AutoSize = true;
+            this.linkLabel9.Location = new System.Drawing.Point(104, 440);
+            this.linkLabel9.Name = "linkLabel9";
+            this.linkLabel9.Size = new System.Drawing.Size(380, 25);
+            this.linkLabel9.TabIndex = 22;
+            this.linkLabel9.TabStop = true;
+            this.linkLabel9.Text = "https://en.wikipedia.org/wiki/Projectile_motion";
+            this.linkLabel9.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+            // 
             // AboutForm
             // 
             this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(717, 381);
+            this.ClientSize = new System.Drawing.Size(717, 495);
+            this.Controls.Add(this.linkLabel9);
+            this.Controls.Add(this.linkLabel8);
+            this.Controls.Add(this.linkLabel7);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label8);
@@ -259,5 +309,9 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.LinkLabel linkLabel7;
+        private System.Windows.Forms.LinkLabel linkLabel8;
+        private System.Windows.Forms.LinkLabel linkLabel9;
     }
 }

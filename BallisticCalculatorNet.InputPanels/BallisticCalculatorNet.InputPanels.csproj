@@ -11,6 +11,7 @@
     <PackageReference Include="BallisticCalculator" Version="1.1.0.10" />
     <PackageReference Include="Gehtsoft.Measurements" Version="1.1.14" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="ScottPlot.WinForms" Version="4.1.59" />
     <PackageReference Include="System.Text.Json" Version="7.0.0" />
   </ItemGroup>
 

@@ -29,8 +29,9 @@ namespace BallisticCalculatorNet
             set
             {
                 mMeasurementSystem = value;
-                trajectoryControl.AngularUnits = mAngularUnits;
                 trajectoryControl.MeasurementSystem = value;
+                chartControl.MeasurementSystem = value;
+                
             }
         }
 
@@ -41,6 +42,7 @@ namespace BallisticCalculatorNet
             {
                 mAngularUnits = value;
                 trajectoryControl.AngularUnits = mAngularUnits;
+                chartControl.AngularUnits = mAngularUnits;
             }
         }
 
@@ -64,11 +66,18 @@ namespace BallisticCalculatorNet
 
                 mTrajectory = trajectory;
                 trajectoryControl.Trajectory = trajectory;
+                chartControl.Trajectory = trajectory;
 
                 Text = string.IsNullOrEmpty(mShotData.Ammunition.Name) ? 
                             $"Trajectory: New ammunition"
                           : $"Trajectory: {mShotData.Ammunition.Name})";
             }
+        }
+
+        public TrajectoryChartMode ChartMode
+        {
+            get => chartControl.ChartMode;
+            set => chartControl.ChartMode = value;
         }
 
         public TrajectoryPoint[] Trajectory => mTrajectory;
@@ -93,5 +102,9 @@ namespace BallisticCalculatorNet
         {
             trajectoryControl.OnClose();
         }
+
+        public void ShowTable() => tabControl.SelectedIndex = 0;
+        public void ShowChart() => tabControl.SelectedIndex = 1;
+        public void ShowReticle() => tabControl.SelectedIndex = 2;
     }
 }
