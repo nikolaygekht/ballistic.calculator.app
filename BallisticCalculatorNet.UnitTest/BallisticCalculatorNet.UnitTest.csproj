@@ -11,18 +11,21 @@
     <None Remove="Resources\120.drg" />
     <None Remove="Resources\762x39rem.ammo" />
     <None Remove="Resources\762x39rem.ammox" />
+    <None Remove="Resources\g1_nowind.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\120.drg" />
     <EmbeddedResource Include="Resources\762x39rem.ammo" />
     <EmbeddedResource Include="Resources\762x39rem.ammox" />
+    <EmbeddedResource Include="Resources\g1_nowind.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.8.0" />
     <PackageReference Include="FluentAssertions.Extension.Json" Version="1.1.2" />
     <PackageReference Include="Moq" Version="4.18.2" />
+    <PackageReference Include="NReco.Csv" Version="1.0.1" />
     <PackageReference Include="System.Text.Json" Version="7.0.0" />
     <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />

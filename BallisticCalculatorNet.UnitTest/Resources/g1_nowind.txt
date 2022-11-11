@@ -1,0 +1,7 @@
+﻿ammo;0.365G1;65gr;2600ft/s
+rifle;2.50in;100yd
+wind;0mph;0°
+atmosphere;59.0°F;78;29.92inHg;0ft
+shot;0°;0°
+yd;in;moa;in;moa;ft/s;mach;ft-lb;s;in;moa
+0;-2.5;0.0;0.0;0.0;2600.0;2.329;975.5;0.000;0.0;0.0

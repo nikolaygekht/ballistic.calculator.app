@@ -52,18 +52,7 @@ namespace BallisticCalculatorNet
             set
             {
                 mShotData = value;
-                var calc = new TrajectoryCalculator();
-                var zeroAmmo = mShotData.Weapon.Zero.Ammunition ?? mShotData.Ammunition.Ammunition;
-
-                mShotData.Parameters.SightAngle = calc.SightAngle(zeroAmmo,
-                                            mShotData.Weapon,
-                                            (mShotData.Weapon.Zero.Atmosphere ?? mShotData.Atmosphere) ?? new Atmosphere(),
-                                            GetDragTable(zeroAmmo));
-
-                var trajectory = calc.Calculate(mShotData.Ammunition.Ammunition, mShotData.Weapon,
-                    mShotData.Atmosphere ?? new Atmosphere(), mShotData.Parameters, mShotData.Wind?.ToArray(),
-                    GetDragTable(mShotData.Ammunition.Ammunition));
-
+                var trajectory = TrajectoryPointsCalculator.Calculate(mShotData);
                 mTrajectory = trajectory;
                 trajectoryControl.Sight = mShotData.Weapon.Sight;
                 trajectoryControl.Trajectory = trajectory;

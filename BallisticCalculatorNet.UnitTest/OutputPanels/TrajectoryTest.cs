@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Xunit;
 using System.Windows.Forms;
 using System.Globalization;
+using Moq;
 
 namespace BallisticCalculatorNet.UnitTest.OutputPanels
 {
@@ -57,7 +58,7 @@ namespace BallisticCalculatorNet.UnitTest.OutputPanels
             else
                 column.Width.Should().BeGreaterThan(50);
 
-            if (index >0 && right)
+            if (index > 0 && right)
                 column.TextAlign.Should().Be(System.Windows.Forms.HorizontalAlignment.Right);
             else
                 column.TextAlign.Should().Be(System.Windows.Forms.HorizontalAlignment.Left);
@@ -148,7 +149,7 @@ namespace BallisticCalculatorNet.UnitTest.OutputPanels
             ControlConfiguration.Configuration = config;
             var ctrl = new TrajectoryControl();
             var list = ctrl.ListView("listView");
-            
+
             list.Columns[0].Width.Should().Be(0);
             list.Columns[1].Width.Should().Be(10);
             list.Columns[2].Width.Should().Be(20);
@@ -296,10 +297,10 @@ namespace BallisticCalculatorNet.UnitTest.OutputPanels
                 Sight = new Sight(0.As(DistanceUnit.Centimeter), scopeStep.As(angularUnits), scopeStep.As(angularUnits)),
                 Trajectory = new TrajectoryPoint[]
                 {
-                    new TrajectoryPoint(TimeSpan.FromSeconds(0.1), 
-                                        10.As(WeightUnit.Gram), 
-                                        distance.As(DistanceUnit.Meter), 
-                                        1000.As(VelocityUnit.MetersPerSecond), 1, 
+                    new TrajectoryPoint(TimeSpan.FromSeconds(0.1),
+                                        10.As(WeightUnit.Gram),
+                                        distance.As(DistanceUnit.Meter),
+                                        1000.As(VelocityUnit.MetersPerSecond), 1,
                                         drop.As(DistanceUnit.Centimeter), 0.As(DistanceUnit.Centimeter))
                 }
             };
