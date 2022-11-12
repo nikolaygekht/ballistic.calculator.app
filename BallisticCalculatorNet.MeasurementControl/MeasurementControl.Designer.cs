@@ -48,8 +48,8 @@ namespace BallisticCalculatorNet.MeasurementControl
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(299, 34);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(299, 35);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // UnitPart
@@ -60,7 +60,7 @@ namespace BallisticCalculatorNet.MeasurementControl
             this.UnitPart.Location = new System.Drawing.Point(199, 0);
             this.UnitPart.Margin = new System.Windows.Forms.Padding(0);
             this.UnitPart.Name = "UnitPart";
-            this.UnitPart.Size = new System.Drawing.Size(100, 32);
+            this.UnitPart.Size = new System.Drawing.Size(100, 33);
             this.UnitPart.TabIndex = 2;
             this.UnitPart.SelectedIndexChanged += new System.EventHandler(this.UnitPart_SelectedIndexChanged);
             // 
@@ -79,14 +79,14 @@ namespace BallisticCalculatorNet.MeasurementControl
             // 
             // MeasurementControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximumSize = new System.Drawing.Size(5120, 34);
-            this.MinimumSize = new System.Drawing.Size(150, 34);
+            this.MaximumSize = new System.Drawing.Size(5120, 35);
+            this.MinimumSize = new System.Drawing.Size(150, 35);
             this.Name = "MeasurementControl";
-            this.Size = new System.Drawing.Size(299, 34);
+            this.Size = new System.Drawing.Size(299, 35);
             this.Enter += new System.EventHandler(this.MeasurementControl_Enter);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

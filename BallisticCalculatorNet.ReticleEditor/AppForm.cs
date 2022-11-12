@@ -17,6 +17,7 @@ using BallisticCalculatorNet.ReticleEditor.Forms;
 using Gehtsoft.Measurements;
 using BallisticCalculatorNet.Common;
 using System.Globalization;
+using BallisticCalculatorNet.ReticleCanvas;
 
 namespace BallisticCalculatorNet.ReticleEditor
 {
@@ -186,7 +187,7 @@ namespace BallisticCalculatorNet.ReticleEditor
             if (checkBoxHighlihtCurrent.Checked)
                 selection = reticleItems.SelectedItem;
 
-            CalculateReticleImageSize(pictureReticle.Size.Width, pictureReticle.Size.Height,
+            ReticleCanvasUtils.CalculateReticleImageSize(pictureReticle.Size.Width, pictureReticle.Size.Height,
                                       Reticle.Size.X, Reticle.Size.Y, out int imageX, out int imageY);
 
             Bitmap bm = new Bitmap(imageX, imageY);
@@ -236,22 +237,6 @@ namespace BallisticCalculatorNet.ReticleEditor
                 }
             }
             pictureReticle.Image = bm;
-        }
-
-        internal static void CalculateReticleImageSize(int placeHolderWidth, int placeHolderHeight, Measurement<AngularUnit> reticleWidth, Measurement<AngularUnit> reticleHeight, out int imageWidth, out int imageHeight)
-        {
-            double reticleProprotion = reticleWidth / reticleHeight;
-
-            if (placeHolderHeight * reticleProprotion > placeHolderWidth)
-            {
-                imageWidth = placeHolderWidth;
-                imageHeight = (int)(placeHolderWidth / reticleProprotion);
-            }
-            else
-            {
-                imageHeight = placeHolderHeight;
-                imageWidth = (int)(placeHolderHeight * reticleProprotion);
-            }
         }
 
         internal void DeleteItem(object item)

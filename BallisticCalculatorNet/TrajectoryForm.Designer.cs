@@ -33,11 +33,13 @@
             this.tabTable = new System.Windows.Forms.TabPage();
             this.trajectoryControl = new BallisticCalculatorNet.InputPanels.TrajectoryControl();
             this.tabChart = new System.Windows.Forms.TabPage();
-            this.tabReticle = new System.Windows.Forms.TabPage();
             this.chartControl = new BallisticCalculatorNet.InputPanels.ChartControl();
+            this.tabReticle = new System.Windows.Forms.TabPage();
+            this.reticleControl = new BallisticCalculatorNet.InputPanels.ReticleControl();
             this.tabControl.SuspendLayout();
             this.tabTable.SuspendLayout();
             this.tabChart.SuspendLayout();
+            this.tabReticle.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -50,7 +52,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1447, 410);
+            this.tabControl.Size = new System.Drawing.Size(1234, 566);
             this.tabControl.TabIndex = 0;
             // 
             // tabTable
@@ -83,15 +85,6 @@
             this.tabChart.Text = "Chart";
             this.tabChart.UseVisualStyleBackColor = true;
             // 
-            // tabReticle
-            // 
-            this.tabReticle.Location = new System.Drawing.Point(4, 4);
-            this.tabReticle.Name = "tabReticle";
-            this.tabReticle.Size = new System.Drawing.Size(1439, 372);
-            this.tabReticle.TabIndex = 2;
-            this.tabReticle.Text = "Reticle";
-            this.tabReticle.UseVisualStyleBackColor = true;
-            // 
             // chartControl
             // 
             this.chartControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -100,11 +93,29 @@
             this.chartControl.Size = new System.Drawing.Size(1433, 366);
             this.chartControl.TabIndex = 0;
             // 
+            // tabReticle
+            // 
+            this.tabReticle.Controls.Add(this.reticleControl);
+            this.tabReticle.Location = new System.Drawing.Point(4, 4);
+            this.tabReticle.Name = "tabReticle";
+            this.tabReticle.Size = new System.Drawing.Size(1226, 528);
+            this.tabReticle.TabIndex = 2;
+            this.tabReticle.Text = "Reticle";
+            this.tabReticle.UseVisualStyleBackColor = true;
+            // 
+            // reticleControl
+            // 
+            this.reticleControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reticleControl.Location = new System.Drawing.Point(0, 0);
+            this.reticleControl.Name = "reticleControl";
+            this.reticleControl.Size = new System.Drawing.Size(1226, 528);
+            this.reticleControl.TabIndex = 0;
+            // 
             // TrajectoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1447, 410);
+            this.ClientSize = new System.Drawing.Size(1234, 566);
             this.Controls.Add(this.tabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TrajectoryForm";
@@ -114,6 +125,7 @@
             this.tabControl.ResumeLayout(false);
             this.tabTable.ResumeLayout(false);
             this.tabChart.ResumeLayout(false);
+            this.tabReticle.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -126,5 +138,6 @@
         private System.Windows.Forms.TabPage tabChart;
         private System.Windows.Forms.TabPage tabReticle;
         private InputPanels.ChartControl chartControl;
+        private InputPanels.ReticleControl reticleControl;
     }
 }

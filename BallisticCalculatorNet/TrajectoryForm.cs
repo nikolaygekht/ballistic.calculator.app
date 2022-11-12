@@ -31,6 +31,7 @@ namespace BallisticCalculatorNet
                 mMeasurementSystem = value;
                 trajectoryControl.MeasurementSystem = value;
                 chartControl.MeasurementSystem = value;
+                reticleControl.MeasurementSystem = value;
                 
             }
         }
@@ -57,6 +58,7 @@ namespace BallisticCalculatorNet
                 trajectoryControl.Sight = mShotData.Weapon.Sight;
                 trajectoryControl.Trajectory = trajectory;
                 chartControl.Trajectory = trajectory;
+                reticleControl.ShotData = mShotData;
 
                 Text = string.IsNullOrEmpty(mShotData.Ammunition.Name) ? 
                             $"Trajectory: New ammunition"
@@ -80,14 +82,6 @@ namespace BallisticCalculatorNet
             this.LoadFormState(Program.Configuration, "trajectory", true);
             chartControl.AngularUnits = mAngularUnits;
             trajectoryControl.AngularUnits = mAngularUnits;
-        }
-
-        private static DragTable GetDragTable(Ammunition ammo)
-        {
-            if (ammo == null || ammo.BallisticCoefficient.Table != DragTableId.GC ||
-                string.IsNullOrEmpty(ammo.CustomTableFileName) || !File.Exists(ammo.CustomTableFileName))
-                return null;
-            return DrgDragTable.Open(ammo.CustomTableFileName);
         }
 
         private void TrajectoryForm_FormClosing(object sender, FormClosingEventArgs e)

@@ -4,7 +4,9 @@ using Gehtsoft.Measurements;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BallisticCalculatorNet.InputPanels
 {
@@ -18,7 +20,7 @@ namespace BallisticCalculatorNet.InputPanels
 
         public class Point
         {
-            public ReticleBulletDropCompensatorPoint BDCPoint { get; init;  }
+            public ReticleBulletDropCompensatorPoint BDCPoint { get; init; }
             public PointLocation PointLocation { get; init; }
             public Measurement<DistanceUnit> Distance { get; init; }
         }
@@ -36,10 +38,10 @@ namespace BallisticCalculatorNet.InputPanels
             mZeroDistance = zeroDistance;
         }
 
-        public TrajectoryToReticleCalculator(ShotData shotData, 
+        public TrajectoryToReticleCalculator(ShotData shotData,
                                              ReticleBulletDropCompensatorPointCollection bulletDropCompensator,
                                              Measurement<DistanceUnit> zeroDistance)
-            : this(TrajectoryPointsCalculator.Calculate(shotData, (2.5).As(DistanceUnit.Meter), (1500.0).As(DistanceUnit.Meter)), 
+            : this(TrajectoryPointsCalculator.Calculate(shotData, (2.5).As(DistanceUnit.Meter), (1500.0).As(DistanceUnit.Meter)),
                    bulletDropCompensator, zeroDistance)
         {
         }
@@ -54,7 +56,7 @@ namespace BallisticCalculatorNet.InputPanels
         public void UpdatePoints(double reticleScale = 1.0)
         {
             mPoints.Clear();
-            
+
             for (int i = 2; i < mTrajectory.Length; i++)
             {
                 var p1 = mTrajectory[i - 1];
@@ -83,13 +85,41 @@ namespace BallisticCalculatorNet.InputPanels
             }
         }
 
-        /// <summary>
-        /// Finds angular size of the object at the give distance for given reticle scale
-        /// </summary>
-        /// <param name="reticleScale">The scale of reticle. Always 1 for FFP scopes. The ratio of maximum zoom to current zoom for SFP scopes</param>
-        public static Measurement<AngularUnit> CalculateSize(Measurement<DistanceUnit> targetSize, Measurement<DistanceUnit> targetDistance, double reticleScale = 1.0)
+        public TrajectoryPoint FindDistance(Measurement<DistanceUnit> distance)
         {
-            return (targetSize.In(DistanceUnit.Centimeter) / (targetDistance.In(DistanceUnit.Meter) / 100)).As(AngularUnit.CmPer100Meters) / reticleScale;
+            if (mTrajectory == null || mTrajectory.Length == 0)
+                return null;
+
+            if (mTrajectory[0].Distance > distance)
+                return null;
+            if (mTrajectory[^1].Distance < distance)
+                return null;
+            if (mTrajectory[^2].Distance < distance)
+                return mTrajectory[^1];
+
+
+            int numpts = mTrajectory.Length - 1;
+
+            int mlo = 0;
+            int mhi = numpts - 1;
+            int mid;
+
+            while ((mhi - mlo) > 1)
+            {
+                mid = (int)Math.Floor((mhi + mlo) / 2.0);
+                if (mTrajectory[mid].Distance < distance)
+                    mlo = mid;
+                else
+                    mhi = mid;
+            }
+
+            int m;
+            if ((mTrajectory[mhi].Distance - distance) > (distance - mTrajectory[mlo].Distance))
+                m = mlo;
+            else
+                m = mhi;
+
+            return mTrajectory[m];
         }
     }
 }

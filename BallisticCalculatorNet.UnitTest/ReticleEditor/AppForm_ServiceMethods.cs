@@ -1,6 +1,7 @@
 ﻿using System;
 using BallisticCalculator.Reticle;
 using BallisticCalculator.Reticle.Data;
+using BallisticCalculatorNet.ReticleCanvas;
 using BallisticCalculatorNet.ReticleEditor;
 using BallisticCalculatorNet.ReticleEditor.Forms;
 using BallisticCalculatorNet.UnitTest.Utils;
@@ -23,7 +24,7 @@ namespace BallisticCalculatorNet.UnitTest.ReticleEditor
         [InlineData(100, 60, 6, 8, 45, 60, "horizontal holder, vertical reticle")]
         public void CalculateReticleImageSize(int controlWidth, int controlHeight, double reticleWidth, double reticleHeight, int imageWidth, int imageHeight, string situation)
         {
-            BallisticCalculatorNet.ReticleEditor.AppForm.CalculateReticleImageSize(controlWidth, controlHeight,
+            ReticleCanvasUtils.CalculateReticleImageSize(controlWidth, controlHeight,
                 AngularUnit.Mil.New(reticleWidth),
                 AngularUnit.Mil.New(reticleHeight),
                 out int calculatedImageWidth, out int calculateImageHeight);

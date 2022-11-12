@@ -68,12 +68,13 @@ namespace BallisticCalculatorNet
                         .AddCommandLine(args, switchMappings)
                         .Build();
 
-            ControlConfiguration.Configuration = Configuration;
-
             Logger = new LoggerConfiguration()
                 .MinimumLevel.Is(MinimumLogLevel)
                 .WriteTo.File(LogTarget, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 10)
                 .CreateLogger();
+
+            ControlConfiguration.Configuration = Configuration;
+            ControlConfiguration.Logger = Logger;
         }
 
         /// <summary>

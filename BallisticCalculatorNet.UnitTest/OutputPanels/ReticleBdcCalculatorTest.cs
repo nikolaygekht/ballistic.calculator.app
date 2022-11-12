@@ -8,6 +8,7 @@ using Xunit;
 using BallisticCalculator.Reticle.Data;
 using BallisticCalculatorNet.UnitTest.Tools;
 using BallisticCalculator.Reticle;
+using Moq;
 
 namespace BallisticCalculatorNet.UnitTest.OutputPanels
 {
@@ -73,6 +74,68 @@ namespace BallisticCalculatorNet.UnitTest.OutputPanels
             calculator.Points[0].BDCPoint.Should().BeSameAs(bdc[0]);
             calculator.Points[0].Distance.In(DistanceUnit.Meter).Should().BeApproximately(calculatedRange, 1e-2);
             calculator.Points[0].PointLocation.Should().Be(location);
+        }
+
+        [Theory]
+        [InlineData(0, 1, null)]       //empty
+        [InlineData(2, -1, null)]      //before start
+        [InlineData(2, 2, null)]       //after end
+        [InlineData(10, 0, 0)]         //first
+        [InlineData(10, 9, 9)]         //last
+        [InlineData(10, 4, 4)]         //left/even
+        [InlineData(10, 5, 5)]         //middle/even
+        [InlineData(10, 8, 8)]         //right/even
+        [InlineData(11, 4, 4)]         //left/odd
+        [InlineData(11, 5, 5)]         //middle/odd
+        [InlineData(11, 8, 8)]         //right/odd
+        [InlineData(10, 4.1, 4)]       //approx/close to left
+        [InlineData(10, 4.8, 5)]       //approx/close to right
+        public void DistanceFinder(int total, double distance, int? index)
+        {
+            var bdc = new ReticleBulletDropCompensatorPointCollection();
+            var trajectory = new TrajectoryPoint[total];
+            for (int i = 0; i < total; i++)
+            {
+                trajectory[i] = new TrajectoryPoint(TimeSpan.FromSeconds(0),
+                                    10.As(WeightUnit.Gram),
+                                    i.As(DistanceUnit.Meter),
+                                    1000.As(VelocityUnit.MetersPerSecond), 1,
+                                    0.As(DistanceUnit.Centimeter), 0.As(DistanceUnit.Centimeter));      
+            }
+            var calculator = new TrajectoryToReticleCalculator(trajectory, bdc, 100.As(DistanceUnit.Meter));
+            var point = calculator.FindDistance(distance.As(DistanceUnit.Meter));
+
+            if (index == null)
+                point.Should().BeNull();
+            else
+                point.Should().BeSameAs(trajectory[index.Value]);
+        }
+
+        [Theory]
+        [InlineData(1022)]
+        [InlineData(571)]
+        public void DistanceFinderStress(int total)
+        {
+            var trajectory = new TrajectoryPoint[total];
+            Random r = new Random();
+            double c = r.NextDouble() * 10;
+            for (int i = 0; i < total; i++)
+            {
+                trajectory[i] = new TrajectoryPoint(TimeSpan.FromSeconds(0),
+                                    10.As(WeightUnit.Gram),
+                                    c.As(DistanceUnit.Meter),
+                                    1000.As(VelocityUnit.MetersPerSecond), 1,
+                                    0.As(DistanceUnit.Centimeter), 0.As(DistanceUnit.Centimeter));
+                c += r.NextDouble() * 10;
+            }
+
+            var calculator = new TrajectoryToReticleCalculator(trajectory, new ReticleBulletDropCompensatorPointCollection(), 100.As(DistanceUnit.Meter));
+
+            for (int i = 0; i < total; i++)
+            {
+                var point = calculator.FindDistance(trajectory[i].Distance);
+                point.Should().BeSameAs(trajectory[i]);
+            }
         }
 
         [Fact]

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using BallisticCalculator.Reticle.Data;
 using BallisticCalculator.Reticle.Draw;
 using BallisticCalculator.Reticle.Graphics;
+using BallisticCalculatorNet.ReticleCanvas;
 using Gehtsoft.Measurements;
 
 namespace BallisticCalculatorNet.ReticleEditor.Forms
@@ -75,7 +76,7 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
                 return;
             }
 
-            AppForm.CalculateReticleImageSize(picturePreview.Size.Width, picturePreview.Size.Height,
+            ReticleCanvasUtils.CalculateReticleImageSize(picturePreview.Size.Width, picturePreview.Size.Height,
                                       Reticle.Size.X, Reticle.Size.Y, out int imageX, out int imageY);
 
             Bitmap bm = new Bitmap(imageX, imageY);
