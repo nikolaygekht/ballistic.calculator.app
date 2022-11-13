@@ -29,8 +29,10 @@ namespace BallisticCalculatorNet.InputPanels
             {
                 if (windControl1.IsEmpty() && mWindControls.Count == 0)
                     return null;
-                WindCollection r = new WindCollection();
-                r.Add(windControl1.Wind);
+                WindCollection r = new WindCollection
+                {
+                    windControl1.Wind
+                };
                 for (int i = 0; i < mWindControls.Count; i++)
                     r.Add(mWindControls[i].Wind);
                 return r;

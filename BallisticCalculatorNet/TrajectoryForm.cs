@@ -15,14 +15,15 @@ using System.Windows.Forms;
 
 namespace BallisticCalculatorNet
 {
-
-    public partial class TrajectoryForm : Form
+    public partial class TrajectoryForm : Form, ITrajectoryDisplayForm, IChartDisplayForm
     {
         private ShotData mShotData = null;
         private MeasurementSystem mMeasurementSystem = MeasurementSystem.Imperial;
         private TrajectoryPoint[] mTrajectory;
         private AngularUnit mAngularUnits = AngularUnit.Mil;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MeasurementSystem MeasurementSystem
         {
             get => mMeasurementSystem;
@@ -35,7 +36,9 @@ namespace BallisticCalculatorNet
                 
             }
         }
-
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public AngularUnit AngularUnits
         {
             get => mAngularUnits;
@@ -47,6 +50,8 @@ namespace BallisticCalculatorNet
             }
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ShotData ShotData
         {
             get => mShotData;
@@ -62,18 +67,24 @@ namespace BallisticCalculatorNet
 
                 Text = string.IsNullOrEmpty(mShotData.Ammunition.Name) ? 
                             $"Trajectory: New ammunition"
-                          : $"Trajectory: {mShotData.Ammunition.Name})";
+                          : $"Trajectory: {mShotData.Ammunition.Name}";
             }
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TrajectoryChartMode ChartMode
         {
             get => chartControl.ChartMode;
             set => chartControl.ChartMode = value;
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TrajectoryPoint[] Trajectory => mTrajectory;
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string FileName { get; set; }
 
         public TrajectoryForm()

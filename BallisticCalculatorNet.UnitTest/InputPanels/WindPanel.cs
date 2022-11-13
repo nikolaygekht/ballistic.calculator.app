@@ -78,7 +78,7 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             control.Wind.Should().BeNull();
         }
 
-        private Wind CreateWind(double? distance, DistanceUnit? distanceUnit, double direction, AngularUnit directionUnit, double velocity, VelocityUnit velocityUnit)
+        private static Wind CreateWind(double? distance, DistanceUnit? distanceUnit, double direction, AngularUnit directionUnit, double velocity, VelocityUnit velocityUnit)
         {
             Wind w = new Wind();
 
@@ -177,10 +177,12 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
 
         private static WindCollection CreateTestCollection()
         {
-            var collection = new WindCollection();
-            collection.Add(new Wind(10.As(VelocityUnit.MetersPerSecond), 90.As(AngularUnit.Degree), 0.As(DistanceUnit.Meter)));
-            collection.Add(new Wind(11.As(VelocityUnit.MetersPerSecond), 91.As(AngularUnit.Degree), 250.As(DistanceUnit.Meter)));
-            collection.Add(new Wind(12.As(VelocityUnit.MetersPerSecond), -92.As(AngularUnit.Degree), 500.As(DistanceUnit.Meter)));
+            var collection = new WindCollection
+            {
+                new Wind(10.As(VelocityUnit.MetersPerSecond), 90.As(AngularUnit.Degree), 0.As(DistanceUnit.Meter)),
+                new Wind(11.As(VelocityUnit.MetersPerSecond), 91.As(AngularUnit.Degree), 250.As(DistanceUnit.Meter)),
+                new Wind(12.As(VelocityUnit.MetersPerSecond), -92.As(AngularUnit.Degree), 500.As(DistanceUnit.Meter))
+            };
             return collection;
         }
 

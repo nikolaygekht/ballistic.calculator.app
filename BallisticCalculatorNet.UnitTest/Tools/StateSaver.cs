@@ -159,10 +159,12 @@ namespace BallisticCalculatorNet.UnitTest.Tools
         [Fact]
         public void SaveFormState()
         {
-            Form f = new Form();
-            f.Location = new System.Drawing.Point(1, 2);
-            f.Size = new System.Drawing.Size(300, 400);
-            f.WindowState = FormWindowState.Normal;
+            Form f = new Form
+            {
+                Location = new System.Drawing.Point(1, 2),
+                Size = new System.Drawing.Size(300, 400),
+                WindowState = FormWindowState.Normal
+            };
 
             var config = (new ConfigurationBuilder())
                 .AddCommandLine(Array.Empty<string>()).Build();
@@ -179,10 +181,12 @@ namespace BallisticCalculatorNet.UnitTest.Tools
         [Fact]
         public void LoadFrom_Full()
         {
-            Form f = new Form();
-            f.Location = new System.Drawing.Point(300, 400);
-            f.Size = new System.Drawing.Size(500, 600);
-            f.WindowState = FormWindowState.Normal;
+            Form f = new Form
+            {
+                Location = new System.Drawing.Point(300, 400),
+                Size = new System.Drawing.Size(500, 600),
+                WindowState = FormWindowState.Normal
+            };
 
             var config = (new ConfigurationBuilder())
                 .AddCommandLine(new[]
@@ -206,10 +210,12 @@ namespace BallisticCalculatorNet.UnitTest.Tools
         [Fact]
         public void LoadFrom_SizeOnly()
         {
-            Form f = new Form();
-            f.Location = new System.Drawing.Point(350, 450);
-            f.Size = new System.Drawing.Size(500, 600);
-            f.WindowState = FormWindowState.Normal;
+            Form f = new Form
+            {
+                Location = new System.Drawing.Point(350, 450),
+                Size = new System.Drawing.Size(500, 600),
+                WindowState = FormWindowState.Normal
+            };
 
             var config = (new ConfigurationBuilder())
                 .AddCommandLine(new[]

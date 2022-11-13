@@ -161,7 +161,7 @@ namespace BallisticCalculatorNet.UnitTest.Tools
             winds[1].Velocity.Should().Be(11.As(VelocityUnit.MetersPerSecond));
             winds[1].Direction.Should().Be(91.As(AngularUnit.Degree));
 
-            winds[2].MaximumRange.Should().BeNull(); ;
+            winds[2].MaximumRange.Should().BeNull();
             winds[2].Velocity.Should().Be(12.As(VelocityUnit.MetersPerSecond));
             winds[2].Direction.Should().Be(-92.As(AngularUnit.Degree));
         }

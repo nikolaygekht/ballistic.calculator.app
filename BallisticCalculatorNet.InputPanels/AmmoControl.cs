@@ -96,10 +96,11 @@ namespace BallisticCalculatorNet.InputPanels
                         if (CustomBallistic.Ammunition.Ammunition.BulletDiameter != null)
                             measurementDiameter.Value = CustomBallistic.Ammunition.Ammunition.BulletDiameter.Value.To(DistanceUnit.Millimeter);
                     }
-                    catch (Exception)
+                    catch (Exception )
                     {
                         CustomBallistic = null;
                         checkBoxFormFactor.Checked = false;
+                        throw;
                     }
                 }
                 CustomTableChanged?.Invoke(this, EventArgs.Empty);
@@ -160,7 +161,18 @@ namespace BallisticCalculatorNet.InputPanels
             dlg.CheckFileExists = true;
             dlg.DefaultExtension = "drg";
             if (dlg.AskName(this))
-                CustomBallisticFile = dlg.FileName;
+            {
+                try
+                {
+                    CustomBallisticFile = dlg.FileName;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Can't open the file {dlg.FileName}\r\nError: {ex.Message}\r\nTo log the error details enable the warning log level and try operation again");
+                    ControlConfiguration.Logger?.Warning(ex, $"Loading file '{dlg.FileName}' failed");
+                }
+
+            }
         }
 
         public event EventHandler CustomTableChanged;

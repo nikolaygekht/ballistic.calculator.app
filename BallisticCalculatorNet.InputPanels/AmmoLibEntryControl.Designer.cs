@@ -56,10 +56,10 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             // buttonLoad
             // 
-            this.buttonLoad.Location = new System.Drawing.Point(177, 50);
+            this.buttonLoad.Location = new System.Drawing.Point(177, 52);
             this.buttonLoad.Margin = new System.Windows.Forms.Padding(4);
             this.buttonLoad.Name = "buttonLoad";
-            this.buttonLoad.Size = new System.Drawing.Size(118, 35);
+            this.buttonLoad.Size = new System.Drawing.Size(118, 36);
             this.buttonLoad.TabIndex = 2;
             this.buttonLoad.Text = "Load";
             this.buttonLoad.UseVisualStyleBackColor = true;
@@ -67,10 +67,10 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(303, 50);
+            this.buttonSave.Location = new System.Drawing.Point(303, 52);
             this.buttonSave.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(118, 35);
+            this.buttonSave.Size = new System.Drawing.Size(118, 36);
             this.buttonSave.TabIndex = 3;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -78,11 +78,12 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             // ammoControl
             // 
-            this.ammoControl.Location = new System.Drawing.Point(0, 92);
+            this.ammoControl.AutoScroll = true;
+            this.ammoControl.Location = new System.Drawing.Point(0, 96);
             this.ammoControl.Margin = new System.Windows.Forms.Padding(5);
             this.ammoControl.Name = "ammoControl";
             this.ammoControl.PromptFactory = winFormsFileNamePromptFactory1;
-            this.ammoControl.Size = new System.Drawing.Size(435, 318);
+            this.ammoControl.Size = new System.Drawing.Size(435, 331);
             this.ammoControl.TabIndex = 4;
             this.ammoControl.CustomTableChanged += new System.EventHandler(this.ammoControl_CustomTableChanged);
             this.ammoControl.Enter += new System.EventHandler(this.ammoControl1_Enter);
@@ -90,40 +91,40 @@ namespace BallisticCalculatorNet.InputPanels
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 18);
+            this.label1.Location = new System.Drawing.Point(16, 19);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 24);
+            this.label1.Size = new System.Drawing.Size(59, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name";
             // 
             // comboBoxAmmoType
             // 
             this.comboBoxAmmoType.FormattingEnabled = true;
-            this.comboBoxAmmoType.Location = new System.Drawing.Point(170, 459);
+            this.comboBoxAmmoType.Location = new System.Drawing.Point(170, 478);
             this.comboBoxAmmoType.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxAmmoType.Name = "comboBoxAmmoType";
-            this.comboBoxAmmoType.Size = new System.Drawing.Size(261, 32);
+            this.comboBoxAmmoType.Size = new System.Drawing.Size(261, 33);
             this.comboBoxAmmoType.Sorted = true;
             this.comboBoxAmmoType.TabIndex = 10;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 421);
+            this.label2.Location = new System.Drawing.Point(16, 439);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 24);
+            this.label2.Size = new System.Drawing.Size(109, 25);
             this.label2.TabIndex = 6;
             this.label2.Text = "Ammo Type";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 463);
+            this.label3.Location = new System.Drawing.Point(18, 482);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 24);
+            this.label3.Size = new System.Drawing.Size(97, 25);
             this.label3.TabIndex = 9;
             this.label3.Text = "Bullet Type";
             // 
@@ -131,15 +132,15 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             this.measurementBarrelLength.DecimalPoints = null;
             this.measurementBarrelLength.Increment = 1D;
-            this.measurementBarrelLength.Location = new System.Drawing.Point(170, 501);
+            this.measurementBarrelLength.Location = new System.Drawing.Point(170, 522);
             this.measurementBarrelLength.Margin = new System.Windows.Forms.Padding(5);
             this.measurementBarrelLength.Maximum = 10000D;
-            this.measurementBarrelLength.MaximumSize = new System.Drawing.Size(5120, 34);
+            this.measurementBarrelLength.MaximumSize = new System.Drawing.Size(5120, 35);
             this.measurementBarrelLength.MeasurementType = BallisticCalculatorNet.MeasurementControl.MeasurementType.Distance;
             this.measurementBarrelLength.Minimum = 0D;
-            this.measurementBarrelLength.MinimumSize = new System.Drawing.Size(150, 34);
+            this.measurementBarrelLength.MinimumSize = new System.Drawing.Size(150, 35);
             this.measurementBarrelLength.Name = "measurementBarrelLength";
-            this.measurementBarrelLength.Size = new System.Drawing.Size(260, 34);
+            this.measurementBarrelLength.Size = new System.Drawing.Size(260, 35);
             this.measurementBarrelLength.TabIndex = 12;
             this.measurementBarrelLength.TextValue = "mm";
             this.measurementBarrelLength.Unit = Gehtsoft.Measurements.DistanceUnit.Millimeter;
@@ -147,16 +148,16 @@ namespace BallisticCalculatorNet.InputPanels
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 505);
+            this.label4.Location = new System.Drawing.Point(19, 526);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(113, 24);
+            this.label4.Size = new System.Drawing.Size(115, 25);
             this.label4.TabIndex = 11;
             this.label4.Text = "Barrel Length";
             // 
             // textBoxSource
             // 
-            this.textBoxSource.Location = new System.Drawing.Point(170, 543);
+            this.textBoxSource.Location = new System.Drawing.Point(170, 566);
             this.textBoxSource.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxSource.Name = "textBoxSource";
             this.textBoxSource.Size = new System.Drawing.Size(260, 31);
@@ -165,25 +166,25 @@ namespace BallisticCalculatorNet.InputPanels
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(19, 543);
+            this.label5.Location = new System.Drawing.Point(19, 566);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 24);
+            this.label5.Size = new System.Drawing.Size(66, 25);
             this.label5.TabIndex = 13;
             this.label5.Text = "Source";
             // 
             // textBoxCaliber
             // 
-            this.textBoxCaliber.Location = new System.Drawing.Point(170, 418);
+            this.textBoxCaliber.Location = new System.Drawing.Point(170, 435);
             this.textBoxCaliber.Name = "textBoxCaliber";
             this.textBoxCaliber.Size = new System.Drawing.Size(214, 31);
             this.textBoxCaliber.TabIndex = 7;
             // 
             // buttonCaliberSelect
             // 
-            this.buttonCaliberSelect.Location = new System.Drawing.Point(390, 418);
+            this.buttonCaliberSelect.Location = new System.Drawing.Point(390, 435);
             this.buttonCaliberSelect.Name = "buttonCaliberSelect";
-            this.buttonCaliberSelect.Size = new System.Drawing.Size(41, 31);
+            this.buttonCaliberSelect.Size = new System.Drawing.Size(41, 32);
             this.buttonCaliberSelect.TabIndex = 8;
             this.buttonCaliberSelect.Text = "...";
             this.buttonCaliberSelect.UseVisualStyleBackColor = true;
@@ -191,7 +192,7 @@ namespace BallisticCalculatorNet.InputPanels
             // 
             // AmmoLibEntryControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.Controls.Add(this.buttonCaliberSelect);
@@ -210,7 +211,7 @@ namespace BallisticCalculatorNet.InputPanels
             this.Controls.Add(this.textBoxName);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AmmoLibEntryControl";
-            this.Size = new System.Drawing.Size(435, 597);
+            this.Size = new System.Drawing.Size(435, 622);
             this.ResumeLayout(false);
             this.PerformLayout();
 

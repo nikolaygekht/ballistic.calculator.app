@@ -46,21 +46,21 @@ namespace BallisticCalculatorNet
 
             menuViewEditParameters.Click += (_, _) => EditParams();
             
-            menuViewSystemImperial.Click += (_, _) => (ActiveMdiChild as TrajectoryForm ?? safetyForm).MeasurementSystem = MeasurementSystem.Imperial;
-            menuViewSystemMetric.Click += (_, _) => (ActiveMdiChild as TrajectoryForm ?? safetyForm).MeasurementSystem = MeasurementSystem.Metric;
+            menuViewSystemImperial.Click += (_, _) => (ActiveMdiChild as ITrajectoryDisplayForm ?? safetyForm).MeasurementSystem = MeasurementSystem.Imperial;
+            menuViewSystemMetric.Click += (_, _) => (ActiveMdiChild as ITrajectoryDisplayForm ?? safetyForm).MeasurementSystem = MeasurementSystem.Metric;
             
-            menuViewAngularMOA.Click += (_, _) => (ActiveMdiChild as TrajectoryForm ?? safetyForm).AngularUnits = AngularUnit.MOA;
-            menuViewAngularMils.Click += (_, _) => (ActiveMdiChild as TrajectoryForm ?? safetyForm).AngularUnits = AngularUnit.Mil;
-            menuViewAngularThousands.Click += (_, _) => (ActiveMdiChild as TrajectoryForm ?? safetyForm).AngularUnits = AngularUnit.Thousand;
-            menuViewAngularMRads.Click += (_, _) => (ActiveMdiChild as TrajectoryForm ?? safetyForm).AngularUnits = AngularUnit.MRad;
-            menuViewAngularInches.Click += (_, _) => (ActiveMdiChild as TrajectoryForm ?? safetyForm).AngularUnits = AngularUnit.InchesPer100Yards;
-            menuViewAngularCentimeters.Click += (_, _) => (ActiveMdiChild as TrajectoryForm ?? safetyForm).AngularUnits = AngularUnit.CmPer100Meters;
+            menuViewAngularMOA.Click += (_, _) => (ActiveMdiChild as ITrajectoryDisplayForm ?? safetyForm).AngularUnits = AngularUnit.MOA;
+            menuViewAngularMils.Click += (_, _) => (ActiveMdiChild as ITrajectoryDisplayForm ?? safetyForm).AngularUnits = AngularUnit.Mil;
+            menuViewAngularThousands.Click += (_, _) => (ActiveMdiChild as ITrajectoryDisplayForm ?? safetyForm).AngularUnits = AngularUnit.Thousand;
+            menuViewAngularMRads.Click += (_, _) => (ActiveMdiChild as ITrajectoryDisplayForm ?? safetyForm).AngularUnits = AngularUnit.MRad;
+            menuViewAngularInches.Click += (_, _) => (ActiveMdiChild as ITrajectoryDisplayForm ?? safetyForm).AngularUnits = AngularUnit.InchesPer100Yards;
+            menuViewAngularCentimeters.Click += (_, _) => (ActiveMdiChild as ITrajectoryDisplayForm ?? safetyForm).AngularUnits = AngularUnit.CmPer100Meters;
 
-            menuViewChartVelocity.Click += (_, _) => (ActiveMdiChild as TrajectoryForm ?? safetyForm).ChartMode = TrajectoryChartMode.Velocity;
-            menuViewChartMach.Click += (_, _) => (ActiveMdiChild as TrajectoryForm ?? safetyForm).ChartMode = TrajectoryChartMode.Mach;
-            menuViewChartDrop.Click += (_, _) => (ActiveMdiChild as TrajectoryForm ?? safetyForm).ChartMode = TrajectoryChartMode.Drop;
-            menuViewChartWindage.Click += (_, _) => (ActiveMdiChild as TrajectoryForm ?? safetyForm).ChartMode = TrajectoryChartMode.Windage;
-            menuViewChartEnergy.Click += (_, _) => (ActiveMdiChild as TrajectoryForm ?? safetyForm).ChartMode = TrajectoryChartMode.Energy;
+            menuViewChartVelocity.Click += (_, _) => (ActiveMdiChild as IChartDisplayForm ?? safetyForm).ChartMode = TrajectoryChartMode.Velocity;
+            menuViewChartMach.Click += (_, _) => (ActiveMdiChild as IChartDisplayForm ?? safetyForm).ChartMode = TrajectoryChartMode.Mach;
+            menuViewChartDrop.Click += (_, _) => (ActiveMdiChild as IChartDisplayForm ?? safetyForm).ChartMode = TrajectoryChartMode.Drop;
+            menuViewChartWindage.Click += (_, _) => (ActiveMdiChild as IChartDisplayForm ?? safetyForm).ChartMode = TrajectoryChartMode.Windage;
+            menuViewChartEnergy.Click += (_, _) => (ActiveMdiChild as IChartDisplayForm ?? safetyForm).ChartMode = TrajectoryChartMode.Energy;
 
             menuViewShowTable.Click += (_, _) => (ActiveMdiChild as TrajectoryForm)?.ShowTable();
             menuViewShowChart.Click += (_, _) => (ActiveMdiChild as TrajectoryForm)?.ShowChart();
@@ -75,48 +75,52 @@ namespace BallisticCalculatorNet
         private void UpdateMenus()
         {
             var active = this.ActiveMdiChild;
-            var isTrajectory = active is TrajectoryForm;
-            var trajectoryForm = active as TrajectoryForm;
+            var isTrajectoryForm = active is TrajectoryForm;
+            var isTrajectoryDisplayForm = active is ITrajectoryDisplayForm;
+            var trajectoryDisplayForm = active as ITrajectoryDisplayForm;
+            
+            var isChartContainter = active is IChartDisplayForm;
+            var chartContainter = active as IChartDisplayForm;
 
-            menuFileSave.Enabled = isTrajectory;
-            menuFileSaveAs.Enabled = isTrajectory;
-            menuFileExportCsv.Enabled = isTrajectory;
+            menuFileSave.Enabled = isTrajectoryForm;
+            menuFileSaveAs.Enabled = isTrajectoryForm;
+            menuFileExportCsv.Enabled = isTrajectoryForm;
 
-            menuViewEditParameters.Enabled = isTrajectory;
+            menuViewEditParameters.Enabled = isTrajectoryForm;
 
-            menuViewSystemImperial.Enabled = isTrajectory;
-            menuViewSystemImperial.Checked = isTrajectory && trajectoryForm.MeasurementSystem == MeasurementSystem.Imperial;
-            menuViewSystemMetric.Enabled = isTrajectory;
-            menuViewSystemMetric.Checked = isTrajectory && trajectoryForm.MeasurementSystem == MeasurementSystem.Metric;
+            menuViewSystemImperial.Enabled = isTrajectoryDisplayForm;
+            menuViewSystemImperial.Checked = isTrajectoryDisplayForm && trajectoryDisplayForm.MeasurementSystem == MeasurementSystem.Imperial;
+            menuViewSystemMetric.Enabled = isTrajectoryDisplayForm;
+            menuViewSystemMetric.Checked = isTrajectoryDisplayForm && trajectoryDisplayForm.MeasurementSystem == MeasurementSystem.Metric;
 
-            menuViewAngularMils.Enabled = isTrajectory;
-            menuViewAngularMils.Checked = isTrajectory && trajectoryForm.AngularUnits == AngularUnit.Mil;
-            menuViewAngularMOA.Enabled = isTrajectory;
-            menuViewAngularMOA.Checked = isTrajectory && trajectoryForm.AngularUnits == AngularUnit.MOA;
-            menuViewAngularThousands.Enabled = isTrajectory;
-            menuViewAngularThousands.Checked = isTrajectory && trajectoryForm.AngularUnits == AngularUnit.Thousand;
-            menuViewAngularMRads.Enabled = isTrajectory;
-            menuViewAngularMRads.Checked = isTrajectory && trajectoryForm.AngularUnits == AngularUnit.MRad;
-            menuViewAngularInches.Enabled = isTrajectory;
-            menuViewAngularInches.Checked = isTrajectory && trajectoryForm.AngularUnits == AngularUnit.InchesPer100Yards;
-            menuViewAngularCentimeters.Enabled = isTrajectory;
-            menuViewAngularCentimeters.Checked = isTrajectory && trajectoryForm.AngularUnits == AngularUnit.CmPer100Meters;
+            menuViewAngularMils.Enabled = isTrajectoryDisplayForm;
+            menuViewAngularMils.Checked = isTrajectoryDisplayForm && trajectoryDisplayForm.AngularUnits == AngularUnit.Mil;
+            menuViewAngularMOA.Enabled = isTrajectoryDisplayForm;
+            menuViewAngularMOA.Checked = isTrajectoryDisplayForm && trajectoryDisplayForm.AngularUnits == AngularUnit.MOA;
+            menuViewAngularThousands.Enabled = isTrajectoryDisplayForm;
+            menuViewAngularThousands.Checked = isTrajectoryDisplayForm && trajectoryDisplayForm.AngularUnits == AngularUnit.Thousand;
+            menuViewAngularMRads.Enabled = isTrajectoryDisplayForm;
+            menuViewAngularMRads.Checked = isTrajectoryDisplayForm && trajectoryDisplayForm.AngularUnits == AngularUnit.MRad;
+            menuViewAngularInches.Enabled = isTrajectoryDisplayForm;
+            menuViewAngularInches.Checked = isTrajectoryDisplayForm && trajectoryDisplayForm.AngularUnits == AngularUnit.InchesPer100Yards;
+            menuViewAngularCentimeters.Enabled = isTrajectoryDisplayForm;
+            menuViewAngularCentimeters.Checked = isTrajectoryDisplayForm && trajectoryDisplayForm.AngularUnits == AngularUnit.CmPer100Meters;
 
-            menuViewChartVelocity.Enabled = isTrajectory;
-            menuViewChartMach.Enabled = isTrajectory;
-            menuViewChartDrop.Enabled = isTrajectory;
-            menuViewChartWindage.Enabled = isTrajectory;
-            menuViewChartEnergy.Enabled = isTrajectory;
+            menuViewChartVelocity.Enabled = isChartContainter;
+            menuViewChartMach.Enabled = isChartContainter;
+            menuViewChartDrop.Enabled = isChartContainter;
+            menuViewChartWindage.Enabled = isChartContainter;
+            menuViewChartEnergy.Enabled = isChartContainter;
 
-            menuViewChartVelocity.Checked = isTrajectory && trajectoryForm.ChartMode == TrajectoryChartMode.Velocity;
-            menuViewChartMach.Checked = isTrajectory && trajectoryForm.ChartMode == TrajectoryChartMode.Mach;
-            menuViewChartDrop.Checked = isTrajectory && trajectoryForm.ChartMode == TrajectoryChartMode.Drop;
-            menuViewChartWindage.Checked = isTrajectory && trajectoryForm.ChartMode == TrajectoryChartMode.Windage;
-            menuViewChartEnergy.Checked = isTrajectory && trajectoryForm.ChartMode == TrajectoryChartMode.Energy;
+            menuViewChartVelocity.Checked = isChartContainter && chartContainter.ChartMode == TrajectoryChartMode.Velocity;
+            menuViewChartMach.Checked = isChartContainter && chartContainter.ChartMode == TrajectoryChartMode.Mach;
+            menuViewChartDrop.Checked = isChartContainter && chartContainter.ChartMode == TrajectoryChartMode.Drop;
+            menuViewChartWindage.Checked = isChartContainter && chartContainter.ChartMode == TrajectoryChartMode.Windage;
+            menuViewChartEnergy.Checked = isChartContainter && chartContainter.ChartMode == TrajectoryChartMode.Energy;
 
-            menuViewShowChart.Enabled = isTrajectory;
-            menuViewShowTable.Enabled = isTrajectory;
-            menuViewShowReticle.Enabled = isTrajectory;
+            menuViewShowChart.Enabled = isTrajectoryForm;
+            menuViewShowTable.Enabled = isTrajectoryForm;
+            menuViewShowReticle.Enabled = isTrajectoryForm;
 
         }
 
@@ -154,27 +158,37 @@ namespace BallisticCalculatorNet
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                XmlDocument document = new XmlDocument();
-                document.Load(dialog.FileName);
-                var serializer = new BallisticXmlDeserializer();
-                var data = serializer.Deserialize<TrajectoryFormState>(document.DocumentElement);
-                var trajectoryWindow = new TrajectoryForm()
+                try
                 {
-                    AngularUnits = data.AngularUnits,
-                    MeasurementSystem = data.MeasurementSystem,
-                    ShotData = data.ShotData,
-                    MdiParent = this,
-                    FileName = dialog.FileName,
-                };
-                trajectoryWindow.Show();
-                UpdateMenus();
+                    XmlDocument document = new XmlDocument();
+                    document.Load(dialog.FileName);
+                    var serializer = new BallisticXmlDeserializer();
+                    var data = serializer.Deserialize<TrajectoryFormState>(document.DocumentElement);
+                    var trajectoryWindow = new TrajectoryForm()
+                    {
+                        AngularUnits = data.AngularUnits,
+                        MeasurementSystem = data.MeasurementSystem,
+                        ShotData = data.ShotData,
+                        MdiParent = this,
+                        FileName = dialog.FileName,
+                    };
+                    trajectoryWindow.Show();
+                    UpdateMenus();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Can't save the file {dialog.FileName}\r\nError: {ex.Message}\r\nTo log the error details enable the warning log level and try operation again");
+                    ControlConfiguration.Logger?.Warning(ex, $"Saving file '{dialog.FileName}' failed");
+                }
+
             }
         }
 
         private void Save()
         {
-            var active = this.ActiveMdiChild as TrajectoryForm;
-            
+            if (this.ActiveMdiChild is not TrajectoryForm active)
+                return;
+
             if (active == null)
                 return;
             
@@ -186,7 +200,8 @@ namespace BallisticCalculatorNet
 
         private void SaveAs()
         {
-            var active = this.ActiveMdiChild as TrajectoryForm;
+            if (this.ActiveMdiChild is not TrajectoryForm active)
+                return;
 
             var dialog = new SaveFileDialog()
             {
@@ -206,27 +221,35 @@ namespace BallisticCalculatorNet
 
         private void DoSave()
         {
-            var active = this.ActiveMdiChild as TrajectoryForm;
-            var state = new TrajectoryFormState()
+            if (this.ActiveMdiChild is not TrajectoryForm active)
+                return;
+
+            try
             {
-                ShotData = active.ShotData,
-                AngularUnits = active.AngularUnits,
-                MeasurementSystem = active.MeasurementSystem,
-            };
-            var serializer = new BallisticXmlSerializer();
-            var root = serializer.Serialize(state);
-            var document = root.OwnerDocument;
-            document.AppendChild(root);
-            document.Save(active.FileName);
+                var state = new TrajectoryFormState()
+                {
+                    ShotData = active.ShotData,
+                    AngularUnits = active.AngularUnits,
+                    MeasurementSystem = active.MeasurementSystem,
+                };
+                var serializer = new BallisticXmlSerializer();
+                var root = serializer.Serialize(state);
+                var document = root.OwnerDocument;
+                document.AppendChild(root);
+                document.Save(active.FileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Can't save the file {active.FileName}\r\nError: {ex.Message}\r\nTo log the error details enable the warning log level and try operation again");
+                ControlConfiguration.Logger?.Warning(ex, $"Saving file '{active.FileName}' failed");
+            }
         }
 
         private void EditParams()
         {
-            var active = this.ActiveMdiChild as TrajectoryForm;
-            
-            if (active == null)
+            if (this.ActiveMdiChild is not TrajectoryForm active)
                 return;
-            
+
             var shotParamsForm = new ShotParametersForm(active.MeasurementSystem, active.ShotData);
             if (shotParamsForm.ShowDialog(this) == DialogResult.OK)
                 active.ShotData = shotParamsForm.ShotParameters;
@@ -240,9 +263,7 @@ namespace BallisticCalculatorNet
 
         private void ExportCsv()
         {
-            var active = this.ActiveMdiChild as TrajectoryForm;
-
-            if (active == null)
+            if (this.ActiveMdiChild is not TrajectoryForm active)
                 return;
 
             var dialog = new SaveFileDialog()
@@ -255,12 +276,18 @@ namespace BallisticCalculatorNet
             };
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                using (var fs = new FileStream(dialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None))
-                using (var stream = new StreamWriter(fs))
+                try
                 {
+                    using var fs = new FileStream(dialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
+                    using var stream = new StreamWriter(fs);
                     var controllers = new CvsExportController(active.Trajectory, active.MeasurementSystem, active.ShotData.Weapon.Sight, active.AngularUnits);
                     foreach (var s in controllers.Prepare())
                         stream.WriteLine(s);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Can't save the file {active.FileName}\r\nError: {ex.Message}\r\nTo log the error details enable the warning log level and try operation again");
+                    ControlConfiguration.Logger?.Warning(ex, $"Saving file '{active.FileName}' failed");
                 }
             }
         }

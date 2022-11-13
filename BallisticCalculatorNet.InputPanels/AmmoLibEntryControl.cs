@@ -93,11 +93,20 @@ namespace BallisticCalculatorNet.InputPanels
 
         private void buttonLoad_Click(object sender, EventArgs e)
         {
-            var ammo = AmmunitionControlUtils.Load(this, PromptFactory, out string fileName);
-            if (ammo != null)
+            string fileName = null;
+            try
             {
-                mFileName = fileName;
-                LibraryEntry = ammo;
+                var ammo = AmmunitionControlUtils.Load(this, PromptFactory, out fileName);
+                if (ammo != null)
+                {
+                    mFileName = fileName;
+                    LibraryEntry = ammo;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Can't open the file {fileName}\r\nError: {ex.Message}\r\nTo log the error details enable the warning log level and try operation again");
+                ControlConfiguration.Logger?.Warning(ex, $"Loading file '{fileName}' failed");
             }
         }
 
@@ -112,7 +121,17 @@ namespace BallisticCalculatorNet.InputPanels
             if (!string.IsNullOrEmpty(mFileName))
                 dlg.FileName = mFileName;
             if (dlg.AskName(this))
-                BallisticXmlSerializer.SerializeToFile(LibraryEntry, dlg.FileName);
+            {
+                try
+                {
+                    BallisticXmlSerializer.SerializeToFile(LibraryEntry, dlg.FileName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Can't save the file {dlg.FileName}\r\nError: {ex.Message}\r\nTo log the error details enable the warning log level and try operation again");
+                    ControlConfiguration.Logger?.Warning(ex, $"Saving file '{dlg.FileName}' failed");
+                }
+            }
         }
 
         public void Clear()
