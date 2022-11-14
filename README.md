@@ -2,7 +2,18 @@
 
 100% open source windows (100% WinE compatible) ballistic calculator with accuracy and performance comparable with best commercial calculators.
 
-The application is under development now!!! Please stay in touch. The current development version is available to play in [releases](https://github.com/nikolaygekht/ballistic.calculator.app/releases). 
+The application is under development now!!! Please stay in touch. 
+
+The current development version is available to play in [releases](https://github.com/nikolaygekht/ballistic.calculator.app/releases). 
+
+The latest release is alpha.3. It supports all core functionality:
+* Calculate a trajectory
+* Show it as a table and chart
+* Export it as a CSV file
+* Show a target and BDC at reticle
+* Edit reticles (via a separate app called reticle editor)
+
+Further development includes trajectory comparison, more reticles and ammo, and a lot of small bells and whistles. 
 
 # Recommended reading 
 
