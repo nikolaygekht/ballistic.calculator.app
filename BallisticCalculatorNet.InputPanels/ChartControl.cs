@@ -78,17 +78,66 @@ namespace BallisticCalculatorNet.InputPanels
 
         private void UpdateChart()
         {
-            var controller = new ChartController(mMeasurementSystem, mAngularUnits, mChartMode, mTrajectory);
             formsPlot1.Plot.YAxis?.LockLimits(false);
             formsPlot1.Plot.Clear();
             if (mTrajectory != null)
             {
-                formsPlot1.Plot.AddScatter(controller.GetXAxis(), controller.GetYAxis());
+                var controller = new ChartController(mMeasurementSystem, mAngularUnits, mChartMode, mTrajectory);
+                var x = controller.GetXAxis();
+                var y = controller.GetYAxis();
+                formsPlot1.Plot.AddScatter(x, y);
                 formsPlot1.Plot.XAxis.Label(controller.XAxisTitle);
                 formsPlot1.Plot.YAxis.Label(controller.YAxisTitle);
                 formsPlot1.Plot.AxisAuto();
                 formsPlot1.Plot.YAxis.LockLimits();
             }
+            formsPlot1.Refresh();
+        }
+
+        public void UpdateYAxis()
+        {
+            if (mTrajectory == null)
+                return;
+
+            formsPlot1.Plot.YAxis?.LockLimits(false);
+
+            var limits = formsPlot1.Plot.GetAxisLimits();
+            var controller = new ChartController(mMeasurementSystem, mAngularUnits, mChartMode, mTrajectory);
+            var yMin = Double.MaxValue;
+            var yMax = Double.MinValue;
+            var i1 = -1;
+            var i2 = mTrajectory.Length - 1;
+
+            for (int i = 1; i < mTrajectory.Length - 1; i++)
+            {
+                var x = controller.GetXAxisPoint(i);
+                if (x >= limits.XMin && i1 == -1)
+                {
+                    i1 = i - 1;
+                }
+                if (x>= limits.XMax)
+                {
+                    i2 = i + 1;
+                    break;
+                }
+            }
+            if (i1 < 0)
+                i1 = 0;
+            if (i2 >= mTrajectory.Length)
+                i2 = mTrajectory.Length - 1;
+
+            for (int i = i1; i <= i2; i++)
+            {
+                var y = controller.GetYAXisPoint(i);
+                if (y < yMin)
+                    yMin = y;
+                if (y > yMax)
+                    yMax = y;
+            }
+
+            var delta = yMax - yMin;
+            formsPlot1.Plot.SetAxisLimitsY(yMin - delta * 0.05, yMax + delta * 0.05);
+            formsPlot1.Plot.YAxis.LockLimits();
             formsPlot1.Refresh();
         }
     }

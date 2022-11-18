@@ -37,9 +37,11 @@ namespace BallisticCalculatorNet.InputPanels
         {
             var r = new double[mTrajectory.Length];
             for (int i = 0; i < mTrajectory.Length; i++)
-                r[i] = mTrajectory[i].Distance.In(mMeasurementSystemController.RangeUnit);
+                r[i] = GetXAxisPoint(i);
             return r;
         }
+
+        public double GetXAxisPoint(int index) => mTrajectory[index].Distance.In(mMeasurementSystemController.RangeUnit);
 
         public double[] GetYAxis()
         {
@@ -49,7 +51,7 @@ namespace BallisticCalculatorNet.InputPanels
             return r;
         }
 
-        private double GetYAXisPoint(int index)
+        public double GetYAXisPoint(int index)
         {
             var pt = mTrajectory[index];
             return mChartMode switch

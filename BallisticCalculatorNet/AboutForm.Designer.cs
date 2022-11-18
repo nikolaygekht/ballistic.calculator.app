@@ -157,9 +157,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(104, 37);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(209, 25);
+            this.label6.Size = new System.Drawing.Size(191, 25);
             this.label6.TabIndex = 13;
-            this.label6.Text = "Version 2.0.alpha1 Build: ";
+            this.label6.Text = "Version 2.0.beta Build: ";
             // 
             // linkLabel6
             // 

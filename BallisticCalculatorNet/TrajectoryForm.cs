@@ -18,8 +18,9 @@ namespace BallisticCalculatorNet
     public partial class TrajectoryForm : Form, ITrajectoryDisplayForm, IChartDisplayForm
     {
         private ShotData mShotData = null;
-        private MeasurementSystem mMeasurementSystem = MeasurementSystem.Imperial;
         private TrajectoryPoint[] mTrajectory;
+        
+        private MeasurementSystem mMeasurementSystem = MeasurementSystem.Imperial;
         private AngularUnit mAngularUnits = AngularUnit.Mil;
 
         [Browsable(false)]
@@ -103,5 +104,10 @@ namespace BallisticCalculatorNet
         public void ShowTable() => tabControl.SelectedIndex = 0;
         public void ShowChart() => tabControl.SelectedIndex = 1;
         public void ShowReticle() => tabControl.SelectedIndex = 2;
+
+        public void UpdateYToVisibleArea()
+        {
+            chartControl.UpdateYAxis();
+        }
     }
 }

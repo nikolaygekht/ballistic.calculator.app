@@ -66,6 +66,11 @@ namespace BallisticCalculatorNet
             menuViewShowChart.Click += (_, _) => (ActiveMdiChild as TrajectoryForm)?.ShowChart();
             menuViewShowReticle.Click += (_, _) => (ActiveMdiChild as TrajectoryForm)?.ShowReticle();
 
+            menuViewChartZoomY.Click += (_, _) => (ActiveMdiChild as IChartDisplayForm)?.UpdateYToVisibleArea();
+
+            menuViewCompareAdd.Click += (_, _) => AddToCompare();
+            menuViewCompareRemoveLast.Click += (_, _) => RemoveLastCompare();
+
             menuWindowsTile.Click += (_, _) => this.LayoutMdi(MdiLayout.TileHorizontal);
             menuWindowsCascade.Click += (_, _) => this.LayoutMdi(MdiLayout.Cascade);
 
@@ -78,7 +83,8 @@ namespace BallisticCalculatorNet
             var isTrajectoryForm = active is TrajectoryForm;
             var isTrajectoryDisplayForm = active is ITrajectoryDisplayForm;
             var trajectoryDisplayForm = active as ITrajectoryDisplayForm;
-            
+            var hasCompareForm = GetCompareForm() != null;
+
             var isChartContainter = active is IChartDisplayForm;
             var chartContainter = active as IChartDisplayForm;
 
@@ -112,6 +118,8 @@ namespace BallisticCalculatorNet
             menuViewChartWindage.Enabled = isChartContainter;
             menuViewChartEnergy.Enabled = isChartContainter;
 
+            menuViewChartZoomY.Enabled = isChartContainter;
+
             menuViewChartVelocity.Checked = isChartContainter && chartContainter.ChartMode == TrajectoryChartMode.Velocity;
             menuViewChartMach.Checked = isChartContainter && chartContainter.ChartMode == TrajectoryChartMode.Mach;
             menuViewChartDrop.Checked = isChartContainter && chartContainter.ChartMode == TrajectoryChartMode.Drop;
@@ -122,6 +130,8 @@ namespace BallisticCalculatorNet
             menuViewShowTable.Enabled = isTrajectoryForm;
             menuViewShowReticle.Enabled = isTrajectoryForm;
 
+            menuViewCompareAdd.Enabled = isTrajectoryForm;
+            menuViewCompareRemoveLast.Enabled = hasCompareForm;
         }
 
         private void AppForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -290,6 +300,46 @@ namespace BallisticCalculatorNet
                     ControlConfiguration.Logger?.Warning(ex, $"Saving file '{active.FileName}' failed");
                 }
             }
+        }
+
+        private CompareForm GetCompareForm()
+        {
+            foreach (var form in this.MdiChildren)
+            {
+                if (form is CompareForm compareForm)
+                    return compareForm;
+            }
+            return null;
+        }
+
+        private void AddToCompare()
+        {
+            if (this.ActiveMdiChild is not TrajectoryForm active)
+                return;
+
+            if (active == null || active.Trajectory == null)
+                return;
+
+            var compareForm = GetCompareForm() ?? 
+                new CompareForm()
+                {
+                    MdiParent = this,
+                    MeasurementSystem = active.MeasurementSystem,
+                    AngularUnits = active.AngularUnits,
+                    ChartMode = active.ChartMode,
+                };
+            
+            var name = active.ShotData.Ammunition.Name;
+            if (string.IsNullOrEmpty(name))
+                name = "no name";
+            compareForm.AddTrajectory(name, active.Trajectory);
+            compareForm.Show();
+        }
+
+        private void RemoveLastCompare()
+        {
+            var compareForm = GetCompareForm();
+            compareForm?.RemoveLast();
         }
     }
 }
