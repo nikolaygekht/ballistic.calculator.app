@@ -56,8 +56,8 @@ namespace BallisticCalculatorNet.InputPanels
         {
             if (!showTargetControl.Checked || calculator == null)
                 return null;
-            
-            var targetSizeUnits = unitsControl.SelectedIndex == 0 ? DistanceUnit.Inch : DistanceUnit.Centimeter;           
+
+            var targetSizeUnits = unitsControl.SelectedIndex == 0 ? DistanceUnit.Inch : DistanceUnit.Centimeter;
             var width = ((double)widthControl.Value).As(targetSizeUnits);
             var height = ((double)heightControl.Value).As(targetSizeUnits);
 
@@ -74,7 +74,7 @@ namespace BallisticCalculatorNet.InputPanels
 
             return new ReticleRectangle()
             {
-                TopLeft = new ReticlePosition(item.WindageAdjustment / zoom - angularWidth / 2, item.DropAdjustment / zoom + angularHeight / 2),
+                TopLeft = new ReticlePosition(-item.WindageAdjustment / zoom - angularWidth / 2, item.DropAdjustment / zoom + angularHeight / 2),
                 Size = new ReticlePosition(angularWidth, angularHeight),
                 Color = "red",
             };
