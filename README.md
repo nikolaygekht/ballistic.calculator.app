@@ -12,6 +12,13 @@ The latest release is beta. It supports all core functionality:
 * Edit reticles (via a separate app called reticle editor)
 * Compare trajectories on the chart
 
+Highlights:
+* Open source calculator with accuracy comparable to the best commercial versions
+* Calculating trajectory with multiple winds
+* Calculating trajectory for zeroing done with another cartridge (e.g. zero with 300blackout supersonic, shoot subsonics)
+* Radar data support
+* Reticle editor - create your own reticle!
+
 The further development will be build around:
 * Deeper testing of not-so-usual cases
 * Making more reticles
