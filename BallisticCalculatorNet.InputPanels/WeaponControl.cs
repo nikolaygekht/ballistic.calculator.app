@@ -1,4 +1,5 @@
 ﻿using BallisticCalculator;
+using BallisticCalculatorNet.InputPanels.DataList;
 using Gehtsoft.Measurements;
 using System;
 using System.Collections.Generic;
@@ -26,8 +27,8 @@ namespace BallisticCalculatorNet.InputPanels
             InitializeComponent();
             comboBoxRiflingDirection.SelectedIndex = 0;
             measurementRifling.Enabled = false;
-            measurementVClick.Value = 0.25.As(AngularUnit.MOA);
-            measurementHClick.Value = 0.25.As(AngularUnit.MOA);
+            measurementVClick.Value = null;
+            measurementHClick.Value = null; 
             measurementVerticalOffset.Enabled = false;
         }
 
@@ -187,6 +188,56 @@ namespace BallisticCalculatorNet.InputPanels
         private void checkBoxZeroVerticalOffset_CheckedChanged(object sender, EventArgs e)
         {
             measurementVerticalOffset.Enabled = checkBoxZeroVerticalOffset.Checked;
+        }
+
+        private void buttonSightDictionary_Click(object sender, EventArgs e)
+        {
+            var dictionary = DataItemDictonaryFactory.Get();
+            if (dictionary == null || dictionary.Sights == null || dictionary.Sights.Count == 0)
+            {
+                MessageBox.Show(this, "Dictionary does not exist in data folder or cannot be read.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var dialog = new DataListItemSelector()
+            {
+                Text = "Sights",
+                Items = dictionary.Sights
+            };
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                if (dialog.SelectedItem is SightListItem item)
+                {
+                    measurementSightHeight.Value = item.SightHeight;
+                    measurementZeroDistance.Value = item.DefaultZero;
+                    if (item.HorizontalClick != null)
+                        measurementHClick.Value = item.HorizontalClick.Value;
+                    if (item.VerticalClick != null)
+                        measurementVClick.Value = item.VerticalClick.Value;
+                }
+            }
+        }
+
+        private void buttonRiflingDictionary_Click(object sender, EventArgs e)
+        {
+            var dictionary = DataItemDictonaryFactory.Get();
+            if (dictionary == null || dictionary.Barrels == null || dictionary.Barrels.Count == 0)
+            {
+                MessageBox.Show(this, "Dictionary does not exist in data folder or cannot be read.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var dialog = new DataListItemSelector()
+            {
+                Text = "Barrels",
+                Items = dictionary.Barrels
+            };
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                if (dialog.SelectedItem is BarrelListItem item)
+                {
+                    measurementRifling.Value = item.Step;
+                    comboBoxRiflingDirection.SelectedIndex = item.TwistDirection == TwistDirection.Left ? 1 : 2;
+                }
+            }
         }
     }
 }

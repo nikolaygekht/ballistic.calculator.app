@@ -1,0 +1,19 @@
+<dictionary>
+    <sights>
+        <sight name=".22LR Iron Sight (US)" sight-height="0.5in" default-zero="25yd" />
+        <sight name=".22LR Optics (US)" sight-height="1.5in" default-zero="25yd" />
+        <sight name="Standard Optics (High, Mil)" sight-height="3in" default-zero="100yd" horizontal-click="0.1mil" vertical-click="0.1mil" />
+        <sight name="Standard Optics (High, Moa)" sight-height="3in" default-zero="100yd" horizontal-click="0.25moa" vertical-click="0.25moa" />
+        <sight name="Elcan Specter" sight-height="3.2in" default-zero="100yd" vertical-click="0.5moa" />
+        <sight name="ACOG TA-32" sight-height="3.5in" default-zero="100yd" horizontal-click="0.5in/100yd" vertical-click="0.5in/100yd" />
+        <sight name="AK Iron Sight" sight-height="5cm" default-zero="100m" />
+        <sight name="PSO-1 Optics" sight-height="65mm" default-zero="100m" horizontal-click="5cm/100m" vertical-click="5cm/100m" />
+    </sights>
+    <barrels>
+        <barrel name="AK-47" step="240mm" direction="Right" />
+        <barrel name="AK-74" step="200mm" direction="Right" />
+        <barrel name="Barret M4" step="11in" direction="Right" />
+        <barrel name="M16A1" step="12in" direction="Right" />
+        <barrel name="M16A3" step="7in" direction="Right" />
+    </barrels>
+</dictionary>

@@ -17,7 +17,8 @@ namespace BallisticCalculatorNet.InputPanels
             dlg.CheckFileExists = true;
             dlg.DefaultExtension = "ammox";
             
-            if (ControlConfiguration.Configuration["datafolder"] != null)
+            if (ControlConfiguration.Configuration != null &&
+                ControlConfiguration.Configuration["datafolder"] != null)
             {
                 dlg.InitialDirectory = ControlConfiguration.Configuration["datafolder"];
                 dlg.RestoreDirectory = false;

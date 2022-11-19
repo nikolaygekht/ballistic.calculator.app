@@ -23,8 +23,8 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             control.ComboBox("comboBoxRiflingDirection").Text.Should().Be("Not Set");
             control.ComboBox("comboBoxRiflingDirection").SelectedIndex.Should().Be(0);
             control.MeasurementControl("measurementRifling").Should().BeDisabled();
-            control.MeasurementControl("measurementVClick").Value.Should().Be(0.25.As(AngularUnit.MOA));
-            control.MeasurementControl("measurementHClick").Value.Should().Be(0.25.As(AngularUnit.MOA));
+            control.MeasurementControl("measurementVClick").IsEmpty.Should().BeTrue();
+            control.MeasurementControl("measurementHClick").IsEmpty.Should().BeTrue();
             control.MeasurementControl("measurementVerticalOffset").Enabled.Should().BeFalse();
         }
 
