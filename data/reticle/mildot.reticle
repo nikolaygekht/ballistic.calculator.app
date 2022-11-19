@@ -29,5 +29,7 @@
     <bdc position-x="0mil" position-y="-2mil" text-offset="1mil" text-height="0.3mil" />
     <bdc position-x="0mil" position-y="-3mil" text-offset="1mil" text-height="0.3mil" />
     <bdc position-x="0mil" position-y="-4mil" text-offset="1mil" text-height="0.3mil" />
+    <bdc position-x="0mil" position-y="1mil" text-offset="1mil" text-height="0.3mil" />
+    <bdc position-x="0mil" position-y="2mil" text-offset="1mil" text-height="0.3mil" />
   </bdc>
 </reticle>
