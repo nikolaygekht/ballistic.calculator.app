@@ -113,6 +113,15 @@ namespace BallisticCalculatorNet.InputPanels
                 Title = "Open..."
             };
 
+            if (ControlConfiguration.Configuration["datafolder"] != null)
+            {
+                dlg.InitialDirectory = ControlConfiguration.Configuration["datafolder"];
+                dlg.RestoreDirectory = false;
+            }
+            else
+                dlg.RestoreDirectory = true;
+
+
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 try

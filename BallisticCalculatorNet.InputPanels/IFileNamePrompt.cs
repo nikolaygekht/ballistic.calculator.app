@@ -10,6 +10,7 @@ namespace BallisticCalculatorNet.InputPanels
         bool OverwritePrompt { get; set; }
         string Title { get; set; }
         string InitialDirectory { get; set; }
+        bool RestoreDirectory { get; set; }
         string FileName { get; set; }
         string DefaultExtension { get; set; }
         bool AskName(IWin32Window parent);

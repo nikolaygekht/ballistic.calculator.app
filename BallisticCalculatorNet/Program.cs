@@ -22,6 +22,26 @@ namespace BallisticCalculatorNet
 
         public static IConfiguration Configuration { get; private set; }
 
+        public static string DataFolder
+        {
+            get
+            {
+                var startFolder = new FileInfo(Application.ExecutablePath).Directory;
+                return SeekForData(startFolder);
+            }
+        }
+
+        private static string SeekForData(DirectoryInfo baseFolder)
+        {
+            var candidate = Path.Combine(baseFolder.FullName, "data");
+            if (Directory.Exists(candidate))
+                return Path.Combine(baseFolder.FullName, "data");
+            if (baseFolder.Parent == null)
+                return null;
+            else
+                return SeekForData(baseFolder.Parent);
+        }
+
         private static LogEventLevel MinimumLogLevel
         {
             get
@@ -73,6 +93,10 @@ namespace BallisticCalculatorNet
                 .WriteTo.File(LogTarget, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 10)
                 .CreateLogger();
 
+            var datafolder = DataFolder;
+            if (datafolder != null)
+                Configuration["datafolder"] = datafolder;
+            
             ControlConfiguration.Configuration = Configuration;
             ControlConfiguration.Logger = Logger;
         }

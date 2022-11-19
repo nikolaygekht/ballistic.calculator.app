@@ -16,6 +16,7 @@ namespace BallisticCalculatorNet.UnitTest.Utils
         public bool OverwritePrompt { get ; set ; }
         public string Title { get ; set ; }
         public string InitialDirectory { get ; set ; }
+        public bool RestoreDirectory { get; set; }
         public string FileName { get ; set ; }
         public string DefaultExtension { get ; set ; }
 

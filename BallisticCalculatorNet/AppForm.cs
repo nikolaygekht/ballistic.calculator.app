@@ -162,9 +162,13 @@ namespace BallisticCalculatorNet
             {
                 Filter = "Ballistic Calculator files (*.trajectory)|*.trajectory|All files (*.*)|*.*",
                 FilterIndex = 1,
-                RestoreDirectory = true,
                 CheckFileExists = true,
             };
+
+            if (Program.Configuration["datafolder"] != null)
+                dialog.InitialDirectory = Program.Configuration["datafolder"];
+            else
+                dialog.RestoreDirectory = true;
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -217,11 +221,16 @@ namespace BallisticCalculatorNet
             {
                 Filter = "Ballistic Calculator files (*.trajectory)|*.trajectory|All files (*.*)|*.*",
                 FilterIndex = 1,
-                RestoreDirectory = true,
                 FileName = active.FileName,
                 OverwritePrompt = true,
                 CheckPathExists = true,
             };
+
+            if (Program.Configuration["datafolder"] != null)
+                dialog.InitialDirectory = Program.Configuration["datafolder"];
+            else
+                dialog.RestoreDirectory = true;
+
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 active.FileName = dialog.FileName;

@@ -1,0 +1,43 @@
+<reticle name="PSO-1" size-x="64mil" size-y="64mil" zero-x="32mil" zero-y="32mil">
+  <elements>
+    <reticle-circle center-x="0mil" center-y="0mil" radius="32mil" fill="false" line-width="0.2mil" color="black" />
+    <reticle-line start-x="12mil" start-y="0mil" end-x="32mil" end-y="0mil" line-width="0.4mil" line-color="black" />
+    <reticle-line start-x="-12mil" start-y="0mil" end-x="-32mil" end-y="0mil" line-width="0.4mil" line-color="black" />
+    <reticle-line start-x="0mil" start-y="-13mil" end-x="0mil" end-y="-32mil" line-width="0.4mil" line-color="black" />
+    <reticle-line start-x="0mil" start-y="0mil" end-x="-0.4mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="0mil" start-y="0mil" end-x="0.4mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="0mil" start-y="-3.4mil" end-x="-0.4mil" end-y="-4.4mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="0mil" start-y="-3.4mil" end-x="0.4mil" end-y="-4.4mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="0mil" start-y="-7.1mil" end-x="-0.4mil" end-y="-8.1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="0mil" start-y="-7.1mil" end-x="0.4mil" end-y="-8.1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="0mil" start-y="-11.2mil" end-x="-0.4mil" end-y="-12.2mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="0mil" start-y="-11.2mil" end-x="0.4mil" end-y="-12.2mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="1mil" start-y="0mil" end-x="1mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="2mil" start-y="0mil" end-x="2mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="3mil" start-y="0mil" end-x="3mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="4mil" start-y="0mil" end-x="4mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="5mil" start-y="0mil" end-x="5mil" end-y="-2mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="6mil" start-y="0mil" end-x="6mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="7mil" start-y="0mil" end-x="7mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="8mil" start-y="0mil" end-x="8mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="9mil" start-y="0mil" end-x="9mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="10mil" start-y="0mil" end-x="10mil" end-y="-2mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="-1mil" start-y="0mil" end-x="-1mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="-2mil" start-y="0mil" end-x="-2mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="-3mil" start-y="0mil" end-x="-3mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="-4mil" start-y="0mil" end-x="-4mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="-5mil" start-y="0mil" end-x="-5mil" end-y="-2mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="-6mil" start-y="0mil" end-x="-6mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="-7mil" start-y="0mil" end-x="-7mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="-8mil" start-y="0mil" end-x="-8mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="-9mil" start-y="0mil" end-x="-9mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
+    <reticle-line start-x="-10mil" start-y="0mil" end-x="-10mil" end-y="-2mil" line-width="0.2mil" line-color="black" />
+    <reticle-text position-x="-11.5mil" position-y="-4mil" text-height="2mil" text="10" text-color="black" />
+    <reticle-text position-x="8.5mil" position-y="-4mil" text-height="2mil" text="10" text-color="black" />
+  </elements>
+  <bdc>
+    <bdc position-x="0mil" position-y="-3.4mil" text-offset="0.5mil" text-height="1.5mil" />
+    <bdc position-x="0mil" position-y="-7.1mil" text-offset="0.5mil" text-height="1.5mil" />
+    <bdc position-x="0mil" position-y="-11.2mil" text-offset="0.5mil" text-height="1.5mil" />
+  </bdc>
+</reticle>

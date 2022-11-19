@@ -15,6 +15,7 @@ namespace BallisticCalculatorNet.InputPanels
         public bool OverwritePrompt { get; set; }
         public string Title { get; set; }
         public string InitialDirectory { get; set; }
+        public bool RestoreDirectory { get; set; }
         public string FileName { get; set; }
         public string DefaultExtension { get; set; }
 
@@ -26,6 +27,7 @@ namespace BallisticCalculatorNet.InputPanels
         {
             fileDialog.Title = Title;
             fileDialog.InitialDirectory = InitialDirectory;
+            fileDialog.RestoreDirectory = RestoreDirectory;
             fileDialog.DefaultExt = DefaultExtension;
             fileDialog.FileName = FileName;
 

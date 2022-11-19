@@ -16,6 +16,15 @@ namespace BallisticCalculatorNet.InputPanels
             dlg.AddFilter("ammo", "Legacy Ammunition Library Entry");
             dlg.CheckFileExists = true;
             dlg.DefaultExtension = "ammox";
+            
+            if (ControlConfiguration.Configuration["datafolder"] != null)
+            {
+                dlg.InitialDirectory = ControlConfiguration.Configuration["datafolder"];
+                dlg.RestoreDirectory = false;
+            }
+            else
+                dlg.RestoreDirectory = true;
+
             if (dlg.AskName(parent))
             {
                 fileName = dlg.FileName;
