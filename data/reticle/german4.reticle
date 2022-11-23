@@ -1,0 +1,12 @@
+<reticle name="German #4" size-x="60moa" size-y="60moa" zero-x="30moa" zero-y="30moa">
+  <elements>
+    <reticle-circle center-x="0moa" center-y="0moa" radius="30moa" fill="false" line-width="0.3moa" color="black" />
+    <reticle-line start-x="-30moa" start-y="0moa" end-x="30moa" end-y="0moa" line-width="0.3moa" line-color="black" />
+    <reticle-line start-x="0moa" start-y="-30moa" end-x="0moa" end-y="30moa" line-width="0.3moa" line-color="black" />
+    <reticle-line start-x="-30moa" start-y="0moa" end-x="-15moa" end-y="0moa" line-width="4moa" line-color="black" />
+    <reticle-line start-x="30moa" start-y="0moa" end-x="15moa" end-y="0moa" line-width="4moa" line-color="black" />
+    <reticle-line start-x="0moa" start-y="-15moa" end-x="0moa" end-y="-30moa" line-width="4moa" line-color="black" />
+    <reticle-circle center-x="0moa" center-y="0moa" radius="0.3moa" fill="true" line-width="0.1mil" color="darkgreen" />
+  </elements>
+  <bdc />
+</reticle>

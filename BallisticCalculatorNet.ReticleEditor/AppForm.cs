@@ -175,6 +175,8 @@ namespace BallisticCalculatorNet.ReticleEditor
             }
         }
 
+        private int mImageX, mImageY;
+
         internal void UpdateImage()
         {
             if (Reticle.Size == null)
@@ -189,7 +191,9 @@ namespace BallisticCalculatorNet.ReticleEditor
 
             ReticleCanvasUtils.CalculateReticleImageSize(pictureReticle.Size.Width, pictureReticle.Size.Height,
                                       Reticle.Size.X, Reticle.Size.Y, out int imageX, out int imageY);
-
+            mImageX = imageX;
+            mImageY = imageY;
+            
             Bitmap bm = new Bitmap(imageX, imageY);
             GraphicsCanvas canvas = GraphicsCanvas.FromImage(bm, Color.White);
             ReticleDrawController controller = new ReticleDrawController(Reticle, canvas);
@@ -587,6 +591,75 @@ namespace BallisticCalculatorNet.ReticleEditor
                 this.SaveFormState(Program.Configuration, "main");
                 Program.Configuration["state:main:separator"] = splitContainer1.SplitterDistance.ToString(CultureInfo.InvariantCulture);
             }
+        }
+
+        private AngularUnit? mShowStatusIn = null;
+
+        private void TranslateXY(int x, int y, out Measurement<AngularUnit> xAngular, out Measurement<AngularUnit> yAngular)
+        {
+            var xOffset = (pictureReticle.Size.Width - pictureReticle.Image.Size.Width) / 2;
+            var yOffset = (pictureReticle.Size.Height - pictureReticle.Image.Size.Height) / 2;
+            xAngular = Translate(x - xOffset, mImageX, Reticle.Size.X, Reticle.Zero.X, false);
+            yAngular = Translate(y - yOffset, mImageY, Reticle.Size.Y, Reticle.Zero.Y, true);
+
+            if (mShowStatusIn != null)
+            {
+                xAngular = xAngular.To(mShowStatusIn.Value);
+                yAngular = yAngular.To(mShowStatusIn.Value);
+            }
+
+        }
+
+        private void pictureReticle_MouseMove(object sender, MouseEventArgs e)
+        {
+            TranslateXY(e.X, e.Y, out var xAngular, out var yAngular);
+            statusX.Text = xAngular.ToString("N1", CultureInfo.InvariantCulture);
+            statusY.Text = yAngular.ToString("N1", CultureInfo.InvariantCulture);
+        }
+
+        private void pictureReticle_MouseLeave(object sender, EventArgs e)
+        {
+            statusX.Text = "";
+            statusY.Text = "";
+        }
+
+        private void statusAngularUnit_DropDownOpening(object sender, EventArgs e)
+        {
+            statusAngularUnitDefault.Checked = mShowStatusIn == null;
+            statusAngularUnitMOA.Checked = mShowStatusIn == AngularUnit.MOA;
+            statusAngularUnitMIL.Checked = mShowStatusIn == AngularUnit.Mil;
+            statusAngularUnitThousand.Checked = mShowStatusIn == AngularUnit.Thousand;
+        }
+
+        private void statusAngularUnitDefault_Click(object sender, EventArgs e)
+        {
+            mShowStatusIn = null;
+        }
+
+        private void statusAngularUnitMOA_Click(object sender, EventArgs e)
+        {
+            mShowStatusIn = AngularUnit.MOA;
+        }
+
+        private void statusAngularUnitMIL_Click(object sender, EventArgs e)
+        {
+            mShowStatusIn = AngularUnit.Mil;
+        }
+
+        private void statusAngularUnitThousand_Click(object sender, EventArgs e)
+        {
+            mShowStatusIn = AngularUnit.Thousand;
+        }
+
+        private void pictureReticle_MouseDown(object sender, MouseEventArgs e)
+        {
+            TranslateXY(e.X, e.Y, out var xAngular, out var yAngular);
+            statusArea.Text = $"{xAngular:N1}x{yAngular:N1}";
+        }
+
+        private static Measurement<AngularUnit> Translate(int linearUnit, int linearLimit, Measurement<AngularUnit> angularLimit, Measurement<AngularUnit> zeroOffset, bool revert)
+        {
+            return (((double)linearUnit) / ((double)linearLimit) * angularLimit - zeroOffset) * (revert ? -1 : 1);
         }
     }
 }
