@@ -3,8 +3,14 @@ using Gehtsoft.Measurements;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BallisticCalculatorNet.InputPanels
+namespace BallisticCalculatorNet.Api
 {
+    /// <summary>
+    /// The collection of winds
+    /// 
+    /// The collection must be sorted by the range in ascending order. 
+    /// The last wind should have maximum range equal to <code>null</code>.
+    /// </summary>
     public class WindCollection : IReadOnlyList<Wind>
     {
         private readonly List<Wind> mList = new List<Wind>();
@@ -25,7 +31,7 @@ namespace BallisticCalculatorNet.InputPanels
 
         public Wind[] ToShotParameters()
         {
-            if (mList.Count == 0 || 
+            if (mList.Count == 0 ||
                 mList.Count == 1 && mList[0].Velocity < 0.001.As(VelocityUnit.MetersPerSecond))
                 return null;
 

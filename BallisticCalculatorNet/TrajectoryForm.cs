@@ -1,4 +1,5 @@
 ﻿using BallisticCalculator;
+using BallisticCalculatorNet.Api;
 using BallisticCalculatorNet.Common;
 using BallisticCalculatorNet.InputPanels;
 using Gehtsoft.Measurements;
@@ -15,7 +16,7 @@ using System.Windows.Forms;
 
 namespace BallisticCalculatorNet
 {
-    public partial class TrajectoryForm : Form, ITrajectoryDisplayForm, IChartDisplayForm
+    public partial class TrajectoryForm : Form, IShotForm, IChartDisplayForm
     {
         private ShotData mShotData = null;
         private TrajectoryPoint[] mTrajectory;

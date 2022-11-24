@@ -1,4 +1,6 @@
-﻿namespace BallisticCalculatorNet.InputPanels
+﻿using BallisticCalculatorNet.Api;
+
+namespace BallisticCalculatorNet.InputPanels
 {
     public interface IMeasurementSystemControl
     {

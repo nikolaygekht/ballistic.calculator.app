@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BallisticCalculatorNet.Api;
 using BallisticCalculatorNet.Common;
 using BallisticCalculatorNet.InputPanels;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,8 @@ namespace BallisticCalculatorNet
         public static string ApplicationFolder { get; private set; }
 
         public static IConfiguration Configuration { get; private set; }
+
+        internal static ExtensionsManager ExtensionsManager { get; private set; }
 
         public static string DataFolder
         {
@@ -96,9 +99,8 @@ namespace BallisticCalculatorNet
             var datafolder = DataFolder;
             if (datafolder != null)
                 Configuration["datafolder"] = datafolder;
-            
-            ControlConfiguration.Configuration = Configuration;
-            ControlConfiguration.Logger = Logger;
+
+            ControlConfiguration.Initialize(Configuration, Logger);
         }
 
         /// <summary>
@@ -108,6 +110,8 @@ namespace BallisticCalculatorNet
         internal static void Main(string[] args)
         {
             Initialize(args);
+
+            ExtensionsManager = new ExtensionsManager();
 
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.Automatic);
             Application.ThreadException += ThreadExceptionHandler;
@@ -119,6 +123,8 @@ namespace BallisticCalculatorNet
             Application.Run(new AppForm());
 
             Configuration.SaveStateToFile(Path.Combine(ApplicationFolder, "ballisticCalculator.state.json"), "state");
+
+            ExtensionsManager.Dispose();
         }
 
         private static void ThreadExceptionHandler(object sender, ThreadExceptionEventArgs e)

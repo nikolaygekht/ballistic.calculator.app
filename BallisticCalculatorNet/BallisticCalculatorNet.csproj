@@ -17,6 +17,7 @@
   <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
  </ItemGroup>
  <ItemGroup>
+  <ProjectReference Include="..\BallisticCalculatorNet.Api\BallisticCalculatorNet.Api.csproj" />
   <ProjectReference Include="..\BallisticCalculatorNet.Common\BallisticCalculatorNet.Common.csproj" />
   <ProjectReference Include="..\BallisticCalculatorNet.MeasurementControl\BallisticCalculatorNet.MeasurementControl.csproj" />
   <ProjectReference Include="..\BallisticCalculatorNet.ReticleCanvas\BallisticCalculatorNet.ReticleCanvas.csproj" />

@@ -1,4 +1,5 @@
 ﻿using BallisticCalculator;
+using BallisticCalculatorNet.Api;
 using Gehtsoft.Measurements;
 using ScottPlot;
 using System;

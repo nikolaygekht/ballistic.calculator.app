@@ -1,5 +1,6 @@
 ﻿using BallisticCalculator;
 using BallisticCalculator.Reticle.Data;
+using BallisticCalculatorNet.Api;
 using Gehtsoft.Measurements;
 using System;
 using System.Collections.Generic;

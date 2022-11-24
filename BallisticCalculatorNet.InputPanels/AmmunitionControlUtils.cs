@@ -1,5 +1,6 @@
 ﻿using BallisticCalculator;
 using BallisticCalculator.Serialization;
+using BallisticCalculatorNet.Api;
 using System.Windows.Forms;
 
 namespace BallisticCalculatorNet.InputPanels

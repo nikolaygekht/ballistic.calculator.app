@@ -1,5 +1,8 @@
-﻿namespace BallisticCalculatorNet.InputPanels
+﻿namespace BallisticCalculatorNet.Api
 {
+    /// <summary>
+    /// The data displayed on the chart
+    /// </summary>
     public enum TrajectoryChartMode
     {
         Velocity,

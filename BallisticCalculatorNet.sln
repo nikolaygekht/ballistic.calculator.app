@@ -26,6 +26,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gehtsoft.Winforms.FluentAss
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BallisticCalculatorNet.InputPanels", "BallisticCalculatorNet.InputPanels\BallisticCalculatorNet.InputPanels.csproj", "{E42FE485-B98E-48C4-8DE3-6B4BBBFB856A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BallisticCalculatorNet.Api", "BallisticCalculatorNet.Api\BallisticCalculatorNet.Api.csproj", "{71F67FEE-71DF-4928-AE9A-E15BCC046295}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,13 +70,17 @@ Global
 		{E42FE485-B98E-48C4-8DE3-6B4BBBFB856A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E42FE485-B98E-48C4-8DE3-6B4BBBFB856A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E42FE485-B98E-48C4-8DE3-6B4BBBFB856A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71F67FEE-71DF-4928-AE9A-E15BCC046295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71F67FEE-71DF-4928-AE9A-E15BCC046295}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71F67FEE-71DF-4928-AE9A-E15BCC046295}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71F67FEE-71DF-4928-AE9A-E15BCC046295}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {88E6864F-6125-46F7-A705-6D81292F7984}
-		        SolutionGuid = {175DDDBA-66F7-4CE1-A5D6-21780054F9A4}
 		                SolutionGuid = {3B64E7C3-1B3F-4B52-BDBF-DBE060C82E75}
+		        SolutionGuid = {175DDDBA-66F7-4CE1-A5D6-21780054F9A4}
+		SolutionGuid = {88E6864F-6125-46F7-A705-6D81292F7984}
 	EndGlobalSection
 EndGlobal

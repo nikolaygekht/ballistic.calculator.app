@@ -14,6 +14,7 @@ using Xunit;
 using System.Windows.Forms;
 using System.Globalization;
 using Moq;
+using BallisticCalculatorNet.Api;
 
 namespace BallisticCalculatorNet.UnitTest.OutputPanels
 {
@@ -92,7 +93,7 @@ namespace BallisticCalculatorNet.UnitTest.OutputPanels
             var config = (new ConfigurationBuilder())
                 .AddCommandLine(Array.Empty<string>()).Build();
 
-            ControlConfiguration.Configuration = config;
+            ControlConfiguration.Initialize(config, null);
             var ctrl = new TrajectoryControl();
             var list = ctrl.ListView("listView");
 
@@ -146,7 +147,7 @@ namespace BallisticCalculatorNet.UnitTest.OutputPanels
                     "state:trajectory:column:12=120",
                 }).Build();
 
-            ControlConfiguration.Configuration = config;
+            ControlConfiguration.Initialize(config, null);
             var ctrl = new TrajectoryControl();
             var list = ctrl.ListView("listView");
 

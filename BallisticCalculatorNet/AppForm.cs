@@ -14,10 +14,11 @@ using BallisticCalculatorNet.Utils;
 using Gehtsoft.Measurements;
 using System.Xml;
 using System.IO;
+using BallisticCalculatorNet.Api;
 
 namespace BallisticCalculatorNet
 {
-    public partial class AppForm : Form
+    public partial class AppForm : Form, IExtensionHost
     {
         public AppForm()
         {
@@ -75,6 +76,31 @@ namespace BallisticCalculatorNet
             menuWindowsCascade.Click += (_, _) => this.LayoutMdi(MdiLayout.Cascade);
 
             menuHelpAbout.Click += (_, _) => About();
+
+            if (Program.ExtensionsManager.Commands.Count == 0)
+                menuMain.Items.Remove(menuExtensions);
+            else
+            {
+                menuExtensions.DropDownItems.Clear();
+                for (int i = 0; i < Program.ExtensionsManager.Commands.Count; i++)
+                {
+                    var command = Program.ExtensionsManager.Commands[i];
+                    var item = new ToolStripMenuItem()
+                    {
+                        Name = $"extension{i}",
+                        Text = command.DisplayName,
+                        Size = new System.Drawing.Size(227, 34)
+                    };
+
+                    item.Click += (_, _) =>
+                    {
+                        using var executor = command.Create();
+                        executor.Execute(this);
+                    };
+                    
+                    menuExtensions.DropDownItems.Add(item);
+                }
+            }
         }
 
         private void UpdateMenus()
@@ -349,6 +375,16 @@ namespace BallisticCalculatorNet
         {
             var compareForm = GetCompareForm();
             compareForm?.RemoveLast();
+        }
+
+        object IExtensionHost.ActiveForm()
+        {
+            return this.ActiveMdiChild;
+        }
+
+        object[] IExtensionHost.AllForms()
+        {
+            return MdiChildren.ToArray();
         }
     }
 }

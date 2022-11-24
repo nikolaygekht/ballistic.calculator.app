@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BallisticCalculator;
+using BallisticCalculatorNet.Api;
 using BallisticCalculatorNet.InputPanels;
 using BallisticCalculatorNet.MeasurementControl;
 using BallisticCalculatorNet.UnitTest.Utils;

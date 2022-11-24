@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using BallisticCalculator;
 using BallisticCalculator.Data.Dictionary;
 using BallisticCalculator.Serialization;
+using BallisticCalculatorNet.Api;
 using Gehtsoft.Measurements;
 
 namespace BallisticCalculatorNet.InputPanels

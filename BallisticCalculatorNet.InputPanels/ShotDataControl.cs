@@ -1,4 +1,5 @@
 ﻿using BallisticCalculator;
+using BallisticCalculatorNet.Api;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

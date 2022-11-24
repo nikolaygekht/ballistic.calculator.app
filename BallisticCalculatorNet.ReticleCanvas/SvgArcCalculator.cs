@@ -45,6 +45,7 @@ namespace BallisticCalculator.Reticle.Graphics
         {
             /*
              *	This algorithm is taken from the Batik source. All cudos to the Batik crew.
+	     *  https://xmlgraphics.apache.org/batik/
              */
             PointF startPoint = new PointF(mX1, mY1);
             PointF endPoint = new PointF(mX2, mY2);

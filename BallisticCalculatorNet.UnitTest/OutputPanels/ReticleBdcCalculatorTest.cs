@@ -9,6 +9,7 @@ using BallisticCalculator.Reticle.Data;
 using BallisticCalculatorNet.UnitTest.Tools;
 using BallisticCalculator.Reticle;
 using Moq;
+using BallisticCalculatorNet.Api;
 
 namespace BallisticCalculatorNet.UnitTest.OutputPanels
 {
