@@ -28,6 +28,22 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
 
             comboBoxColor.FillByColors();
             comboBoxColor.Text = text.Color;
+
+            switch (text.Anchor)
+            {
+                case null:
+                    comboBoxAlignment.SelectedIndex = 0;
+                    break;
+                case TextAnchor.Left:
+                    comboBoxAlignment.SelectedIndex = 1;
+                    break;
+                case TextAnchor.Center:
+                    comboBoxAlignment.SelectedIndex = 2;
+                    break;
+                case TextAnchor.Right:
+                    comboBoxAlignment.SelectedIndex = 3;
+                    break;
+            }
         }
 
         internal void Save()
@@ -37,6 +53,21 @@ namespace BallisticCalculatorNet.ReticleEditor.Forms
             ReticleText.TextHeight = measurementH.ValueAsMeasurement<AngularUnit>();
             ReticleText.Text = textBox.Text;
             ReticleText.Color = comboBoxColor.Text;
+            switch (comboBoxAlignment.SelectedIndex)
+            {
+                case 1:
+                    ReticleText.Anchor = TextAnchor.Left;
+                    break;
+                case 2:
+                    ReticleText.Anchor = TextAnchor.Center;
+                    break;
+                case 3:
+                    ReticleText.Anchor = TextAnchor.Right;
+                    break;
+                default:
+                    ReticleText.Anchor = null;
+                    break;
+            }
         }
 
         private void buttonOK_Click(object sender, EventArgs e)

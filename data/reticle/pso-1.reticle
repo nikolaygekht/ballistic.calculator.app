@@ -32,8 +32,8 @@
     <reticle-line start-x="-8mil" start-y="0mil" end-x="-8mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
     <reticle-line start-x="-9mil" start-y="0mil" end-x="-9mil" end-y="-1mil" line-width="0.2mil" line-color="black" />
     <reticle-line start-x="-10mil" start-y="0mil" end-x="-10mil" end-y="-2mil" line-width="0.2mil" line-color="black" />
-    <reticle-text position-x="-11.5mil" position-y="-4mil" text-height="2mil" text="10" text-color="black" />
-    <reticle-text position-x="8.5mil" position-y="-4mil" text-height="2mil" text="10" text-color="black" />
+    <reticle-text position-x="-10mil" position-y="-4mil" text-height="2mil" text="10" anchor="Center" text-color="black" />
+    <reticle-text position-x="10mil" position-y="-4mil" text-height="2mil" text="10" anchor="Center" text-color="black" />
   </elements>
   <bdc>
     <bdc position-x="0mil" position-y="-3.4mil" text-offset="0.5mil" text-height="1.5mil" />

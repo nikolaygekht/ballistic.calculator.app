@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BallisticCalculator" Version="1.1.1" />
+    <PackageReference Include="BallisticCalculator" Version="1.1.2" />
     <PackageReference Include="Gehtsoft.Measurements" Version="1.1.14" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
     <PackageReference Include="ScottPlot.WinForms" Version="4.1.59" />
