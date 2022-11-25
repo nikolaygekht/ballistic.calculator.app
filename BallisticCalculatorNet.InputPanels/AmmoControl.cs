@@ -47,6 +47,8 @@ namespace BallisticCalculatorNet.InputPanels
                     BulletDiameter = !measurementDiameter.IsEmpty ? measurementDiameter.ValueAsMeasurement<DistanceUnit>() : null,
                     BulletLength = !measurementLength.IsEmpty ? measurementLength.ValueAsMeasurement<DistanceUnit>() : null,
                 };
+                if (!string.IsNullOrEmpty(textBoxCustomBallistic.Text))
+                    ammo.CustomTableFileName = textBoxCustomBallistic.Text;
                 return ammo;
             }
             set
@@ -59,6 +61,7 @@ namespace BallisticCalculatorNet.InputPanels
                     checkBoxFormFactor.Checked = false;
                     measurementDiameter.Value = null;
                     measurementLength.Value = null;
+                    textBoxCustomBallistic.Text = "";
                 }
                 else
                 {
@@ -71,6 +74,10 @@ namespace BallisticCalculatorNet.InputPanels
                     else
                         measurementDiameter.Value = value.BulletDiameter;
                     measurementLength.Value = value.BulletLength;
+                    if (!string.IsNullOrEmpty(value.CustomTableFileName))
+                        textBoxCustomBallistic.Text = value.CustomTableFileName;
+                    else
+                        textBoxCustomBallistic.Text = "";
                 }
             }
         }
@@ -161,6 +168,15 @@ namespace BallisticCalculatorNet.InputPanels
             dlg.AddFilter("drg", "Custom Drag Table");
             dlg.CheckFileExists = true;
             dlg.DefaultExtension = "drg";
+            if (ControlConfiguration.Configuration != null &&
+                ControlConfiguration.Configuration["datafolder"] != null)
+            {
+                dlg.InitialDirectory = ControlConfiguration.Configuration["datafolder"];
+                dlg.RestoreDirectory = false;
+            }
+            else
+                dlg.RestoreDirectory = true;
+            
             if (dlg.AskName(this))
             {
                 try
