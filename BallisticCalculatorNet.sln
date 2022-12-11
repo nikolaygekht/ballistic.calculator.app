@@ -8,9 +8,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BallisticCalculatorNet.MeasurementControl", "BallisticCalculatorNet.MeasurementControl\BallisticCalculatorNet.MeasurementControl.csproj", "{F989ACF7-BF67-4F76-BF75-2EF8D0C8B2C6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AEC2804A-98EC-4047-A466-9D4ACCC382F9}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BallisticCalculatorNet", "BallisticCalculatorNet\BallisticCalculatorNet.csproj", "{FC316B6C-97E2-4B04-B83F-1F06CCA42584}"
 EndProject
@@ -27,6 +24,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BallisticCalculatorNet.InputPanels", "BallisticCalculatorNet.InputPanels\BallisticCalculatorNet.InputPanels.csproj", "{E42FE485-B98E-48C4-8DE3-6B4BBBFB856A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BallisticCalculatorNet.Api", "BallisticCalculatorNet.Api\BallisticCalculatorNet.Api.csproj", "{71F67FEE-71DF-4928-AE9A-E15BCC046295}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{0083D7BC-4756-4C14-B1DB-223A68E66C34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{DF0F0E2B-CD12-4066-BB25-399E2CB3B35E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{2E8F2FB9-85C1-4A31-B307-72788C16571E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,9 +81,21 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2FBDAA0A-7947-4C61-92D7-F5282462C28F} = {DF0F0E2B-CD12-4066-BB25-399E2CB3B35E}
+		{F989ACF7-BF67-4F76-BF75-2EF8D0C8B2C6} = {DF0F0E2B-CD12-4066-BB25-399E2CB3B35E}
+		{FC316B6C-97E2-4B04-B83F-1F06CCA42584} = {DF0F0E2B-CD12-4066-BB25-399E2CB3B35E}
+		{B40EB7B3-729A-4BDE-9BE9-C85A7F3FE573} = {DF0F0E2B-CD12-4066-BB25-399E2CB3B35E}
+		{741A6A09-0B46-453C-A48A-E0912A2E2F57} = {DF0F0E2B-CD12-4066-BB25-399E2CB3B35E}
+		{A5CFA404-B5A5-4061-9E82-7E64F403AD20} = {DF0F0E2B-CD12-4066-BB25-399E2CB3B35E}
+		{59494094-2EDB-4CCA-A80A-81D7322BAFCE} = {2E8F2FB9-85C1-4A31-B307-72788C16571E}
+		{D0ACF118-057E-4F33-A863-5E2C01B283B7} = {2E8F2FB9-85C1-4A31-B307-72788C16571E}
+		{E42FE485-B98E-48C4-8DE3-6B4BBBFB856A} = {DF0F0E2B-CD12-4066-BB25-399E2CB3B35E}
+		{71F67FEE-71DF-4928-AE9A-E15BCC046295} = {DF0F0E2B-CD12-4066-BB25-399E2CB3B35E}
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		                SolutionGuid = {3B64E7C3-1B3F-4B52-BDBF-DBE060C82E75}
-		        SolutionGuid = {175DDDBA-66F7-4CE1-A5D6-21780054F9A4}
-		SolutionGuid = {88E6864F-6125-46F7-A705-6D81292F7984}
+		                        SolutionGuid = {3B64E7C3-1B3F-4B52-BDBF-DBE060C82E75}
+		                SolutionGuid = {175DDDBA-66F7-4CE1-A5D6-21780054F9A4}
+		        SolutionGuid = {88E6864F-6125-46F7-A705-6D81292F7984}
 	EndGlobalSection
 EndGlobal

@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Api.Interop;
 using BallisticCalculatorNet.Common;
 using BallisticCalculatorNet.InputPanels;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +23,8 @@ namespace BallisticCalculatorNet
         public static string ApplicationFolder { get; private set; }
 
         public static IConfiguration Configuration { get; private set; }
+
+        private static InteropServer gInteropServer;
 
         internal static ExtensionsManager ExtensionsManager { get; private set; }
 
@@ -120,10 +123,23 @@ namespace BallisticCalculatorNet
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AppForm());
+            var form = new AppForm();
+            if (ExtensionsManager.Commands.Count > 0)
+            {
+                var s = Configuration["interop:port"];
+                if (s == null || !int.TryParse(s, out var port))
+                    port = 32800;
+                gInteropServer = new InteropServer(form, port);
+                gInteropServer.Start();
+            }
+            Application.Run(form);
 
             Configuration.SaveStateToFile(Path.Combine(ApplicationFolder, "ballisticCalculator.state.json"), "state");
-
+            if (gInteropServer != null && gInteropServer.Started)
+            {
+                gInteropServer.Stop();
+                gInteropServer.Dispose();
+            }
             ExtensionsManager.Dispose();
         }
 

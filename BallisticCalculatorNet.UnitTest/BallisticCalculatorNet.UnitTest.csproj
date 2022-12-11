@@ -40,6 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BallisticCalculatorNet.Api\BallisticCalculatorNet.Api.csproj" />
     <ProjectReference Include="..\BallisticCalculatorNet.Common\BallisticCalculatorNet.Common.csproj" />
     <ProjectReference Include="..\BallisticCalculatorNet.InputPanels\BallisticCalculatorNet.InputPanels.csproj" />
     <ProjectReference Include="..\BallisticCalculatorNet.MeasurementControl\BallisticCalculatorNet.MeasurementControl.csproj" />

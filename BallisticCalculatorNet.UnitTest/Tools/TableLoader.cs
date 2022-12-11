@@ -22,7 +22,7 @@ namespace BallisticCalculatorNet.UnitTest.Tools
 
         public static TableLoader FromResource(string name)
         {
-            using Stream stream = typeof(TableLoader).Assembly.GetManifestResourceStream($"BallisticCalculator.Test.resources.{name}.txt");
+            using Stream stream = typeof(TableLoader).Assembly.GetManifestResourceStream($"BallisticCalculatorNet.UnitTest.Resources.{name}.txt");
             return new TableLoader(stream);
         }
 

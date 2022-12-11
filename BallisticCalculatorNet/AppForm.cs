@@ -15,10 +15,12 @@ using Gehtsoft.Measurements;
 using System.Xml;
 using System.IO;
 using BallisticCalculatorNet.Api;
+using System.Diagnostics;
+using BallisticCalculatorNet.Api.Interop;
 
 namespace BallisticCalculatorNet
 {
-    public partial class AppForm : Form, IExtensionHost
+    public partial class AppForm : Form, IInteropServerHost
     {
         public AppForm()
         {
@@ -94,8 +96,7 @@ namespace BallisticCalculatorNet
 
                     item.Click += (_, _) =>
                     {
-                        using var executor = command.Create();
-                        executor.Execute(this);
+                        ExecuteCommnad(command.ID, command.ExecutablePath);
                     };
                     
                     menuExtensions.DropDownItems.Add(item);
@@ -377,14 +378,12 @@ namespace BallisticCalculatorNet
             compareForm?.RemoveLast();
         }
 
-        object IExtensionHost.ActiveForm()
+        private void ExecuteCommnad(string commandId, string executablePath)
         {
-            return this.ActiveMdiChild;
+            var startInfo = new ProcessStartInfo(executablePath, commandId);
+            Process.Start(startInfo);
         }
 
-        object[] IExtensionHost.AllForms()
-        {
-            return MdiChildren.ToArray();
-        }
+        object IInteropServerHost.MdiActiveWindow => ActiveMdiChild;
     }
 }

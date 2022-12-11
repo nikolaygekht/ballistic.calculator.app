@@ -5,47 +5,59 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using static BallisticCalculatorNet.ExtensionsManager;
 
 namespace BallisticCalculatorNet
 {
     internal sealed class ExtensionsManager : IDisposable
     {
-        private readonly List<IExtensionFactory> mFactories = new();
-        private readonly List<IExtensionCommandMetadata> mCommands = new();
+        public class ExtensionCommand
+        {
+            public string ID { get; init; }
+            public string DisplayName { get; init; }
+            public string ExecutablePath { get; init; }
+        }
 
-        public IReadOnlyList<IExtensionCommandMetadata> Commands => mCommands;
+        private readonly List<ExtensionCommand> mCommands = new();
+
+        public IReadOnlyList<ExtensionCommand> Commands => mCommands;
 
         public ExtensionsManager()
         {
             var path = new FileInfo(Assembly.GetExecutingAssembly().Location);
-            var dir = path.DirectoryName;
-            var extensionsRoot = Path.Combine(dir, "extensions");
-            if (Directory.Exists(extensionsRoot))
+            var extensionDirectory = Path.Combine(path.DirectoryName, "extensions");
+
+            if (!Directory.Exists(extensionDirectory))
+                return;
+
+            foreach (var dir in Directory.GetDirectories(extensionDirectory))
             {
-                var extenionsDirectories = Directory.GetDirectories(extensionsRoot);
-                foreach (var extensionDirectory in extenionsDirectories)
+                var configPath = Path.Combine(dir, "extension.json");
+                if (File.Exists(configPath))
                 {
-                    var di = new DirectoryInfo(extensionDirectory);
-                    var dllPath = Path.Combine(di.FullName, di.Name + ".dll");
                     try
                     {
-                        if (File.Exists(dllPath))
+                        var config = JsonSerializer.Deserialize<ExtensionConfig>(File.ReadAllText(configPath));
+                        if (config == null)
+                            throw new ArgumentNullException("Configuration isn't parsed");
+                        var executablePath = Path.Combine(dir, config.ExecutableName);
+                        if (!File.Exists(executablePath))
+                            throw new FileNotFoundException($"File {executablePath} is not found");
+                        foreach (var command in config.Commands)
                         {
-                            var assembly = Assembly.Load(dllPath);
-                            var types = assembly.GetTypes();
-                            foreach (var type in types.Where(t => typeof(IExtensionFactory).IsAssignableFrom(t)))
+                            mCommands.Add(new ExtensionCommand
                             {
-                                var factory = (IExtensionFactory)Activator.CreateInstance(type);
-                                mFactories.Add(factory);
-                                var commands = factory.GetCommands();
-                                mCommands.AddRange(commands);
-                            }
+                                ID = command.ID,
+                                DisplayName = command.DisplayName,
+                                ExecutablePath = executablePath
+                            });
                         }
                     }
                     catch (Exception e)
                     {
-                        Program.Logger.Error(e, "Can't load extension {extension}", dllPath);
+                        Program.Logger?.Error(e, "Can't load extension specification {0}", configPath);
                     }
                 }
             }
@@ -53,8 +65,7 @@ namespace BallisticCalculatorNet
 
         public void Dispose()
         {
-            for (int i = 0; i < mFactories.Count; i++)
-                mFactories[i].Dispose();
+            //nothing to dispose in this implementation
         }
     }
 }
