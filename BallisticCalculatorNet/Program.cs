@@ -124,14 +124,14 @@ namespace BallisticCalculatorNet
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var form = new AppForm();
-            if (ExtensionsManager.Commands.Count > 0)
-            {
+            //if (ExtensionsManager.Commands.Count > 0)
+            //{
                 var s = Configuration["interop:port"];
                 if (s == null || !int.TryParse(s, out var port))
                     port = 32800;
                 gInteropServer = new InteropServer(form, port);
                 gInteropServer.Start();
-            }
+            //}
             Application.Run(form);
 
             Configuration.SaveStateToFile(Path.Combine(ApplicationFolder, "ballisticCalculator.state.json"), "state");

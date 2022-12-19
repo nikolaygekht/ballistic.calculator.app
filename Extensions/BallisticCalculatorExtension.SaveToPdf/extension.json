@@ -1,0 +1,12 @@
+{
+  "id": "BallisticCalculatorExtension.SaveToPdf",
+  "displayName": "Save Trajectory to PDF",
+  "executableName": "BallisticCalculatorExtension.SaveToPdf.exe",
+  "commands": [
+    {
+      "id": "save",
+      "displayName": "Save To PDF"
+    }
+  ]
+    
+}

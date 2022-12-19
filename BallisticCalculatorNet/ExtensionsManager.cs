@@ -41,7 +41,7 @@ namespace BallisticCalculatorNet
                     {
                         var config = JsonSerializer.Deserialize<ExtensionConfig>(File.ReadAllText(configPath));
                         if (config == null)
-                            throw new ArgumentNullException("Configuration isn't parsed");
+                            throw new InvalidOperationException($"Configuration {configPath} isn't parsed");
                         var executablePath = Path.Combine(dir, config.ExecutableName);
                         if (!File.Exists(executablePath))
                             throw new FileNotFoundException($"File {executablePath} is not found");

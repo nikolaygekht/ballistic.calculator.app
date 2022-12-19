@@ -46,8 +46,6 @@ namespace BallisticCalculatorNet.UnitTest.Interop
             server.Start();
             WaitFor(100, () => server.Started).Should().BeTrue();
 
-            bool connected = false;
-
             using var client = new InteropClient("127.0.0.1", 31559);
             client.Connect();
             WaitFor(100, () => client.Connected).Should().BeTrue();
@@ -94,8 +92,6 @@ namespace BallisticCalculatorNet.UnitTest.Interop
             using var server = new InteropServer(host.Object, 31559);
             server.Start();
             WaitFor(100, () => server.Started).Should().BeTrue();
-
-            bool connected = false;
 
             using var client = new InteropClient("127.0.0.1", 31559);
             client.Connect();

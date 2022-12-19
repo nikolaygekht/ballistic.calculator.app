@@ -96,7 +96,7 @@ namespace BallisticCalculatorNet
 
                     item.Click += (_, _) =>
                     {
-                        ExecuteCommnad(command.ID, command.ExecutablePath);
+                        ExecuteCommand(command.ID, command.ExecutablePath);
                     };
                     
                     menuExtensions.DropDownItems.Add(item);
@@ -378,7 +378,7 @@ namespace BallisticCalculatorNet
             compareForm?.RemoveLast();
         }
 
-        private void ExecuteCommnad(string commandId, string executablePath)
+        private void ExecuteCommand(string commandId, string executablePath)
         {
             var startInfo = new ProcessStartInfo(executablePath, commandId);
             Process.Start(startInfo);
