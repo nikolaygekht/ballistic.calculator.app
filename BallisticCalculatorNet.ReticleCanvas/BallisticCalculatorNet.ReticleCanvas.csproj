@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net60-windows</TargetFramework>
+    <TargetFramework>net80-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="BallisticCalculator" Version="1.1.2" />
     <PackageReference Include="Gehtsoft.Measurements" Version="1.1.14" />
-    <PackageReference Include="System.Text.Json" Version="7.0.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.3" />
   </ItemGroup>
 
 </Project>

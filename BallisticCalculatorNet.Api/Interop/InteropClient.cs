@@ -2,6 +2,7 @@
 using System;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 using System.Xml;
 using WatsonTcp;
 
@@ -28,14 +29,16 @@ namespace BallisticCalculatorNet.Api.Interop
         
         public void Disconnect() => mClient.Disconnect();
 
-        public void RequestTrajectory()
+        public void RequestTrajectory() => RequestTrajectoryAsync().ConfigureAwait(true).GetAwaiter().GetResult(); 
+
+        public async Task RequestTrajectoryAsync()
         {
             var message = new InteropMessage()
             {
                 Command = "GetTrajectory"
             };
             var json = JsonSerializer.Serialize(message);
-            mClient.Send(Encoding.UTF8.GetBytes(json));
+            await mClient.SendAsync(Encoding.UTF8.GetBytes(json));
         }
 
         private void ServerConnected(object sender, ConnectionEventArgs args)

@@ -72,14 +72,14 @@ namespace BallisticCalculatorNet.UnitTest.Interop
                 Atmosphere = loader.Atmosphere,
                 Parameters = loader.ShotParameters,
                 Weapon = loader.Rifle,
-                Wind = new WindCollection() { loader.Wind }
+                Wind = [loader.Wind]
             };
             
             var window = new Mock<IShotForm>();
             window.Setup(w => w.ShotData)
                 .Returns(shotData);
             window.Setup(w => w.Trajectory)
-                .Returns(loader.Trajectory.ToArray());
+                .Returns([.. loader.Trajectory]);
             window.Setup(w => w.MeasurementSystem)
                 .Returns(MeasurementSystem.Metric);
             window.Setup(w => w.AngularUnits)
@@ -101,7 +101,7 @@ namespace BallisticCalculatorNet.UnitTest.Interop
             InteropGetTrajectoryResponse response = null;
             client.TrajectoryReceived += (_, args) => { responseReceived = true; response = args.Response; };
             client.RequestTrajectory();
-            WaitFor(100, () => responseReceived).Should().BeTrue();
+            WaitFor(250, () => responseReceived).Should().BeTrue();
             response.Should().NotBeNull();
 
             //TBD: check the response

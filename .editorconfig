@@ -32,3 +32,6 @@ dotnet_diagnostic.IDE1006.severity = none
 
 # S4136: Method overloads should be grouped together
 dotnet_diagnostic.S4136.severity = none
+
+# VSSpell001
+dotnet_diagnostic.VSSpell001.severity = none

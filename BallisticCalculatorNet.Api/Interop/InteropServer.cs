@@ -1,8 +1,10 @@
 ﻿using BallisticCalculator.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 using WatsonTcp;
 
 namespace BallisticCalculatorNet.Api.Interop
@@ -28,7 +30,16 @@ namespace BallisticCalculatorNet.Api.Interop
         {
             if (mServer.IsListening)
                 mServer.Stop();
-            mServer.Dispose();
+            try
+            {
+                mServer.Dispose();
+            }
+            catch (AggregateException e)
+            {
+                if (e.InnerExceptions.All(x => x is TaskCanceledException))
+                    return;
+                throw;
+            }
         }
 
         private void MessageReceived(object sender, MessageReceivedEventArgs args)
@@ -48,17 +59,16 @@ namespace BallisticCalculatorNet.Api.Interop
         private void ProcessMessageGetTrajectory(Guid client)
         {
             InteropMessage message;
-            
-            var mdiWindow = mHost.MdiActiveWindow as IShotForm;
-            
-            if (mdiWindow == null)
+
+
+            if (mHost.MdiActiveWindow is not IShotForm mdiWindow)
             {
                 message = new InteropMessage
                 {
                     Command = "GetTrajectory",
                     Argument = "NONE",
                 };
-                mServer.Send(client, Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message)));
+                mServer.SendAsync(client, Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message))).ConfigureAwait(false).GetAwaiter().GetResult();
                 return;
             }
 
@@ -79,7 +89,7 @@ namespace BallisticCalculatorNet.Api.Interop
                 Data1 = serializer.Serialize(response).OuterXml,
             };
 
-            mServer.Send(client, Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message)));
+            mServer.SendAsync(client, Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message))).ConfigureAwait(false).GetAwaiter().GetResult();
         }
     }
 }
