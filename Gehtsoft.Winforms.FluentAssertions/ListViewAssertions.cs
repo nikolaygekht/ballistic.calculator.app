@@ -10,13 +10,13 @@ namespace Gehtsoft.Winforms.FluentAssertions
 {
     public class ListViewAssertions : ControlAssertionsBase<ListView, ListViewAssertions>
     {
-        public ListViewAssertions(ListView subject) : base(subject)
+        public ListViewAssertions(ListView subject, AssertionChain chain) : base(subject, chain)
         {
         }
 
         public AndConstraint<ListViewAssertions> HaveNotItems(string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lv => lv.Items.Count == 0)
@@ -27,7 +27,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ListViewAssertions> HaveItems(string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lv => lv.Items.Count != 0)
@@ -38,7 +38,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ListViewAssertions> HaveItem(Func<ListViewItem, bool> predicate, string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lv =>
@@ -54,7 +54,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ListViewAssertions> BeInViewMode(View viewMode, string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lv => lv.View == viewMode)
@@ -65,7 +65,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ListViewAssertions> HaveNoSelection(string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lv =>
@@ -82,7 +82,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ListViewAssertions> HaveItemSelected(Func<ListViewItem, int, bool> predicate, string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lv =>
@@ -98,7 +98,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ListViewAssertions> HaveItemsInOrder(Func<ListViewItem, ListViewItem, bool> predicate, string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lv =>

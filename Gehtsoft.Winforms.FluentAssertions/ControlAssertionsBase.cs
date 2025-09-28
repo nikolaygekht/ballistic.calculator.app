@@ -12,15 +12,18 @@ namespace Gehtsoft.Winforms.FluentAssertions
         where T1 : ControlAssertionsBase<T, T1>
 
     {
-        public ControlAssertionsBase(T subject) : base(subject)
+        protected AssertionChain mChain;
+
+        public ControlAssertionsBase(T subject, AssertionChain chain) : base(subject, chain)
         {
+            mChain = chain;
         }
 
         protected override string Identifier => "control";
 
         public AndConstraint<T1> HaveControl(string name, Type type, string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(control => control.Control(name, type) != null)
@@ -36,7 +39,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<T1> Exist(string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                   .BecauseOf(because, becauseParameters)
                   .Given(() => Subject)
                   .ForCondition(control => control != null)
@@ -47,7 +50,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<T1> HaveType(Type type, string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                   .BecauseOf(because, becauseParameters)
                   .Given(() => Subject)
                   .ForCondition(control => control != null)
@@ -65,7 +68,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
         public AndConstraint<T1> MatchAs<TC>(Expression<Func<TC, bool>> predicate, string because = null, params object[] becauseParameters)
             where TC : Control
         {
-            Execute.Assertion
+            mChain
                   .BecauseOf(because, becauseParameters)
                   .Given(() => Subject)
                   .ForCondition(control => control != null)
@@ -78,7 +81,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<T1> BeEnabled(bool enabled = true, string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                    .BecauseOf(because, becauseParameters)
                    .Given(() => Subject)
                    .ForCondition(control => control != null)
@@ -94,7 +97,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<T1> HaveText(string text, string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                    .BecauseOf(because, becauseParameters)
                    .Given(() => Subject)
                    .ForCondition(control => control != null)
@@ -108,7 +111,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<T1> BeBefore(Control otherControl, string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                               .BecauseOf(because, becauseParameters)
                               .Given(() => Subject)
                               .ForCondition(control => control != null && otherControl != null)
@@ -128,7 +131,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<T1> BeImmediatelyBefore(Control otherControl, string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                               .BecauseOf(because, becauseParameters)
                               .Given(() => Subject)
                               .ForCondition(control => control != null && otherControl != null)
@@ -148,7 +151,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<T1> BeAfter(Control otherControl, string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                               .BecauseOf(because, becauseParameters)
                               .Given(() => Subject)
                               .ForCondition(control => control != null && otherControl != null)
@@ -168,7 +171,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<T1> BeImmediatelyAfter(Control otherControl, string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                               .BecauseOf(because, becauseParameters)
                               .Given(() => Subject)
                               .ForCondition(control => control != null && otherControl != null)

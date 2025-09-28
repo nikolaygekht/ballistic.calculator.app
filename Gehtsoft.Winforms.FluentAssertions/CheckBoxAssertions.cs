@@ -6,7 +6,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 {
     public class CheckBoxAssertions : ControlAssertionsBase<CheckBox, CheckBoxAssertions>
     {
-        public CheckBoxAssertions(CheckBox subject) : base(subject)
+        public CheckBoxAssertions(CheckBox subject, AssertionChain chain) : base(subject, chain)
         {
         }
 
@@ -14,7 +14,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<CheckBoxAssertions> BeChecked(string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(cb => cb.Checked)
@@ -25,7 +25,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<CheckBoxAssertions> BeNotChecked(string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(cb => !cb.Checked)

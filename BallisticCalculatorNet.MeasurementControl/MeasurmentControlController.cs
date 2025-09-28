@@ -100,9 +100,11 @@ namespace BallisticCalculatorNet.MeasurementControl
             return sb.ToString();
         }
 
-        public object Value(string text, object unit)
+        public object Value(string text, object unit, int? accuracy)
         {
             double v = ParseNumericPart(text);
+            if (accuracy != null)
+                v = Math.Round(v, accuracy.Value);
 
             object u = ((MeasurementUtility.Unit)unit).Value;
             return mMeasurementUtility.Activator(v, u);

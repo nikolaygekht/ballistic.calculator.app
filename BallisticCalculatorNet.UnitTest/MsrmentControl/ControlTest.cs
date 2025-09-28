@@ -113,7 +113,7 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
             if (control.MeasurementType == MeasurementType.BallisticCoefficient)
                 control.Value.Should().BeOfType(typeof(BallisticCoefficient));
             else
-                control.Value.Should().BeOfType(typeof(Measurement<>).MakeGenericType(new Type[] { unitType }));
+                control.Value.Should().BeOfType(typeof(Measurement<>).MakeGenericType(unitType));
 
             var unitPart = control.ComboBox("UnitPart");
 
@@ -304,7 +304,7 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
             control.UnitAs<T>().Should().Be(targetUnit);
             control.TextBox("NumericPart").Text.Should().Be(convertedValue.ToString());
             //change back to initial value
-            control.ChangeUnit(initialUnit, null);
+            control.ChangeUnit(initialUnit, accurracy);
             control.Value.Should().Be(new Measurement<T>(initialValue, initialUnit));
         }
 
@@ -326,6 +326,7 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
         }
 
         [Theory]
+        [InlineData(1, 1, DragTableId.G1, "1")]
         [InlineData(3, 0.365, DragTableId.G1, "0.365")]
         [InlineData(3, 0.3651, DragTableId.G1, "0.365")]
         [InlineData(3, 0.225, DragTableId.G7, "0.225")]
@@ -338,9 +339,6 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
 
             control.Value = new BallisticCoefficient(value, table);
             control.TextValue.Should().Be(textValue + table.ToString());
-
-            control.Value = new BallisticCoefficient(1, DragTableId.G1);
-            control.TextValue.Should().Be("1G1");
 
             control.TextValue = textValue + table.ToString();
             control.ValueAs<BallisticCoefficient>().Should().Be(new BallisticCoefficient(double.Parse(textValue), table));

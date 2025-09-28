@@ -67,9 +67,11 @@ namespace BallisticCalculatorNet
                 chartControl.Trajectory = trajectory;
                 reticleControl.ShotData = mShotData;
 
-                Text = string.IsNullOrEmpty(mShotData.Ammunition.Name) ? 
+                var t = string.IsNullOrEmpty(mShotData.Ammunition.Name) ? 
                             $"Trajectory: New ammunition"
                           : $"Trajectory: {mShotData.Ammunition.Name}";
+                t += string.Format("({0}:{1}@{2})", mShotData.Ammunition.Ammunition.Weight, mShotData.Ammunition.Ammunition.BallisticCoefficient, mShotData.Ammunition.Ammunition.MuzzleVelocity);
+                Text = t;
             }
         }
 

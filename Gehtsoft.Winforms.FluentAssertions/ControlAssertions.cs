@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using FluentAssertions.Execution;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 {
     public class ControlAssertions : ControlAssertionsBase<Control, ControlAssertions>
     {
-        public ControlAssertions(Control subject) : base(subject)
+        public ControlAssertions(Control subject, AssertionChain chain) : base(subject, chain)
         {
         }
     }

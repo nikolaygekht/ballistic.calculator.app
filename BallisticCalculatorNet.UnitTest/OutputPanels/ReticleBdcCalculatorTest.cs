@@ -222,7 +222,7 @@ namespace BallisticCalculatorNet.UnitTest.OutputPanels
             calculator.Points[3].Distance.In(DistanceUnit.Yard).Should().BeApproximately(31, 0.9);
             calculator.Points[4].Distance.In(DistanceUnit.Yard).Should().BeApproximately(255, 4);
             calculator.Points[5].Distance.In(DistanceUnit.Yard).Should().BeApproximately(355, 4);
-            calculator.Points[6].Distance.In(DistanceUnit.Yard).Should().BeApproximately(440, 4);
+            calculator.Points[6].Distance.In(DistanceUnit.Yard).Should().BeApproximately(435, 4);
             calculator.Points[7].Distance.In(DistanceUnit.Yard).Should().BeApproximately(510, 4);
 
             calculator.Points[0].PointLocation.Should().Be(TrajectoryToReticleCalculator.PointLocation.Near);

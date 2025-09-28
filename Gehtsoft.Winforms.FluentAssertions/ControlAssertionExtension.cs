@@ -4,26 +4,27 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
 using FluentAssertions;
+using FluentAssertions.Execution;
 
 namespace Gehtsoft.Winforms.FluentAssertions
 {
     public static class ControlAssertionExtension
     {
-        public static ControlAssertions Should(this Control control) => new ControlAssertions(control);
+        public static ControlAssertions Should(this Control control) => new ControlAssertions(control, AssertionChain.GetOrCreate());
 
-        public static TextBoxAssertions Should(this TextBox control) => new TextBoxAssertions(control);
+        public static TextBoxAssertions Should(this TextBox control) => new TextBoxAssertions(control, AssertionChain.GetOrCreate());
 
-        public static ListBoxAssertions Should(this ListBox control) => new ListBoxAssertions(control);
+        public static ListBoxAssertions Should(this ListBox control) => new ListBoxAssertions(control, AssertionChain.GetOrCreate());
 
-        public static ComboBoxAssertions Should(this ComboBox control) => new ComboBoxAssertions(control);
+        public static ComboBoxAssertions Should(this ComboBox control) => new ComboBoxAssertions(control, AssertionChain.GetOrCreate());
 
-        public static CheckBoxAssertions Should(this CheckBox control) => new CheckBoxAssertions(control);
+        public static CheckBoxAssertions Should(this CheckBox control) => new CheckBoxAssertions(control, AssertionChain.GetOrCreate());
 
-        public static RadioButtonAssertions Should(this RadioButton control) => new RadioButtonAssertions(control);
+        public static RadioButtonAssertions Should(this RadioButton control) => new RadioButtonAssertions(control, AssertionChain.GetOrCreate());
 
-        public static ListViewAssertions Should(this ListView control) => new ListViewAssertions(control);
+        public static ListViewAssertions Should(this ListView control) => new ListViewAssertions(control, AssertionChain.GetOrCreate());
         
-        public static ListViewItemAssertions Should(this ListViewItem item) => new ListViewItemAssertions(item);
+        public static ListViewItemAssertions Should(this ListViewItem item) => new ListViewItemAssertions(item, AssertionChain.GetOrCreate());
 
         public static Control Control(this Control parent, string name, Type type)
         {

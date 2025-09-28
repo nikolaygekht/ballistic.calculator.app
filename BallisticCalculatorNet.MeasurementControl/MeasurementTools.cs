@@ -84,6 +84,7 @@ namespace BallisticCalculatorNet.MeasurementControl
                 r.Add(new MeasurementUtility.Unit("G8", DragTableId.G8));
                 r.Add(new MeasurementUtility.Unit("GI", DragTableId.GI));
                 r.Add(new MeasurementUtility.Unit("GS", DragTableId.GS));
+                r.Add(new MeasurementUtility.Unit("RA4", DragTableId.RA4));
                 r.Add(new MeasurementUtility.Unit("GC", DragTableId.GC));
             }
             else
@@ -103,11 +104,16 @@ namespace BallisticCalculatorNet.MeasurementControl
             return r;
         }
 
+        private static BallisticCoefficient BallisticCoefficientActivator(double value, DragTableId table)
+        { 
+            return new BallisticCoefficient(value, table);
+        }
+
         private static Func<double, object, object> CreateActivator(Type measurementUnit)
         {
             if (measurementUnit == typeof(DragTableId))
             {
-                return (bc, t) => new BallisticCoefficient(bc, (DragTableId)t);
+                return (bc, t) => BallisticCoefficientActivator(bc, (DragTableId)t);
             }
             else
             {

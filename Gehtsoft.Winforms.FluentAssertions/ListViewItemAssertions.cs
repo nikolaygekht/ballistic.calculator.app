@@ -9,15 +9,18 @@ namespace Gehtsoft.Winforms.FluentAssertions
 {
     public class ListViewItemAssertions : ReferenceTypeAssertions<ListViewItem, ListViewItemAssertions>
     {
-        public ListViewItemAssertions(ListViewItem subject) : base(subject)
+        protected AssertionChain mChain;
+
+        public ListViewItemAssertions(ListViewItem subject, AssertionChain chain) : base(subject, chain)
         {
+            mChain = chain;
         }
 
         protected override string Identifier => "item";
 
         public AndConstraint<ListViewItemAssertions> HaveText(string text, string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(control => Subject.Text == text)
@@ -28,7 +31,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ListViewItemAssertions> HaveColumn(int index, string content, string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(control => Subject.SubItems.Count > index)
@@ -42,7 +45,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
         public AndConstraint<ListViewItemAssertions> HaveTag<T>(Expression<Func<T, bool>> predicate, string because = null, params object[] becauseParameters)
             where T : class
         {
-            Execute.Assertion
+            mChain
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(control => Subject.Tag is T && predicate.Compile().Invoke(Subject.Tag as T))

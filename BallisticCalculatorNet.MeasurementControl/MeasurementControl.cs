@@ -75,6 +75,9 @@ namespace BallisticCalculatorNet.MeasurementControl
 
             set
             {
+                mOrgText = null;
+                mOrgUnit = null;
+
                 var units = mController.GetUnits(out int defaultIndex);
                 if (string.IsNullOrEmpty(value))
                 {
@@ -102,29 +105,34 @@ namespace BallisticCalculatorNet.MeasurementControl
 
         private object mOldValue = null;
         private string mOrgText = null;
+        private MeasurementUtility.Unit mOrgUnit = null;
 
         public object Value
         {
             get
             {
-                if (mOrgText == NumericPart.Text && mOldValue != null)
+
+                if (mOrgText == NumericPart.Text && mOldValue != null && mOrgUnit != null && object.Equals(Unit, mOrgUnit.Value))
                     return mOldValue;
-                return mController.Value(NumericPart.Text, UnitPart.SelectedItem);
+                return mController.Value(NumericPart.Text, UnitPart.SelectedItem, DecimalPoints);
             }
             set
             {
                 if (value == null)
                 {
                     NumericPart.Text = "";
+                    mOrgUnit = (MeasurementUtility.Unit)UnitPart.SelectedItem;
                 }
                 else
                 {
                     mController.ParseValue(value, out var text, out var unit);
                     NumericPart.Text = text;
                     UnitPart.SelectedItem = unit;
+                    mOrgUnit = unit;
                 }
                 mOrgText = NumericPart.Text;
                 mOldValue = value;
+                
             }
         }
 

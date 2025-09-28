@@ -6,7 +6,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 {
     public class RadioButtonAssertions : ControlAssertionsBase<RadioButton, RadioButtonAssertions>
     {
-        public RadioButtonAssertions(RadioButton subject) : base(subject)
+        public RadioButtonAssertions(RadioButton subject, AssertionChain chain) : base(subject, chain)
         {
         }
 
@@ -14,7 +14,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<RadioButtonAssertions> BeChecked(string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(cb => cb.Checked)
@@ -25,7 +25,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<RadioButtonAssertions> BeNotChecked(string because = null, params object[] becauseParameters)
         {
-            Execute.Assertion
+            mChain
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(cb => !cb.Checked)

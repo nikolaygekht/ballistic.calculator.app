@@ -6,14 +6,14 @@ set projectroot=%cd%
 cd BallisticCalculatorNet
 msbuild -t:Publish -p:Configuration=Release BallisticCalculatorNet.csproj
 cd bin\release\net60-windows\publish
-signtool.exe sign /tr "http://timestamp.digicert.com" /td sha256 /fd sha256 /f "%ng-nuget-certificate%" /p "%ng-nuget-certificate-password%" /v BallisticCalculatorNet.exe
+smctl sign --fingerprint %digicert-fingerprint% --input BallisticCalculatorNet.exe
 
 cd %projectroot%
 
 cd BallisticCalculatorNet.ReticleEditor
 msbuild -t:Publish -p:Configuration=Release BallisticCalculatorNet.ReticleEditor.csproj
 cd bin\release\net60-windows\publish
-signtool.exe sign /tr "http://timestamp.digicert.com" /td sha256 /fd sha256 /f "%ng-nuget-certificate%" /p "%ng-nuget-certificate-password%" /v BallisticCalculatorNet.ReticleEditor.exe
+smctl sign --fingerprint %digicert-fingerprint% --input BallisticCalculatorNet.ReticleEditor.exe
 
 cd %projectroot%
 cd Setup
@@ -27,8 +27,7 @@ robocopy "%projectroot%\BallisticCalculatorNet.ReticleEditor\bin\release\net60-w
 robocopy "%projectroot%\data" "%projectroot%\Setup\content\data" /S
 
 makensis BallisticCalculator.nsi
-
-signtool.exe sign /tr "http://timestamp.digicert.com" /td sha256 /fd sha256 /f "%ng-nuget-certificate%" /p "%ng-nuget-certificate-password%" /v BallisticCaculatorSetup.exe
+smctl sign --fingerprint %digicert-fingerprint% --input BallisticCaculatorSetup.exe
 
 cd content
 7z a -r BallisticCaculatorPortable.zip *.*

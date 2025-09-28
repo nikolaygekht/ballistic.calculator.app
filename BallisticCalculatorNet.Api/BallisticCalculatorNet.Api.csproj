@@ -5,10 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BallisticCalculator" Version="1.1.2" />
-    <PackageReference Include="Gehtsoft.Measurements" Version="1.1.14" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
-    <PackageReference Include="Serilog" Version="3.1.1" />
-    <PackageReference Include="WatsonTcp" Version="6.0.5" />
+    <PackageReference Include="BallisticCalculator" Version="1.1.5" />
+    <PackageReference Include="Gehtsoft.Measurements" Version="1.1.16" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.9" />
+    <PackageReference Include="Serilog" Version="4.3.0" />
+    <PackageReference Include="WatsonTcp" Version="6.0.10" />
   </ItemGroup>
 </Project>
