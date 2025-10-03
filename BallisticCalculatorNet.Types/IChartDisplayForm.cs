@@ -1,4 +1,4 @@
-﻿namespace BallisticCalculatorNet.Api
+﻿namespace BallisticCalculatorNet.Types
 {
     /// <summary>
     /// The interface to a form that displays a chart

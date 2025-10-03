@@ -1,5 +1,6 @@
 ﻿using BallisticCalculator;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using BallisticCalculatorNet.Common;
 using BallisticCalculatorNet.InputPanels;
 using Gehtsoft.Measurements;
@@ -19,10 +20,12 @@ namespace BallisticCalculatorNet
     public partial class TrajectoryForm : Form, IShotForm, IChartDisplayForm
     {
         private ShotData mShotData = null;
-        private TrajectoryPoint[] mTrajectory;
-        
+        private TrajectoryPoint[] mTrajectory;       
         private MeasurementSystem mMeasurementSystem = MeasurementSystem.Imperial;
         private AngularUnit mAngularUnits = AngularUnit.Mil;
+        private DropBase mDropBase = DropBase.SightLine;
+
+        
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -81,6 +84,19 @@ namespace BallisticCalculatorNet
         {
             get => chartControl.ChartMode;
             set => chartControl.ChartMode = value;
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public DropBase DropBase
+        {
+            get => mDropBase;
+            set 
+            {
+                mDropBase = value;
+                chartControl.DropBase = value;
+                trajectoryControl.DropBase = value;
+            }
         }
 
         [Browsable(false)]

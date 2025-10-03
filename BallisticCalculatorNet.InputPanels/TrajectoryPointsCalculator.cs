@@ -1,5 +1,6 @@
 ﻿using BallisticCalculator;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using Gehtsoft.Measurements;
 using System.IO;
 using System.Linq;
@@ -31,6 +32,16 @@ namespace BallisticCalculatorNet.InputPanels
             var trajectory = calc.Calculate(shotData.Ammunition.Ammunition, shotData.Weapon,
                 shotData.Atmosphere ?? new Atmosphere(), calculationParameters, shotData.Wind?.ToArray(),
                 GetDragTable(shotData.Ammunition.Ammunition));
+
+            for (int i = 0; i < trajectory.Length; i++)
+                if (trajectory[i] == null)
+                {
+                    var oldTrajectory = trajectory;
+                    trajectory = new TrajectoryPoint[i];
+                    for (int j = 0; j < i; j++)
+                        trajectory[j] = oldTrajectory[j];
+                    break;
+                }
 
             return trajectory;
         }

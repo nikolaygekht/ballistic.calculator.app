@@ -1,4 +1,5 @@
 ﻿using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using BallisticCalculatorNet.InputPanels;
 using System;
 using System.IO;

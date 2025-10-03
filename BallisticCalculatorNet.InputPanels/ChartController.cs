@@ -1,5 +1,6 @@
 ﻿using BallisticCalculator;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using Gehtsoft.Measurements;
 
 namespace BallisticCalculatorNet.InputPanels
@@ -8,15 +9,18 @@ namespace BallisticCalculatorNet.InputPanels
     {
         private readonly AngularUnit mAngularUnits;
         private readonly TrajectoryChartMode mChartMode;
+        private readonly DropBase mDropBase;
         private readonly TrajectoryPoint[] mTrajectory;
         private readonly MeasurementSystemController mMeasurementSystemController;
 
         public ChartController(MeasurementSystem measurementSystem, AngularUnit angularUnits,
-                               TrajectoryChartMode chartMode, TrajectoryPoint[] trajectory)
+                               TrajectoryChartMode chartMode, DropBase dropBase,
+                               TrajectoryPoint[] trajectory)
         {
             mAngularUnits = angularUnits;
             mChartMode = chartMode;
             mTrajectory = trajectory;
+            mDropBase = dropBase;
             mMeasurementSystemController = new MeasurementSystemController(measurementSystem) { AngularUnit = angularUnits };
         }
 
@@ -60,7 +64,7 @@ namespace BallisticCalculatorNet.InputPanels
                 TrajectoryChartMode.Velocity => pt.Velocity.In(mMeasurementSystemController.VelocityUnit),
                 TrajectoryChartMode.Mach => pt.Mach,
                 TrajectoryChartMode.Energy => pt.Energy.In(mMeasurementSystemController.EnergyUnit),
-                TrajectoryChartMode.Drop => pt.Drop.In(mMeasurementSystemController.AdjustmentUnit),
+                TrajectoryChartMode.Drop => mDropBase == DropBase.SightLine ? pt.Drop.In(mMeasurementSystemController.AdjustmentUnit) : (pt.Drop + pt.LineOfSightElevation).In(mMeasurementSystemController.AdjustmentUnit),
                 TrajectoryChartMode.DropAdjustment => pt.DropAdjustment.In(mAngularUnits),
                 TrajectoryChartMode.Windage => pt.Windage.In(mMeasurementSystemController.AdjustmentUnit),
                 TrajectoryChartMode.WindageAdjustment => pt.WindageAdjustment.In(mAngularUnits),

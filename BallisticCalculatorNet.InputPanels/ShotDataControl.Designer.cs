@@ -148,7 +148,7 @@
             this.panelShotAmmo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelShotAmmo.Location = new System.Drawing.Point(3, 3);
             this.panelShotAmmo.Margin = new System.Windows.Forms.Padding(4);
-            this.panelShotAmmo.MeasurementSystem = BallisticCalculatorNet.Api.MeasurementSystem.Metric;
+            this.panelShotAmmo.MeasurementSystem = BallisticCalculatorNet.Types.MeasurementSystem.Metric;
             this.panelShotAmmo.Name = "panelShotAmmo";
             this.panelShotAmmo.Size = new System.Drawing.Size(597, 537);
             this.panelShotAmmo.TabIndex = 0;

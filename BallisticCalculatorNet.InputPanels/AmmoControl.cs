@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BallisticCalculator;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using Gehtsoft.Measurements;
 
 namespace BallisticCalculatorNet.InputPanels

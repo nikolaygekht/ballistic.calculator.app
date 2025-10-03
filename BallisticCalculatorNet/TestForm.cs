@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using BallisticCalculatorNet.InputPanels;
 
 #pragma warning disable S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields

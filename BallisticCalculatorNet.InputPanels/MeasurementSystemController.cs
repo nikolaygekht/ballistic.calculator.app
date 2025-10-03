@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BallisticCalculatorNet.Types;
 
 namespace BallisticCalculatorNet.InputPanels
 {
@@ -19,33 +20,33 @@ namespace BallisticCalculatorNet.InputPanels
             MeasurementSystem = measurementSystem;
         }
 
-        public int RangeAccuracy => 0;
-        public int AdjustentAccuracy => 2;
-        public int VeloctyAccuracy => 0;
-        public int EnergyAccuracy => 0;
-        public int WeightAccuracy => 1;
-        public int MachAccuracy => 2;
-        public int AngularAccuracy => 2;
-        public int ClickAccuracy => 0;
+        public static int RangeAccuracy => 0;
+        public static int AdjustentAccuracy => 2;
+        public static int VeloctyAccuracy => 0;
+        public static int EnergyAccuracy => 0;
+        public static int WeightAccuracy => 1;
+        public static int MachAccuracy => 2;
+        public static int AngularAccuracy => 2;
+        public static int ClickAccuracy => 0;
 
-        public string RangeFormatString => $"N{RangeAccuracy}";
-        public string AdjustmentFormatString => $"N{AdjustentAccuracy}";
-        public string VelocityFormatString => $"N{VeloctyAccuracy}";
-        public string EnergyFormatString => $"N{EnergyAccuracy}";
-        public string WeightFormatString => $"N{WeightAccuracy}";
-        public string MachFormatString => $"N{MachAccuracy}";
-        public string AngularFormatString => $"N{AngularAccuracy}";
-        public string ClickFormatString => $"N{ClickAccuracy}";
-        public string TimeFormatString => "mm\\:ss\\.fff";
+        public static string RangeFormatString => $"N{RangeAccuracy}";
+        public static string AdjustmentFormatString => $"N{AdjustentAccuracy}";
+        public static string VelocityFormatString => $"N{VeloctyAccuracy}";
+        public static string EnergyFormatString => $"N{EnergyAccuracy}";
+        public static string WeightFormatString => $"N{WeightAccuracy}";
+        public static string MachFormatString => $"N{MachAccuracy}";
+        public static string AngularFormatString => $"N{AngularAccuracy}";
+        public static string ClickFormatString => $"N{ClickAccuracy}";
+        public static string TimeFormatString => "mm\\:ss\\.fff";
 
-        public string RangeFormatString1 => $"F{RangeAccuracy}";
-        public string AdjustmentFormatString1 => $"F{AdjustentAccuracy}";
-        public string VelocityFormatString1 => $"F{VeloctyAccuracy}";
-        public string EnergyFormatString1 => $"F{EnergyAccuracy}";
-        public string WeightFormatString1 => $"F{WeightAccuracy}";
-        public string MachFormatString1 => $"F{MachAccuracy}";
-        public string AngularFormatString1 => $"F{AngularAccuracy}";
-        public string ClickFormatString1 => $"F{ClickAccuracy}";
+        public static string RangeFormatString1 => $"F{RangeAccuracy}";
+        public static string AdjustmentFormatString1 => $"F{AdjustentAccuracy}";
+        public static string VelocityFormatString1 => $"F{VeloctyAccuracy}";
+        public static string EnergyFormatString1 => $"F{EnergyAccuracy}";
+        public static string WeightFormatString1 => $"F{WeightAccuracy}";
+        public static string ClickFormatString1 => $"F{ClickAccuracy}";
+        public static string MachFormatString1 => $"F{MachAccuracy}";
+        public static string AngularFormatString1 => $"F{AngularAccuracy}";
 
 
         public DistanceUnit RangeUnit => MeasurementSystem == MeasurementSystem.Metric ? DistanceUnit.Meter : DistanceUnit.Yard;

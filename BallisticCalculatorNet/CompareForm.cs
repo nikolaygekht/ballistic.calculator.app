@@ -1,5 +1,6 @@
 ﻿using BallisticCalculator;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using BallisticCalculatorNet.InputPanels;
 using Gehtsoft.Measurements;
 using System;
@@ -18,6 +19,7 @@ namespace BallisticCalculatorNet
     {
         private MeasurementSystem mMeasurementSystem = MeasurementSystem.Imperial;
         private AngularUnit mAngularUnits = AngularUnit.Mil;
+        private DropBase mDropBase = DropBase.SightLine;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -50,6 +52,19 @@ namespace BallisticCalculatorNet
         {
             get => multiChartControl.ChartMode;
             set => multiChartControl.ChartMode = value;
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public DropBase DropBase
+        {
+            get => mDropBase;
+            set
+            {
+                mDropBase = value;
+                multiChartControl.DropBase = value;
+
+            }
         }
 
         public CompareForm()

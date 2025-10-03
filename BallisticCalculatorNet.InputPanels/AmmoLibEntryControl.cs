@@ -11,6 +11,7 @@ using BallisticCalculator;
 using BallisticCalculator.Data.Dictionary;
 using BallisticCalculator.Serialization;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using Gehtsoft.Measurements;
 
 namespace BallisticCalculatorNet.InputPanels

@@ -15,6 +15,7 @@ using BallisticCalculator.Reticle.Draw;
 using BallisticCalculator.Reticle.Graphics;
 using BallisticCalculator.Serialization;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using Gehtsoft.Measurements;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 

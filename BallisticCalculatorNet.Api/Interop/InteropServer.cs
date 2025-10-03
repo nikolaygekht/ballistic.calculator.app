@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using WatsonTcp;
+using BallisticCalculatorNet.Types;
 
 namespace BallisticCalculatorNet.Api.Interop
 {

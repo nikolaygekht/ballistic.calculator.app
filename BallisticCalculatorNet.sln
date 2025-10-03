@@ -36,6 +36,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{2E8F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BallisticCalculatorExtension.SaveToPdf", "Extensions\BallisticCalculatorExtension.SaveToPdf\BallisticCalculatorExtension.SaveToPdf.csproj", "{44122D05-684E-4F31-A336-738F9D14EBD0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BallisticCalculatorNet.Types", "BallisticCalculatorNet.Types\BallisticCalculatorNet.Types.csproj", "{E6D4EDB3-E607-5E19-1C49-8620A98BDF69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +88,10 @@ Global
 		{44122D05-684E-4F31-A336-738F9D14EBD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44122D05-684E-4F31-A336-738F9D14EBD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44122D05-684E-4F31-A336-738F9D14EBD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6D4EDB3-E607-5E19-1C49-8620A98BDF69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6D4EDB3-E607-5E19-1C49-8620A98BDF69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6D4EDB3-E607-5E19-1C49-8620A98BDF69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6D4EDB3-E607-5E19-1C49-8620A98BDF69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,10 +108,11 @@ Global
 		{E42FE485-B98E-48C4-8DE3-6B4BBBFB856A} = {DF0F0E2B-CD12-4066-BB25-399E2CB3B35E}
 		{71F67FEE-71DF-4928-AE9A-E15BCC046295} = {DF0F0E2B-CD12-4066-BB25-399E2CB3B35E}
 		{44122D05-684E-4F31-A336-738F9D14EBD0} = {0083D7BC-4756-4C14-B1DB-223A68E66C34}
+		{E6D4EDB3-E607-5E19-1C49-8620A98BDF69} = {DF0F0E2B-CD12-4066-BB25-399E2CB3B35E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		                        SolutionGuid = {3B64E7C3-1B3F-4B52-BDBF-DBE060C82E75}
-		                SolutionGuid = {175DDDBA-66F7-4CE1-A5D6-21780054F9A4}
 		        SolutionGuid = {88E6864F-6125-46F7-A705-6D81292F7984}
+		                SolutionGuid = {175DDDBA-66F7-4CE1-A5D6-21780054F9A4}
+		                        SolutionGuid = {3B64E7C3-1B3F-4B52-BDBF-DBE060C82E75}
 	EndGlobalSection
 EndGlobal

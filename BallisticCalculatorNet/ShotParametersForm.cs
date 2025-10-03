@@ -1,5 +1,6 @@
 ﻿using BallisticCalculator;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using BallisticCalculatorNet.InputPanels;
 using BallisticCalculatorNet.Utils;
 using Gehtsoft.Measurements;

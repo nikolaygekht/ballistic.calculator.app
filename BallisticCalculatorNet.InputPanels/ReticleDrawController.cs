@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using BallisticCalculator.Reticle.Data;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using BallisticCalculatorNet.ReticleCanvas;
 using Gehtsoft.Measurements;
 

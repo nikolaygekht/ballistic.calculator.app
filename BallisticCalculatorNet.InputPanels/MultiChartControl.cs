@@ -1,5 +1,6 @@
 ﻿using BallisticCalculator;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using Gehtsoft.Measurements;
 using ScottPlot;
 using System;
@@ -40,6 +41,20 @@ namespace BallisticCalculatorNet.InputPanels
             set
             {
                 mAngularUnits = value;
+                UpdateChart();
+            }
+        }
+
+        private DropBase mDropBase;
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public DropBase DropBase
+        {
+            get => mDropBase;
+            set
+            {
+                mDropBase = value;
                 UpdateChart();
             }
         }
@@ -87,7 +102,7 @@ namespace BallisticCalculatorNet.InputPanels
                 for (int i = 0; i < mTrajectories.Count; i++)
                 {
                     var trajectory = mTrajectories[i];
-                    var controller = new ChartController(mMeasurementSystem, mAngularUnits, mChartMode, trajectory.Item2);
+                    var controller = new ChartController(mMeasurementSystem, mAngularUnits, mChartMode, mDropBase, trajectory.Item2);
                     formsPlot1.Plot.AddScatter(controller.GetXAxis(), controller.GetYAxis(), label:trajectory.Item1);
                     
                     if (i == 0)
@@ -118,7 +133,7 @@ namespace BallisticCalculatorNet.InputPanels
             {
                 var trajectory = mTrajectories[j].Item2;
                 
-                var controller = new ChartController(mMeasurementSystem, mAngularUnits, mChartMode, trajectory);
+                var controller = new ChartController(mMeasurementSystem, mAngularUnits, mChartMode, mDropBase, trajectory);
                 var i1 = -1;
                 var i2 = trajectory.Length - 1;
                 

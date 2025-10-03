@@ -1,4 +1,5 @@
 ﻿using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 
 namespace BallisticCalculatorNet.InputPanels
 {

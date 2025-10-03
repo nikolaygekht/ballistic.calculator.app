@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using System.Globalization;
 using Moq;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 
 namespace BallisticCalculatorNet.UnitTest.OutputPanels
 {

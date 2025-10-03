@@ -1,5 +1,5 @@
 ﻿using BallisticCalculator;
-using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using BallisticCalculatorNet.Api.Interop;
 using BallisticCalculatorNet.UnitTest.Tools;
 using FluentAssertions;

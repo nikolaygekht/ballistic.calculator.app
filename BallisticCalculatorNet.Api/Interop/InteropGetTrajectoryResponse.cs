@@ -1,4 +1,5 @@
 ﻿using BallisticCalculator;
+using BallisticCalculatorNet.Types;
 using BallisticCalculator.Serialization;
 using Gehtsoft.Measurements;
 

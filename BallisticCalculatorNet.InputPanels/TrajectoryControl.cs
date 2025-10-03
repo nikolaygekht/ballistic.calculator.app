@@ -1,5 +1,6 @@
 ﻿using BallisticCalculator;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using Gehtsoft.Measurements;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -46,6 +47,20 @@ namespace BallisticCalculatorNet.InputPanels
             set
             {
                 mSight = value;
+                listView.Invalidate();
+                listView.Update();
+            }
+        }
+
+        private DropBase mDropBase = DropBase.SightLine;
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public DropBase DropBase
+        {
+            get => mDropBase;
+            set
+            {
+                mDropBase = value;
                 listView.Invalidate();
                 listView.Update();
             }
@@ -128,30 +143,34 @@ namespace BallisticCalculatorNet.InputPanels
             //range
             e.Item.SubItems
                 .Add(item.Distance.To(mMeasurementSystemController.RangeUnit)
-                                  .ToString(mMeasurementSystemController.RangeFormatString, Culture));
+                                  .ToString(MeasurementSystemController.RangeFormatString, Culture));
             //velocity
             e.Item.SubItems
                 .Add(item.Velocity.To(mMeasurementSystemController.VelocityUnit)
-                                  .ToString(mMeasurementSystemController.VelocityFormatString, Culture));
+                                  .ToString(MeasurementSystemController.VelocityFormatString, Culture));
             //mach
             e.Item.SubItems
-                .Add(item.Mach.ToString(mMeasurementSystemController.MachFormatString, CultureInfo.CurrentCulture));
+                .Add(item.Mach.ToString(MeasurementSystemController.MachFormatString, CultureInfo.CurrentCulture));
+            
             //path
-            AddAngularValue(item.Distance, item.Drop, item.DropAdjustment, mSight?.VerticalClick, e.Item);
+            AddAngularValue(item.Distance, 
+                mDropBase == DropBase.SightLine ? item.Drop : item.Drop + item.LineOfSightElevation,  
+                item.DropAdjustment, mSight?.VerticalClick, e.Item);
 
             //windage
             AddAngularValue(item.Distance, item.Windage, item.WindageAdjustment, mSight?.HorizontalClick, e.Item);
 
             //time
-            e.Item.SubItems.Add(item.Time.ToString(mMeasurementSystemController.TimeFormatString));
+            e.Item.SubItems.Add(item.Time.ToString(MeasurementSystemController.TimeFormatString));
+            
             //energy
             e.Item.SubItems
                 .Add(item.Energy.To(mMeasurementSystemController.EnergyUnit)
-                                .ToString(mMeasurementSystemController.EnergyFormatString, Culture));
+                                .ToString(MeasurementSystemController.EnergyFormatString, Culture));
             //ogw
             e.Item.SubItems
                 .Add(item.OptimalGameWeight.To(mMeasurementSystemController.WeightUnit)
-                                            .ToString(mMeasurementSystemController.WeightFormatString, Culture));
+                                            .ToString(MeasurementSystemController.WeightFormatString, Culture));
         }
 
         private void AddAngularValue(Measurement<DistanceUnit> distance,
@@ -163,7 +182,7 @@ namespace BallisticCalculatorNet.InputPanels
             //value
             lvi.SubItems
                 .Add(value.To(mMeasurementSystemController.AdjustmentUnit)
-                .ToString(mMeasurementSystemController.AdjustmentFormatString, Culture));
+                .ToString(MeasurementSystemController.AdjustmentFormatString, Culture));
 
             //adjustment
             if (distance.Value < 1e-8)
@@ -174,14 +193,14 @@ namespace BallisticCalculatorNet.InputPanels
             else
             {
                 lvi.SubItems
-                    .Add(valueAdjustiment.To(mAngularUnits).ToString(mMeasurementSystemController.AngularFormatString, Culture));
+                    .Add(valueAdjustiment.To(mAngularUnits).ToString(MeasurementSystemController.AngularFormatString, Culture));
 
                 
                 //clicks
                 if (scopeStep == null || scopeStep.Value.Value <= 0)
                     lvi.SubItems.Add("n/a");
                 else
-                    lvi.SubItems.Add((valueAdjustiment / scopeStep.Value).ToString(mMeasurementSystemController.ClickFormatString, Culture));
+                    lvi.SubItems.Add((valueAdjustiment / scopeStep.Value).ToString(MeasurementSystemController.ClickFormatString, Culture));
             }
         }
     }

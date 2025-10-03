@@ -1,4 +1,4 @@
-﻿namespace BallisticCalculatorNet.Api
+﻿namespace BallisticCalculatorNet.Types
 {
     /// <summary>
     /// The data displayed on the chart

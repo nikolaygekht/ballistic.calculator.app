@@ -23,6 +23,7 @@
   <ProjectReference Include="..\BallisticCalculatorNet.MeasurementControl\BallisticCalculatorNet.MeasurementControl.csproj" />
   <ProjectReference Include="..\BallisticCalculatorNet.ReticleCanvas\BallisticCalculatorNet.ReticleCanvas.csproj" />
   <ProjectReference Include="..\BallisticCalculatorNet.InputPanels\BallisticCalculatorNet.InputPanels.csproj" />
+  <ProjectReference Include="..\BallisticCalculatorNet.Types\BallisticCalculatorNet.Types.csproj" />
  </ItemGroup>
  <ItemGroup>
   <Compile Update="Properties\Resources.Designer.cs">

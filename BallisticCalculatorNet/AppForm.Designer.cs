@@ -30,435 +30,402 @@ namespace BallisticCalculatorNet
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppForm));
-            this.menuMain = new System.Windows.Forms.MenuStrip();
-            this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuFileNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuFileNewImperial = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuFileNewMetric = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuFileOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuFileSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuFileExportCsv = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuFileExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuView = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewEditParameters = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuViewSystem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewSystemImperial = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewSystemMetric = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewAngular = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewAngularMOA = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewAngularMils = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewAngularThousands = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewAngularMRads = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewAngularInches = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewAngularCentimeters = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewChart = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewChartVelocity = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewChartMach = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewChartDrop = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewChartWindage = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewChartEnergy = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuViewChartZoomY = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewShow = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewShowTable = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewShowChart = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewShowReticle = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewCompare = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewCompareAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuViewCompareRemoveLast = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuExtensions = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuWindows = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuWindowsTile = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuWindowsCascade = new System.Windows.Forms.ToolStripMenuItem();
-            this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuMain.SuspendLayout();
-            this.SuspendLayout();
+            menuMain = new System.Windows.Forms.MenuStrip();
+            menuFile = new System.Windows.Forms.ToolStripMenuItem();
+            menuFileNew = new System.Windows.Forms.ToolStripMenuItem();
+            menuFileNewImperial = new System.Windows.Forms.ToolStripMenuItem();
+            menuFileNewMetric = new System.Windows.Forms.ToolStripMenuItem();
+            menuFileOpen = new System.Windows.Forms.ToolStripMenuItem();
+            menuFileSave = new System.Windows.Forms.ToolStripMenuItem();
+            menuFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            menuFileExportCsv = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            menuFileExit = new System.Windows.Forms.ToolStripMenuItem();
+            menuView = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewEditParameters = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            menuViewSystem = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewSystemImperial = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewSystemMetric = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewAngular = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewAngularMOA = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewAngularMils = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewAngularThousands = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewAngularMRads = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewAngularInches = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewAngularCentimeters = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewChart = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewChartVelocity = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewChartMach = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewChartDrop = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewChartWindage = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewChartEnergy = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            menuViewChartZoomY = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewShow = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewShowTable = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewShowChart = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewShowReticle = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewCompare = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewCompareAdd = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewCompareRemoveLast = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewDrop = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewDropLineOfSight = new System.Windows.Forms.ToolStripMenuItem();
+            menuViewDropMuzzleLevel = new System.Windows.Forms.ToolStripMenuItem();
+            menuExtensions = new System.Windows.Forms.ToolStripMenuItem();
+            menuWindows = new System.Windows.Forms.ToolStripMenuItem();
+            menuWindowsTile = new System.Windows.Forms.ToolStripMenuItem();
+            menuWindowsCascade = new System.Windows.Forms.ToolStripMenuItem();
+            windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            menuHelp = new System.Windows.Forms.ToolStripMenuItem();
+            menuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
+            menuMain.SuspendLayout();
+            SuspendLayout();
             // 
             // menuMain
             // 
-            this.menuMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
-            this.menuMain.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuFile,
-            this.menuView,
-            this.menuExtensions,
-            this.menuWindows,
-            this.menuHelp});
-            this.menuMain.Location = new System.Drawing.Point(0, 0);
-            this.menuMain.Name = "menuMain";
-            this.menuMain.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuMain.Size = new System.Drawing.Size(1552, 33);
-            this.menuMain.TabIndex = 1;
+            menuMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+            menuMain.ImageScalingSize = new System.Drawing.Size(20, 20);
+            menuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { menuFile, menuView, menuExtensions, menuWindows, menuHelp });
+            menuMain.Location = new System.Drawing.Point(0, 0);
+            menuMain.Name = "menuMain";
+            menuMain.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            menuMain.Size = new System.Drawing.Size(1862, 38);
+            menuMain.TabIndex = 1;
             // 
             // menuFile
             // 
-            this.menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuFileNew,
-            this.menuFileOpen,
-            this.menuFileSave,
-            this.menuFileSaveAs,
-            this.menuFileExportCsv,
-            this.toolStripSeparator1,
-            this.menuFileExit});
-            this.menuFile.Name = "menuFile";
-            this.menuFile.Size = new System.Drawing.Size(103, 29);
-            this.menuFile.Text = "&Trajectory";
+            menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuFileNew, menuFileOpen, menuFileSave, menuFileSaveAs, menuFileExportCsv, toolStripSeparator1, menuFileExit });
+            menuFile.Name = "menuFile";
+            menuFile.Size = new System.Drawing.Size(120, 34);
+            menuFile.Text = "&Trajectory";
             // 
             // menuFileNew
             // 
-            this.menuFileNew.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuFileNewImperial,
-            this.menuFileNewMetric});
-            this.menuFileNew.Name = "menuFileNew";
-            this.menuFileNew.Size = new System.Drawing.Size(227, 34);
-            this.menuFileNew.Text = "&New";
+            menuFileNew.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuFileNewImperial, menuFileNewMetric });
+            menuFileNew.Name = "menuFileNew";
+            menuFileNew.Size = new System.Drawing.Size(262, 40);
+            menuFileNew.Text = "&New";
             // 
             // menuFileNewImperial
             // 
-            this.menuFileNewImperial.Name = "menuFileNewImperial";
-            this.menuFileNewImperial.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.menuFileNewImperial.Size = new System.Drawing.Size(234, 34);
-            this.menuFileNewImperial.Text = "Imperial";
+            menuFileNewImperial.Name = "menuFileNewImperial";
+            menuFileNewImperial.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I;
+            menuFileNewImperial.Size = new System.Drawing.Size(271, 40);
+            menuFileNewImperial.Text = "Imperial";
             // 
             // menuFileNewMetric
             // 
-            this.menuFileNewMetric.Name = "menuFileNewMetric";
-            this.menuFileNewMetric.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-            this.menuFileNewMetric.Size = new System.Drawing.Size(234, 34);
-            this.menuFileNewMetric.Text = "Metric";
+            menuFileNewMetric.Name = "menuFileNewMetric";
+            menuFileNewMetric.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M;
+            menuFileNewMetric.Size = new System.Drawing.Size(271, 40);
+            menuFileNewMetric.Text = "Metric";
             // 
             // menuFileOpen
             // 
-            this.menuFileOpen.Name = "menuFileOpen";
-            this.menuFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.menuFileOpen.Size = new System.Drawing.Size(227, 34);
-            this.menuFileOpen.Text = "&Open";
+            menuFileOpen.Name = "menuFileOpen";
+            menuFileOpen.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O;
+            menuFileOpen.Size = new System.Drawing.Size(262, 40);
+            menuFileOpen.Text = "&Open";
             // 
             // menuFileSave
             // 
-            this.menuFileSave.Name = "menuFileSave";
-            this.menuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.menuFileSave.Size = new System.Drawing.Size(227, 34);
-            this.menuFileSave.Text = "&Save";
+            menuFileSave.Name = "menuFileSave";
+            menuFileSave.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S;
+            menuFileSave.Size = new System.Drawing.Size(262, 40);
+            menuFileSave.Text = "&Save";
             // 
             // menuFileSaveAs
             // 
-            this.menuFileSaveAs.Name = "menuFileSaveAs";
-            this.menuFileSaveAs.Size = new System.Drawing.Size(227, 34);
-            this.menuFileSaveAs.Text = "Save As";
+            menuFileSaveAs.Name = "menuFileSaveAs";
+            menuFileSaveAs.Size = new System.Drawing.Size(262, 40);
+            menuFileSaveAs.Text = "Save As";
             // 
             // menuFileExportCsv
             // 
-            this.menuFileExportCsv.Name = "menuFileExportCsv";
-            this.menuFileExportCsv.Size = new System.Drawing.Size(227, 34);
-            this.menuFileExportCsv.Text = "Export As &CSV";
+            menuFileExportCsv.Name = "menuFileExportCsv";
+            menuFileExportCsv.Size = new System.Drawing.Size(262, 40);
+            menuFileExportCsv.Text = "Export As &CSV";
             // 
             // toolStripSeparator1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(224, 6);
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(259, 6);
             // 
             // menuFileExit
             // 
-            this.menuFileExit.Name = "menuFileExit";
-            this.menuFileExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.menuFileExit.Size = new System.Drawing.Size(227, 34);
-            this.menuFileExit.Text = "&Exit";
+            menuFileExit.Name = "menuFileExit";
+            menuFileExit.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X;
+            menuFileExit.Size = new System.Drawing.Size(262, 40);
+            menuFileExit.Text = "&Exit";
             // 
             // menuView
             // 
-            this.menuView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuViewEditParameters,
-            this.toolStripSeparator2,
-            this.menuViewSystem,
-            this.menuViewAngular,
-            this.menuViewChart,
-            this.menuViewShow,
-            this.menuViewCompare});
-            this.menuView.Name = "menuView";
-            this.menuView.Size = new System.Drawing.Size(65, 29);
-            this.menuView.Text = "&View";
+            menuView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuViewEditParameters, toolStripSeparator2, menuViewSystem, menuViewAngular, menuViewDrop, menuViewChart, menuViewShow, menuViewCompare });
+            menuView.Name = "menuView";
+            menuView.Size = new System.Drawing.Size(75, 34);
+            menuView.Text = "&View";
             // 
             // menuViewEditParameters
             // 
-            this.menuViewEditParameters.Name = "menuViewEditParameters";
-            this.menuViewEditParameters.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.menuViewEditParameters.Size = new System.Drawing.Size(296, 34);
-            this.menuViewEditParameters.Text = "&Edit Parameters";
+            menuViewEditParameters.Name = "menuViewEditParameters";
+            menuViewEditParameters.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E;
+            menuViewEditParameters.Size = new System.Drawing.Size(345, 40);
+            menuViewEditParameters.Text = "&Edit Parameters";
             // 
             // toolStripSeparator2
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(293, 6);
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new System.Drawing.Size(342, 6);
             // 
             // menuViewSystem
             // 
-            this.menuViewSystem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuViewSystemImperial,
-            this.menuViewSystemMetric});
-            this.menuViewSystem.Name = "menuViewSystem";
-            this.menuViewSystem.Size = new System.Drawing.Size(296, 34);
-            this.menuViewSystem.Text = "&Measurement System";
+            menuViewSystem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuViewSystemImperial, menuViewSystemMetric });
+            menuViewSystem.Name = "menuViewSystem";
+            menuViewSystem.Size = new System.Drawing.Size(345, 40);
+            menuViewSystem.Text = "&Measurement System";
             // 
             // menuViewSystemImperial
             // 
-            this.menuViewSystemImperial.Name = "menuViewSystemImperial";
-            this.menuViewSystemImperial.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.I)));
-            this.menuViewSystemImperial.Size = new System.Drawing.Size(282, 34);
-            this.menuViewSystemImperial.Text = "Imperial";
+            menuViewSystemImperial.Name = "menuViewSystemImperial";
+            menuViewSystemImperial.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.I;
+            menuViewSystemImperial.Size = new System.Drawing.Size(327, 40);
+            menuViewSystemImperial.Text = "Imperial";
             // 
             // menuViewSystemMetric
             // 
-            this.menuViewSystemMetric.Name = "menuViewSystemMetric";
-            this.menuViewSystemMetric.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.M)));
-            this.menuViewSystemMetric.Size = new System.Drawing.Size(282, 34);
-            this.menuViewSystemMetric.Text = "Metric";
+            menuViewSystemMetric.Name = "menuViewSystemMetric";
+            menuViewSystemMetric.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.M;
+            menuViewSystemMetric.Size = new System.Drawing.Size(327, 40);
+            menuViewSystemMetric.Text = "Metric";
             // 
             // menuViewAngular
             // 
-            this.menuViewAngular.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuViewAngularMOA,
-            this.menuViewAngularMils,
-            this.menuViewAngularThousands,
-            this.menuViewAngularMRads,
-            this.menuViewAngularInches,
-            this.menuViewAngularCentimeters});
-            this.menuViewAngular.Name = "menuViewAngular";
-            this.menuViewAngular.Size = new System.Drawing.Size(296, 34);
-            this.menuViewAngular.Text = "&Angular Units";
+            menuViewAngular.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuViewAngularMOA, menuViewAngularMils, menuViewAngularThousands, menuViewAngularMRads, menuViewAngularInches, menuViewAngularCentimeters });
+            menuViewAngular.Name = "menuViewAngular";
+            menuViewAngular.Size = new System.Drawing.Size(345, 40);
+            menuViewAngular.Text = "&Angular Units";
             // 
             // menuViewAngularMOA
             // 
-            this.menuViewAngularMOA.Name = "menuViewAngularMOA";
-            this.menuViewAngularMOA.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.A)));
-            this.menuViewAngularMOA.Size = new System.Drawing.Size(347, 34);
-            this.menuViewAngularMOA.Text = "Minutes of Angle";
+            menuViewAngularMOA.Name = "menuViewAngularMOA";
+            menuViewAngularMOA.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A;
+            menuViewAngularMOA.Size = new System.Drawing.Size(404, 40);
+            menuViewAngularMOA.Text = "Minutes of Angle";
             // 
             // menuViewAngularMils
             // 
-            this.menuViewAngularMils.Name = "menuViewAngularMils";
-            this.menuViewAngularMils.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.M)));
-            this.menuViewAngularMils.Size = new System.Drawing.Size(347, 34);
-            this.menuViewAngularMils.Text = "Mils";
+            menuViewAngularMils.Name = "menuViewAngularMils";
+            menuViewAngularMils.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M;
+            menuViewAngularMils.Size = new System.Drawing.Size(404, 40);
+            menuViewAngularMils.Text = "Mils";
             // 
             // menuViewAngularThousands
             // 
-            this.menuViewAngularThousands.Name = "menuViewAngularThousands";
-            this.menuViewAngularThousands.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.T)));
-            this.menuViewAngularThousands.Size = new System.Drawing.Size(347, 34);
-            this.menuViewAngularThousands.Text = "Thousdands";
+            menuViewAngularThousands.Name = "menuViewAngularThousands";
+            menuViewAngularThousands.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.T;
+            menuViewAngularThousands.Size = new System.Drawing.Size(404, 40);
+            menuViewAngularThousands.Text = "Thousdands";
             // 
             // menuViewAngularMRads
             // 
-            this.menuViewAngularMRads.Name = "menuViewAngularMRads";
-            this.menuViewAngularMRads.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.R)));
-            this.menuViewAngularMRads.Size = new System.Drawing.Size(347, 34);
-            this.menuViewAngularMRads.Text = "Milliradians";
+            menuViewAngularMRads.Name = "menuViewAngularMRads";
+            menuViewAngularMRads.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R;
+            menuViewAngularMRads.Size = new System.Drawing.Size(404, 40);
+            menuViewAngularMRads.Text = "Milliradians";
             // 
             // menuViewAngularInches
             // 
-            this.menuViewAngularInches.Name = "menuViewAngularInches";
-            this.menuViewAngularInches.Size = new System.Drawing.Size(347, 34);
-            this.menuViewAngularInches.Text = "Inches/100 yards";
+            menuViewAngularInches.Name = "menuViewAngularInches";
+            menuViewAngularInches.Size = new System.Drawing.Size(404, 40);
+            menuViewAngularInches.Text = "Inches/100 yards";
             // 
             // menuViewAngularCentimeters
             // 
-            this.menuViewAngularCentimeters.Name = "menuViewAngularCentimeters";
-            this.menuViewAngularCentimeters.Size = new System.Drawing.Size(347, 34);
-            this.menuViewAngularCentimeters.Text = "Centimeters/100 meters";
+            menuViewAngularCentimeters.Name = "menuViewAngularCentimeters";
+            menuViewAngularCentimeters.Size = new System.Drawing.Size(404, 40);
+            menuViewAngularCentimeters.Text = "Centimeters/100 meters";
             // 
             // menuViewChart
             // 
-            this.menuViewChart.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuViewChartVelocity,
-            this.menuViewChartMach,
-            this.menuViewChartDrop,
-            this.menuViewChartWindage,
-            this.menuViewChartEnergy,
-            this.toolStripSeparator3,
-            this.menuViewChartZoomY});
-            this.menuViewChart.Name = "menuViewChart";
-            this.menuViewChart.Size = new System.Drawing.Size(296, 34);
-            this.menuViewChart.Text = "&Chart";
+            menuViewChart.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuViewChartVelocity, menuViewChartMach, menuViewChartDrop, menuViewChartWindage, menuViewChartEnergy, toolStripSeparator3, menuViewChartZoomY });
+            menuViewChart.Name = "menuViewChart";
+            menuViewChart.Size = new System.Drawing.Size(345, 40);
+            menuViewChart.Text = "&Chart";
             // 
             // menuViewChartVelocity
             // 
-            this.menuViewChartVelocity.Name = "menuViewChartVelocity";
-            this.menuViewChartVelocity.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.V)));
-            this.menuViewChartVelocity.Size = new System.Drawing.Size(456, 34);
-            this.menuViewChartVelocity.Text = "Velocity";
+            menuViewChartVelocity.Name = "menuViewChartVelocity";
+            menuViewChartVelocity.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.V;
+            menuViewChartVelocity.Size = new System.Drawing.Size(530, 40);
+            menuViewChartVelocity.Text = "Velocity";
             // 
             // menuViewChartMach
             // 
-            this.menuViewChartMach.Name = "menuViewChartMach";
-            this.menuViewChartMach.Size = new System.Drawing.Size(456, 34);
-            this.menuViewChartMach.Text = "Mach";
+            menuViewChartMach.Name = "menuViewChartMach";
+            menuViewChartMach.Size = new System.Drawing.Size(530, 40);
+            menuViewChartMach.Text = "Mach";
             // 
             // menuViewChartDrop
             // 
-            this.menuViewChartDrop.Name = "menuViewChartDrop";
-            this.menuViewChartDrop.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.D)));
-            this.menuViewChartDrop.Size = new System.Drawing.Size(456, 34);
-            this.menuViewChartDrop.Text = "Drop";
+            menuViewChartDrop.Name = "menuViewChartDrop";
+            menuViewChartDrop.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D;
+            menuViewChartDrop.Size = new System.Drawing.Size(530, 40);
+            menuViewChartDrop.Text = "Drop";
             // 
             // menuViewChartWindage
             // 
-            this.menuViewChartWindage.Name = "menuViewChartWindage";
-            this.menuViewChartWindage.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.W)));
-            this.menuViewChartWindage.Size = new System.Drawing.Size(456, 34);
-            this.menuViewChartWindage.Text = "Windage";
+            menuViewChartWindage.Name = "menuViewChartWindage";
+            menuViewChartWindage.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.W;
+            menuViewChartWindage.Size = new System.Drawing.Size(530, 40);
+            menuViewChartWindage.Text = "Windage";
             // 
             // menuViewChartEnergy
             // 
-            this.menuViewChartEnergy.Name = "menuViewChartEnergy";
-            this.menuViewChartEnergy.Size = new System.Drawing.Size(456, 34);
-            this.menuViewChartEnergy.Text = "Energy";
+            menuViewChartEnergy.Name = "menuViewChartEnergy";
+            menuViewChartEnergy.Size = new System.Drawing.Size(530, 40);
+            menuViewChartEnergy.Text = "Energy";
             // 
             // toolStripSeparator3
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(453, 6);
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new System.Drawing.Size(527, 6);
             // 
             // menuViewChartZoomY
             // 
-            this.menuViewChartZoomY.Name = "menuViewChartZoomY";
-            this.menuViewChartZoomY.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.Z)));
-            this.menuViewChartZoomY.Size = new System.Drawing.Size(456, 34);
-            this.menuViewChartZoomY.Text = "Zoom Y Axis to Visible Range";
+            menuViewChartZoomY.Name = "menuViewChartZoomY";
+            menuViewChartZoomY.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.Z;
+            menuViewChartZoomY.Size = new System.Drawing.Size(530, 40);
+            menuViewChartZoomY.Text = "Zoom Y Axis to Visible Range";
             // 
             // menuViewShow
             // 
-            this.menuViewShow.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuViewShowTable,
-            this.menuViewShowChart,
-            this.menuViewShowReticle});
-            this.menuViewShow.Name = "menuViewShow";
-            this.menuViewShow.Size = new System.Drawing.Size(296, 34);
-            this.menuViewShow.Text = "Show";
+            menuViewShow.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuViewShowTable, menuViewShowChart, menuViewShowReticle });
+            menuViewShow.Name = "menuViewShow";
+            menuViewShow.Size = new System.Drawing.Size(345, 40);
+            menuViewShow.Text = "Show";
             // 
             // menuViewShowTable
             // 
-            this.menuViewShowTable.Name = "menuViewShowTable";
-            this.menuViewShowTable.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.menuViewShowTable.Size = new System.Drawing.Size(226, 34);
-            this.menuViewShowTable.Text = "Table";
+            menuViewShowTable.Name = "menuViewShowTable";
+            menuViewShowTable.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T;
+            menuViewShowTable.Size = new System.Drawing.Size(264, 40);
+            menuViewShowTable.Text = "Table";
             // 
             // menuViewShowChart
             // 
-            this.menuViewShowChart.Name = "menuViewShowChart";
-            this.menuViewShowChart.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.menuViewShowChart.Size = new System.Drawing.Size(226, 34);
-            this.menuViewShowChart.Text = "Chart";
+            menuViewShowChart.Name = "menuViewShowChart";
+            menuViewShowChart.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C;
+            menuViewShowChart.Size = new System.Drawing.Size(264, 40);
+            menuViewShowChart.Text = "Chart";
             // 
             // menuViewShowReticle
             // 
-            this.menuViewShowReticle.Name = "menuViewShowReticle";
-            this.menuViewShowReticle.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.menuViewShowReticle.Size = new System.Drawing.Size(226, 34);
-            this.menuViewShowReticle.Text = "Reticle";
+            menuViewShowReticle.Name = "menuViewShowReticle";
+            menuViewShowReticle.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R;
+            menuViewShowReticle.Size = new System.Drawing.Size(264, 40);
+            menuViewShowReticle.Text = "Reticle";
             // 
             // menuViewCompare
             // 
-            this.menuViewCompare.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuViewCompareAdd,
-            this.menuViewCompareRemoveLast});
-            this.menuViewCompare.Name = "menuViewCompare";
-            this.menuViewCompare.Size = new System.Drawing.Size(296, 34);
-            this.menuViewCompare.Text = "Compare";
+            menuViewCompare.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuViewCompareAdd, menuViewCompareRemoveLast });
+            menuViewCompare.Name = "menuViewCompare";
+            menuViewCompare.Size = new System.Drawing.Size(345, 40);
+            menuViewCompare.Text = "Compare";
             // 
             // menuViewCompareAdd
             // 
-            this.menuViewCompareAdd.Name = "menuViewCompareAdd";
-            this.menuViewCompareAdd.Size = new System.Drawing.Size(273, 34);
-            this.menuViewCompareAdd.Text = "Add";
+            menuViewCompareAdd.Name = "menuViewCompareAdd";
+            menuViewCompareAdd.Size = new System.Drawing.Size(315, 40);
+            menuViewCompareAdd.Text = "Add";
             // 
             // menuViewCompareRemoveLast
             // 
-            this.menuViewCompareRemoveLast.Name = "menuViewCompareRemoveLast";
-            this.menuViewCompareRemoveLast.Size = new System.Drawing.Size(273, 34);
-            this.menuViewCompareRemoveLast.Text = "Remove Last Added";
+            menuViewCompareRemoveLast.Name = "menuViewCompareRemoveLast";
+            menuViewCompareRemoveLast.Size = new System.Drawing.Size(315, 40);
+            menuViewCompareRemoveLast.Text = "Remove Last Added";
+            // 
+            // menuViewDrop
+            // 
+            menuViewDrop.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuViewDropLineOfSight, menuViewDropMuzzleLevel });
+            menuViewDrop.Name = "menuViewDrop";
+            menuViewDrop.Size = new System.Drawing.Size(345, 40);
+            menuViewDrop.Text = "Drop";
+            // 
+            // menuViewDropLineOfSight
+            // 
+            menuViewDropLineOfSight.Name = "menuViewDropLineOfSight";
+            menuViewDropLineOfSight.Size = new System.Drawing.Size(315, 40);
+            menuViewDropLineOfSight.Text = "Over Line of Sight";
+            // 
+            // menuViewDropMuzzleLevel
+            // 
+            menuViewDropMuzzleLevel.Name = "menuViewDropMuzzleLevel";
+            menuViewDropMuzzleLevel.Size = new System.Drawing.Size(315, 40);
+            menuViewDropMuzzleLevel.Text = "Over Muzzle Level";
             // 
             // menuExtensions
             // 
-            this.menuExtensions.Name = "menuExtensions";
-            this.menuExtensions.Size = new System.Drawing.Size(111, 29);
-            this.menuExtensions.Text = "Extensions";
+            menuExtensions.Name = "menuExtensions";
+            menuExtensions.Size = new System.Drawing.Size(129, 34);
+            menuExtensions.Text = "Extensions";
             // 
             // menuWindows
             // 
-            this.menuWindows.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuWindowsTile,
-            this.menuWindowsCascade,
-            this.windowsToolStripMenuItem});
-            this.menuWindows.Name = "menuWindows";
-            this.menuWindows.Size = new System.Drawing.Size(102, 29);
-            this.menuWindows.Text = "&Windows";
+            menuWindows.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuWindowsTile, menuWindowsCascade, windowsToolStripMenuItem });
+            menuWindows.Name = "menuWindows";
+            menuWindows.Size = new System.Drawing.Size(116, 34);
+            menuWindows.Text = "&Windows";
             // 
             // menuWindowsTile
             // 
-            this.menuWindowsTile.Name = "menuWindowsTile";
-            this.menuWindowsTile.Size = new System.Drawing.Size(188, 34);
-            this.menuWindowsTile.Text = "&Tile";
+            menuWindowsTile.Name = "menuWindowsTile";
+            menuWindowsTile.Size = new System.Drawing.Size(216, 40);
+            menuWindowsTile.Text = "&Tile";
             // 
             // menuWindowsCascade
             // 
-            this.menuWindowsCascade.Name = "menuWindowsCascade";
-            this.menuWindowsCascade.Size = new System.Drawing.Size(188, 34);
-            this.menuWindowsCascade.Text = "&Cascade";
+            menuWindowsCascade.Name = "menuWindowsCascade";
+            menuWindowsCascade.Size = new System.Drawing.Size(216, 40);
+            menuWindowsCascade.Text = "&Cascade";
             // 
             // windowsToolStripMenuItem
             // 
-            this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
-            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(188, 34);
-            this.windowsToolStripMenuItem.Text = "&Windows";
+            windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
+            windowsToolStripMenuItem.Size = new System.Drawing.Size(216, 40);
+            windowsToolStripMenuItem.Text = "&Windows";
             // 
             // menuHelp
             // 
-            this.menuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuHelpAbout});
-            this.menuHelp.Name = "menuHelp";
-            this.menuHelp.Size = new System.Drawing.Size(65, 29);
-            this.menuHelp.Text = "&Help";
+            menuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { menuHelpAbout });
+            menuHelp.Name = "menuHelp";
+            menuHelp.Size = new System.Drawing.Size(74, 34);
+            menuHelp.Text = "&Help";
             // 
             // menuHelpAbout
             // 
-            this.menuHelpAbout.Name = "menuHelpAbout";
-            this.menuHelpAbout.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
-            this.menuHelpAbout.Size = new System.Drawing.Size(234, 34);
-            this.menuHelpAbout.Text = "&About";
+            menuHelpAbout.Name = "menuHelpAbout";
+            menuHelpAbout.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1;
+            menuHelpAbout.Size = new System.Drawing.Size(268, 40);
+            menuHelpAbout.Text = "&About";
             // 
             // AppForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1552, 762);
-            this.Controls.Add(this.menuMain);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.IsMdiContainer = true;
-            this.MainMenuStrip = this.menuMain;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "AppForm";
-            this.Text = "Ballistic Calculator.NET";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AppForm_FormClosing);
-            this.menuMain.ResumeLayout(false);
-            this.menuMain.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1862, 914);
+            Controls.Add(menuMain);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            IsMdiContainer = true;
+            MainMenuStrip = menuMain;
+            Margin = new System.Windows.Forms.Padding(5);
+            Name = "AppForm";
+            Text = "Ballistic Calculator.NET";
+            FormClosing += AppForm_FormClosing;
+            menuMain.ResumeLayout(false);
+            menuMain.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -510,6 +477,9 @@ namespace BallisticCalculatorNet
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem menuViewChartZoomY;
         private System.Windows.Forms.ToolStripMenuItem menuExtensions;
+        private System.Windows.Forms.ToolStripMenuItem menuViewDrop;
+        private System.Windows.Forms.ToolStripMenuItem menuViewDropLineOfSight;
+        private System.Windows.Forms.ToolStripMenuItem menuViewDropMuzzleLevel;
     }
 }
 

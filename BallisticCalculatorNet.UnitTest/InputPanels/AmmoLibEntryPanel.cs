@@ -1,7 +1,7 @@
 ﻿using BallisticCalculator;
 using BallisticCalculator.Data.Dictionary;
 using BallisticCalculator.Serialization;
-using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using BallisticCalculatorNet.InputPanels;
 using BallisticCalculatorNet.UnitTest.Utils;
 using FluentAssertions;

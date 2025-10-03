@@ -1,5 +1,6 @@
 ﻿using BallisticCalculator;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using Gehtsoft.Measurements;
 using ScottPlot;
 using System;
@@ -14,6 +15,7 @@ using System.Windows.Forms;
 
 namespace BallisticCalculatorNet.InputPanels
 {
+
     public partial class ChartControl : UserControl
     {
         private MeasurementSystem mMeasurementSystem = MeasurementSystem.Metric;
@@ -40,6 +42,19 @@ namespace BallisticCalculatorNet.InputPanels
             set
             {
                 mAngularUnits = value;
+                UpdateChart();
+            }
+        }
+
+        private DropBase mDropBase = DropBase.SightLine;
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public DropBase DropBase
+        {
+            get => mDropBase;
+            set
+            {
+                mDropBase = value;
                 UpdateChart();
             }
         }
@@ -83,7 +98,7 @@ namespace BallisticCalculatorNet.InputPanels
             formsPlot1.Plot.Clear();
             if (mTrajectory != null)
             {
-                var controller = new ChartController(mMeasurementSystem, mAngularUnits, mChartMode, mTrajectory);
+                var controller = new ChartController(mMeasurementSystem, mAngularUnits, mChartMode, mDropBase, mTrajectory);
                 var x = controller.GetXAxis();
                 var y = controller.GetYAxis();
                 formsPlot1.Plot.AddScatter(x, y);
@@ -103,7 +118,7 @@ namespace BallisticCalculatorNet.InputPanels
             formsPlot1.Plot.YAxis?.LockLimits(false);
 
             var limits = formsPlot1.Plot.GetAxisLimits();
-            var controller = new ChartController(mMeasurementSystem, mAngularUnits, mChartMode, mTrajectory);
+            var controller = new ChartController(mMeasurementSystem, mAngularUnits, mChartMode, mDropBase, mTrajectory);
             var yMin = Double.MaxValue;
             var yMax = Double.MinValue;
             var i1 = -1;

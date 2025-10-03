@@ -3,7 +3,7 @@ using Gehtsoft.Measurements;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BallisticCalculatorNet.Api
+namespace BallisticCalculatorNet.Types
 {
     /// <summary>
     /// The collection of winds

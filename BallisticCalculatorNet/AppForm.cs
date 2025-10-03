@@ -15,6 +15,7 @@ using Gehtsoft.Measurements;
 using System.Xml;
 using System.IO;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using System.Diagnostics;
 using BallisticCalculatorNet.Api.Interop;
 
@@ -64,6 +65,9 @@ namespace BallisticCalculatorNet
             menuViewChartDrop.Click += (_, _) => (ActiveMdiChild as IChartDisplayForm ?? safetyForm).ChartMode = TrajectoryChartMode.Drop;
             menuViewChartWindage.Click += (_, _) => (ActiveMdiChild as IChartDisplayForm ?? safetyForm).ChartMode = TrajectoryChartMode.Windage;
             menuViewChartEnergy.Click += (_, _) => (ActiveMdiChild as IChartDisplayForm ?? safetyForm).ChartMode = TrajectoryChartMode.Energy;
+
+            menuViewDropLineOfSight.Click += (_, _) => (ActiveMdiChild as ITrajectoryDisplayForm ?? safetyForm).DropBase = DropBase.SightLine;
+            menuViewDropMuzzleLevel.Click += (_, _) => (ActiveMdiChild as ITrajectoryDisplayForm ?? safetyForm).DropBase = DropBase.MuzzlePoint;
 
             menuViewShowTable.Click += (_, _) => (ActiveMdiChild as TrajectoryForm)?.ShowTable();
             menuViewShowChart.Click += (_, _) => (ActiveMdiChild as TrajectoryForm)?.ShowChart();
@@ -125,6 +129,11 @@ namespace BallisticCalculatorNet
             menuViewSystemImperial.Checked = isTrajectoryDisplayForm && trajectoryDisplayForm.MeasurementSystem == MeasurementSystem.Imperial;
             menuViewSystemMetric.Enabled = isTrajectoryDisplayForm;
             menuViewSystemMetric.Checked = isTrajectoryDisplayForm && trajectoryDisplayForm.MeasurementSystem == MeasurementSystem.Metric;
+
+            menuViewDropLineOfSight.Enabled = isTrajectoryDisplayForm;
+            menuViewDropLineOfSight.Checked = isTrajectoryDisplayForm && trajectoryDisplayForm.DropBase == DropBase.SightLine;
+            menuViewDropMuzzleLevel.Enabled = isTrajectoryDisplayForm;
+            menuViewDropMuzzleLevel.Checked = isTrajectoryDisplayForm && trajectoryDisplayForm.DropBase == DropBase.MuzzlePoint;
 
             menuViewAngularMils.Enabled = isTrajectoryDisplayForm;
             menuViewAngularMils.Checked = isTrajectoryDisplayForm && trajectoryDisplayForm.AngularUnits == AngularUnit.Mil;

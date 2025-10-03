@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BallisticCalculatorNet.Api
+namespace BallisticCalculatorNet.Types
 {
     /// <summary>
     /// The measurement system

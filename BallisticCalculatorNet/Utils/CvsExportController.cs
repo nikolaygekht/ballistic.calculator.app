@@ -1,5 +1,6 @@
 ﻿using BallisticCalculator;
 using BallisticCalculatorNet.Api;
+using BallisticCalculatorNet.Types;
 using BallisticCalculatorNet.InputPanels;
 using Gehtsoft.Measurements;
 using System;
@@ -56,29 +57,29 @@ namespace BallisticCalculatorNet.Utils
             var sb = new StringBuilder();
             var culture = CultureInfo.InvariantCulture;
 
-            sb.Append(point.Distance.In(mController.RangeUnit).ToString(mController.RangeFormatString1, culture))
+            sb.Append(point.Distance.In(mController.RangeUnit).ToString(MeasurementSystemController.RangeFormatString1, culture))
               .Append(',')
-              .Append(point.Velocity.In(mController.VelocityUnit).ToString(mController.VelocityFormatString1, culture))
+              .Append(point.Velocity.In(mController.VelocityUnit).ToString(MeasurementSystemController.VelocityFormatString1, culture))
               .Append(',')
-              .Append(point.Mach.ToString(mController.MachFormatString1, culture))
+              .Append(point.Mach.ToString(MeasurementSystemController.MachFormatString, culture))
               .Append(',')
-              .Append(point.Drop.In(mController.AdjustmentUnit).ToString(mController.AdjustmentFormatString1, culture))
+              .Append(point.Drop.In(mController.AdjustmentUnit).ToString(MeasurementSystemController.AdjustmentFormatString1, culture))
               .Append(',')
-              .Append(point.DropAdjustment.In(mController.AngularUnit).ToString(mController.AngularFormatString1, culture))
+              .Append(point.DropAdjustment.In(mController.AngularUnit).ToString(MeasurementSystemController.AngularFormatString1, culture))
               .Append(',')
               .Append(GetClicks(point.Distance, point.DropAdjustment, Sight?.HorizontalClick, culture))
               .Append(',')
-              .Append(point.Windage.In(mController.AdjustmentUnit).ToString(mController.AdjustmentFormatString1, culture))
+              .Append(point.Windage.In(mController.AdjustmentUnit).ToString(MeasurementSystemController.AdjustmentFormatString1, culture))
               .Append(',')
-              .Append(point.WindageAdjustment.In(mController.AngularUnit).ToString(mController.AngularFormatString1, culture))
+              .Append(point.WindageAdjustment.In(mController.AngularUnit).ToString(MeasurementSystemController.AngularFormatString1, culture))
               .Append(',')
               .Append(GetClicks(point.Distance, point.WindageAdjustment, Sight?.VerticalClick, culture))
               .Append(',')
-              .Append(point.Time.ToString(mController.TimeFormatString, culture))
+              .Append(point.Time.ToString(MeasurementSystemController.TimeFormatString, culture))
               .Append(',')
-              .Append(point.Energy.In(mController.EnergyUnit).ToString(mController.EnergyFormatString1, culture))
+              .Append(point.Energy.In(mController.EnergyUnit).ToString(MeasurementSystemController.EnergyFormatString1, culture))
               .Append(',')
-              .Append(point.OptimalGameWeight.In(mController.WeightUnit).ToString(mController.WeightFormatString1, culture));
+              .Append(point.OptimalGameWeight.In(mController.WeightUnit).ToString(MeasurementSystemController.WeightFormatString1, culture));
             return sb.ToString();
         }
 
@@ -86,7 +87,7 @@ namespace BallisticCalculatorNet.Utils
         {
             if (distance.Value < 1 || clickValue == null)
                 return "n/a";
-            return ((int)Math.Round(windageAdjustment / clickValue.Value)).ToString(mController.ClickFormatString1, culture);
+            return ((int)Math.Round(windageAdjustment / clickValue.Value)).ToString(MeasurementSystemController.ClickFormatString1, culture);
         }
     }
 }

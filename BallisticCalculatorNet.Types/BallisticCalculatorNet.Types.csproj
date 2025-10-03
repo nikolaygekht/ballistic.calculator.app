@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net80-windows</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BallisticCalculator" Version="1.1.5" />
+    <PackageReference Include="Gehtsoft.Measurements" Version="1.1.16" />
+  </ItemGroup>
+</Project>
