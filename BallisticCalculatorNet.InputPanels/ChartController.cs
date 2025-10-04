@@ -64,7 +64,7 @@ namespace BallisticCalculatorNet.InputPanels
                 TrajectoryChartMode.Velocity => pt.Velocity.In(mMeasurementSystemController.VelocityUnit),
                 TrajectoryChartMode.Mach => pt.Mach,
                 TrajectoryChartMode.Energy => pt.Energy.In(mMeasurementSystemController.EnergyUnit),
-                TrajectoryChartMode.Drop => mDropBase == DropBase.SightLine ? pt.Drop.In(mMeasurementSystemController.AdjustmentUnit) : (pt.Drop + pt.LineOfSightElevation).In(mMeasurementSystemController.AdjustmentUnit),
+                TrajectoryChartMode.Drop => mDropBase == DropBase.SightLine ? pt.Drop.In(mMeasurementSystemController.AdjustmentUnit) : (pt.DropFlat).In(mMeasurementSystemController.AdjustmentUnit),
                 TrajectoryChartMode.DropAdjustment => pt.DropAdjustment.In(mAngularUnits),
                 TrajectoryChartMode.Windage => pt.Windage.In(mMeasurementSystemController.AdjustmentUnit),
                 TrajectoryChartMode.WindageAdjustment => pt.WindageAdjustment.In(mAngularUnits),

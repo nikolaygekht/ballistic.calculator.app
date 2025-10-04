@@ -154,7 +154,7 @@ namespace BallisticCalculatorNet.InputPanels
             
             //path
             AddAngularValue(item.Distance, 
-                mDropBase == DropBase.SightLine ? item.Drop : item.Drop + item.LineOfSightElevation,  
+                mDropBase == DropBase.SightLine ? item.Drop : item.DropFlat,  
                 item.DropAdjustment, mSight?.VerticalClick, e.Item);
 
             //windage

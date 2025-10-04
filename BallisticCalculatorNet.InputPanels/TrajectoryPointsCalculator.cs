@@ -15,7 +15,7 @@ namespace BallisticCalculatorNet.InputPanels
 
             var calculationParameters = new ShotParameters()
             {
-                BarrelAzymuth = shotData.Parameters.BarrelAzymuth,
+                BarrelAzimuth = shotData.Parameters.BarrelAzimuth,
                 CantAngle = shotData.Parameters.CantAngle,
                 MaximumDistance = overrideMaximumDistance ?? shotData.Parameters.MaximumDistance,
                 ShotAngle = shotData.Parameters.ShotAngle,

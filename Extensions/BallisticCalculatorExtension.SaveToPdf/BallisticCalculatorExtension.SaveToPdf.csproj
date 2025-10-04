@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BallisticCalculator" Version="1.1.5" />
+    <PackageReference Include="BallisticCalculator" Version="1.1.6" />
     <PackageReference Include="Gehtsoft.PDFFlowLib" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.9" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="9.0.9" />
