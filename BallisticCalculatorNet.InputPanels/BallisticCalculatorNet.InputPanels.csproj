@@ -8,10 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BallisticCalculator" Version="1.1.6" />
+    <PackageReference Include="BallisticCalculator" Version="1.1.7.1" />
     <PackageReference Include="Gehtsoft.Measurements" Version="1.1.16" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.9" />
-    <PackageReference Include="ScottPlot.WinForms" Version="4.1.74" />
+    <PackageReference Include="ScottPlot.WinForms" Version="[4.1.74]" />
     <PackageReference Include="Serilog" Version="4.3.0" />
     <PackageReference Include="System.Text.Json" Version="9.0.9" />
   </ItemGroup>

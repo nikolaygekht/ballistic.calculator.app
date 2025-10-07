@@ -8,13 +8,13 @@ namespace Gehtsoft.Winforms.FluentAssertions
 {
     public class ListBoxAssertions : ControlAssertionsBase<ListBox, ListBoxAssertions>
     {
-        public ListBoxAssertions(ListBox subject, AssertionChain chain) : base(subject, chain)
+        public ListBoxAssertions(ListBox subject) : base(subject)
         {
         }
 
         public AndConstraint<ListBoxAssertions> HaveNoItems(string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lb => lb.Items.Count == 0)
@@ -25,7 +25,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ListBoxAssertions> HaveItemsCount(int count, string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lb => lb.Items.Count == count)
@@ -36,7 +36,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ListBoxAssertions> HaveItemMatching<T>(Expression<Func<T, bool>> predicate, string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lb =>
@@ -57,7 +57,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ListBoxAssertions> HaveNotItemsMatching<T>(Expression<Func<T, bool>> predicate, string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lb =>
@@ -75,7 +75,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ListBoxAssertions> HaveAllItemsMatching<T>(Expression<Func<T, bool>> predicate, string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lb =>
@@ -93,7 +93,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ListBoxAssertions> HaveIndexSelected(int index, string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lb => lb.SelectedIndex == index)
@@ -104,7 +104,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ListBoxAssertions> SelectedObjectMatch<T>(Expression<Func<T, bool>> predicate, string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lb => lb.SelectedItem is T t && predicate.Compile().Invoke(t))

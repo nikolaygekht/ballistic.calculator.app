@@ -6,13 +6,13 @@ namespace Gehtsoft.Winforms.FluentAssertions
 {
     public class TextBoxAssertions : ControlAssertionsBase<TextBox, TextBoxAssertions>
     {
-        public TextBoxAssertions(TextBox subject, AssertionChain chain) : base(subject, chain)
+        public TextBoxAssertions(TextBox subject) : base(subject)
         {
         }
 
         public AndConstraint<TextBoxAssertions> HaveNoText(string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject.Text)
                 .ForCondition(text => string.IsNullOrEmpty(text))

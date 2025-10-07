@@ -8,13 +8,13 @@ namespace Gehtsoft.Winforms.FluentAssertions
 {
     public class ComboBoxAssertions : ControlAssertionsBase<ComboBox, ComboBoxAssertions>
     {
-        public ComboBoxAssertions(ComboBox subject, AssertionChain chain) : base(subject, chain)
+        public ComboBoxAssertions(ComboBox subject) : base(subject)
         {
         }
 
         public AndConstraint<ComboBoxAssertions> HaveNoItems(string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lb => lb.Items.Count == 0)
@@ -25,7 +25,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ComboBoxAssertions> HaveItemsCount(int count, string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lb => lb.Items.Count == count)
@@ -36,7 +36,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ComboBoxAssertions> HaveItemMatching<T>(Expression<Func<T, bool>> predicate, string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lb =>
@@ -54,7 +54,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ComboBoxAssertions> HaveNotItemsMatching<T>(Expression<Func<T, bool>> predicate, string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lb =>
@@ -72,7 +72,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ComboBoxAssertions> HaveAllItemsMatching<T>(Expression<Func<T, bool>> predicate, string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lb =>
@@ -90,7 +90,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ComboBoxAssertions> HaveIndexSelected(int index, string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lb => lb.SelectedIndex == index)
@@ -101,7 +101,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         public AndConstraint<ComboBoxAssertions> SelectedObjectMatch<T>(Expression<Func<T, bool>> predicate, string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(lb => lb.SelectedItem is T t && predicate.Compile().Invoke(t))
@@ -112,7 +112,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 
         new public AndConstraint<ComboBoxAssertions> HaveText(string text, string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject.Text)
                 .ForCondition(t => t == text)

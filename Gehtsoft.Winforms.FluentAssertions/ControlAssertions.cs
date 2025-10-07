@@ -9,7 +9,7 @@ namespace Gehtsoft.Winforms.FluentAssertions
 {
     public class ControlAssertions : ControlAssertionsBase<Control, ControlAssertions>
     {
-        public ControlAssertions(Control subject, AssertionChain chain) : base(subject, chain)
+        public ControlAssertions(Control subject) : base(subject)
         {
         }
     }

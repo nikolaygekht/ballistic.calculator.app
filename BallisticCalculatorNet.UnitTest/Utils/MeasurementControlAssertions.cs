@@ -12,13 +12,13 @@ namespace BallisticCalculatorNet.UnitTest.Utils
 {
     public class MeasurementControlAssertions : ControlAssertionsBase<MeasurementControl.MeasurementControl, MeasurementControlAssertions>
     {
-        public MeasurementControlAssertions(MeasurementControl.MeasurementControl subject, AssertionChain chain) : base(subject, chain)
+        public MeasurementControlAssertions(MeasurementControl.MeasurementControl subject) : base(subject)
         {
         }
 
         public AndConstraint<MeasurementControlAssertions> HaveUnitType(MeasurementType type, string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(control => control.MeasurementType == type)
@@ -30,7 +30,7 @@ namespace BallisticCalculatorNet.UnitTest.Utils
         public AndConstraint<MeasurementControlAssertions> HaveValue<T>(Measurement<T> value, string because = null, params object[] becauseParameters)
             where T : Enum
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(control => control.Value is Measurement<T> v && v == value)
@@ -41,7 +41,7 @@ namespace BallisticCalculatorNet.UnitTest.Utils
 
         public AndConstraint<MeasurementControlAssertions> BeEmpty(string because = null, params object[] becauseParameters)
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(control => control.IsEmpty)
@@ -53,7 +53,7 @@ namespace BallisticCalculatorNet.UnitTest.Utils
         public AndConstraint<MeasurementControlAssertions> HaveExactValue<T>(Measurement<T> value, string because = null, params object[] becauseParameters)
            where T : Enum
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(control => control.Value is Measurement<T> v && v == value && v.Unit.Equals(value.Unit))
@@ -65,7 +65,7 @@ namespace BallisticCalculatorNet.UnitTest.Utils
         public AndConstraint<MeasurementControlAssertions> HaveUnitSelected<T>(T value, string because = null, params object[] becauseParameters)
             where T : Enum
         {
-            mChain
+            Execute.Assertion
                 .BecauseOf(because, becauseParameters)
                 .Given(() => Subject)
                 .ForCondition(control => control.Unit.Equals(value))
