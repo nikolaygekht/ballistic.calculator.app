@@ -2,6 +2,7 @@
 using BallisticCalculatorNet.Api;
 using BallisticCalculatorNet.Types;
 using Gehtsoft.Measurements;
+using System.Collections.Generic;
 
 namespace BallisticCalculatorNet.InputPanels
 {
@@ -38,6 +39,23 @@ namespace BallisticCalculatorNet.InputPanels
 
         public string XAxisTitle => $"Range ({mMeasurementSystemController.RangeUnitName})";
 
+        public int SeriesCount => (mChartMode == TrajectoryChartMode.Drop && mDropBase == DropBase.MuzzlePoint) ? 2 : 1;
+
+        public string GetSeriesTitle(int seriesIndex)
+        {
+            if (mChartMode == TrajectoryChartMode.Drop && mDropBase == DropBase.MuzzlePoint)
+            {
+                return seriesIndex switch
+                {
+                    0 => $"Drop ({mMeasurementSystemController.AdjustmentUnitName})",
+                    1 => $"Line of Sight Elevation ({mMeasurementSystemController.AdjustmentUnitName})",
+                    _ => "Unknown"
+                };
+            }
+
+            return YAxisTitle;
+        }
+
         public double[] GetXAxis()
         {
             var r = new double[mTrajectory.Length];
@@ -48,23 +66,41 @@ namespace BallisticCalculatorNet.InputPanels
 
         public double GetXAxisPoint(int index) => mTrajectory[index].Distance.In(mMeasurementSystemController.RangeUnit);
 
-        public double[] GetYAxis()
+        public List<double[]> GetYAxis()
         {
-            var r = new double[mTrajectory.Length];
-            for (int i = 0; i < mTrajectory.Length; i++)
-                r[i] = GetYAXisPoint(i);
-            return r;
+            var result = new List<double[]>();
+
+            for (int series = 0; series < SeriesCount; series++)
+            {
+                var seriesData = new double[mTrajectory.Length];
+                for (int i = 0; i < mTrajectory.Length; i++)
+                    seriesData[i] = GetYAXisPoint(i, series);
+                result.Add(seriesData);
+            }
+
+            return result;
         }
 
-        public double GetYAXisPoint(int index)
+        public double GetYAXisPoint(int index, int seriesIndex = 0)
         {
             var pt = mTrajectory[index];
+
+            if (mChartMode == TrajectoryChartMode.Drop && mDropBase == DropBase.MuzzlePoint)
+            {
+                return seriesIndex switch
+                {
+                    0 => pt.DropFlat.In(mMeasurementSystemController.AdjustmentUnit),
+                    1 => pt.LineOfSightElevation.In(mMeasurementSystemController.AdjustmentUnit),
+                    _ => 0
+                };
+            }
+
             return mChartMode switch
             {
                 TrajectoryChartMode.Velocity => pt.Velocity.In(mMeasurementSystemController.VelocityUnit),
                 TrajectoryChartMode.Mach => pt.Mach,
                 TrajectoryChartMode.Energy => pt.Energy.In(mMeasurementSystemController.EnergyUnit),
-                TrajectoryChartMode.Drop => mDropBase == DropBase.SightLine ? pt.Drop.In(mMeasurementSystemController.AdjustmentUnit) : (pt.DropFlat).In(mMeasurementSystemController.AdjustmentUnit),
+                TrajectoryChartMode.Drop => pt.Drop.In(mMeasurementSystemController.AdjustmentUnit),
                 TrajectoryChartMode.DropAdjustment => pt.DropAdjustment.In(mAngularUnits),
                 TrajectoryChartMode.Windage => pt.Windage.In(mMeasurementSystemController.AdjustmentUnit),
                 TrajectoryChartMode.WindageAdjustment => pt.WindageAdjustment.In(mAngularUnits),

@@ -103,8 +103,17 @@ namespace BallisticCalculatorNet.InputPanels
                 {
                     var trajectory = mTrajectories[i];
                     var controller = new ChartController(mMeasurementSystem, mAngularUnits, mChartMode, mDropBase, trajectory.Item2);
-                    formsPlot1.Plot.AddScatter(controller.GetXAxis(), controller.GetYAxis(), label:trajectory.Item1);
-                    
+                    var x = controller.GetXAxis();
+                    var ySeries = controller.GetYAxis();
+
+                    for (int s = 0; s < ySeries.Count; s++)
+                    {
+                        var label = controller.SeriesCount > 1
+                            ? $"{trajectory.Item1} - {controller.GetSeriesTitle(s)}"
+                            : trajectory.Item1;
+                        formsPlot1.Plot.AddScatter(x, ySeries[s], label: label);
+                    }
+
                     if (i == 0)
                     {
                         formsPlot1.Plot.XAxis.Label(controller.XAxisTitle);
@@ -132,11 +141,11 @@ namespace BallisticCalculatorNet.InputPanels
             for (int j = 0; j < mTrajectories.Count; j++)
             {
                 var trajectory = mTrajectories[j].Item2;
-                
+
                 var controller = new ChartController(mMeasurementSystem, mAngularUnits, mChartMode, mDropBase, trajectory);
                 var i1 = -1;
                 var i2 = trajectory.Length - 1;
-                
+
                 for (int i = 1; i < trajectory.Length - 1; i++)
                 {
                     var x = controller.GetXAxisPoint(i);
@@ -155,13 +164,16 @@ namespace BallisticCalculatorNet.InputPanels
                 if (i2 >= trajectory.Length)
                     i2 = trajectory.Length - 1;
 
-                for (int i = i1; i <= i2; i++)
+                for (int series = 0; series < controller.SeriesCount; series++)
                 {
-                    var y = controller.GetYAXisPoint(i);
-                    if (y < yMin)
-                        yMin = y;
-                    if (y > yMax)
-                        yMax = y;
+                    for (int i = i1; i <= i2; i++)
+                    {
+                        var y = controller.GetYAXisPoint(i, series);
+                        if (y < yMin)
+                            yMin = y;
+                        if (y > yMax)
+                            yMax = y;
+                    }
                 }
             }
 

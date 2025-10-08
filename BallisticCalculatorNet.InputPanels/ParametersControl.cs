@@ -47,7 +47,7 @@ namespace BallisticCalculatorNet.InputPanels
                     MaximumDistance = measurementDistance.ValueAsMeasurement<DistanceUnit>(),
                     Step = measurementStep.ValueAsMeasurement<DistanceUnit>(),
                     ShotAngle = measurementShotAngle.IsEmpty ||
-                                measurementShotAngle.ValueAsMeasurement<AngularUnit>().In(AngularUnit.MOA) < 0.0001 ? null : measurementShotAngle.ValueAsMeasurement<AngularUnit>()
+                                Math.Abs(measurementShotAngle.ValueAsMeasurement<AngularUnit>().In(AngularUnit.MOA)) < 0.0001 ? null : measurementShotAngle.ValueAsMeasurement<AngularUnit>()
                 };
             }
             set

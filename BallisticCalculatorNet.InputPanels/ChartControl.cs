@@ -100,8 +100,17 @@ namespace BallisticCalculatorNet.InputPanels
             {
                 var controller = new ChartController(mMeasurementSystem, mAngularUnits, mChartMode, mDropBase, mTrajectory);
                 var x = controller.GetXAxis();
-                var y = controller.GetYAxis();
-                formsPlot1.Plot.AddScatter(x, y);
+                var ySeries = controller.GetYAxis();
+
+                for (int i = 0; i < ySeries.Count; i++)
+                {
+                    var label = controller.SeriesCount > 1 ? controller.GetSeriesTitle(i) : null;
+                    formsPlot1.Plot.AddScatter(x, ySeries[i], label: label);
+                }
+
+                if (controller.SeriesCount > 1)
+                    formsPlot1.Plot.Legend();
+
                 formsPlot1.Plot.XAxis.Label(controller.XAxisTitle);
                 formsPlot1.Plot.YAxis.Label(controller.YAxisTitle);
                 formsPlot1.Plot.AxisAuto();
@@ -142,13 +151,16 @@ namespace BallisticCalculatorNet.InputPanels
             if (i2 >= mTrajectory.Length)
                 i2 = mTrajectory.Length - 1;
 
-            for (int i = i1; i <= i2; i++)
+            for (int series = 0; series < controller.SeriesCount; series++)
             {
-                var y = controller.GetYAXisPoint(i);
-                if (y < yMin)
-                    yMin = y;
-                if (y > yMax)
-                    yMax = y;
+                for (int i = i1; i <= i2; i++)
+                {
+                    var y = controller.GetYAXisPoint(i, series);
+                    if (y < yMin)
+                        yMin = y;
+                    if (y > yMax)
+                        yMax = y;
+                }
             }
 
             var delta = yMax - yMin;
