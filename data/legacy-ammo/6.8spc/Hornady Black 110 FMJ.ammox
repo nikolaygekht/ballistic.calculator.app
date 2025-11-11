@@ -1,0 +1,3 @@
+<ammunition-library-entry name="Hornady 6.8spc 110gr FMJ" source="" caliber="6.8mm Remington SPC" ammunition-type="FMJ" barrel-length="16in">
+  <ammunition bullet-weight="110gr" ballistic-coefficient="0.370G1" muzzle-velocity="2550ft/s" bullet-diameter="0.277in" />
+</ammunition-library-entry>

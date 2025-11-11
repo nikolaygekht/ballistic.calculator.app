@@ -87,8 +87,14 @@ namespace BallisticCalculatorNet.InputPanels
 
         private static void DrawRay(Graphics g, Pen p, float cx, float cy, float r, double direction)
         {
-            float y = cy - r * (float)Math.Cos(direction);
-            float x = cx + r * (float)Math.Sin(direction);
+            // 0° = wind toward observer's back (from bottom)
+            // 90° = wind toward observer's right (from right)
+            // 180° = wind toward observer's face (from top)
+            // 270° = wind toward observer's left (from left)
+            // Add 180° to reverse Y, negate X to flip left/right
+            double reversed = direction + Math.PI;
+            float y = cy - r * (float)Math.Cos(reversed);
+            float x = cx - r * (float)Math.Sin(reversed);
             g.DrawLine(p, x, y, cx, cy);
         }
 
@@ -110,18 +116,14 @@ namespace BallisticCalculatorNet.InputPanels
         {
             var cy = pictureBox1.Height / 2;
             var cx = pictureBox1.Width / 2;
-            var dx = Math.Abs(e.X - cx);
-            var dy = Math.Abs(e.Y - cy);
-            var a = Math.Atan2(dy, dx);
-            if (e.X <= cx && e.Y <= cy)
-                a = -Math.PI / 2 + a;
-            else if (e.X <= cx && e.Y > cy)
-                a = -Math.PI / 2 - a;
-            else if (e.X > cx && e.Y <= cy)
-                a = Math.PI / 2 - a;
-            else if (e.X > cx && e.Y > cy)
-                a = Math.PI / 2 + a;
+            var dx = e.X - cx;
+            var dy = e.Y - cy;
+            // Calculate angle: 0° = bottom, 90° = right, 180° = top, 270° = left
+            var a = Math.Atan2(dx, dy);
             var d = Math.Round(AngularUnit.Radian.New(a).In(AngularUnit.Degree));
+            // Normalize to 0-360 range
+            if (d < 0)
+                d += 360;
             measurementDirection.Value = AngularUnit.Degree.New(d);
         }
 
