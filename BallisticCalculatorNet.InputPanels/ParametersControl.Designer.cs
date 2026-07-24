@@ -31,12 +31,15 @@
             this.measurementDistance = new BallisticCalculatorNet.MeasurementControl.MeasurementControl();
             this.measurementStep = new BallisticCalculatorNet.MeasurementControl.MeasurementControl();
             this.measurementShotAngle = new BallisticCalculatorNet.MeasurementControl.MeasurementControl();
-            this.textBoxClicks = new System.Windows.Forms.TextBox();
-            this.buttonClicksSet = new System.Windows.Forms.Button();
+            this.numericVerticalCorrection = new System.Windows.Forms.NumericUpDown();
+            this.numericHorizontalCorrection = new System.Windows.Forms.NumericUpDown();
             this.labelMaximumRange = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelVerticalCorrection = new System.Windows.Forms.Label();
+            this.labelHorizontalCorrection = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.numericVerticalCorrection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericHorizontalCorrection)).BeginInit();
             this.SuspendLayout();
             // 
             // measurementDistance
@@ -89,24 +92,42 @@
             this.measurementShotAngle.TabIndex = 2;
             this.measurementShotAngle.TextValue = "mil";
             this.measurementShotAngle.Unit = Gehtsoft.Measurements.AngularUnit.Mil;
-            // 
-            // textBoxClicks
-            // 
-            this.textBoxClicks.Location = new System.Drawing.Point(170, 134);
-            this.textBoxClicks.Name = "textBoxClicks";
-            this.textBoxClicks.Size = new System.Drawing.Size(157, 31);
-            this.textBoxClicks.TabIndex = 3;
-            this.textBoxClicks.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // buttonClicksSet
-            // 
-            this.buttonClicksSet.Location = new System.Drawing.Point(333, 134);
-            this.buttonClicksSet.Name = "buttonClicksSet";
-            this.buttonClicksSet.Size = new System.Drawing.Size(98, 32);
-            this.buttonClicksSet.TabIndex = 4;
-            this.buttonClicksSet.Text = "Set";
-            this.buttonClicksSet.UseVisualStyleBackColor = true;
-            this.buttonClicksSet.Click += new System.EventHandler(this.buttonClicksSet_Click);
+            //
+            // numericVerticalCorrection
+            //
+            this.numericVerticalCorrection.Location = new System.Drawing.Point(170, 134);
+            this.numericVerticalCorrection.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.numericVerticalCorrection.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericVerticalCorrection.Name = "numericVerticalCorrection";
+            this.numericVerticalCorrection.Size = new System.Drawing.Size(261, 31);
+            this.numericVerticalCorrection.TabIndex = 3;
+            this.numericVerticalCorrection.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            //
+            // numericHorizontalCorrection
+            //
+            this.numericHorizontalCorrection.Location = new System.Drawing.Point(170, 176);
+            this.numericHorizontalCorrection.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.numericHorizontalCorrection.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericHorizontalCorrection.Name = "numericHorizontalCorrection";
+            this.numericHorizontalCorrection.Size = new System.Drawing.Size(261, 31);
+            this.numericHorizontalCorrection.TabIndex = 4;
+            this.numericHorizontalCorrection.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // labelMaximumRange
             // 
@@ -134,32 +155,44 @@
             this.label2.Size = new System.Drawing.Size(58, 25);
             this.label2.TabIndex = 7;
             this.label2.Text = "Angle";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 141);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(126, 25);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Angle as clicks";
+            //
+            // labelVerticalCorrection
+            //
+            this.labelVerticalCorrection.AutoSize = true;
+            this.labelVerticalCorrection.Location = new System.Drawing.Point(3, 141);
+            this.labelVerticalCorrection.Name = "labelVerticalCorrection";
+            this.labelVerticalCorrection.Size = new System.Drawing.Size(126, 25);
+            this.labelVerticalCorrection.TabIndex = 8;
+            this.labelVerticalCorrection.Text = "V-clicks";
+            //
+            // labelHorizontalCorrection
+            //
+            this.labelHorizontalCorrection.AutoSize = true;
+            this.labelHorizontalCorrection.Location = new System.Drawing.Point(3, 183);
+            this.labelHorizontalCorrection.Name = "labelHorizontalCorrection";
+            this.labelHorizontalCorrection.Size = new System.Drawing.Size(126, 25);
+            this.labelHorizontalCorrection.TabIndex = 9;
+            this.labelHorizontalCorrection.Text = "H-clicks";
             // 
             // ParametersControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.labelHorizontalCorrection);
+            this.Controls.Add(this.labelVerticalCorrection);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelMaximumRange);
-            this.Controls.Add(this.buttonClicksSet);
-            this.Controls.Add(this.textBoxClicks);
+            this.Controls.Add(this.numericHorizontalCorrection);
+            this.Controls.Add(this.numericVerticalCorrection);
             this.Controls.Add(this.measurementShotAngle);
             this.Controls.Add(this.measurementStep);
             this.Controls.Add(this.measurementDistance);
             this.Name = "ParametersControl";
-            this.Size = new System.Drawing.Size(435, 226);
+            this.Size = new System.Drawing.Size(435, 268);
+            ((System.ComponentModel.ISupportInitialize)(this.numericVerticalCorrection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericHorizontalCorrection)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,11 +203,12 @@
         private MeasurementControl.MeasurementControl measurementDistance;
         private MeasurementControl.MeasurementControl measurementStep;
         private MeasurementControl.MeasurementControl measurementShotAngle;
-        private System.Windows.Forms.TextBox textBoxClicks;
-        private System.Windows.Forms.Button buttonClicksSet;
+        private System.Windows.Forms.NumericUpDown numericVerticalCorrection;
+        private System.Windows.Forms.NumericUpDown numericHorizontalCorrection;
         private System.Windows.Forms.Label labelMaximumRange;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelVerticalCorrection;
+        private System.Windows.Forms.Label labelHorizontalCorrection;
     }
 }

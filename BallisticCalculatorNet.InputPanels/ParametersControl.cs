@@ -47,7 +47,9 @@ namespace BallisticCalculatorNet.InputPanels
                     MaximumDistance = measurementDistance.ValueAsMeasurement<DistanceUnit>(),
                     Step = measurementStep.ValueAsMeasurement<DistanceUnit>(),
                     ShotAngle = measurementShotAngle.IsEmpty ||
-                                Math.Abs(measurementShotAngle.ValueAsMeasurement<AngularUnit>().In(AngularUnit.MOA)) < 0.0001 ? null : measurementShotAngle.ValueAsMeasurement<AngularUnit>()
+                                Math.Abs(measurementShotAngle.ValueAsMeasurement<AngularUnit>().In(AngularUnit.MOA)) < 0.0001 ? null : measurementShotAngle.ValueAsMeasurement<AngularUnit>(),
+                    ShotDropAdjustment = ClicksToAngle((int)numericVerticalCorrection.Value, WeaponControl?.VertialClick),
+                    ShotWindageAdjustment = ClicksToAngle((int)numericHorizontalCorrection.Value, WeaponControl?.HorizontalClick),
                 };
             }
             set
@@ -57,12 +59,16 @@ namespace BallisticCalculatorNet.InputPanels
                     measurementDistance.Value = 1000.As(mMeasurementSystem == MeasurementSystem.Metric ? DistanceUnit.Meter : DistanceUnit.Yard);
                     measurementStep.Value = 100.As(mMeasurementSystem == MeasurementSystem.Metric ? DistanceUnit.Meter : DistanceUnit.Yard);
                     measurementShotAngle.Value = null;
+                    numericVerticalCorrection.Value = 0;
+                    numericHorizontalCorrection.Value = 0;
                 }
                 else
                 {
                     measurementDistance.Value = value.MaximumDistance;
                     measurementStep.Value = value.Step;
                     measurementShotAngle.Value = value.ShotAngle;
+                    numericVerticalCorrection.Value = ClampToRange(AngleToClicks(value.ShotDropAdjustment, WeaponControl?.VertialClick), numericVerticalCorrection);
+                    numericHorizontalCorrection.Value = ClampToRange(AngleToClicks(value.ShotWindageAdjustment, WeaponControl?.HorizontalClick), numericHorizontalCorrection);
                 }
             }
         }
@@ -86,13 +92,29 @@ namespace BallisticCalculatorNet.InputPanels
             }
         }
 
-        private void buttonClicksSet_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Converts a number of scope clicks entered by the user into an angular adjustment
+        /// using the sight's click value. Returns null when there is no correction to apply.
+        /// </summary>
+        private static Measurement<AngularUnit>? ClicksToAngle(int clicks, Measurement<AngularUnit>? click)
         {
-            if (!int.TryParse(textBoxClicks.Text, NumberStyles.Integer, CultureInfo.CurrentCulture, out var clicks))
-                return;
-            if (WeaponControl == null)
-                return;
-            measurementShotAngle.Value = clicks * WeaponControl.VertialClick;
+            if (click == null || clicks == 0)
+                return null;
+            return click.Value * clicks;
         }
+
+        /// <summary>
+        /// Converts a stored angular adjustment back into a whole number of scope clicks for display.
+        /// Returns zero when there is no correction.
+        /// </summary>
+        private static decimal AngleToClicks(Measurement<AngularUnit>? angle, Measurement<AngularUnit>? click)
+        {
+            if (angle == null || click == null || Math.Abs(click.Value.Value) < 1e-9)
+                return 0;
+            return (int)Math.Round(angle.Value.In(click.Value.Unit) / click.Value.Value);
+        }
+
+        private static decimal ClampToRange(decimal value, NumericUpDown control)
+            => Math.Clamp(value, control.Minimum, control.Maximum);
     }
 }

@@ -65,7 +65,12 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
         {
             var util = MeasurementTools.Instance.GetUtility(type);
 
-            var values = Enum.GetValues(unitType);
+            // Obsolete enum members (renamed misspellings kept for compatibility) are
+            // excluded from the library's public unit listing, so they must not be counted.
+            var values = Enum.GetValues(unitType)
+                .Cast<object>()
+                .Where(value => unitType.GetMember(value.ToString()).First().GetCustomAttribute<ObsoleteAttribute>() == null)
+                .ToArray();
             util.Units.Should().HaveCount(values.Length);
 
             foreach (var value in values)

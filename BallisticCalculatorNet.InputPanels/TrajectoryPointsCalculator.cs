@@ -19,15 +19,21 @@ namespace BallisticCalculatorNet.InputPanels
                 CantAngle = shotData.Parameters.CantAngle,
                 MaximumDistance = overrideMaximumDistance ?? shotData.Parameters.MaximumDistance,
                 ShotAngle = shotData.Parameters.ShotAngle,
+                ShotDropAdjustment = shotData.Parameters.ShotDropAdjustment,
+                ShotWindageAdjustment = shotData.Parameters.ShotWindageAdjustment,
                 Step = overrideStep ?? shotData.Parameters.Step,
             };
 
             var zeroAmmo = shotData.Weapon.Zero.Ammunition ?? shotData.Ammunition.Ammunition;
+            var zeroAtmosphere = (shotData.Weapon.Zero.Atmosphere ?? shotData.Atmosphere) ?? new Atmosphere();
 
-            calculationParameters.SightAngle = calc.SightAngle(zeroAmmo,
+            var zeroParameters = calc.CalculateZeroParameters(zeroAmmo,
+                                        zeroAtmosphere,
                                         shotData.Weapon,
-                                        (shotData.Weapon.Zero.Atmosphere ?? shotData.Atmosphere) ?? new Atmosphere(),
-                                        GetDragTable(zeroAmmo));
+                                        shotData.Weapon.Zero,
+                                        dragTable: GetDragTable(zeroAmmo));
+
+            calculationParameters.Apply(zeroParameters);
 
             var trajectory = calc.Calculate(shotData.Ammunition.Ammunition, shotData.Weapon,
                 shotData.Atmosphere ?? new Atmosphere(), calculationParameters, shotData.Wind?.ToArray(),

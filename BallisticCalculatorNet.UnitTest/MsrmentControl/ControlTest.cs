@@ -117,10 +117,16 @@ namespace BallisticCalculatorNet.UnitTest.MsrmentControl
 
             var unitPart = control.ComboBox("UnitPart");
 
+            // Obsolete enum members (renamed misspellings kept for compatibility) are excluded
+            // from the library's unit listing, so the control shows one item per non-obsolete unit.
+            var expectedUnitCount = Enum.GetValues(unitType)
+                .Cast<object>()
+                .Count(value => unitType.GetMember(value.ToString()).First().GetCustomAttribute<ObsoleteAttribute>() == null);
+
             unitPart.Should()
                 .HaveItemsCount(util.Units.Count)
                 .And
-                .HaveItemsCount(Enum.GetValues(unitType).Length);
+                .HaveItemsCount(expectedUnitCount);
 
             foreach (MeasurementUtility.Unit unit in util.Units)
                 unitPart.Should().HaveItemMatching<MeasurementUtility.Unit>(u => u.Equals(unit));

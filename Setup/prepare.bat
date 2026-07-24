@@ -6,14 +6,14 @@ set projectroot=%cd%
 cd BallisticCalculatorNet
 msbuild -t:Publish -p:Configuration=Release BallisticCalculatorNet.csproj
 cd bin\release\net80-windows\publish
-smctl sign --fingerprint %digicert-fingerprint% --input BallisticCalculatorNet.exe
+signtool sign /sha1 "%CERTUM_CERTIFICATE_SHA1%" /fd sha256 /tr http://time.certum.pl /td sha256 BallisticCalculatorNet.exe
 
 cd %projectroot%
 
 cd BallisticCalculatorNet.ReticleEditor
 msbuild -t:Publish -p:Configuration=Release BallisticCalculatorNet.ReticleEditor.csproj
 cd bin\release\net80-windows\publish
-smctl sign --fingerprint %digicert-fingerprint% --input BallisticCalculatorNet.ReticleEditor.exe
+signtool sign /sha1 "%CERTUM_CERTIFICATE_SHA1%" /fd sha256 /tr http://time.certum.pl /td sha256 BallisticCalculatorNet.ReticleEditor.exe
 
 cd %projectroot%
 cd Setup
@@ -27,8 +27,7 @@ robocopy "%projectroot%\BallisticCalculatorNet.ReticleEditor\bin\release\net80-w
 robocopy "%projectroot%\data" "%projectroot%\Setup\content\data" /S
 
 makensis BallisticCalculator.nsi
-smctl sign --fingerprint %digicert-fingerprint% --input BallisticCaculatorSetup.exe
-
+signtool sign /sha1 "%CERTUM_CERTIFICATE_SHA1%" /fd sha256 /tr http://time.certum.pl /td sha256 BallisticCaculatorSetup.exe
 cd content
 7z a -r BallisticCaculatorPortable.zip *.*
 copy BallisticCaculatorPortable.zip ..

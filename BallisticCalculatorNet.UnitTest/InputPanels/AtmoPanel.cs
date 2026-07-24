@@ -167,7 +167,8 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
             control.MeasurementControl("measurementDistance").Should().BeEmpty();
             control.MeasurementControl("measurementStep").Should().BeEmpty();
             control.MeasurementControl("measurementShotAngle").Should().BeEmpty();
-            control.TextBox("textBoxClicks").Should().HaveNoText();
+            control.Control<NumericUpDown>("numericVerticalCorrection").Value.Should().Be(0);
+            control.Control<NumericUpDown>("numericHorizontalCorrection").Value.Should().Be(0);
 
         }
 
@@ -265,17 +266,62 @@ namespace BallisticCalculatorNet.UnitTest.InputPanels
         }
 
         [Fact]
-        public void Clicks_ToEmptyAngle()
+        public void Corrections_ClicksToAdjustments()
         {
             var weapon = new Mock<IWeaponControl>();
             weapon.Setup(m => m.VertialClick).Returns(0.25.As(AngularUnit.Mil));
+            weapon.Setup(m => m.HorizontalClick).Returns(0.1.As(AngularUnit.Mil));
             using TestForm tf = new TestForm();
             var control = tf.AddControl<ParametersControl>(5, 5, 100, 100);
             control.WeaponControl = weapon.Object;
-            control.MeasurementControl("measurementShotAngle").Value = null;
-            control.TextBox("textBoxClicks").Text = "5";
-            control.InvokeEventHandler("buttonClicksSet_Click", EventArgs.Empty);
-            control.MeasurementControl("measurementShotAngle").Should().HaveValue(1.25.As(AngularUnit.Mil));
+            control.MeasurementControl("measurementDistance").Value = 500.As(DistanceUnit.Meter);
+            control.MeasurementControl("measurementStep").Value = 25.As(DistanceUnit.Meter);
+            control.Control<NumericUpDown>("numericVerticalCorrection").Value = 5;
+            control.Control<NumericUpDown>("numericHorizontalCorrection").Value = -3;
+
+            var parameters = control.Parameters;
+
+            parameters.ShotDropAdjustment.Should().Be(1.25.As(AngularUnit.Mil));
+            parameters.ShotWindageAdjustment.Should().Be((-0.3).As(AngularUnit.Mil));
+        }
+
+        [Fact]
+        public void Corrections_EmptyClicksToNull()
+        {
+            var weapon = new Mock<IWeaponControl>();
+            weapon.Setup(m => m.VertialClick).Returns(0.25.As(AngularUnit.Mil));
+            weapon.Setup(m => m.HorizontalClick).Returns(0.1.As(AngularUnit.Mil));
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<ParametersControl>(5, 5, 100, 100);
+            control.WeaponControl = weapon.Object;
+            control.MeasurementControl("measurementDistance").Value = 500.As(DistanceUnit.Meter);
+            control.MeasurementControl("measurementStep").Value = 25.As(DistanceUnit.Meter);
+
+            var parameters = control.Parameters;
+
+            parameters.ShotDropAdjustment.Should().BeNull();
+            parameters.ShotWindageAdjustment.Should().BeNull();
+        }
+
+        [Fact]
+        public void Corrections_AdjustmentsToClicks()
+        {
+            var weapon = new Mock<IWeaponControl>();
+            weapon.Setup(m => m.VertialClick).Returns(0.25.As(AngularUnit.Mil));
+            weapon.Setup(m => m.HorizontalClick).Returns(0.1.As(AngularUnit.Mil));
+            using TestForm tf = new TestForm();
+            var control = tf.AddControl<ParametersControl>(5, 5, 100, 100);
+            control.WeaponControl = weapon.Object;
+            control.Parameters = new ShotParameters()
+            {
+                MaximumDistance = 500.As(DistanceUnit.Meter),
+                Step = 25.As(DistanceUnit.Meter),
+                ShotDropAdjustment = 1.25.As(AngularUnit.Mil),
+                ShotWindageAdjustment = (-0.3).As(AngularUnit.Mil),
+            };
+
+            control.Control<NumericUpDown>("numericVerticalCorrection").Value.Should().Be(5);
+            control.Control<NumericUpDown>("numericHorizontalCorrection").Value.Should().Be(-3);
         }
     }
 }

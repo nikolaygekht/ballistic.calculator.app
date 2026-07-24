@@ -19,6 +19,7 @@ namespace BallisticCalculatorNet.InputPanels
     {
         MeasurementSystem MeasurementSystem { get; set; }
         Measurement<AngularUnit> VertialClick { get; }
+        Measurement<AngularUnit> HorizontalClick { get; }
         Rifle Rifle { get; set; }
     }
 
@@ -55,6 +56,10 @@ namespace BallisticCalculatorNet.InputPanels
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Measurement<AngularUnit> VertialClick => measurementVClick.ValueAsMeasurement<AngularUnit>();
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Measurement<AngularUnit> HorizontalClick => measurementHClick.ValueAsMeasurement<AngularUnit>();
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

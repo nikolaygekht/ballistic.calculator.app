@@ -1,8 +1,12 @@
 # Ballistic Calculator .NET
 
+NOTE: This project will become archived soon. A new, truly cross-platform and modern UI Avalonia-based calculator
+goes in https://github.com/nikolaygekht/ballistic.calculator.app.avalonia. The core functionality is already ported
+there.
+
 100% open source windows (100% WinE compatible) ballistic calculator with accuracy and performance comparable with best commercial calculators.
 
-The current development version is available to play in [releases](https://github.com/nikolaygekht/ballistic.calculator.app/releases). 
+The current development version is available to play in [releases](https://github.com/nikolaygekht/ballistic.calculator.app/releases).
 
 The latest release is beta. It supports all core functionality:
 * Calculate a trajectory
@@ -24,7 +28,7 @@ The further development will be build around:
 * Making more reticles
 * Collecting feedback
 
-# Recommended reading 
+# Recommended reading
 
 To use the application, please read the following articles on wiki if you aren't familiar with precise shooting or external ballistics:
 
@@ -56,10 +60,10 @@ THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
 ## Project Structure
 
 * `BallisticCalculatorNet`
-  
-  The calculator application. 
 
-  The application mostly defines the windows, menus and the command logic. All input and output is made trough custom panels. 
+  The calculator application.
+
+  The application mostly defines the windows, menus and the command logic. All input and output is made trough custom panels.
   The panels are in `BallisticCalculatorNet.InputPanels` library.
 
 * `BallisticCalculatorNet.Common`
@@ -68,7 +72,7 @@ THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
 
 * `BallisticCalculatorNet.InputPanels`
 
-  The input panels to enter data for calculation and to output the results.  
+  The input panels to enter data for calculation and to output the results.
   All panels are made in form of custom controls and then used in the calculator application.
 
 * `BallisticCalculatorNet.MeasurementControl`
@@ -80,11 +84,11 @@ THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
    A custom control to paint a reticle.
 
 * `BallisticCalculatorNet.ReticleEditor`
- 
-   The editor for reticles. 
+
+   The editor for reticles.
 
 * `BallisticCalculatorNet.UnitTest`
- 
+
    Unit and integration tests.
 
 * `Gehtsoft.Winforms.FluentAssertions`
@@ -94,10 +98,10 @@ THE CODE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
 * `Gehtsoft.Winforms.FluentAssertions.Test`
 
   Test of fluent assertions for winforms controls.
-  
+
 * `data`
 
-   Data files: ammunition descriptions, drag tables, reticles. 
+   Data files: ammunition descriptions, drag tables, reticles.
 
 
 # Old version
