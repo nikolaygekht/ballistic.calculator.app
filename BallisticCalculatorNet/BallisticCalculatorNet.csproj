@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
  <PropertyGroup>
   <OutputType>WinExe</OutputType>
-  <TargetFramework>net80-windows</TargetFramework>
+  <TargetFramework>net8.0-windows</TargetFramework>
   <UseWindowsForms>true</UseWindowsForms>
   <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
