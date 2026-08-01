@@ -1,8 +1,7 @@
 # Ballistic Calculator .NET
 
-**NOTE: This project is retired and will become archived soon. A new, truly cross-platform and modern UI Avalonia-based calculator
-goes in https://github.com/nikolaygekht/ballistic.calculator.app.avalonia. The core functionality is already ported
-there.**
+**NOTE: This project is retired and archived. A new, truly cross-platform and modern UI Avalonia-based calculator
+goes in https://github.com/nikolaygekht/ballistic.calculator.app.avalonia. **
 
 100% open source windows (100% WinE compatible) ballistic calculator with accuracy and performance comparable with best commercial calculators.
 
